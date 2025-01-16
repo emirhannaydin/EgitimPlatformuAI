@@ -20,7 +20,7 @@ public final class MainScreenCoordinator: Coordinator {
     var window : UIWindow?
     var navigationController: UINavigationController! = UINavigationController()
     let homeStoryboard = UIStoryboard(name: "MainScreen", bundle: nil).instantiateViewController(withIdentifier: "MainScreen")
-    let selectedImage = UIImage(systemName: "person")
+    let selectedImage = UIImage(systemName: "person.fill")
     let unselectedImage = UIImage(systemName: "person")
     
     func start() {
@@ -41,7 +41,6 @@ public final class MainScreenCoordinator: Coordinator {
         
         navigationController.isNavigationBarHidden = true
         navigationController.viewControllers = [viewController]
-        
     }
 
 }

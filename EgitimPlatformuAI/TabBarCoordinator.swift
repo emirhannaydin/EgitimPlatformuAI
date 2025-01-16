@@ -17,8 +17,13 @@ public final class TabBarCoordinator: Coordinator {
     }
     
     let tabBarController: UITabBarController = UITabBarController()
+    
     func start() {
-        
+        tabBarController.tabBar.tintColor = .systemRed
+        let backgroundColor = UIColor { traitCollection in
+            return traitCollection.userInterfaceStyle == .dark ? .black : UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.5)
+                }
+        tabBarController.tabBar.backgroundColor = backgroundColor
         MainScreenCoordinator.getInstance().start()
         ProfileScreenCoordinator.getInstance().start()
         tabBarController.viewControllers = [MainScreenCoordinator.getInstance().navigationController,

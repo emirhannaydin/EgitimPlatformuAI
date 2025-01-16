@@ -9,10 +9,18 @@ class MainScreenViewController: UIViewController {
 
     var viewModel: MainScreenViewModel?
 
+    init(viewModel: MainScreenViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
-
+        
     }
 
 }

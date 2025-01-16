@@ -21,6 +21,7 @@ class ProfileScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
 
 }

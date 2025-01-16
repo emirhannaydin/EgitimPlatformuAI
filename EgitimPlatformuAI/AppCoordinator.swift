@@ -10,18 +10,23 @@ public final class ApplicationCoordinator: Coordinator {
     private static var instance : ApplicationCoordinator?
     static func getInstance() -> ApplicationCoordinator {
         if(instance == nil){
-            instance = ApplicationCoordinator()
+            instance = ApplicationCoordinator(window: UIWindow())
         }
         return instance!
     }
-    
     var window: UIWindow?
-    var tabBarCoordinator: TabBarCoordinator?
+
+
+    init(window: UIWindow){
+        self.window = window
+    }
     
     func start() {
-        tabBarCoordinator = TabBarCoordinator()
-        tabBarCoordinator?.start()
-        window?.rootViewController = tabBarCoordinator?.tabBarController
+        TabBarCoordinator.getInstance().start()
+        window?.rootViewController = TabBarCoordinator.getInstance().tabBarController
         window?.makeKeyAndVisible()
+        
+
     }
+    
 }

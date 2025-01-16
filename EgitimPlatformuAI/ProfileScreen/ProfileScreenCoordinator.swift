@@ -19,7 +19,7 @@ public final class ProfileScreenCoordinator: Coordinator {
     }
     var navigationController: UINavigationController! = UINavigationController()
     let homeStoryboard = UIStoryboard(name: "ProfileScreen", bundle: nil).instantiateViewController(withIdentifier: "ProfileScreen")
-    let selectedImage = UIImage(systemName: "person")
+    let selectedImage = UIImage(systemName: "person.fill")
     let unselectedImage = UIImage(systemName: "person")
     
     func start() {
@@ -38,7 +38,6 @@ public final class ProfileScreenCoordinator: Coordinator {
                                                        selectedImage: selectedImage)
         
         navigationController.isNavigationBarHidden = true
-        navigationController.viewControllers = [viewController]
-    }
+        navigationController.viewControllers = [viewController]    }
 
 }
