@@ -4,17 +4,15 @@
 //
 //  Created by Emirhan Aydın on 16.01.2025.
 //
-
 import UIKit
+class MainScreenViewController: UIViewController {
 
-class ViewController: UIViewController {
+    var viewModel: MainScreenViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("akjsdfdskl")
-        print("akjsdfdskl")
+        view.backgroundColor = .red
+
     }
 
-
 }
-
