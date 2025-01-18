@@ -16,17 +16,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aqk-mC-bmx" customClass="CustomNameContainer" customModule="EgitimPlatformuAI" customModuleProvider="target">
-                                <rect key="frame" x="76" y="147" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aqk-mC-bmx" customClass="CustomNameContainer" customModule="EgitimPlatformuAI" customModuleProvider="target">
+                                <rect key="frame" x="20" y="79" width="353" height="80"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="ZKF-HE-2Tf"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Aqk-mC-bmx" secondAttribute="trailing" constant="20" id="OnB-3o-mbd"/>
+                            <constraint firstItem="Aqk-mC-bmx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="a3W-qo-So7"/>
+                            <constraint firstItem="Aqk-mC-bmx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="cDg-6t-PMd"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="titleLabel" destination="Aqk-mC-bmx" id="bMa-r2-cFB"/>
+                        <outlet property="nameContainerView" destination="Aqk-mC-bmx" id="PrY-P7-o0r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

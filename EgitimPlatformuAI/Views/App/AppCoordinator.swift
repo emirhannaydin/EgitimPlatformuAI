@@ -26,7 +26,6 @@ public final class ApplicationCoordinator: Coordinator {
         window?.rootViewController = TabBarCoordinator.getInstance().tabBarController
         window?.makeKeyAndVisible()
         
-
     }
     
 }

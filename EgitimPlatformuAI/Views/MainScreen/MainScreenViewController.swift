@@ -7,7 +7,7 @@
 import UIKit
 class MainScreenViewController: UIViewController {
 
-    @IBOutlet weak var titleLabel: CustomNameContainer!
+    @IBOutlet weak var nameContainerView: CustomNameContainer!
     var viewModel: MainScreenViewModel?
 
     
@@ -22,7 +22,12 @@ class MainScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.configureView(title: "Emirhan")
+        
+        self.title = "Home"
+        self.setNavigateBar()
+        nameContainerView.configureView(nameLabel: "emirhanaydin_1600@hotmail.com", statusLabel: "Online", image: "person.fill")
     }
+    
+    
 
 }

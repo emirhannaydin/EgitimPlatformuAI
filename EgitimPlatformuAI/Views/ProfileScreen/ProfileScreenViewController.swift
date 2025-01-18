@@ -21,7 +21,10 @@ class ProfileScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Profile"
+        self.setNavigateBar()
         
+
     }
 
 }

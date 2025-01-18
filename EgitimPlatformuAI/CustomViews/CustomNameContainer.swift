@@ -10,27 +10,37 @@ import UIKit
 final class CustomNameContainer: UIView {
     
     
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setView()
+        self.setViews()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.setView()
+        self.setViews()
 
     }
     
-    private func setView() {
+    private func setViews() {
         guard let view = self.loadViewFromNib(nibName: "CustomNameContainerView") else { return }
         view.frame = self.bounds
-        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.addSubview(view)
+        view.layer.borderWidth = 2
+        view.layer.cornerRadius = 12
+        view.layer.borderColor = UIColor.systemBlue.cgColor
     }
 
     
-    func configureView(title: String){
-        self.titleLabel.text = title
+    func configureView(nameLabel: String, statusLabel: String, image: String){
+        self.nameLabel.adjustsFontSizeToFitWidth = true
+        self.nameLabel.text = nameLabel
+        self.statusLabel.text = statusLabel
+        self.imageView.image = UIImage(systemName: "\(image)")
     }
+    
+    
     
 }

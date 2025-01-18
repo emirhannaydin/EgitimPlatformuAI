@@ -39,7 +39,7 @@ public final class MainScreenCoordinator: Coordinator {
                                                        image: unselectedImage,
                                                        selectedImage: selectedImage)
         
-        navigationController.isNavigationBarHidden = true
+        navigationController.isNavigationBarHidden = false
         navigationController.viewControllers = [viewController]
     }
 
