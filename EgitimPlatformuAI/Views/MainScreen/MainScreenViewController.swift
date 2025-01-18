@@ -7,8 +7,10 @@
 import UIKit
 class MainScreenViewController: UIViewController {
 
+    @IBOutlet weak var titleLabel: CustomNameContainer!
     var viewModel: MainScreenViewModel?
 
+    
     init(viewModel: MainScreenViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -20,7 +22,7 @@ class MainScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        titleLabel.configureView(title: "Emirhan")
     }
 
 }
