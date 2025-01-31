@@ -30,7 +30,7 @@ extension UIViewController{
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
-    @objc private func hamburgerMenuTapped() {
-            print("Hamburger menü")
+    @objc func hamburgerMenuTapped() {
+            
         }
 }
