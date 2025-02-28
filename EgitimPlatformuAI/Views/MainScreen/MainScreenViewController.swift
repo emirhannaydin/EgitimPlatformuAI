@@ -51,7 +51,7 @@ class MainScreenViewController: UIViewController {
         menuView.frame = CGRect(x: -300, y: 0, width: view.frame.width/2, height: view.frame.height - TabBarCoordinator.getInstance().tabBarController.tabBar.frame.height)
         view.addSubview(menuView)
         self.menuView = menuView
-        
+
         let closeButton = UIButton(frame: view.bounds)
         closeButton.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         closeButton.addTarget(self, action: #selector(hideSlideMenu), for: .touchUpInside)
