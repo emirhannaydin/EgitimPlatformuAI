@@ -21,6 +21,13 @@ public final class ApplicationCoordinator: Coordinator {
         self.window = window
     }
     
+    func navigateToLogin() {
+        LoginScreenCoordinator.getInstance().start()
+        window?.rootViewController = LoginScreenCoordinator.getInstance().navigationController
+        window?.makeKeyAndVisible()
+
+    }
+    
     func start() {
         TabBarCoordinator.getInstance().start()
         window?.rootViewController = TabBarCoordinator.getInstance().tabBarController
