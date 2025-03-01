@@ -1,8 +1,8 @@
 //
-//  AppCoordinator.swift
+//  ApplicationCoordinator.swift
 //  EgitimPlatformuAI
 //
-//  Created by Başar Noyan on 16.01.2025.
+//  Created by Emirhan Aydın on 1.03.2025.
 //
 
 import UIKit
@@ -21,18 +21,24 @@ public final class ApplicationCoordinator: Coordinator {
         self.window = window
     }
     
-    func navigateToLogin() {
-        LoginScreenCoordinator.getInstance().start()
-        window?.rootViewController = LoginScreenCoordinator.getInstance().navigationController
-        window?.makeKeyAndVisible()
-
-    }
-    
     func start() {
         TabBarCoordinator.getInstance().start()
         window?.rootViewController = TabBarCoordinator.getInstance().tabBarController
         window?.makeKeyAndVisible()
-        
+    }
+    
+    func navigateToLogin() {
+        LoginScreenCoordinator.getInstance().start()
+        window?.rootViewController = LoginScreenCoordinator.getInstance().navigationController
+        window?.makeKeyAndVisible()
+    }
+    func navigateToMain() {
+        MainScreenCoordinator.getInstance().start()
+        TabBarCoordinator.getInstance().tabBarController.selectedIndex = 0
+    }
+    func navigateToProfile() {
+        ProfileScreenCoordinator.getInstance().start()
+        TabBarCoordinator.getInstance().tabBarController.selectedIndex = 1
     }
     
 }

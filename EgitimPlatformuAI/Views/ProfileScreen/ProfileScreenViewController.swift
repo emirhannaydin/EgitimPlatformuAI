@@ -10,21 +10,12 @@ class ProfileScreenViewController: UIViewController {
 
     var viewModel: ProfileScreenViewModel?
 
-    init(viewModel: ProfileScreenViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Profile"
-        self.setNavigateBar()
+        self.setNavigationBar()
         
-
     }
-
+    
 }

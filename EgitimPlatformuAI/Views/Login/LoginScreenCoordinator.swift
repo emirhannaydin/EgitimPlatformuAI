@@ -17,7 +17,6 @@ public final class LoginScreenCoordinator: Coordinator {
         return instance!
     }
     var navigationController: UINavigationController! = UINavigationController()
-    let homeStoryboard = UIStoryboard(name: "LoginScreen", bundle: nil).instantiateViewController(withIdentifier: "LoginScreen")
     
     func start() {
         let storyboard = UIStoryboard(name: "LoginScreen", bundle: nil)

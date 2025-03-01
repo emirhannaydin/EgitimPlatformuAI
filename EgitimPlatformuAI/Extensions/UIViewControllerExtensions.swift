@@ -7,16 +7,13 @@
 import UIKit
 
 extension UIViewController {
-    func setNavigateBar() {
-        let menuButton = UIBarButtonItem(
-            image: UIImage(systemName: "line.3.horizontal"),
-            style: .plain,
-            target: self,
-            action: #selector(hamburgerMenuTapped)
-        )
-        menuButton.tintColor = .black
-        navigationItem.leftBarButtonItem = menuButton
-        
+    func setNavigationBar() {
+        configureNavigationBarAppearance()
+        configureMenuButton()
+        addEdgePanGesture()
+    }
+    
+    private func configureNavigationBarAppearance() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = UIColor.systemGreen
@@ -28,19 +25,33 @@ extension UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
     }
     
-    @objc func hamburgerMenuTapped() {
-        toggleSlideMenu()
+    private func configureMenuButton() {
+        let menuButton = UIBarButtonItem(
+            image: UIImage(systemName: "line.3.horizontal"),
+            style: .plain,
+            target: self,
+            action: #selector(toggleSlideMenu)
+        )
+        menuButton.tintColor = .black
+        navigationItem.leftBarButtonItem = menuButton
     }
     
-    private func getKeyWindow() -> UIWindow? {
-        return UIApplication.shared.connectedScenes
-            .compactMap { $0 as? UIWindowScene }
-            .flatMap { $0.windows }
-            .first { $0.isKeyWindow }
+    private func addEdgePanGesture() {
+        guard let window = getKeyWindow() else { return }
+        let edgePanGesture = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(handleEdgePan(_:)))
+        edgePanGesture.edges = .left
+        window.addGestureRecognizer(edgePanGesture)
     }
-
-    func toggleSlideMenu() {
-        if let menuView = getKeyWindow()?.viewWithTag(999) {
+    
+    @objc private func handleEdgePan(_ gesture: UIScreenEdgePanGestureRecognizer) {
+        let translation = gesture.translation(in: view).x
+        if gesture.state == .ended, translation > 50 {
+            showSlideMenu()
+        }
+    }
+    
+    @objc private func toggleSlideMenu() {
+        if getKeyWindow()?.viewWithTag(999) != nil {
             hideSlideMenu()
         } else {
             showSlideMenu()
@@ -49,43 +60,66 @@ extension UIViewController {
     
     private func showSlideMenu() {
         guard let window = getKeyWindow() else { return }
+        let backgroundView = createBackgroundView()
+        let menuView = createMenuView(in: window)
+        setupMenuSubviews(in: menuView)
         
+        window.addSubview(backgroundView)
+        window.addSubview(menuView)
+        
+        UIView.animate(withDuration: 0.3) {
+            menuView.frame.origin.x = 0
+        }
+    }
+    
+    private func createBackgroundView() -> UIView {
+        guard let window = getKeyWindow() else { return UIView() }
         let backgroundView = UIView(frame: window.bounds)
         backgroundView.tag = 1000
         backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        
+        let closeButton = UIButton(frame: backgroundView.bounds)
+        closeButton.addTarget(self, action: #selector(hideSlideMenu), for: .touchUpInside)
+        backgroundView.addSubview(closeButton)
+        return backgroundView
+    }
+    
+    private func createMenuView(in window: UIWindow) -> UIView {
         let menuView = UIView()
         menuView.tag = 999
         menuView.backgroundColor = .systemBackground
         menuView.frame = CGRect(x: -300, y: 0, width: window.frame.width * 2/3, height: window.frame.height)
-
-        let closeButton = UIButton(frame: backgroundView.bounds)
-        closeButton.addTarget(self, action: #selector(hideSlideMenu), for: .touchUpInside)
-        
-        backgroundView.addSubview(closeButton)
-        window.addSubview(backgroundView)
-        window.addSubview(menuView)
-        
-        let tableView = UITableView(frame: menuView.bounds)
-            tableView.delegate = self
-            tableView.dataSource = self
-            menuView.addSubview(tableView)
-
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         menuView.addGestureRecognizer(panGesture)
-
-        UIView.animate(withDuration: 0.3) {
-            menuView.frame.origin.x = 0
-        }
+        return menuView
+    }
+    
+    private func setupMenuSubviews(in menuView: UIView) {
+        let tableView = getTableView()
+        let imageView = getImageView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        menuView.addSubview(tableView)
+        menuView.addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: menuView.safeAreaLayoutGuide.topAnchor, constant: 20),
+            imageView.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 5),
+            imageView.trailingAnchor.constraint(equalTo: menuView.trailingAnchor, constant: -5),
+            imageView.heightAnchor.constraint(equalToConstant: 50),
+            
+            tableView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 30),
+            tableView.leadingAnchor.constraint(equalTo: menuView.leadingAnchor, constant: 5),
+            tableView.trailingAnchor.constraint(equalTo: menuView.trailingAnchor, constant: -5),
+            tableView.bottomAnchor.constraint(equalTo: menuView.bottomAnchor)
+        ])
     }
     
     @objc private func hideSlideMenu() {
         guard let window = getKeyWindow(),
               let menuView = window.viewWithTag(999),
               let backgroundView = window.viewWithTag(1000) else { return }
-
+        
         UIView.animate(withDuration: 0.3, animations: {
-            menuView.frame.origin.x = -300
+            menuView.frame.origin.x = -menuView.frame.width
             backgroundView.alpha = 0
         }) { _ in
             menuView.removeFromSuperview()
@@ -96,14 +130,14 @@ extension UIViewController {
     @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         guard let menuView = gesture.view else { return }
         let translation = gesture.translation(in: menuView)
-
+        
         switch gesture.state {
         case .changed:
-            if translation.x < 0 { // Sadece sola sürüklemeye izin veriyoruz
+            if translation.x < 0 {
                 menuView.frame.origin.x = max(-menuView.frame.width, translation.x)
             }
         case .ended:
-            let shouldClose = translation.x < -menuView.frame.width / 3 // Menü yeterince sola kaydıysa kapat
+            let shouldClose = translation.x < -menuView.frame.width / 3
             if shouldClose {
                 hideSlideMenu()
             } else {
@@ -115,25 +149,55 @@ extension UIViewController {
             break
         }
     }
+    
+    private func getKeyWindow() -> UIWindow? {
+        return UIApplication.shared.connectedScenes
+            .compactMap { ($0 as? UIWindowScene)?.keyWindow }
+            .first
+    }
+    
+    private func getTableView() -> UITableView {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
+    }
+    
+    private func getImageView() -> UIImageView {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "person.circle.fill")
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .label
+        return imageView
+    }
 }
 
-extension UIViewController: @retroactive UITableViewDataSource, @retroactive UITableViewDelegate {
+extension UIViewController: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 5 // Menüde gösterilecek öğe sayısı
-        }
-
-        // Menü öğelerini tanımlıyoruz
+        return 5
+    }
+    
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MenuItemCell") ?? UITableViewCell(style: .default, reuseIdentifier: "MenuItemCell")
-            cell.textLabel?.text = "Menu Item \(indexPath.row + 1)" // Menü öğelerini buradan belirleyebilirsiniz
-            return cell
-        }
-
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MenuItemCell") ?? UITableViewCell(style: .default, reuseIdentifier: "MenuItemCell")
+        cell.textLabel?.text = "Menu Item \(indexPath.row + 1)"
+        return cell
+    }
+    
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            print("Selected menu item \(indexPath.row + 1)")
-            hideSlideMenu()
+        print("Selected menu item \(indexPath.row + 1)")
+        hideSlideMenu()
+        switch indexPath.row{
+        case 0:
+            ApplicationCoordinator.getInstance().navigateToLogin()
+        case 1:
+            ApplicationCoordinator.getInstance().navigateToProfile()
+        case 2:
+            ApplicationCoordinator.getInstance().navigateToMain()
+        default:
+            break
         }
+    }
 }
+
 
 

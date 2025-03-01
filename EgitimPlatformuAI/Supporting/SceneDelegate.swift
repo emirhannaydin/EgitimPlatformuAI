@@ -14,10 +14,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
-        ApplicationCoordinator.getInstance().window = window
-        ApplicationCoordinator.getInstance().start()
+        let window = UIWindow(windowScene: windowScene)
         
+        let appCoordinator = ApplicationCoordinator.getInstance()
+        appCoordinator.window = window
+        appCoordinator.start()
+        
+        self.window = window
     }
     
     
