@@ -160,6 +160,7 @@ extension UIViewController {
         let tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(HamburgerTableViewCell.nib(), forCellReuseIdentifier: HamburgerTableViewCell.identifier)
         return tableView
     }
     
@@ -178,8 +179,25 @@ extension UIViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MenuItemCell") ?? UITableViewCell(style: .default, reuseIdentifier: "MenuItemCell")
-        cell.textLabel?.text = "Menu Item \(indexPath.row + 1)"
+        let cell = tableView.dequeueReusableCell(withIdentifier: HamburgerTableViewCell.identifier) as! HamburgerTableViewCell
+        switch indexPath.row{
+        case 0:
+            cell.labelText.text = "Login"
+            cell.logoImageView.image = UIImage(systemName: "lock")
+            cell.logoImageView.tintColor = .green
+        case 1:
+            cell.labelText.text = "Profile"
+            cell.logoImageView.image = UIImage(systemName: "person.circle")
+            cell.logoImageView.tintColor = .blue
+        case 2:
+            cell.labelText.text = "Home"
+            cell.logoImageView.image = UIImage(systemName: "house")
+            cell.logoImageView.tintColor = .red
+        default:
+            cell.labelText.text = "--"
+            cell.logoImageView.image = UIImage(systemName: "link")
+            cell.logoImageView.tintColor = .darkGray
+        }
         return cell
     }
     
