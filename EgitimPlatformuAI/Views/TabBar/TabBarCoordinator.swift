@@ -8,16 +8,17 @@
 import UIKit
 
 public final class TabBarCoordinator: Coordinator {
-    private static var instance : TabBarCoordinator?
+    private static var instance: TabBarCoordinator?
     static func getInstance() -> TabBarCoordinator {
-        if(instance == nil){
+        if instance == nil {
             instance = TabBarCoordinator()
         }
         return instance!
     }
-    
+
     let tabBarController: UITabBarController = UITabBarController()
-    
+    var navigationController: UINavigationController?
+
     func start() {
         tabBarController.tabBar.tintColor = .systemRed
         let backgroundColor = UIColor { traitCollection in
@@ -27,11 +28,18 @@ public final class TabBarCoordinator: Coordinator {
 
         let mainCoordinator = MainScreenCoordinator.getInstance()
         let profileCoordinator = ProfileScreenCoordinator.getInstance()
-        
+
         mainCoordinator.start()
         profileCoordinator.start()
-        
-        tabBarController.viewControllers = [mainCoordinator.navigationController,
-                                            profileCoordinator.navigationController]
+
+        let mainNav = UINavigationController(rootViewController: mainCoordinator.navigationController.viewControllers.first!)
+        let profileNav = UINavigationController(rootViewController: profileCoordinator.navigationController.viewControllers.first!)
+
+        mainNav.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
+        profileNav.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
+
+        tabBarController.viewControllers = [mainNav, profileNav]
+
+        navigationController = mainNav
     }
 }

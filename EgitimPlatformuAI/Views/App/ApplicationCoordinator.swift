@@ -6,32 +6,33 @@
 //
 
 import UIKit
-public final class ApplicationCoordinator: Coordinator {
-    private static var instance : ApplicationCoordinator?
+
+final class ApplicationCoordinator: Coordinator {
+    private static var instance: ApplicationCoordinator?
     static func getInstance() -> ApplicationCoordinator {
-        if(instance == nil){
-            instance = ApplicationCoordinator(window: UIWindow())
+        if instance == nil {
+            instance = ApplicationCoordinator()
         }
         return instance!
     }
+    
     var window: UIWindow?
-
-
-    init(window: UIWindow){
-        self.window = window
-    }
     
     func start() {
-        TabBarCoordinator.getInstance().start()
-        window?.rootViewController = TabBarCoordinator.getInstance().tabBarController
+        let tabBarCoordinator = TabBarCoordinator.getInstance()
+        tabBarCoordinator.start()
+        
+        window?.rootViewController = tabBarCoordinator.tabBarController
         window?.makeKeyAndVisible()
     }
     
     func navigateToLogin() {
-        LoginScreenCoordinator.getInstance().start()
-        window?.rootViewController = LoginScreenCoordinator.getInstance().navigationController
-        window?.makeKeyAndVisible()
+        let navigationController = TabBarCoordinator.getInstance().navigationController
+        let loginCoordinator = LoginScreenCoordinator.getInstance()
+        loginCoordinator.navigationController = navigationController
+        loginCoordinator.start()
     }
+    
     func navigateToMain() {
         MainScreenCoordinator.getInstance().start()
         TabBarCoordinator.getInstance().tabBarController.selectedIndex = 0
@@ -40,5 +41,4 @@ public final class ApplicationCoordinator: Coordinator {
         ProfileScreenCoordinator.getInstance().start()
         TabBarCoordinator.getInstance().tabBarController.selectedIndex = 1
     }
-    
 }

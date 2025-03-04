@@ -38,6 +38,7 @@ public final class ProfileScreenCoordinator: Coordinator {
                                                        selectedImage: selectedImage)
         
         navigationController.isNavigationBarHidden = false
-        navigationController.viewControllers = [viewController]    }
+        navigationController.viewControllers = [viewController]
+    }
 
 }
