@@ -180,7 +180,7 @@ extension UIViewController: UITableViewDataSource, UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HamburgerTableViewCell.identifier) as! HamburgerTableViewCell
-        switch indexPath.row{
+        switch indexPath.row {
         case 0:
             cell.labelText.text = "Login"
             cell.logoImageView.image = UIImage(systemName: "lock")
@@ -204,18 +204,23 @@ extension UIViewController: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Selected menu item \(indexPath.row + 1)")
         hideSlideMenu()
-        switch indexPath.row{
-        case 0:
-            ApplicationCoordinator.getInstance().navigateToLogin()
-        case 1:
-            ApplicationCoordinator.getInstance().navigateToProfile()
-        case 2:
-            ApplicationCoordinator.getInstance().navigateToMain()
+        
+        let tabBarController = TabBarCoordinator.getInstance().tabBarController
+        
+        switch indexPath.row {
+        case 0: // Login sayfası, tab barda olmadığı için push yapılabilir
+            let loginCoordinator = LoginScreenCoordinator.getInstance()
+            loginCoordinator.navigationController = tabBarController.selectedViewController as? UINavigationController
+            loginCoordinator.start()
+            
+        case 1: // Profile sayfası tab bar içinde, bu yüzden sadece tab'a geçmeliyiz
+            tabBarController.selectedIndex = 1
+            
+        case 2: // Home sayfası tab bar içinde, bu yüzden sadece tab'a geçmeliyiz
+            tabBarController.selectedIndex = 0
+            
         default:
             break
         }
     }
 }
-
-
-
