@@ -6,25 +6,52 @@
 //
 import UIKit
 
-class MainScreenViewController: UIViewController {
+final class MainScreenViewController: UIViewController{
+    
     @IBOutlet weak var nameContainerView: CustomNameContainer!
+    @IBOutlet weak var collectionView: UICollectionView!
     var viewModel: MainScreenViewModel?
-
-    init(viewModel: MainScreenViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-
+    var screenName: [String] = ["Home", "Profile", "Lessons", "Deneme", "Deneme"]
+    var screenLogo: [String] = ["house", "person.circle", "book","lock","lock"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Home"
         self.setNavigationBar()
         nameContainerView.configureView(nameLabel: "emirhanaydin_1600@hotmail.com", statusLabel: "Online", image: "person.fill")
+        setCollectionView()
     }
+    
+    private func setCollectionView(){
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(HomeScreenCollectionViewCell.nib(), forCellWithReuseIdentifier: HomeScreenCollectionViewCell.identifier)
+        collectionView.collectionViewLayout = UICollectionViewFlowLayout()
+    }
+    
+}
+
+extension MainScreenViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        screenName.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeScreenCollectionViewCell.identifier, for: indexPath) as! HomeScreenCollectionViewCell
+        cell.imageView.image = UIImage(systemName: screenLogo[indexPath.row])
+        cell.labelText.text = screenName[indexPath.row]
+        return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let size = (collectionView.frame.size.width-10)/2
+        
+        return CGSize(width: size, height: size)
+        
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("selected\(indexPath.row)")
+    }
+    
 }
 
 
