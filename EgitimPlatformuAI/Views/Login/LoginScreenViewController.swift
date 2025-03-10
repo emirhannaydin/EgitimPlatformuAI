@@ -9,7 +9,7 @@ import Foundation
 
 public final class LoginScreenViewController: UIViewController {
     
-    
+    private var hamburgerMenuManager: HamburgerMenuManager!
     @IBOutlet var loginButton: UIButton!
     
     var viewModel: LoginScreenViewModel?
@@ -17,10 +17,18 @@ public final class LoginScreenViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Login"
-        self.setNavigationBar()
+        hamburgerMenuManager = HamburgerMenuManager(viewController: self)
+        removeEdgePanGesture()
     }
     @IBAction func loginButtonClicked(_ sender: Any) {
-        ApplicationCoordinator.getInstance().start()
+        ApplicationCoordinator.getInstance().initTabBar()
     }
+    
+    private func removeEdgePanGesture() {
+        if let window = hamburgerMenuManager.getKeyWindow() {
+            window.gestureRecognizers?.removeAll(where: { $0 is UIScreenEdgePanGestureRecognizer })
+        }
+    }
+    
     
 }

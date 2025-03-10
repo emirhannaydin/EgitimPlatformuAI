@@ -17,28 +17,31 @@ final class ApplicationCoordinator: Coordinator {
     }
     
     var window: UIWindow?
-    
+    let tabBarCoordinator = TabBarCoordinator.getInstance()
     func start() {
-        let tabBarCoordinator = TabBarCoordinator.getInstance()
-        tabBarCoordinator.start()
-        
-        window?.rootViewController = tabBarCoordinator.tabBarController
+        let loginCoordinator = LoginScreenCoordinator.getInstance()
+        loginCoordinator.start()
+        window?.rootViewController = loginCoordinator.navigationController
         window?.makeKeyAndVisible()
     }
     
     func navigateToLogin() {
-        let navigationController = TabBarCoordinator.getInstance().navigationController
         let loginCoordinator = LoginScreenCoordinator.getInstance()
-        loginCoordinator.navigationController = navigationController
+        tabBarCoordinator.tabBarController.isTabBarHidden = true
+        loginCoordinator.navigationController = tabBarCoordinator.tabBarController.selectedViewController as? UINavigationController
         loginCoordinator.start()
+
     }
-    
     func navigateToMain() {
-        MainScreenCoordinator.getInstance().start()
         TabBarCoordinator.getInstance().tabBarController.selectedIndex = 0
     }
     func navigateToProfile() {
-        ProfileScreenCoordinator.getInstance().start()
         TabBarCoordinator.getInstance().tabBarController.selectedIndex = 1
+    }
+    func initTabBar(){
+        tabBarCoordinator.start()
+        tabBarCoordinator.tabBarController.isTabBarHidden = false
+        window?.rootViewController = tabBarCoordinator.tabBarController
+        window?.makeKeyAndVisible()
     }
 }

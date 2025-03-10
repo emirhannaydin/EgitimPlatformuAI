@@ -9,13 +9,17 @@ import UIKit
 class ProfileScreenViewController: UIViewController {
 
     var viewModel: ProfileScreenViewModel?
-
+    private var hamburgerMenuManager: HamburgerMenuManager!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Profile"
-        self.setNavigationBar()
-        
+        hamburgerMenuManager = HamburgerMenuManager(viewController: self)
+        hamburgerMenuManager.setNavigationBar()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
     }
     
 }

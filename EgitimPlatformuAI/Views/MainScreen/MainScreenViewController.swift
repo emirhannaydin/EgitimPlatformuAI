@@ -10,6 +10,7 @@ final class MainScreenViewController: UIViewController{
     
     @IBOutlet weak var nameContainerView: CustomNameContainer!
     @IBOutlet weak var collectionView: UICollectionView!
+    private var hamburgerMenuManager: HamburgerMenuManager!
     var viewModel: MainScreenViewModel?
     var screenName: [String] = ["Home", "Profile", "Lessons", "Deneme", "Deneme"]
     var screenLogo: [String] = ["house", "person.circle", "book","lock","lock"]
@@ -17,9 +18,14 @@ final class MainScreenViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Home"
-        self.setNavigationBar()
+        hamburgerMenuManager = HamburgerMenuManager(viewController: self)
+        hamburgerMenuManager.setNavigationBar()
         nameContainerView.configureView(nameLabel: "emirhanaydin_1600@hotmail.com", statusLabel: "Online", image: "person.fill")
         setCollectionView()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
     }
     
     private func setCollectionView(){
@@ -49,6 +55,7 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
         
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         print("selected\(indexPath.row)")
     }
     

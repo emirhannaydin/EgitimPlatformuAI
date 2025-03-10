@@ -29,7 +29,8 @@ public final class LoginScreenCoordinator: Coordinator {
         
         let viewModel = LoginScreenViewModel(coordinator: self)
         viewController.viewModel = viewModel
-        
+        navigationController.interactivePopGestureRecognizer?.isEnabled = false
+        navigationController.isNavigationBarHidden = true
         if navigationController.viewControllers.isEmpty {
             navigationController.viewControllers = [viewController]
         } else {
