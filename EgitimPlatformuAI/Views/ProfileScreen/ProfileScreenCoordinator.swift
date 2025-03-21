@@ -18,9 +18,6 @@ public final class ProfileScreenCoordinator: Coordinator {
         return instance!
     }
     var navigationController: UINavigationController! = UINavigationController()
-    let homeStoryboard = UIStoryboard(name: "ProfileScreen", bundle: nil).instantiateViewController(withIdentifier: "ProfileScreen")
-    let selectedImage = UIImage(systemName: "person.fill")
-    let unselectedImage = UIImage(systemName: "person")
     
     func start() {
         let storyboard = UIStoryboard(name: "ProfileScreen", bundle: nil)
@@ -31,11 +28,6 @@ public final class ProfileScreenCoordinator: Coordinator {
         
         let viewModel = ProfileScreenViewModel(coordinator: self)
         viewController.viewModel = viewModel
-        
-        let tabBarTitle = "Profile"
-        navigationController.tabBarItem = UITabBarItem(title: tabBarTitle,
-                                                       image: unselectedImage,
-                                                       selectedImage: selectedImage)
         
         navigationController.isNavigationBarHidden = false
         navigationController.viewControllers = [viewController]

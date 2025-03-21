@@ -6,8 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		944CD20E2AFD26ECF3771D3A /* Pods_EgitimPlatformuAI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 798215EE100CD37DD26F5289 /* Pods_EgitimPlatformuAI.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		1E6861702D3922E6007DB7C2 /* EgitimPlatformuAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EgitimPlatformuAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3731A8CC365DF6E1F9384268 /* Pods-EgitimPlatformuAI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EgitimPlatformuAI.debug.xcconfig"; path = "Target Support Files/Pods-EgitimPlatformuAI/Pods-EgitimPlatformuAI.debug.xcconfig"; sourceTree = "<group>"; };
+		70CBAD2A4B6B0F123747E232 /* Pods-EgitimPlatformuAI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EgitimPlatformuAI.release.xcconfig"; path = "Target Support Files/Pods-EgitimPlatformuAI/Pods-EgitimPlatformuAI.release.xcconfig"; sourceTree = "<group>"; };
+		798215EE100CD37DD26F5289 /* Pods_EgitimPlatformuAI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EgitimPlatformuAI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -36,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				944CD20E2AFD26ECF3771D3A /* Pods_EgitimPlatformuAI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +55,8 @@
 			children = (
 				1E6861722D3922E6007DB7C2 /* EgitimPlatformuAI */,
 				1E6861712D3922E6007DB7C2 /* Products */,
+				30B52BDCA3036F1DC6DCBD6B /* Pods */,
+				D78ACEFA8F63004087351610 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +68,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		30B52BDCA3036F1DC6DCBD6B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3731A8CC365DF6E1F9384268 /* Pods-EgitimPlatformuAI.debug.xcconfig */,
+				70CBAD2A4B6B0F123747E232 /* Pods-EgitimPlatformuAI.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		D78ACEFA8F63004087351610 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				798215EE100CD37DD26F5289 /* Pods_EgitimPlatformuAI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -65,9 +92,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1E6861832D3922E7007DB7C2 /* Build configuration list for PBXNativeTarget "EgitimPlatformuAI" */;
 			buildPhases = (
+				F9196EC20DD21AA4C8062602 /* [CP] Check Pods Manifest.lock */,
 				1E68616C2D3922E6007DB7C2 /* Sources */,
 				1E68616D2D3922E6007DB7C2 /* Frameworks */,
 				1E68616E2D3922E6007DB7C2 /* Resources */,
+				26BD1485E442DC0503723736 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -77,8 +106,6 @@
 				1E6861722D3922E6007DB7C2 /* EgitimPlatformuAI */,
 			);
 			name = EgitimPlatformuAI;
-			packageProductDependencies = (
-			);
 			productName = EgitimPlatformuAI;
 			productReference = 1E6861702D3922E6007DB7C2 /* EgitimPlatformuAI.app */;
 			productType = "com.apple.product-type.application";
@@ -127,6 +154,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		26BD1485E442DC0503723736 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EgitimPlatformuAI/Pods-EgitimPlatformuAI-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EgitimPlatformuAI/Pods-EgitimPlatformuAI-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EgitimPlatformuAI/Pods-EgitimPlatformuAI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F9196EC20DD21AA4C8062602 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EgitimPlatformuAI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1E68616C2D3922E6007DB7C2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -140,11 +209,13 @@
 /* Begin XCBuildConfiguration section */
 		1E6861842D3922E7007DB7C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3731A8CC365DF6E1F9384268 /* Pods-EgitimPlatformuAI.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EgitimPlatformuAI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -167,11 +238,13 @@
 		};
 		1E6861852D3922E7007DB7C2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 70CBAD2A4B6B0F123747E232 /* Pods-EgitimPlatformuAI.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EgitimPlatformuAI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

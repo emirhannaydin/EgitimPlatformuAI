@@ -28,18 +28,20 @@ public final class TabBarCoordinator: Coordinator {
 
         let mainCoordinator = MainScreenCoordinator.getInstance()
         let profileCoordinator = ProfileScreenCoordinator.getInstance()
-
+        let aiCoordinator = AIScreenCoordinator.getInstance()
+        
         mainCoordinator.start()
         profileCoordinator.start()
+        aiCoordinator.start()
 
         let mainNav = UINavigationController(rootViewController: mainCoordinator.navigationController.viewControllers.first!)
         let profileNav = UINavigationController(rootViewController: profileCoordinator.navigationController.viewControllers.first!)
+        let aiNav = UINavigationController(rootViewController: aiCoordinator.navigationController.viewControllers.first!)
 
         mainNav.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
-        profileNav.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
+        aiNav.tabBarItem = UITabBarItem(title: "AI", image: UIImage(systemName: "checkmark.message"), tag: 1)
+        profileNav.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 2)
 
-        tabBarController.viewControllers = [mainNav, profileNav]
-
-        navigationController = mainNav
+        tabBarController.viewControllers = [mainNav, aiNav, profileNav]
     }
 }

@@ -220,14 +220,17 @@ class HamburgerMenuManager: NSObject, UITableViewDataSource, UITableViewDelegate
         let tabBarController = TabBarCoordinator.getInstance().tabBarController
         
         switch indexPath.row {
-        case 0: // Login sayfası, tab barda olmadığı için push yapılabilir
+        case 0:
             ApplicationCoordinator.getInstance().start()
             
-        case 1: // Profile sayfası tab bar içinde, bu yüzden sadece tab'a geçmeliyiz
+        case 1:
             ApplicationCoordinator.getInstance().navigateToProfile()
             
-        case 2: // Home sayfası tab bar içinde, bu yüzden sadece tab'a geçmeliyiz
+        case 2:
             ApplicationCoordinator.getInstance().navigateToMain()
+        case 3:
+            ApplicationCoordinator.getInstance().navigateToAI()
+            
             
         default:
             break

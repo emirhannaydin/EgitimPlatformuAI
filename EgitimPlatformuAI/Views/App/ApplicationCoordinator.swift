@@ -24,23 +24,20 @@ final class ApplicationCoordinator: Coordinator {
         window?.rootViewController = loginCoordinator.navigationController
         window?.makeKeyAndVisible()
     }
-    
-    func navigateToLogin() {
-        let loginCoordinator = LoginScreenCoordinator.getInstance()
-        tabBarCoordinator.tabBarController.isTabBarHidden = true
-        loginCoordinator.navigationController = tabBarCoordinator.tabBarController.selectedViewController as? UINavigationController
-        loginCoordinator.start()
-
-    }
     func navigateToMain() {
-        TabBarCoordinator.getInstance().tabBarController.selectedIndex = 0
+        tabBarCoordinator.tabBarController.selectedIndex = 0
+    }
+    func navigateToAI(){
+        tabBarCoordinator.tabBarController.selectedIndex = 1
     }
     func navigateToProfile() {
-        TabBarCoordinator.getInstance().tabBarController.selectedIndex = 1
+        tabBarCoordinator.tabBarController.selectedIndex = 2
     }
+
     func initTabBar(){
         tabBarCoordinator.start()
         tabBarCoordinator.tabBarController.isTabBarHidden = false
+        tabBarCoordinator.tabBarController.selectedIndex = 0
         window?.rootViewController = tabBarCoordinator.tabBarController
         window?.makeKeyAndVisible()
     }

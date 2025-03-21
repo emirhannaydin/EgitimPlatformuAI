@@ -17,11 +17,7 @@ public final class MainScreenCoordinator: Coordinator {
         }
         return instance!
     }
-    var window : UIWindow?
     var navigationController: UINavigationController! = UINavigationController()
-    let homeStoryboard = UIStoryboard(name: "MainScreen", bundle: nil).instantiateViewController(withIdentifier: "MainScreen")
-    let selectedImage = UIImage(systemName: "person.fill")
-    let unselectedImage = UIImage(systemName: "person")
     
     func start() {
         let storyboard = UIStoryboard(name: "MainScreen", bundle: nil)
@@ -33,11 +29,6 @@ public final class MainScreenCoordinator: Coordinator {
         
         let viewModel = MainScreenViewModel(coordinator: self)
         viewController.viewModel = viewModel
-        
-        let tabBarTitle = "Home"
-        navigationController.tabBarItem = UITabBarItem(title: tabBarTitle,
-                                                       image: unselectedImage,
-                                                       selectedImage: selectedImage)
         
         navigationController.isNavigationBarHidden = false
         navigationController.viewControllers = [viewController]
