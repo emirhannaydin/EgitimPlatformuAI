@@ -12,6 +12,8 @@ class AIScreenViewController: UIViewController, UITableViewDataSource, UITableVi
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textField: UITextField!
+    private var hamburgerMenuManager: HamburgerMenuManager!
+
     
     private var aiAPIManager = AIAPIManager()
     private var messages: [MessageChatGPT] = []
@@ -19,19 +21,18 @@ class AIScreenViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Set up the table view
         tableView.dataSource = self
         tableView.register(AIChatTableViewCell.nib(), forCellReuseIdentifier: AIChatTableViewCell.identifier)
         textField.returnKeyType = .send
         textField.delegate = self
-        
+        self.title = "Chat"
+        hamburgerMenuManager = HamburgerMenuManager(viewController: self)
+        hamburgerMenuManager.setNavigationBar()
         messages = aiAPIManager.messages
         tableView.reloadData()
         
     }
 
-    // MARK: - UITableViewDataSource
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
     }
@@ -44,8 +45,6 @@ class AIScreenViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
 
-    // MARK: - UITextFieldDelegate
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let message = textField.text, !message.isEmpty else {
             return true
@@ -56,8 +55,6 @@ class AIScreenViewController: UIViewController, UITableViewDataSource, UITableVi
         
         return true
     }
-
-    // MARK: - Send Message
 
     private func sendMessage(_ message: String) {
         textField.isHidden = true

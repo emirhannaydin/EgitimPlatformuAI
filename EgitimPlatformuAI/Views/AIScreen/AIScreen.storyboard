@@ -22,31 +22,19 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wwQ-qT-mS4">
-                                <rect key="frame" x="0.0" y="129" width="393" height="645"/>
+                                <rect key="frame" x="0.0" y="69" width="393" height="705"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D96-Ft-OZK">
-                                <rect key="frame" x="0.0" y="59" width="393" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="q97-bR-8Hj"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="D96-Ft-OZK" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="6dO-RB-ILx"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="55C-Ol-jPk" secondAttribute="trailing" id="Fic-by-UyR"/>
                             <constraint firstItem="wwQ-qT-mS4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="JX9-cq-wnN"/>
-                            <constraint firstItem="wwQ-qT-mS4" firstAttribute="top" secondItem="D96-Ft-OZK" secondAttribute="bottom" constant="20" id="RFC-96-gHM"/>
-                            <constraint firstItem="D96-Ft-OZK" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="VJQ-ED-XLJ"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="D96-Ft-OZK" secondAttribute="trailing" id="WCB-1F-6Kw"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="wwQ-qT-mS4" secondAttribute="trailing" id="WGp-oA-0k9"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="55C-Ol-jPk" secondAttribute="bottom" id="YgB-wk-LND"/>
                             <constraint firstItem="55C-Ol-jPk" firstAttribute="top" secondItem="wwQ-qT-mS4" secondAttribute="bottom" constant="10" id="hGb-9U-kAz"/>
+                            <constraint firstItem="wwQ-qT-mS4" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="mRB-FC-Rdb"/>
                             <constraint firstItem="55C-Ol-jPk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="vOl-oB-d0h"/>
                         </constraints>
                     </view>
