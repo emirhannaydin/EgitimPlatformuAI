@@ -7,9 +7,9 @@
 
 import Foundation
 class AIScreenViewModel {
-    var coordiantor: AIScreenCoordinator?
+    var coordinator: AIScreenCoordinator?
     
     init(coordinator: AIScreenCoordinator?){
-        self.coordiantor = coordinator
+        self.coordinator = coordinator
     }
 }

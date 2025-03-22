@@ -26,7 +26,6 @@ public final class AIScreenCoordinator: Coordinator{
                 as? AIScreenViewController else {
             fatalError("Failed  to instantiate HomeViewController")
         }
-        
         let viewModel = AIScreenViewModel(coordinator: self)
         viewController.viewModel = viewModel
         
