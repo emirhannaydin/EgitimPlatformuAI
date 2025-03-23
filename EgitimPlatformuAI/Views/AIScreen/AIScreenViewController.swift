@@ -42,6 +42,7 @@ class AIScreenViewController: UIViewController {
         tableView.separatorStyle = .none
     }
     private func setTextField(){
+        textField.autocorrectionType = .no
         textField.returnKeyType = .send
         textField.delegate = self
     }
