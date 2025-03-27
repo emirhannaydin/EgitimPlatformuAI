@@ -6,22 +6,36 @@
 //
 import UIKit
 import Foundation
+import Lottie
 
-public final class LoginScreenViewController: UIViewController {
+final class LoginScreenViewController: UIViewController {
+    @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var loginButton: UIButton!
     
+    @IBOutlet var lottieView: LottieAnimationView!
     private var hamburgerMenuManager: HamburgerMenuManager!
-    @IBOutlet var loginButton: UIButton!
     
     var viewModel: LoginScreenViewModel?
 
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Login"
+        navigationController?.isNavigationBarHidden = true
         hamburgerMenuManager = HamburgerMenuManager(viewController: self)
         removeEdgePanGesture()
+        setLoginButton()
+        setRegisterButton()
+        setLottieAnimation()
     }
-    @IBAction func loginButtonClicked(_ sender: Any) {
-        ApplicationCoordinator.getInstance().initTabBar()
+    override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            
+            self.navigationController?.isNavigationBarHidden = true
+        }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     private func removeEdgePanGesture() {
@@ -30,5 +44,31 @@ public final class LoginScreenViewController: UIViewController {
         }
     }
     
+    private func setLoginButton(){
+        loginButton.backgroundColor = UIColor.customDarkBlue
+        loginButton.layer.cornerRadius = 8
+        loginButton.layer.masksToBounds = true
+    }
+    private func setRegisterButton(){
+        registerButton.layer.cornerRadius = 8
+        registerButton.layer.borderWidth = 1
+        registerButton.layer.borderColor = UIColor.customDarkBlue.cgColor
+        loginButton.layer.masksToBounds = true
+    }
+    private func setLottieAnimation(){
+        let animation = LottieAnimation.named("loginAnimation")
+        lottieView.animation = animation
+        lottieView.contentMode = .scaleAspectFit
+        lottieView.loopMode = .loop
+        lottieView.play()
+    }
+    @IBAction func loginButtonClicked(_ sender: UIButton) {
+        ApplicationCoordinator.getInstance().initTabBar()
+    }
+   
+    
+    @IBAction func registerButtonClicked(_ sender: UIButton) {
+        ApplicationCoordinator.getInstance().navigateToRegister()
+    }
     
 }

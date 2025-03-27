@@ -21,7 +21,12 @@ final class ApplicationCoordinator: Coordinator {
     func start() {
         let loginCoordinator = LoginScreenCoordinator.getInstance()
         loginCoordinator.start()
-        window?.rootViewController = loginCoordinator.navigationController
+        if let window = self.window {
+            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                self.window?.rootViewController = loginCoordinator.navigationController
+            })
+            window.makeKeyAndVisible()
+        }
         window?.makeKeyAndVisible()
     }
     func navigateToMain() {
@@ -33,13 +38,21 @@ final class ApplicationCoordinator: Coordinator {
     func navigateToProfile() {
         tabBarCoordinator.tabBarController.selectedIndex = 2
     }
+    func navigateToRegister(){
+        pushToRegisterScreen()
+    }
 
     func initTabBar(){
         tabBarCoordinator.start()
         tabBarCoordinator.tabBarController.isTabBarHidden = false
         tabBarCoordinator.tabBarController.selectedIndex = 0
-        window?.rootViewController = tabBarCoordinator.tabBarController
-        window?.makeKeyAndVisible()
+        if let window = self.window {
+            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                self.window?.rootViewController = self.tabBarCoordinator.tabBarController
+            })
+            window.makeKeyAndVisible()
+        }
+
     }
     func pushFromTabBarCoordinator<T: Coordinator>(_ coordinatorType: T.Type) {
        let coordinator = coordinatorType.getInstance()
@@ -49,4 +62,16 @@ final class ApplicationCoordinator: Coordinator {
        newVC.hidesBottomBarWhenPushed = true
        navController.pushViewController(newVC, animated: true)
     }
+    func pushToRegisterScreen() {
+        let registerCoordinator = RegisterScreenCoordinator.getInstance()
+        registerCoordinator.start()
+
+        let navController = LoginScreenCoordinator.getInstance().navigationController
+        if let registerVC = registerCoordinator.navigationController.viewControllers.first {
+            navController.pushViewController(registerVC, animated: true)
+        }
+    }
+
+
+
 }

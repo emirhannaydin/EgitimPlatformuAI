@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1E47FA4A2D8E41040065888D /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 1E47FA492D8E41040065888D /* SwiftOpenAI */; };
+		1E85701A2D95F50F004EEA09 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1E8570192D95F50F004EEA09 /* Lottie */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E47FA4A2D8E41040065888D /* SwiftOpenAI in Frameworks */,
+				1E85701A2D95F50F004EEA09 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +114,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				1E47FA482D8E41040065888D /* XCRemoteSwiftPackageReference "SwiftOpenAI" */,
+				1E8570182D95F50F004EEA09 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1E6861712D3922E6007DB7C2 /* Products */;
@@ -351,6 +354,14 @@
 				minimumVersion = 1.9.0;
 			};
 		};
+		1E8570182D95F50F004EEA09 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -358,6 +369,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1E47FA482D8E41040065888D /* XCRemoteSwiftPackageReference "SwiftOpenAI" */;
 			productName = SwiftOpenAI;
+		};
+		1E8570192D95F50F004EEA09 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1E8570182D95F50F004EEA09 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

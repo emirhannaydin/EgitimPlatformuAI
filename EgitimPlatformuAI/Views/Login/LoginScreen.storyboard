@@ -16,21 +16,78 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="97q-gp-EX4">
-                                <rect key="frame" x="164" y="692" width="66" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v960-ning-29" translatesAutoresizingMaskIntoConstraints="NO" id="qAI-pN-EsZ">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Learn Turkish App!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zX-ux-kq1">
+                                <rect key="frame" x="20" y="109" width="353" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="prn-yL-o3W"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ArialHebrew-Bold" family="Arial Hebrew" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qlz-me-u25" customClass="LottieAnimationView" customModule="Lottie">
+                                <rect key="frame" x="20" y="229" width="353" height="364"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sYU-OU-xh9">
+                                <rect key="frame" x="20" y="713" width="353" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="I9x-Pa-1Js"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Login"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Register">
+                                    <fontDescription key="titleFontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                </buttonConfiguration>
                                 <connections>
-                                    <action selector="loginButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="orQ-qS-8f5"/>
+                                    <action selector="registerButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="n7e-6R-6p2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yeg-XB-Nx8">
+                                <rect key="frame" x="20" y="643" width="353" height="55"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="Nmy-PP-S55"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Login">
+                                    <fontDescription key="titleFontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="loginButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="PdJ-Vr-2mY"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="5zX-ux-kq1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="0gp-QE-2AM"/>
+                            <constraint firstItem="qAI-pN-EsZ" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="9bg-Im-fGk"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="sYU-OU-xh9" secondAttribute="trailing" constant="20" id="IN8-gn-uVf"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Qlz-me-u25" secondAttribute="trailing" constant="20" id="M9o-Tr-WVR"/>
+                            <constraint firstItem="Qlz-me-u25" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="TWI-Zm-xfE"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="5zX-ux-kq1" secondAttribute="trailing" constant="20" id="TwO-z6-lCA"/>
+                            <constraint firstItem="Qlz-me-u25" firstAttribute="top" secondItem="5zX-ux-kq1" secondAttribute="bottom" constant="50" id="UV9-N0-nDQ"/>
+                            <constraint firstItem="qAI-pN-EsZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="cH2-hA-Stn"/>
+                            <constraint firstItem="Yeg-XB-Nx8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="eeT-D9-euh"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Yeg-XB-Nx8" secondAttribute="trailing" constant="20" id="g93-Ts-iNi"/>
+                            <constraint firstItem="sYU-OU-xh9" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="jas-ub-tlg"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="qAI-pN-EsZ" secondAttribute="trailing" id="jiq-Ou-WPy"/>
+                            <constraint firstItem="sYU-OU-xh9" firstAttribute="top" secondItem="Yeg-XB-Nx8" secondAttribute="bottom" constant="15" id="kY9-Yb-kq7"/>
+                            <constraint firstItem="Yeg-XB-Nx8" firstAttribute="top" secondItem="Qlz-me-u25" secondAttribute="bottom" constant="50" id="kpl-jX-ign"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="sYU-OU-xh9" secondAttribute="bottom" constant="50" id="ouu-Ld-Okb"/>
+                            <constraint firstItem="5zX-ux-kq1" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="50" id="wyx-YG-m1J"/>
+                            <constraint firstAttribute="bottom" secondItem="qAI-pN-EsZ" secondAttribute="bottom" id="xoX-BJ-vMF"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="loginButton" destination="97q-gp-EX4" id="SPs-gq-4VM"/>
+                        <outlet property="loginButton" destination="Yeg-XB-Nx8" id="26d-K6-pdO"/>
+                        <outlet property="lottieView" destination="Qlz-me-u25" id="0za-et-dxH"/>
+                        <outlet property="registerButton" destination="sYU-OU-xh9" id="mjz-Qc-1Xh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -39,6 +96,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="v960-ning-29" width="5000" height="3333"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
