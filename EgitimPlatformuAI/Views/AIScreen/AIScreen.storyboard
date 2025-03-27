@@ -16,39 +16,72 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Text Here.." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="55C-Ol-jPk">
-                                <rect key="frame" x="0.0" y="784" width="393" height="34"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wwQ-qT-mS4">
-                                <rect key="frame" x="0.0" y="69" width="393" height="705"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="704"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RR2-Ys-Qsg">
+                                <rect key="frame" x="0.0" y="768" width="393" height="50"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Text Here.." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="55C-Ol-jPk">
+                                        <rect key="frame" x="5" y="0.0" width="320" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="9C3-Vx-voO"/>
+                                            <constraint firstAttribute="width" constant="320" id="iHA-Cj-FIx"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0qF-zB-DN8">
+                                        <rect key="frame" x="332.33333333333331" y="0.0" width="50.666666666666686" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="O9g-yh-HQ1"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="paperplane.fill" catalog="system"/>
+                                        <connections>
+                                            <action selector="sendButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="la7-PB-93W"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="55C-Ol-jPk" firstAttribute="top" secondItem="RR2-Ys-Qsg" secondAttribute="top" id="1OX-Db-Dgz"/>
+                                    <constraint firstAttribute="trailing" secondItem="0qF-zB-DN8" secondAttribute="trailing" constant="10" id="AZy-pn-LHz"/>
+                                    <constraint firstItem="55C-Ol-jPk" firstAttribute="leading" secondItem="RR2-Ys-Qsg" secondAttribute="leading" constant="5" id="D2F-zV-c5A"/>
+                                    <constraint firstAttribute="bottom" secondItem="0qF-zB-DN8" secondAttribute="bottom" id="KY5-lz-6Sl"/>
+                                    <constraint firstAttribute="bottom" secondItem="55C-Ol-jPk" secondAttribute="bottom" id="MhJ-Oj-A2l"/>
+                                    <constraint firstItem="0qF-zB-DN8" firstAttribute="top" secondItem="RR2-Ys-Qsg" secondAttribute="top" id="TBG-dB-T69"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="55C-Ol-jPk" secondAttribute="trailing" id="Fic-by-UyR"/>
-                            <constraint firstItem="wwQ-qT-mS4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="JX9-cq-wnN"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="wwQ-qT-mS4" secondAttribute="trailing" id="WGp-oA-0k9"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="55C-Ol-jPk" secondAttribute="bottom" id="YgB-wk-LND"/>
-                            <constraint firstItem="55C-Ol-jPk" firstAttribute="top" secondItem="wwQ-qT-mS4" secondAttribute="bottom" constant="10" id="hGb-9U-kAz"/>
-                            <constraint firstItem="wwQ-qT-mS4" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="mRB-FC-Rdb"/>
-                            <constraint firstItem="55C-Ol-jPk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="vOl-oB-d0h"/>
+                            <constraint firstItem="wwQ-qT-mS4" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="An2-l8-XVn"/>
+                            <constraint firstItem="wwQ-qT-mS4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="B0V-lz-eVF"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="RR2-Ys-Qsg" secondAttribute="trailing" id="YLp-Ff-cBp"/>
+                            <constraint firstItem="wwQ-qT-mS4" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="ifC-Hn-oCa"/>
+                            <constraint firstItem="RR2-Ys-Qsg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="pZL-S1-qwm"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="RR2-Ys-Qsg" secondAttribute="bottom" id="xNp-I3-Jl7"/>
+                            <constraint firstItem="RR2-Ys-Qsg" firstAttribute="top" secondItem="wwQ-qT-mS4" secondAttribute="bottom" constant="5" id="y3A-MM-Hrn"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="wwQ-qT-mS4" id="Fkg-eH-OFU"/>
-                        <outlet property="textField" destination="55C-Ol-jPk" id="cb9-rf-MZH"/>
+                        <outlet property="sendButton" destination="0qF-zB-DN8" id="Zid-08-86W"/>
+                        <outlet property="tableView" destination="wwQ-qT-mS4" id="cXM-cS-W2A"/>
+                        <outlet property="textField" destination="55C-Ol-jPk" id="brw-Bh-7cR"/>
+                        <outlet property="textView" destination="RR2-Ys-Qsg" id="EYP-Bf-ohE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="99" y="-2"/>
+            <point key="canvasLocation" x="98.473282442748086" y="-2.1126760563380285"/>
         </scene>
     </scenes>
     <resources>
+        <image name="paperplane.fill" catalog="system" width="128" height="119"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

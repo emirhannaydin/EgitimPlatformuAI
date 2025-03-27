@@ -39,7 +39,7 @@ public final class TabBarCoordinator: Coordinator {
         let aiNav = UINavigationController(rootViewController: aiCoordinator.navigationController.viewControllers.first!)
 
         mainNav.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
-        aiNav.tabBarItem = UITabBarItem(title: "AI", image: UIImage(systemName: "checkmark.message"), tag: 1)
+        aiNav.tabBarItem = UITabBarItem(title: "Chat", image: UIImage(systemName: "checkmark.message"), tag: 1)
         profileNav.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 2)
 
         tabBarController.viewControllers = [mainNav, aiNav, profileNav]

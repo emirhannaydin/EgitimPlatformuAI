@@ -205,6 +205,10 @@ class HamburgerMenuManager: NSObject, UITableViewDataSource, UITableViewDelegate
             cell.labelText.text = "Home"
             cell.logoImageView.image = UIImage(systemName: "house")
             cell.logoImageView.tintColor = .red
+        case 3:
+            cell.labelText.text = "AI"
+            cell.logoImageView.image = UIImage(systemName: "checkmark.message")
+            cell.logoImageView.tintColor = .yellow
         default:
             cell.labelText.text = "--"
             cell.logoImageView.image = UIImage(systemName: "link")
