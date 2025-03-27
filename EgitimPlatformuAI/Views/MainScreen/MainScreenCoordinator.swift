@@ -17,8 +17,8 @@ public final class MainScreenCoordinator: Coordinator {
         }
         return instance!
     }
-    var navigationController: UINavigationController! = UINavigationController()
-    
+    var navigationController = UINavigationController()
+
     func start() {
         let storyboard = UIStoryboard(name: "MainScreen", bundle: nil)
         guard let viewController = storyboard.instantiateViewController(withIdentifier: "MainScreen")

@@ -18,8 +18,8 @@ public final class AIScreenCoordinator: Coordinator{
         return instance!
     }
     
-    var navigationController: UINavigationController! = UINavigationController()
-    
+    var navigationController = UINavigationController()
+
     func start() {
         let storyboard = UIStoryboard(name: "AIScreen", bundle: nil)
         guard let viewController = storyboard.instantiateViewController(withIdentifier: "AIScreen")

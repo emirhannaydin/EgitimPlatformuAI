@@ -8,7 +8,7 @@
 import UIKit
 
 protocol Coordinator {
-
+    var navigationController: UINavigationController { get }
     func start()
         
     static func getInstance() -> Self

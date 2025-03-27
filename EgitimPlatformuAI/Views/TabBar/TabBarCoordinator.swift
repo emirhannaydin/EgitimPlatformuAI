@@ -17,7 +17,7 @@ public final class TabBarCoordinator: Coordinator {
     }
 
     let tabBarController: UITabBarController = UITabBarController()
-    var navigationController: UINavigationController?
+    var navigationController = UINavigationController()
 
     func start() {
         tabBarController.tabBar.tintColor = .systemRed

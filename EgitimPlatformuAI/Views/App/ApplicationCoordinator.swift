@@ -15,7 +15,7 @@ final class ApplicationCoordinator: Coordinator {
         }
         return instance!
     }
-    
+    var navigationController = UINavigationController()
     var window: UIWindow?
     let tabBarCoordinator = TabBarCoordinator.getInstance()
     func start() {
@@ -40,5 +40,13 @@ final class ApplicationCoordinator: Coordinator {
         tabBarCoordinator.tabBarController.selectedIndex = 0
         window?.rootViewController = tabBarCoordinator.tabBarController
         window?.makeKeyAndVisible()
+    }
+    func pushFromTabBarCoordinator<T: Coordinator>(_ coordinatorType: T.Type) {
+       let coordinator = coordinatorType.getInstance()
+       coordinator.start()
+       guard let navController = tabBarCoordinator.tabBarController.selectedViewController as? UINavigationController,
+             let newVC = coordinator.navigationController.viewControllers.first else { return }
+       newVC.hidesBottomBarWhenPushed = true
+       navController.pushViewController(newVC, animated: true)
     }
 }
