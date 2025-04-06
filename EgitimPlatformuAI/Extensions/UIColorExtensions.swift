@@ -9,6 +9,7 @@ import UIKit
 
 extension UIColor {
     static let customDarkBlue = UIColor(hex: "#1E232C")
+    static let customPorcelain = UIColor(hex: "#F7F8F9")
 
     convenience init(hex: String) {
         var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
