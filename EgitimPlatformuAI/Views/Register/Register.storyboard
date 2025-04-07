@@ -93,6 +93,10 @@
                                     <action selector="loginNowButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="RvV-L8-Frp"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="imf-4n-LuH" customClass="SocialLoginView" customModule="EgitimPlatformuAI" customModuleProvider="target">
+                                <rect key="frame" x="20" y="594" width="353" height="164"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -102,12 +106,16 @@
                             <constraint firstItem="1Kl-gH-Xbl" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="8ws-HI-PqN"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="BwU-5E-49d" secondAttribute="trailing" constant="20" id="9WX-jg-Arf"/>
                             <constraint firstItem="qau-rg-uMU" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="BnT-qK-TUL"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="imf-4n-LuH" secondAttribute="trailing" constant="20" id="GXs-fv-hCZ"/>
                             <constraint firstItem="SlC-38-UhK" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="HxB-So-fdn"/>
                             <constraint firstAttribute="trailing" secondItem="SlC-38-UhK" secondAttribute="trailing" constant="20" id="K0f-8m-U22"/>
                             <constraint firstItem="qau-rg-uMU" firstAttribute="top" secondItem="SlC-38-UhK" secondAttribute="bottom" constant="40" id="QEZ-Cw-jnD"/>
+                            <constraint firstItem="imf-4n-LuH" firstAttribute="top" secondItem="U8K-2B-85t" secondAttribute="bottom" constant="20" id="QaO-R6-Ahp"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="qau-rg-uMU" secondAttribute="trailing" constant="20" id="Vvk-Sy-uRh"/>
+                            <constraint firstItem="BwU-5E-49d" firstAttribute="top" secondItem="imf-4n-LuH" secondAttribute="bottom" constant="20" id="bih-o5-4VX"/>
                             <constraint firstItem="U8K-2B-85t" firstAttribute="top" secondItem="qau-rg-uMU" secondAttribute="bottom" constant="20" id="iKr-KX-AWR"/>
                             <constraint firstItem="SlC-38-UhK" firstAttribute="top" secondItem="1Kl-gH-Xbl" secondAttribute="bottom" constant="40" id="j9C-ud-fTj"/>
+                            <constraint firstItem="imf-4n-LuH" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="qjp-gY-Na4"/>
                             <constraint firstItem="U8K-2B-85t" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="vry-Rc-yRr"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="U8K-2B-85t" secondAttribute="trailing" constant="20" id="z51-xs-d8v"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="BwU-5E-49d" secondAttribute="bottom" constant="20" id="zRh-xx-cMG"/>
