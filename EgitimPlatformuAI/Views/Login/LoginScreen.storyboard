@@ -24,8 +24,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="prn-yL-o3W"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="ArialHebrew-Bold" family="Arial Hebrew" pointSize="20"/>
-                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qlz-me-u25" customClass="LottieAnimationView" customModule="Lottie">
@@ -40,7 +40,7 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Register">
-                                    <fontDescription key="titleFontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="registerButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="n7e-6R-6p2"/>

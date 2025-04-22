@@ -25,6 +25,9 @@ final class LoginScreenViewController: UIViewController {
         setLoginButton()
         setRegisterButton()
         setLottieAnimation()
+        print(UIFont.fontNames(forFamilyName: "Urbanist"))  // urbanist alt font isimlerini gösterir
+
+        
     }
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
