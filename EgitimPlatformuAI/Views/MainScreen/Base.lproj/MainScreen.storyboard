@@ -3,6 +3,7 @@
     <device id="retina6_3" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,15 +17,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FaX-kg-ico">
+                                <rect key="frame" x="0.0" y="0.0" width="402" height="62"/>
+                                <color key="backgroundColor" name="darkBlue"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aqk-mC-bmx" customClass="CustomNameContainer" customModule="EgitimPlatformuAI" customModuleProvider="target">
-                                <rect key="frame" x="20" y="82" width="362" height="80"/>
+                                <rect key="frame" x="0.0" y="62" width="402" height="80"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="ZKF-HE-2Tf"/>
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xWG-wT-v4z">
-                                <rect key="frame" x="10" y="182" width="382" height="648"/>
+                                <rect key="frame" x="10" y="162" width="382" height="668"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PWP-I6-HgU">
                                     <size key="itemSize" width="198" height="185"/>
@@ -48,12 +53,16 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="FaX-kg-ico" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="CgN-1J-NmH"/>
+                            <constraint firstItem="Aqk-mC-bmx" firstAttribute="top" secondItem="FaX-kg-ico" secondAttribute="bottom" id="LaV-lU-Y05"/>
                             <constraint firstItem="xWG-wT-v4z" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="O0Q-hm-qA0"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Aqk-mC-bmx" secondAttribute="trailing" constant="20" id="OnB-3o-mbd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Aqk-mC-bmx" secondAttribute="trailing" id="OnB-3o-mbd"/>
+                            <constraint firstAttribute="trailing" secondItem="FaX-kg-ico" secondAttribute="trailing" id="S2H-jc-dn6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="xWG-wT-v4z" secondAttribute="bottom" constant="10" id="UQX-FZ-FnV"/>
-                            <constraint firstItem="Aqk-mC-bmx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="a3W-qo-So7"/>
-                            <constraint firstItem="Aqk-mC-bmx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="cDg-6t-PMd"/>
+                            <constraint firstItem="Aqk-mC-bmx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="a3W-qo-So7"/>
+                            <constraint firstItem="Aqk-mC-bmx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cDg-6t-PMd"/>
                             <constraint firstItem="xWG-wT-v4z" firstAttribute="top" secondItem="Aqk-mC-bmx" secondAttribute="bottom" constant="20" id="dJm-Gv-WRt"/>
+                            <constraint firstItem="FaX-kg-ico" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fRV-yP-AtD"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xWG-wT-v4z" secondAttribute="trailing" constant="10" id="krC-cU-N8q"/>
                         </constraints>
                     </view>
@@ -68,6 +77,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="darkBlue">
+            <color red="0.11764705882352941" green="0.13725490196078433" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
