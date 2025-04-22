@@ -35,7 +35,8 @@ class RegisterScreenViewController: UIViewController {
         roleTextField.inputView = pickerView
         roleTextField.delegate = self
         roleTextField.tintColor = .clear
-        
+        passwordLabel.isSecureTextEntry = true
+        confirmPasswordLabel.isSecureTextEntry = true
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
 
