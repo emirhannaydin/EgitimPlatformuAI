@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E47FA4A2D8E41040065888D /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 1E47FA492D8E41040065888D /* SwiftOpenAI */; };
-		1E85701A2D95F50F004EEA09 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 1E8570192D95F50F004EEA09 /* Lottie */; };
+		A0BACC9E2DB79F2B00DCC6AD /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = A0BACC9D2DB79F2B00DCC6AD /* Lottie */; };
+		A0BACCA12DB79F3C00DCC6AD /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = A0BACCA02DB79F3C00DCC6AD /* SwiftOpenAI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,8 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E47FA4A2D8E41040065888D /* SwiftOpenAI in Frameworks */,
-				1E85701A2D95F50F004EEA09 /* Lottie in Frameworks */,
+				A0BACCA12DB79F3C00DCC6AD /* SwiftOpenAI in Frameworks */,
+				A0BACC9E2DB79F2B00DCC6AD /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +84,10 @@
 				1E6861722D3922E6007DB7C2 /* EgitimPlatformuAI */,
 			);
 			name = EgitimPlatformuAI;
+			packageProductDependencies = (
+				A0BACC9D2DB79F2B00DCC6AD /* Lottie */,
+				A0BACCA02DB79F3C00DCC6AD /* SwiftOpenAI */,
+			);
 			productName = EgitimPlatformuAI;
 			productReference = 1E6861702D3922E6007DB7C2 /* EgitimPlatformuAI.app */;
 			productType = "com.apple.product-type.application";
@@ -113,8 +117,8 @@
 			mainGroup = 1E6861672D3922E6007DB7C2;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				1E47FA482D8E41040065888D /* XCRemoteSwiftPackageReference "SwiftOpenAI" */,
-				1E8570182D95F50F004EEA09 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				A0BACC9C2DB79F2B00DCC6AD /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				A0BACC9F2DB79F3C00DCC6AD /* XCRemoteSwiftPackageReference "SwiftOpenAI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1E6861712D3922E6007DB7C2 /* Products */;
@@ -154,7 +158,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EgitimPlatformuAI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -182,7 +185,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EgitimPlatformuAI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -346,15 +348,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1E47FA482D8E41040065888D /* XCRemoteSwiftPackageReference "SwiftOpenAI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftBeta/SwiftOpenAI";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.9.0;
-			};
-		};
-		1E8570182D95F50F004EEA09 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+		A0BACC9C2DB79F2B00DCC6AD /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
 			requirement = {
@@ -362,18 +356,26 @@
 				minimumVersion = 4.5.1;
 			};
 		};
+		A0BACC9F2DB79F3C00DCC6AD /* XCRemoteSwiftPackageReference "SwiftOpenAI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftBeta/SwiftOpenAI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1E47FA492D8E41040065888D /* SwiftOpenAI */ = {
+		A0BACC9D2DB79F2B00DCC6AD /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1E47FA482D8E41040065888D /* XCRemoteSwiftPackageReference "SwiftOpenAI" */;
-			productName = SwiftOpenAI;
-		};
-		1E8570192D95F50F004EEA09 /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1E8570182D95F50F004EEA09 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			package = A0BACC9C2DB79F2B00DCC6AD /* XCRemoteSwiftPackageReference "lottie-spm" */;
 			productName = Lottie;
+		};
+		A0BACCA02DB79F3C00DCC6AD /* SwiftOpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0BACC9F2DB79F3C00DCC6AD /* XCRemoteSwiftPackageReference "SwiftOpenAI" */;
+			productName = SwiftOpenAI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
