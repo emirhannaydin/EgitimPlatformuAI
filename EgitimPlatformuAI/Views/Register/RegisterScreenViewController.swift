@@ -42,7 +42,7 @@ class RegisterScreenViewController: UIViewController {
 
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "Tamam", style: .done, target: self, action: #selector(doneTapped))
-        doneButton.setTitleTextAttributes([.foregroundColor: UIColor.customDarkBlue], for: .normal)
+        doneButton.setTitleTextAttributes([.foregroundColor: UIColor.darkBlue], for: .normal)
         toolbar.setItems([flexibleSpace, doneButton, flexibleSpace], animated: false)
 
         roleTextField.inputAccessoryView = toolbar
@@ -52,15 +52,15 @@ class RegisterScreenViewController: UIViewController {
     }
     
     func setLabelBackground(){
-        nameLabel.backgroundColor = .customPorcelain
-        emailLabel.backgroundColor = .customPorcelain
-        passwordLabel.backgroundColor = .customPorcelain
-        confirmPasswordLabel.backgroundColor = .customPorcelain
-        roleTextField.backgroundColor = .customPorcelain
+        nameLabel.backgroundColor = .porcelain
+        emailLabel.backgroundColor = .porcelain
+        passwordLabel.backgroundColor = .porcelain
+        confirmPasswordLabel.backgroundColor = .porcelain
+        roleTextField.backgroundColor = .porcelain
 
     }
     private func setRegisterButton(){
-        registerButton.backgroundColor = UIColor.customDarkBlue
+        registerButton.backgroundColor = UIColor.darkBlue
         registerButton.layer.cornerRadius = 8
         registerButton.layer.masksToBounds = true
     }

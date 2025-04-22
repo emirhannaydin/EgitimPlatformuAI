@@ -28,16 +28,12 @@ final class CustomNameContainer: UIView {
         guard let view = self.loadViewFromNib(nibName: "CustomNameContainerView") else { return }
         view.frame = self.bounds
         self.addSubview(view)
-        view.layer.borderWidth = 2
-        view.layer.cornerRadius = 12
-        view.layer.borderColor = UIColor.systemBlue.cgColor
     }
 
     
     func configureView(nameLabel: String, statusLabel: String, image: String){
         self.nameLabel.adjustsFontSizeToFitWidth = true
         self.nameLabel.text = nameLabel
-        self.statusLabel.text = statusLabel
         self.imageView.image = UIImage(systemName: "\(image)")
     }
     

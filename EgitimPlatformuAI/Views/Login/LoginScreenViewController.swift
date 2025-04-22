@@ -45,14 +45,14 @@ final class LoginScreenViewController: UIViewController {
     }
     
     private func setLoginButton(){
-        loginButton.backgroundColor = UIColor.customDarkBlue
+        loginButton.backgroundColor = .darkBlue
         loginButton.layer.cornerRadius = 8
         loginButton.layer.masksToBounds = true
     }
     private func setRegisterButton(){
         registerButton.layer.cornerRadius = 8
         registerButton.layer.borderWidth = 1
-        registerButton.layer.borderColor = UIColor.customDarkBlue.cgColor
+        registerButton.layer.borderColor = UIColor.darkBlue.cgColor
         loginButton.layer.masksToBounds = true
     }
     private func setLottieAnimation(){
