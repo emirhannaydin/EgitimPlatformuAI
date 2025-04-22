@@ -66,7 +66,7 @@ final class LoginScreenViewController: UIViewController {
         lottieView.play()
     }
     @IBAction func loginButtonClicked(_ sender: UIButton) {
-        ApplicationCoordinator.getInstance().initTabBar()
+        ApplicationCoordinator.getInstance().navigateToMainLogin()
     }
    
     

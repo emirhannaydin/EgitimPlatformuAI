@@ -7,10 +7,9 @@
 
 import UIKit
 
+@IBDesignable
 final class SocialLoginView: UIView {
-    
-    // MARK: - UI Elements
-    var stackView = UIStackView()
+
     private let leftLine: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
@@ -27,7 +26,7 @@ final class SocialLoginView: UIView {
         let label = UILabel()
         label.text = "Or Register with"
         label.textColor = .darkGray
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = UIFont(name: "Helvetica Neue Bold", size: 14.0)
         label.textAlignment = .center
         return label
     }()
@@ -42,57 +41,59 @@ final class SocialLoginView: UIView {
         stack.spacing = 2
         stack.distribution = .fillEqually
         stack.alignment = .center
-    
         return stack
     }()
     
+    private var topStackView = UIStackView()
     
-    // MARK: - Init
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setStackView()
-        setupUI()
+    @IBInspectable var titleText: String = "Or Register with" {
+        didSet {
+            titleLabel.text = titleText
+        }
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setStackView()
+        configure()
+    }
+
+    private func configure() {
+        titleLabel.text = titleText
+        setupTopStack()
         setupUI()
     }
-    
-    // MARK: - Layout
-    private func setStackView() {
-        stackView = UIStackView(arrangedSubviews: [leftLine, titleLabel, rightLine])
-        stackView.axis = .horizontal
-        stackView.spacing = 2
-        stackView.distribution = .fillEqually
-        stackView.alignment = .center
-    
+
+    private func setupTopStack() {
+        topStackView = UIStackView(arrangedSubviews: [leftLine, titleLabel, rightLine])
+        topStackView.axis = .horizontal
+        topStackView.spacing = 2
+        topStackView.distribution = .fillEqually
+        topStackView.alignment = .center
+        
         leftLine.translatesAutoresizingMaskIntoConstraints = false
         rightLine.translatesAutoresizingMaskIntoConstraints = false
         leftLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
         rightLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
+
     private func setupUI() {
-        addSubview(stackView)
+        addSubview(topStackView)
         addSubview(buttonsStack)
         
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        topStackView.translatesAutoresizingMaskIntoConstraints = false
         buttonsStack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            topStackView.topAnchor.constraint(equalTo: topAnchor),
+            topStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            topStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            buttonsStack.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 24),
+            buttonsStack.topAnchor.constraint(equalTo: topStackView.bottomAnchor, constant: 24),
             buttonsStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             buttonsStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
             buttonsStack.heightAnchor.constraint(equalToConstant: 50),
             buttonsStack.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
-
 }

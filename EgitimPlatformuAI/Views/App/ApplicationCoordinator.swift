@@ -41,6 +41,9 @@ final class ApplicationCoordinator: Coordinator {
     func navigateToRegister(){
         pushToRegisterScreen()
     }
+    func navigateToMainLogin(){
+        pushToMainLoginScreen()
+    }
 
     func initTabBar(){
         tabBarCoordinator.start()
@@ -69,6 +72,15 @@ final class ApplicationCoordinator: Coordinator {
         let navController = LoginScreenCoordinator.getInstance().navigationController
         if let registerVC = registerCoordinator.navigationController.viewControllers.first {
             navController.pushViewController(registerVC, animated: true)
+        }
+    }
+    func pushToMainLoginScreen(){
+        let mainLoginCoordinator = MainLoginScreenCoordinator.getInstance()
+        mainLoginCoordinator.start()
+
+        let navController = LoginScreenCoordinator.getInstance().navigationController
+        if let mainLoginVC = mainLoginCoordinator.navigationController.viewControllers.first {
+            navController.pushViewController(mainLoginVC, animated: true)
         }
     }
 

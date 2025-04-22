@@ -10,6 +10,7 @@ class RegisterScreenViewController: UIViewController {
     
     
 
+    @IBOutlet var socialLoginView: SocialLoginView!
     @IBOutlet var backButton: CustomBackButtonView!
     @IBOutlet var loginNowButton: UIButton!
     @IBOutlet var nameLabel: UITextField!
@@ -21,7 +22,6 @@ class RegisterScreenViewController: UIViewController {
     let pickerView = UIPickerView()
     let options = ["Student", "Teacher"]
     var viewModel: RegisterScreenViewModel?
-    private var hamburgerMenuManager: HamburgerMenuManager!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +29,7 @@ class RegisterScreenViewController: UIViewController {
         backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         setLabelBackground()
         setRegisterButton()
+        
         pickerView.delegate = self
         pickerView.dataSource = self
        
@@ -66,7 +67,6 @@ class RegisterScreenViewController: UIViewController {
     }
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
-
     }
     
     @IBAction func loginNowButtonClicked(_ sender: Any) {
@@ -75,9 +75,6 @@ class RegisterScreenViewController: UIViewController {
     @objc func doneTapped() {
         roleTextField.resignFirstResponder()
     }
-
-    
-    
 }
 
 extension RegisterScreenViewController: UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate{

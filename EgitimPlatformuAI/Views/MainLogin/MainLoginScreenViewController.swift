@@ -9,12 +9,12 @@ import UIKit
 
 class MainLoginScreenViewController: UIViewController {
 
-    private var hamburgerMenuManager: HamburgerMenuManager!
     var viewModel: MainLoginScreenViewModel?
 
+    @IBOutlet var backButton: CustomBackButtonView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        removeEdgePanGesture()
+        backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
 
     }
     
@@ -30,11 +30,15 @@ class MainLoginScreenViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
     }
     
-    private func removeEdgePanGesture() {
-        if let window = hamburgerMenuManager.getKeyWindow() {
-            window.gestureRecognizers?.removeAll(where: { $0 is UIScreenEdgePanGestureRecognizer })
-        }
+    @objc func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
     }
 
-
+    @IBAction func registerNowButton(_ sender: Any) {
+        ApplicationCoordinator.getInstance().navigateToRegister()
+    }
+    
+    @IBAction func loginButton(_ sender: Any) {
+        ApplicationCoordinator.getInstance().initTabBar()
+    }
 }
