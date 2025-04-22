@@ -22,6 +22,7 @@ final class MainScreenViewController: UIViewController{
         hamburgerMenuManager.setNavigationBar()
         nameContainerView.configureView(nameLabel: "emirhanaydin_1600@hotmail.com", statusLabel: "Online", image: "person.fill")
         setCollectionView()
+        navigationController?.navigationBar.isHidden = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
