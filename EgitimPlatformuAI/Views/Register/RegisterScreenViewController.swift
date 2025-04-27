@@ -48,8 +48,16 @@ class RegisterScreenViewController: UIViewController {
 
         roleTextField.inputAccessoryView = toolbar
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     func setLabelBackground(){
@@ -70,11 +78,43 @@ class RegisterScreenViewController: UIViewController {
     }
     
     @IBAction func loginNowButtonClicked(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        ApplicationCoordinator.getInstance().navigateToMainLogin()
     }
     @objc func doneTapped() {
         roleTextField.resignFirstResponder()
     }
+    
+    @IBAction func registerButton(_ sender: Any) {
+        register()
+    }
+    func register() {
+        var userType = Int()
+        if roleTextField.text == "Teacher"{
+            userType = 0
+        }else{
+            userType = 1
+        }
+        let registerInfo = Register(
+            name: nameLabel.text!,
+            email: emailLabel.text!,
+            password: passwordLabel.text!,
+            userType: userType
+        )
+        viewModel?.register(user: registerInfo) { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success:
+                        self?.showAlert(title: "Success", message: "Registration completed successfully!") {
+                            ApplicationCoordinator.getInstance().pushToMainLoginScreen()
+                        }
+                    case .failure(let error):
+                        self?.showAlert(title: "Login Error", message: error.localizedDescription)
+                    }
+                }
+            }
+    }
+
+
 }
 
 extension RegisterScreenViewController: UIPickerViewDataSource, UIPickerViewDelegate,UITextFieldDelegate{

@@ -20,11 +20,16 @@ final class MainScreenViewController: UIViewController{
         self.title = "Home"
         hamburgerMenuManager = HamburgerMenuManager(viewController: self)
         hamburgerMenuManager.setNavigationBar()
-        nameContainerView.configureView(nameLabel: "emirhanaydin_1600@hotmail.com", statusLabel: "Online", image: "person.fill")
         setCollectionView()
+
         navigationController?.navigationBar.isHidden = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        let username = UserDefaults.standard.string(forKey: "username") ?? "Unknown"
+        nameContainerView.configureView(nameText: username.capitalizingFirstLetter(), statusText: "Online", imageName: "person.fill")
+
+    }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }

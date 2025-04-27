@@ -128,6 +128,8 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="jgk-uX-nqU" id="R7s-Im-Oc4"/>
+                        <outlet property="emailText" destination="wTj-vj-Pyc" id="Zuw-sl-rOj"/>
+                        <outlet property="passwordText" destination="y5r-zH-K88" id="C3c-yY-TND"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

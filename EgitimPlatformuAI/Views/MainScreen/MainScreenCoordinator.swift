@@ -29,7 +29,6 @@ public final class MainScreenCoordinator: Coordinator {
         
         let viewModel = MainScreenViewModel(coordinator: self)
         viewController.viewModel = viewModel
-        
         navigationController.isNavigationBarHidden = false
         navigationController.viewControllers = [viewController]
     }

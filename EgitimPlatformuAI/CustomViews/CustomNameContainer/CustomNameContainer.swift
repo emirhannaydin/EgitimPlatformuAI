@@ -31,11 +31,12 @@ final class CustomNameContainer: UIView {
     }
 
     
-    func configureView(nameLabel: String, statusLabel: String, image: String){
+    func configureView(nameText: String, statusText: String, imageName: String) {
         self.nameLabel.adjustsFontSizeToFitWidth = true
-        self.nameLabel.text = nameLabel
-        self.imageView.image = UIImage(systemName: "\(image)")
+        self.nameLabel.text = nameText
+        self.imageView.image = UIImage(systemName: imageName)
     }
+
     
     
     
