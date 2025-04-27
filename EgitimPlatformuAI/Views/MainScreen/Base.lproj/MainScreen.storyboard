@@ -28,9 +28,12 @@
                                     <constraint firstAttribute="height" constant="80" id="ZKF-HE-2Tf"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xWG-wT-v4z">
-                                <rect key="frame" x="10" y="162" width="382" height="668"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xWG-wT-v4z">
+                                <rect key="frame" x="0.0" y="147" width="402" height="200"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="cPp-sC-drL"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PWP-I6-HgU">
                                     <size key="itemSize" width="198" height="185"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -39,7 +42,28 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeScreenCollectionViewCell" id="lXu-La-JBq">
-                                        <rect key="frame" x="0.0" y="0.0" width="198" height="185"/>
+                                        <rect key="frame" x="0.0" y="7.666666666666667" width="198" height="185"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="198" height="185"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                        <size key="customSize" width="198" height="185"/>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ght-77-u77">
+                                <rect key="frame" x="0.0" y="377" width="402" height="463"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gbh-9s-oDU">
+                                    <size key="itemSize" width="198" height="185"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeScreenCollectionViewCell" id="4KZ-av-Diz">
+                                        <rect key="frame" x="102" y="0.0" width="198" height="185"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="198" height="185"/>
@@ -55,19 +79,23 @@
                         <constraints>
                             <constraint firstItem="FaX-kg-ico" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="CgN-1J-NmH"/>
                             <constraint firstItem="Aqk-mC-bmx" firstAttribute="top" secondItem="FaX-kg-ico" secondAttribute="bottom" id="LaV-lU-Y05"/>
-                            <constraint firstItem="xWG-wT-v4z" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="O0Q-hm-qA0"/>
+                            <constraint firstItem="xWG-wT-v4z" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="O0Q-hm-qA0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Aqk-mC-bmx" secondAttribute="trailing" id="OnB-3o-mbd"/>
+                            <constraint firstItem="Ght-77-u77" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Qg4-px-iTx"/>
                             <constraint firstAttribute="trailing" secondItem="FaX-kg-ico" secondAttribute="trailing" id="S2H-jc-dn6"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="xWG-wT-v4z" secondAttribute="bottom" constant="10" id="UQX-FZ-FnV"/>
                             <constraint firstItem="Aqk-mC-bmx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="a3W-qo-So7"/>
                             <constraint firstItem="Aqk-mC-bmx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cDg-6t-PMd"/>
-                            <constraint firstItem="xWG-wT-v4z" firstAttribute="top" secondItem="Aqk-mC-bmx" secondAttribute="bottom" constant="20" id="dJm-Gv-WRt"/>
+                            <constraint firstItem="xWG-wT-v4z" firstAttribute="top" secondItem="Aqk-mC-bmx" secondAttribute="bottom" constant="5" id="dJm-Gv-WRt"/>
                             <constraint firstItem="FaX-kg-ico" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fRV-yP-AtD"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xWG-wT-v4z" secondAttribute="trailing" constant="10" id="krC-cU-N8q"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xWG-wT-v4z" secondAttribute="trailing" id="krC-cU-N8q"/>
+                            <constraint firstItem="Ght-77-u77" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="nV8-ph-WeL"/>
+                            <constraint firstItem="Ght-77-u77" firstAttribute="top" secondItem="xWG-wT-v4z" secondAttribute="bottom" constant="30" id="slr-Zh-T9O"/>
+                            <constraint firstItem="Ght-77-u77" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="vNt-2B-NbR"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="xWG-wT-v4z" id="3mS-EN-hwU"/>
+                        <outlet property="collectionView2" destination="Ght-77-u77" id="kvF-Sy-GCY"/>
                         <outlet property="nameContainerView" destination="Aqk-mC-bmx" id="PrY-P7-o0r"/>
                     </connections>
                 </viewController>
