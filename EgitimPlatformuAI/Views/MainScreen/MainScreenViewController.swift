@@ -8,13 +8,15 @@ import UIKit
 
 final class MainScreenViewController: UIViewController{
     
-    @IBOutlet weak var nameContainerView: CustomNameContainer!
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var collectionView2: UICollectionView!
+    @IBOutlet var nameContainerView: CustomNameContainer!
+    @IBOutlet var collectionView: UICollectionView!
+    
+    @IBOutlet var collectionView2: UICollectionView!
     private var hamburgerMenuManager: HamburgerMenuManager!
     var viewModel: MainScreenViewModel?
     var screenName: [String] = ["Home", "Profile", "Lessons", "Deneme", "Deneme"]
     var screenLogo: [String] = ["house", "person.circle", "book","lock","lock"]
+    var coursesName: [String] = ["Reading", "Listening", "Writing", "Speaking"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,28 +46,39 @@ final class MainScreenViewController: UIViewController{
     private func setCollectionView(){
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.tag = 1
         collectionView.register(HomeScreenCollectionViewCell.nib(), forCellWithReuseIdentifier: HomeScreenCollectionViewCell.identifier)
-        collectionView.collectionViewLayout = UICollectionViewFlowLayout()
+        
+        collectionView2.delegate = self
+        collectionView2.dataSource = self
+        collectionView2.register(HomeScreenCourseCollectionViewCell.nib(), forCellWithReuseIdentifier: HomeScreenCourseCollectionViewCell.identifier)
     }
     
 }
 
-extension MainScreenViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+extension MainScreenViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        screenName.count
+        if collectionView.tag == 1{
+            return screenName.count
+        }else{
+            return coursesName.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeScreenCollectionViewCell.identifier, for: indexPath) as! HomeScreenCollectionViewCell
-        cell.imageView.image = UIImage(systemName: screenLogo[indexPath.row])
-        cell.labelText.text = screenName[indexPath.row]
-        return cell
+        if collectionView.tag == 1 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeScreenCollectionViewCell.identifier, for: indexPath) as! HomeScreenCollectionViewCell
+            cell.imageView.image = UIImage(systemName: screenLogo[indexPath.row])
+            cell.labelText.text = screenName[indexPath.row]
+            return cell
+        }else{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeScreenCourseCollectionViewCell.identifier, for: indexPath) as! HomeScreenCourseCollectionViewCell
+            cell.imageView.image = UIImage(systemName: screenLogo[indexPath.row])
+            cell.courseNameLabel.text = coursesName[indexPath.row]
+            return cell
+        }
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = ((collectionView.frame.size.width)/2) - 30
-        return CGSize(width: size, height: size)
-        
-    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         print("selected\(indexPath.row)")

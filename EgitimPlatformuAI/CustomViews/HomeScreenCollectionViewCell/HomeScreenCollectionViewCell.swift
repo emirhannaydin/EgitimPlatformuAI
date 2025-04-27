@@ -9,8 +9,8 @@ import UIKit
 
 class HomeScreenCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var labelText: UILabel!
+    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var labelText: UILabel!
     static let identifier = "HomeScreenCollectionViewCell"
     
     static func nib() -> UINib{
