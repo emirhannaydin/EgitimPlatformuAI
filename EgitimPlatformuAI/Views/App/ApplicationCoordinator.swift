@@ -66,23 +66,35 @@ final class ApplicationCoordinator: Coordinator {
        navController.pushViewController(newVC, animated: true)
     }
     func pushToRegisterScreen() {
-        let registerCoordinator = RegisterScreenCoordinator.getInstance()
-        registerCoordinator.start()
-
         let navController = LoginScreenCoordinator.getInstance().navigationController
-        if let registerVC = registerCoordinator.navigationController.viewControllers.first {
-            navController.pushViewController(registerVC, animated: true)
+
+        if let existingRegisterVC = navController.viewControllers.first(where: { $0 is RegisterScreenViewController }) {
+            navController.popToViewController(existingRegisterVC, animated: true)
+        } else {
+            let registerCoordinator = RegisterScreenCoordinator.getInstance()
+            registerCoordinator.start()
+            
+            if let registerVC = registerCoordinator.navigationController.viewControllers.first {
+                navController.pushViewController(registerVC, animated: true)
+            }
         }
     }
-    func pushToMainLoginScreen(){
-        let mainLoginCoordinator = MainLoginScreenCoordinator.getInstance()
-        mainLoginCoordinator.start()
 
+    func pushToMainLoginScreen() {
         let navController = LoginScreenCoordinator.getInstance().navigationController
-        if let mainLoginVC = mainLoginCoordinator.navigationController.viewControllers.first {
-            navController.pushViewController(mainLoginVC, animated: true)
+
+        if let existingLoginVC = navController.viewControllers.first(where: { $0 is MainLoginScreenViewController }) {
+            navController.popToViewController(existingLoginVC, animated: true)
+        } else {
+            let mainLoginCoordinator = MainLoginScreenCoordinator.getInstance()
+            mainLoginCoordinator.start()
+            
+            if let mainLoginVC = mainLoginCoordinator.navigationController.viewControllers.first {
+                navController.pushViewController(mainLoginVC, animated: true)
+            }
         }
     }
+
 
 
 

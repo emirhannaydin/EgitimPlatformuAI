@@ -221,12 +221,10 @@ class HamburgerMenuManager: NSObject, UITableViewDataSource, UITableViewDelegate
         print("Selected menu item \(indexPath.row + 1)")
         hideSlideMenu()
         
-        let tabBarController = TabBarCoordinator.getInstance().tabBarController
         
         switch indexPath.row {
         case 0:
             ApplicationCoordinator.getInstance().start()
-            
         case 1:
             ApplicationCoordinator.getInstance().navigateToProfile()
             
