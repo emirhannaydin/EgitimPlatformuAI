@@ -10,6 +10,7 @@ final class MainScreenViewController: UIViewController{
     
     @IBOutlet weak var nameContainerView: CustomNameContainer!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView2: UICollectionView!
     private var hamburgerMenuManager: HamburgerMenuManager!
     var viewModel: MainScreenViewModel?
     var screenName: [String] = ["Home", "Profile", "Lessons", "Deneme", "Deneme"]
@@ -23,6 +24,12 @@ final class MainScreenViewController: UIViewController{
         nameContainerView.configureView(nameLabel: "emirhanaydin_1600@hotmail.com", statusLabel: "Online", image: "person.fill")
         setCollectionView()
         navigationController?.navigationBar.isHidden = true
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+        }
+        if let layout = collectionView2.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .vertical
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -50,8 +57,7 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = (collectionView.frame.size.width-10)/2
-        
+        let size = ((collectionView.frame.size.width)/2) - 30
         return CGSize(width: size, height: size)
         
     }
