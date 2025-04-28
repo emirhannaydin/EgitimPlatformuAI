@@ -112,8 +112,19 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        print("selected\(indexPath.row)")
-        ApplicationCoordinator.getInstance().pushFromTabBarCoordinator(ReadingScreenCoordinator.self)
+        switch indexPath.row {
+        case 0:
+            ApplicationCoordinator.getInstance().pushFromTabBarCoordinator(ReadingScreenCoordinator.self)
+        case 1:
+            ApplicationCoordinator.getInstance().pushFromTabBarCoordinator(ListeningScreenCoordinator.self)
+        case 2:
+            ApplicationCoordinator.getInstance().pushFromTabBarCoordinator(WritingScreenCoordinator.self)
+        case 3:
+            ApplicationCoordinator.getInstance().pushFromTabBarCoordinator(SpeakingScreenCoordinator.self)
+        default:
+            print("invalid indexPath at CollectionView")
+        }
+        
     }
     
 }
