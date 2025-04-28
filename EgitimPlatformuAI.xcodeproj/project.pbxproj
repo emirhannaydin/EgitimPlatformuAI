@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A0BACC9E2DB79F2B00DCC6AD /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = A0BACC9D2DB79F2B00DCC6AD /* Lottie */; };
+		9E306155DFC7E42466E14E51 /* Pods_EgitimPlatformuAI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26ADD68A230BD5B4E87CF4EF /* Pods_EgitimPlatformuAI.framework */; };
 		A0BACCA12DB79F3C00DCC6AD /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = A0BACCA02DB79F3C00DCC6AD /* SwiftOpenAI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1E6861702D3922E6007DB7C2 /* EgitimPlatformuAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EgitimPlatformuAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		229A017F3CABA0C5DE5654AF /* Pods-EgitimPlatformuAI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EgitimPlatformuAI.debug.xcconfig"; path = "Target Support Files/Pods-EgitimPlatformuAI/Pods-EgitimPlatformuAI.debug.xcconfig"; sourceTree = "<group>"; };
+		26ADD68A230BD5B4E87CF4EF /* Pods_EgitimPlatformuAI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EgitimPlatformuAI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		72E6280F1452DEE40FE0EC84 /* Pods-EgitimPlatformuAI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EgitimPlatformuAI.release.xcconfig"; path = "Target Support Files/Pods-EgitimPlatformuAI/Pods-EgitimPlatformuAI.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -42,18 +45,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0BACCA12DB79F3C00DCC6AD /* SwiftOpenAI in Frameworks */,
-				A0BACC9E2DB79F2B00DCC6AD /* Lottie in Frameworks */,
+				9E306155DFC7E42466E14E51 /* Pods_EgitimPlatformuAI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14BC68CBE488B779D6E7D3C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				26ADD68A230BD5B4E87CF4EF /* Pods_EgitimPlatformuAI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1E6861672D3922E6007DB7C2 = {
 			isa = PBXGroup;
 			children = (
 				1E6861722D3922E6007DB7C2 /* EgitimPlatformuAI */,
 				1E6861712D3922E6007DB7C2 /* Products */,
+				E159EEDD7B3F04703AFA43ED /* Pods */,
+				14BC68CBE488B779D6E7D3C4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +78,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		E159EEDD7B3F04703AFA43ED /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				229A017F3CABA0C5DE5654AF /* Pods-EgitimPlatformuAI.debug.xcconfig */,
+				72E6280F1452DEE40FE0EC84 /* Pods-EgitimPlatformuAI.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -72,9 +94,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1E6861832D3922E7007DB7C2 /* Build configuration list for PBXNativeTarget "EgitimPlatformuAI" */;
 			buildPhases = (
+				8480AA303502BA54161C688A /* [CP] Check Pods Manifest.lock */,
 				1E68616C2D3922E6007DB7C2 /* Sources */,
 				1E68616D2D3922E6007DB7C2 /* Frameworks */,
 				1E68616E2D3922E6007DB7C2 /* Resources */,
+				9261D511E12E351DFBC08778 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -85,7 +109,6 @@
 			);
 			name = EgitimPlatformuAI;
 			packageProductDependencies = (
-				A0BACC9D2DB79F2B00DCC6AD /* Lottie */,
 				A0BACCA02DB79F3C00DCC6AD /* SwiftOpenAI */,
 			);
 			productName = EgitimPlatformuAI;
@@ -117,7 +140,6 @@
 			mainGroup = 1E6861672D3922E6007DB7C2;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				A0BACC9C2DB79F2B00DCC6AD /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				A0BACC9F2DB79F3C00DCC6AD /* XCRemoteSwiftPackageReference "SwiftOpenAI" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -140,6 +162,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8480AA303502BA54161C688A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EgitimPlatformuAI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9261D511E12E351DFBC08778 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EgitimPlatformuAI/Pods-EgitimPlatformuAI-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EgitimPlatformuAI/Pods-EgitimPlatformuAI-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EgitimPlatformuAI/Pods-EgitimPlatformuAI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1E68616C2D3922E6007DB7C2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -153,11 +217,13 @@
 /* Begin XCBuildConfiguration section */
 		1E6861842D3922E7007DB7C2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 229A017F3CABA0C5DE5654AF /* Pods-EgitimPlatformuAI.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EgitimPlatformuAI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -180,11 +246,13 @@
 		};
 		1E6861852D3922E7007DB7C2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72E6280F1452DEE40FE0EC84 /* Pods-EgitimPlatformuAI.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EgitimPlatformuAI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -348,14 +416,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A0BACC9C2DB79F2B00DCC6AD /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.5.1;
-			};
-		};
 		A0BACC9F2DB79F3C00DCC6AD /* XCRemoteSwiftPackageReference "SwiftOpenAI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftBeta/SwiftOpenAI.git";
@@ -367,11 +427,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A0BACC9D2DB79F2B00DCC6AD /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A0BACC9C2DB79F2B00DCC6AD /* XCRemoteSwiftPackageReference "lottie-spm" */;
-			productName = Lottie;
-		};
 		A0BACCA02DB79F3C00DCC6AD /* SwiftOpenAI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A0BACC9F2DB79F3C00DCC6AD /* XCRemoteSwiftPackageReference "SwiftOpenAI" */;
