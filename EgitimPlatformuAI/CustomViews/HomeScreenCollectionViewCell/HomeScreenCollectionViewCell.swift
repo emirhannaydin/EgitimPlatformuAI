@@ -6,11 +6,15 @@
 //
 
 import UIKit
+import MBCircularProgressBar
 
 class HomeScreenCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet var imageView: UIImageView!
-    @IBOutlet var labelText: UILabel!
+    
+    @IBOutlet var courseName: UILabel!
+    @IBOutlet var progressView: MBCircularProgressBarView!
+    @IBOutlet var levelLabel: UILabel!
+    @IBOutlet var lessonLabel: UILabel!
     static let identifier = "HomeScreenCollectionViewCell"
     
     static func nib() -> UINib{
@@ -18,7 +22,10 @@ class HomeScreenCollectionViewCell: UICollectionViewCell {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        progressView.value = 20
+        progressView.maxValue = 100
+        let formatted = String(format: "%g", progressView.maxValue)
+        progressView.unitString = " / \(formatted)"
     }
     
 

@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Lottie
 
 class HomeScreenCourseCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet var courseNameLabel: UILabel!
-    @IBOutlet var imageView: UIImageView!
     
+    @IBOutlet var lottieView: LottieAnimationView!
+    @IBOutlet var clickLabel: UILabel!
     static let identifier = "HomeScreenCourseCollectionViewCell"
     
     static func nib() -> UINib{
