@@ -1,0 +1,24 @@
+{
+  "originHash" : "7ee9f56b0a7d80676e38c1922e6dc097b1d39e233a59b6ca5befb48fa10db235",
+  "pins" : [
+    {
+      "identity" : "lottie-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-spm.git",
+      "state" : {
+        "revision" : "8c6edf4f0fa84fe9c058600a4295eb0c01661c69",
+        "version" : "4.5.1"
+      }
+    },
+    {
+      "identity" : "swiftopenai",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftBeta/SwiftOpenAI",
+      "state" : {
+        "revision" : "b316788cf0e6584cc730d8231112dd2c76458713",
+        "version" : "1.9.0"
+      }
+    }
+  ],
+  "version" : 3
+}
