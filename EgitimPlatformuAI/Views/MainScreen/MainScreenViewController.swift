@@ -113,6 +113,7 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         print("selected\(indexPath.row)")
+        ApplicationCoordinator.getInstance().pushFromTabBarCoordinator(ReadingScreenCoordinator.self)
     }
     
 }
