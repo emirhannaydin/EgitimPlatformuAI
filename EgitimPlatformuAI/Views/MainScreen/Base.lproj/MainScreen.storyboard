@@ -6,7 +6,6 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -33,20 +32,20 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="maW-RO-0Cj">
-                                <rect key="frame" x="0.0" y="170" width="402" height="150"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="160" width="402" height="150"/>
+                                <color key="backgroundColor" name="paleGray"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="uVd-9g-nEe"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DZe-tB-ua4">
-                                    <size key="itemSize" width="200" height="150"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="DZe-tB-ua4">
+                                    <size key="itemSize" width="200" height="120"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                                    <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="rWS-d1-LFN" customClass="HomeScreenCollectionViewCell" customModule="EgitimPlatformuAI" customModuleProvider="target">
-                                        <rect key="frame" x="101" y="10" width="200" height="100"/>
+                                        <rect key="frame" x="10" y="25" width="200" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="100"/>
@@ -57,17 +56,17 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Courses" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L4E-nM-gSH">
-                                <rect key="frame" x="20" y="350" width="362" height="50"/>
+                                <rect key="frame" x="20" y="340" width="362" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Biz-ZU-Gu4"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AuW-VA-f6H">
-                                <rect key="frame" x="0.0" y="430" width="402" height="390"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="420" width="402" height="400"/>
+                                <color key="backgroundColor" name="paleGray"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="gOd-Pd-uM8">
                                     <size key="itemSize" width="170" height="150"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -76,19 +75,18 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="YWB-gm-mbk" customClass="HomeScreenCourseCollectionViewCell" customModule="EgitimPlatformuAI" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="10" width="140" height="200"/>
+                                        <rect key="frame" x="10" y="10" width="170" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EwZ-sj-u5F">
-                                            <rect key="frame" x="0.0" y="0.0" width="140" height="200"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="170" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                        </collectionViewCellContentView>
-                                        <size key="customSize" width="140" height="200"/>
+                                        </view>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="paleGray"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="AuW-VA-f6H" secondAttribute="bottom" constant="20" id="3Dc-G4-04e"/>
                             <constraint firstItem="L4E-nM-gSH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="5tg-b0-ZzE"/>
@@ -103,7 +101,7 @@
                             <constraint firstItem="AuW-VA-f6H" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jXX-LJ-biT"/>
                             <constraint firstItem="L4E-nM-gSH" firstAttribute="top" secondItem="maW-RO-0Cj" secondAttribute="bottom" constant="30" id="odf-Ge-jeG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="L4E-nM-gSH" secondAttribute="trailing" constant="20" id="pxl-rY-ezO"/>
-                            <constraint firstItem="maW-RO-0Cj" firstAttribute="top" secondItem="4u2-oV-Dgl" secondAttribute="bottom" constant="20" id="q9Q-Ig-OTV"/>
+                            <constraint firstItem="maW-RO-0Cj" firstAttribute="top" secondItem="4u2-oV-Dgl" secondAttribute="bottom" constant="10" id="q9Q-Ig-OTV"/>
                             <constraint firstItem="maW-RO-0Cj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tDy-NV-Mke"/>
                             <constraint firstItem="4u2-oV-Dgl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="u6i-58-cF1"/>
                         </constraints>
@@ -122,6 +120,9 @@
     <resources>
         <namedColor name="darkBlue">
             <color red="0.11764705882352941" green="0.13725490196078433" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="paleGray">
+            <color red="0.88235294117647056" green="0.89411764705882357" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

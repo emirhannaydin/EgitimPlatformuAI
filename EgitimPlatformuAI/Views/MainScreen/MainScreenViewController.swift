@@ -26,12 +26,7 @@ final class MainScreenViewController: UIViewController{
         setCollectionView()
 
         navigationController?.navigationBar.isHidden = true
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-        }
-        if let layout = collectionView2.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .vertical
-        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,18 +53,16 @@ final class MainScreenViewController: UIViewController{
 
 extension MainScreenViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView.tag == 1{
-            return screenName.count
-        }else{
-            return coursesName.count
-        }
+        
+        return coursesName.count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView.tag == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeScreenCollectionViewCell.identifier, for: indexPath) as! HomeScreenCollectionViewCell
             cell.imageView.image = UIImage(systemName: screenLogo[indexPath.row])
-            cell.labelText.text = screenName[indexPath.row]
+            cell.labelText.text = coursesName[indexPath.row]
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeScreenCourseCollectionViewCell.identifier, for: indexPath) as! HomeScreenCourseCollectionViewCell
