@@ -11,9 +11,14 @@ import UIKit
 final class ListeningScreenViewController: UIViewController {
     var viewModel: ListeningScreenViewModel?
     
+    var tts: TextToSpeech = TextToSpeech()
+    var label = "Selamlar, nasılsın?"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false
+        tts.speak(text:label)
+        tts.startSpeaking()
     }
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
