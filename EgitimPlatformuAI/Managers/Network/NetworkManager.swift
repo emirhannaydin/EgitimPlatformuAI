@@ -10,8 +10,13 @@ class NetworkManager {
     static let shared = NetworkManager()
     private init() {}
 
+    private var baseUrl = "http://localhost:5001/api/"
+    
     func registerUser(request: Register, completion: @escaping (Result<Bool, Error>) -> Void) {
-        guard let url = URL(string: "http://localhost:5001/api/Account/signup") else {
+        
+        let endPoint = "Account/signup"
+        
+        guard let url = URL(string: "\(baseUrl)\(endPoint)") else {
             completion(.failure(NSError(domain: "Invalid URL", code: 0)))
             return
         }
@@ -61,7 +66,9 @@ class NetworkManager {
 
     
     func loginUser(email: String, password: String, completion: @escaping (Result<LoginResponse, Error>) -> Void) {
-        guard let url = URL(string: "http://localhost:5001/api/Account/login") else {
+        
+        let endPoint = "Account/login"
+        guard let url = URL(string: "\(baseUrl)\(endPoint)") else {
             completion(.failure(NSError(domain: "Invalid URL", code: 0)))
             return
         }

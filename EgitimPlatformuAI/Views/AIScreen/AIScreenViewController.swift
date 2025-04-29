@@ -21,126 +21,140 @@ class AIScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Chat"
-        style()
-        setHamburgerMenu()
-        aiChatNotifications()
+        setup()
         
     }
 }
-extension AIScreenViewController{
-    private func style(){
-        setTableView()
-        setTextField()
-        setTextView()
+// MARK: - Setup
+private extension AIScreenViewController {
+    
+    func setup() {
+        setupUI()
+        setupHamburgerMenu()
+        setupNotifications()
+        setupTextFieldTarget()
     }
-    private func setHamburgerMenu(){
-        hamburgerMenuManager = HamburgerMenuManager(viewController: self)
-        hamburgerMenuManager.setNavigationBar()
+    
+    func setupUI() {
+        setupTableView()
+        setupTextField()
+        setupTextView()
+        setupDismissKeyboardGesture()
     }
-    private func scrollToBottom() {
-        guard !viewModel.messages.isEmpty else { return }
-        
-        let indexPath = IndexPath(row: viewModel.messages.count - 1, section: 0)
-        tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-    }
-    private func aiChatNotifications(){
-        NotificationCenter.default.addObserver(self, selector: #selector(handleAIMessageStarted), name: Notification.Name("AIMessageStarted"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleAIMessageCompleted), name: Notification.Name("AIMessageCompleted"), object: nil)
-    }
-    private func setTableView(){
+    
+    func setupTableView() {
         tableView.dataSource = self
-        tableView.register(AIChatTableViewCell.self, forCellReuseIdentifier: AIChatTableViewCell.identifier)
+        tableView.delegate = self
         tableView.separatorStyle = .none
+        tableView.register(AIChatTableViewCell.self, forCellReuseIdentifier: AIChatTableViewCell.identifier)
     }
-    private func setTextField(){
+    
+    func setupTextField() {
         textField.delegate = self
         textField.autocorrectionType = .no
         textField.returnKeyType = .send
         textField.layer.cornerRadius = 10
         textField.borderStyle = .none
-
     }
-    private func setTextView(){
+    
+    func setupTextFieldTarget() {
+        textField.addTarget(self, action: #selector(textFieldEditingChanged), for: .editingChanged)
+    }
+    
+    func setupTextView() {
         textView.layer.cornerRadius = 12
         textView.layer.borderWidth = 1
         textView.layer.borderColor = UIColor.lightGray.cgColor
     }
-    private func setGesture(){
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+    
+    func setupHamburgerMenu() {
+        hamburgerMenuManager = HamburgerMenuManager(viewController: self)
+        hamburgerMenuManager.setNavigationBar()
+    }
+    
+    func setupNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleAIMessageStarted), name: Notification.Name("AIMessageStarted"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleAIMessageCompleted), name: Notification.Name("AIMessageCompleted"), object: nil)
+    }
+    
+    func setupDismissKeyboardGesture() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(gesture)
     }
-    @objc func handleTap() {
-            view.endEditing(true)
-        }
-    @objc private func handleAIMessageStarted() {
-        textField.isEnabled = false
-    }
+}
 
-    @IBAction private func sendButtonTapped(_ sender: UIButton) {
-        handleTextAction(for: sender)
+// MARK: - Actions
+private extension AIScreenViewController {
+    
+    @objc func handleAIMessageStarted() {
+        textField.isEnabled = false
+        sendButton.isEnabled = false
     }
     
-    @objc private func handleAIMessageCompleted() {
+    @objc func handleAIMessageCompleted() {
         if let lastMessage = viewModel.messages.last, lastMessage.role == .system, !lastMessage.text.isEmpty {
             textField.isEnabled = true
-        }
-    }
-    private func handleTextAction(for sender: Any) {
-        guard let message = textField.text, !message.isEmpty else { return }
-        let trimmedMessage = message.trimmingCharacters(in: .whitespacesAndNewlines)
-        if let textField = sender as? UITextField {
-           
-            textField.isEnabled = false
-            textField.text = ""
-            
-            viewModel.sendMessage(trimmedMessage) { [weak self] in
-                self?.tableView.reloadData()
-                self?.scrollToBottom()
-                textField.isEnabled = true
-            }
-            
-        } else if let button = sender as? UIButton {
-            guard let textField = self.textField else { return }
-            textField.isEnabled = false
-            textField.text = ""
-            
-            viewModel.sendMessage(trimmedMessage) { [weak self] in
-                self?.tableView.reloadData()
-                self?.scrollToBottom()
-                textField.isEnabled = true
-            }
+            textFieldEditingChanged(textField)
         }
     }
     
+    @IBAction func sendButtonTapped(_ sender: UIButton) {
+        sendMessage()
+    }
+    
+    func sendMessage() {
+        guard let message = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !message.isEmpty else { return }
+        
+        textField.isEnabled = false
+        sendButton.isEnabled = false
+        textField.text = ""
+        
+        viewModel.sendMessage(message) { [weak self] in
+            guard let self = self else { return }
+            self.tableView.reloadData()
+            self.scrollToBottom()
+            self.textField.isEnabled = true
+            self.textFieldEditingChanged(self.textField)
+        }
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    @objc func textFieldEditingChanged(_ textField: UITextField) {
+        let trimmedText = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        sendButton.isEnabled = !trimmedText.isEmpty
+    }
+    
+    func scrollToBottom() {
+        guard !viewModel.messages.isEmpty else { return }
+        let indexPath = IndexPath(row: viewModel.messages.count - 1, section: 0)
+        tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    }
 }
+
 // MARK: - TableView
-extension AIScreenViewController: UITableViewDataSource, UITableViewDelegate{
+extension AIScreenViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.messages.count
+        viewModel.messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: AIChatTableViewCell.identifier) as! AIChatTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: AIChatTableViewCell.identifier, for: indexPath) as! AIChatTableViewCell
         cell.configure(with: viewModel.messages[indexPath.row])
         return cell
     }
-    
 }
+
 // MARK: - TextField
-extension AIScreenViewController: UITextFieldDelegate{
+extension AIScreenViewController: UITextFieldDelegate {
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        handleTextAction(for: textField)
+        sendMessage()
         return true
     }
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-            let currentText = textField.text ?? ""
-            let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
-            
-            if newText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                return false
-            }
-            
-            return true
-        }
 }
 
