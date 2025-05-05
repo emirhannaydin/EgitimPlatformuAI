@@ -16,6 +16,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jh1-HN-l2N" customClass="CustomBackButtonView" customModule="EgitimPlatformuAI" customModuleProvider="target">
+                                <rect key="frame" x="20" y="59" width="40" height="40"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="SDy-QI-4W3"/>
+                                    <constraint firstAttribute="height" constant="40" id="iuc-ck-Urr"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Listening" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CmN-Af-E01">
                                 <rect key="frame" x="175" y="297" width="69" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -26,7 +34,14 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Jh1-HN-l2N" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="mAA-Ys-kDE"/>
+                            <constraint firstItem="Jh1-HN-l2N" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="wL5-Ae-gwf"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="backButton" destination="Jh1-HN-l2N" id="RkY-K3-7Ty"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
