@@ -114,7 +114,7 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
         
         switch indexPath.row {
         case 0:
-            ApplicationCoordinator.getInstance().pushFromTabBarCoordinator(ReadingScreenCoordinator.self)
+            ApplicationCoordinator.getInstance().pushWithoutTabBarFromTabBarCoordinator(ReadingScreenCoordinator.self)
         case 1:
             ApplicationCoordinator.getInstance().pushFromTabBarCoordinator(ListeningScreenCoordinator.self)
         case 2:

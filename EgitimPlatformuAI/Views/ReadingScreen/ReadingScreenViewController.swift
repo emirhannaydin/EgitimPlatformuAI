@@ -10,10 +10,13 @@ import UIKit
 
 final class ReadingScreenViewController: UIViewController {
     var viewModel: ReadingScreenViewModel?
+    @IBOutlet var backButton: CustomBackButtonView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = false
+        backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        
     }
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
@@ -26,4 +29,11 @@ final class ReadingScreenViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = false
     }
+    
+    @objc func backButtonTapped(){
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
+    
 }
