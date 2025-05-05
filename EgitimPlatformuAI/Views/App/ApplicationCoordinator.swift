@@ -67,6 +67,17 @@ final class ApplicationCoordinator: Coordinator {
         newVC.hidesBottomBarWhenPushed = false
        navController.pushViewController(newVC, animated: true)
     }
+    func pushWithoutTabBarFromTabBarCoordinator<T: Coordinator>(_ coordinatorType: T.Type) {
+        let coordinator = coordinatorType.getInstance()
+        coordinator.start()
+        
+        guard let navController = tabBarCoordinator.tabBarController.selectedViewController as? UINavigationController,
+              let newVC = coordinator.navigationController.viewControllers.first else { return }
+        
+        newVC.hidesBottomBarWhenPushed = true
+        navController.pushViewController(newVC, animated: true)
+    }
+
     func pushToRegisterScreen() {
         let navController = LoginScreenCoordinator.getInstance().navigationController
 
