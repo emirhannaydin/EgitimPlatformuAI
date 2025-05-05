@@ -11,7 +11,6 @@ final class MainScreenViewController: UIViewController{
     
     @IBOutlet var nameContainerView: CustomNameContainer!
     @IBOutlet var collectionView: UICollectionView!
-    
     @IBOutlet var collectionView2: UICollectionView!
     private var hamburgerMenuManager: HamburgerMenuManager!
     var viewModel: MainScreenViewModel?
@@ -20,7 +19,7 @@ final class MainScreenViewController: UIViewController{
     var lottieAnimations: [String] = ["reading", "listening", "writing", "speaking"]
     var lessonCount: [Int] = [10,20,30,40]
     var progressCount: [Int] = [3,8,15,20]
-    var cellBackgroundColor: [UIColor] = [.silver, .sapphireBlue, .darkBlue, .purple]
+    var cellBackgroundColor: [UIColor] = [.silver, .sapphireBlue, .darkBlue, .mintGreen]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +28,7 @@ final class MainScreenViewController: UIViewController{
         hamburgerMenuManager.setNavigationBar()
         setCollectionView()
 
+        nameContainerView.hamburgerMenuManager = hamburgerMenuManager
         navigationController?.navigationBar.isHidden = true
         
     }
@@ -74,22 +74,26 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
             cell.progressView.unitString = " / \(formatted)"
             cell.backgroundColor = cellBackgroundColor[indexPath.row]
             if cell.courseName.text == "Reading Course"{
-                cell.progressView.progressColor = .orange
-                cell.progressView.progressStrokeColor = .orange
-                cell.progressView.fontColor = .black
+                cell.progressView.progressColor = .darkBlue
+                cell.progressView.progressStrokeColor = .darkBlue
+                cell.progressView.fontColor = .darkBlue
                 cell.lessonLabel.textColor = .black
                 cell.levelLabel.textColor = .black
+                cell.courseName.textColor = .black
             }else if cell.courseName.text == "Listening Course"{
-                cell.progressView.progressColor = .mediumTurqoise
-                cell.progressView.progressStrokeColor = .mediumTurqoise
-                cell.progressView.fontColor = .white
-            }else if cell.courseName.text == "Writing Course"{
+                cell.courseName.textColor = .porcelain
                 cell.progressView.progressColor = .porcelain
                 cell.progressView.progressStrokeColor = .porcelain
                 cell.progressView.fontColor = .white
+            }else if cell.courseName.text == "Writing Course"{
+                cell.courseName.textColor = .winter
+                cell.progressView.progressColor = .winter
+                cell.progressView.progressStrokeColor = .winter
+                cell.progressView.fontColor = .white
             }else if cell.courseName.text == "Speaking Course"{
-                cell.progressView.progressColor = .systemPink
-                cell.progressView.progressStrokeColor = .systemPink
+                cell.courseName.textColor = .coldPurple
+                cell.progressView.progressColor = .coldPurple
+                cell.progressView.progressStrokeColor = .coldPurple
                 cell.progressView.fontColor = .white
             }
             
@@ -98,13 +102,24 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeScreenCourseCollectionViewCell.identifier, for: indexPath) as! HomeScreenCourseCollectionViewCell
             cell.backgroundColor = cellBackgroundColor[indexPath.row]
             cell.courseNameLabel.text = coursesName[indexPath.row]
-
-            let animation = LottieAnimation.named(lottieAnimations[indexPath.row])
             
+            let animation = LottieAnimation.named(lottieAnimations[indexPath.row])
             cell.lottieView.animation = animation
             cell.lottieView.contentMode = .scaleAspectFill
             cell.lottieView.loopMode = .loop
             cell.lottieView.play()
+            
+            if cell.courseNameLabel.text == "Reading Course"{
+                cell.enrollLabel.textColor = .black
+                cell.courseNameLabel.textColor = .black
+            }else if cell.courseNameLabel.text == "Listening Course"{
+                cell.courseNameLabel.textColor = .porcelain
+            }else if cell.courseNameLabel.text == "Writing Course"{
+                cell.courseNameLabel.textColor = .winter
+            }else if cell.courseNameLabel.text == "Speaking Course"{
+                cell.courseNameLabel.textColor = .coldPurple
+                cell.enrollLabel.textColor = .white
+            }
             
             return cell
         }

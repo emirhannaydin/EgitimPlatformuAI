@@ -64,7 +64,7 @@ class HamburgerMenuManager: NSObject, UITableViewDataSource, UITableViewDelegate
         }
     }
     
-    @objc private func toggleSlideMenu() {
+    @objc func toggleSlideMenu() {
         if getKeyWindow()?.viewWithTag(999) != nil {
             hideSlideMenu()
         } else {

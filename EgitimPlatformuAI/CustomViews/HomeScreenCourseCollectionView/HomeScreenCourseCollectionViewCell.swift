@@ -12,6 +12,7 @@ class HomeScreenCourseCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet var courseNameLabel: UILabel!
     
+    @IBOutlet var enrollLabel: UILabel!
     @IBOutlet var lottieView: LottieAnimationView!
     @IBOutlet var clickLabel: UILabel!
     static let identifier = "HomeScreenCourseCollectionViewCell"

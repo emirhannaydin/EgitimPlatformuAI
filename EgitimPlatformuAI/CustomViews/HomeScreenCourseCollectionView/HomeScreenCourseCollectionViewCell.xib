@@ -75,6 +75,7 @@
             </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="courseNameLabel" destination="OKe-dv-2mo" id="aIZ-Bh-5g4"/>
+                <outlet property="enrollLabel" destination="ROE-e4-xhN" id="625-aG-ObV"/>
                 <outlet property="lottieView" destination="AYC-hP-a8X" id="46Q-xc-eNh"/>
             </connections>
             <point key="canvasLocation" x="283.96946564885496" y="58.802816901408455"/>
