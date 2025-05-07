@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,11 +21,60 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RP5-2U-vwP">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="346.66666666666669"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <subviews>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NjP-Qa-BqE">
+                                                <rect key="frame" x="8" y="8" width="345" height="330.66666666666669"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fld-Au-PDt">
+                                                        <rect key="frame" x="0.0" y="0.0" width="345" height="475.33333333333331"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGT-TG-VRA">
+                                                                <rect key="frame" x="0.0" y="0.0" width="345" height="475.33333333333331"/>
+                                                                <mutableString key="text">Benim adım Ali. On dokuz yaşındayım. Ankara’da yaşıyorum. Üniversite öğrencisiyim. Sabah saat sekizde uyanırım. Kahvaltı yaparım ve okula giderim. Okul saat dokuzda başlar. Öğleden sonra kütüphanede ders çalışırım. Akşam yemeğinden sonra kitap okurum veya televizyon izlerim. Hafta sonları genellikle arkadaşlarımla buluşurum. Benim adım Ali. On dokuz yaşındayım. Ankara’da yaşıyorum. Üniversite öğrencisiyim. Sabah saat sekizde uyanırım. Kahvaltı yaparım ve okula giderim. Okul saat dokuzda başlar. Öğleden sonra kütüphanede ders çalışırım. Akşam yemeğinden sonra kitap okurum veya televizyon izlerim. Hafta sonları genellikle arkadaşlarımla buluşurum. Benim adım Ali. On dokuz yaşındayım. Ankara’da yaşıyorum. Üniversite öğrencisiyim. Sabah saat sekizde uyanırım. Kahvaltı yaparım ve okula giderim. Okul saat dokuzda başlar. Öğleden sonra kütüphanede ders çalışırım. Akşam yemeğinden sonra kitap okurum veya televizyon izlerim. Hafta sonları genellikle arkadaşlarımla buluşurum.</mutableString>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                                <color key="textColor" name="porcelain"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="qGT-TG-VRA" firstAttribute="leading" secondItem="Fld-Au-PDt" secondAttribute="leading" id="3bo-t9-Ox3"/>
+                                                            <constraint firstItem="qGT-TG-VRA" firstAttribute="top" secondItem="Fld-Au-PDt" secondAttribute="top" id="UYg-qO-dXg"/>
+                                                            <constraint firstAttribute="bottom" secondItem="qGT-TG-VRA" secondAttribute="bottom" id="Zgk-08-Z0F"/>
+                                                            <constraint firstAttribute="trailing" secondItem="qGT-TG-VRA" secondAttribute="trailing" id="eEI-kh-DY8"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="Fld-Au-PDt" secondAttribute="trailing" id="Kfk-nH-XMS"/>
+                                                    <constraint firstItem="Fld-Au-PDt" firstAttribute="leading" secondItem="NjP-Qa-BqE" secondAttribute="leading" id="Q4v-a4-CRH"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Fld-Au-PDt" secondAttribute="bottom" id="aCA-Xa-hbU"/>
+                                                    <constraint firstItem="Fld-Au-PDt" firstAttribute="width" secondItem="NjP-Qa-BqE" secondAttribute="width" id="m55-Vv-mY1"/>
+                                                    <constraint firstItem="Fld-Au-PDt" firstAttribute="top" secondItem="NjP-Qa-BqE" secondAttribute="top" id="one-HN-JMZ"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="contentLayoutGuide" id="avr-Pt-gPI"/>
+                                                <viewLayoutGuide key="frameLayoutGuide" id="tWB-cW-eK7"/>
+                                            </scrollView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="NjP-Qa-BqE" firstAttribute="leading" secondItem="RP5-2U-vwP" secondAttribute="leadingMargin" id="9XX-sj-ZNq"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="NjP-Qa-BqE" secondAttribute="bottom" id="cV5-lo-dOf"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="NjP-Qa-BqE" secondAttribute="trailing" id="gXE-lp-LbF"/>
+                                            <constraint firstItem="NjP-Qa-BqE" firstAttribute="top" secondItem="RP5-2U-vwP" secondAttribute="topMargin" id="kt9-N9-SMs"/>
+                                        </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4bH-jg-GvT">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4bH-jg-GvT">
                                         <rect key="frame" x="0.0" y="356.66666666666674" width="361" height="346.33333333333326"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="sectionIndexColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="Y6W-OH-hqX" id="Qyf-vo-mX4"/>
+                                            <outlet property="delegate" destination="Y6W-OH-hqX" id="Fwo-QM-22P"/>
+                                        </connections>
                                     </tableView>
                                 </subviews>
                             </stackView>
@@ -52,6 +100,7 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="Ipu-xd-vvc" id="U0Q-YG-fbn"/>
+                        <outlet property="tableView" destination="4bH-jg-GvT" id="DcK-yk-Eq0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -63,8 +112,8 @@
         <namedColor name="darkBlue">
             <color red="0.11764705882352941" green="0.13725490196078433" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="porcelain">
+            <color red="0.96862745098039216" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
