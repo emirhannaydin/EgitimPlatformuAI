@@ -131,11 +131,11 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
         case 0:
             ApplicationCoordinator.getInstance().pushWithoutTabBarFromTabBarCoordinator(ReadingScreenCoordinator.self)
         case 1:
-            ApplicationCoordinator.getInstance().pushFromTabBarCoordinator(ListeningScreenCoordinator.self)
+            ApplicationCoordinator.getInstance().pushWithoutTabBarFromTabBarCoordinator(ListeningScreenCoordinator.self)
         case 2:
-            ApplicationCoordinator.getInstance().pushFromTabBarCoordinator(WritingScreenCoordinator.self)
+            ApplicationCoordinator.getInstance().pushWithoutTabBarFromTabBarCoordinator(WritingScreenCoordinator.self)
         case 3:
-            ApplicationCoordinator.getInstance().pushFromTabBarCoordinator(SpeakingScreenCoordinator.self)
+            ApplicationCoordinator.getInstance().pushWithoutTabBarFromTabBarCoordinator(SpeakingScreenCoordinator.self)
         default:
             print("invalid indexPath at CollectionView")
         }

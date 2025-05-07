@@ -17,5 +17,15 @@ extension UIViewController {
         alertController.addAction(okButton)
         present(alertController, animated: true)
     }
+    
+    func animateLabelShake(_ label: UILabel) {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.05
+        animation.repeatCount = 3
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: label.center.x - 5, y: label.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: label.center.x + 5, y: label.center.y))
+        label.layer.add(animation, forKey: "position")
+    }
 }
 
