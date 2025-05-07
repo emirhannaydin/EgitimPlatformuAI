@@ -99,10 +99,6 @@ final class AIAPIManager {
             NotificationCenter.default.post(name: .aiMessageUpdated, object: nil)
         }
     }
-
-
-
-
     
     @MainActor
     private func onReceive(newMessage: ChatCompletionsDataModel, appendToMessages: Bool) {
@@ -114,10 +110,8 @@ final class AIAPIManager {
             messages[lastIndex].text = currentMessage.text
             NotificationCenter.default.post(name: .aiMessageUpdated, object: nil)
         }
-
         NotificationCenter.default.post(name: .aiMessageFinished, object: nil)
     }
-
 
 }
 

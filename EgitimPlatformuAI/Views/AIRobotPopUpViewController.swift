@@ -6,17 +6,16 @@
 //
 
 import UIKit
+import Lottie
 
 final class AIRobotPopupViewController: UIViewController {
     
     private let message: String
-    private let imageName: String
     private var typingTimer: Timer?
     private var isTypingInterrupted = false
 
-    init(message: String, imageName: String = "robot_ai") {
+    init(message: String) {
         self.message = message
-        self.imageName = imageName
         super.init(nibName: nil, bundle: nil)
         modalPresentationStyle = .overFullScreen
         modalTransitionStyle = .crossDissolve
@@ -33,18 +32,18 @@ final class AIRobotPopupViewController: UIViewController {
         return view
     }()
     
-    private let robotImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.clipsToBounds = true
-        iv.layer.cornerRadius = 40
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        return iv
+    private let robotLottieView: LottieAnimationView = {
+        let animation = LottieAnimationView(name: "robot")
+        animation.translatesAutoresizingMaskIntoConstraints = false
+        animation.contentMode = .scaleAspectFit
+        animation.loopMode = .loop
+        return animation
     }()
+
     
     private let bubbleView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.systemGray6
+        view.backgroundColor = .darkBlue
         view.layer.cornerRadius = 16
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor.lightGray.cgColor
@@ -65,7 +64,8 @@ final class AIRobotPopupViewController: UIViewController {
     private let okButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("I got it!", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.setTitleColor(.mintGreen, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -73,9 +73,9 @@ final class AIRobotPopupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
-        robotImageView.image = UIImage(named: imageName)
         animateMessageTyping(text: message)
         okButton.alpha = 0
+        robotLottieView.play()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(userInterruptedTyping))
         view.addGestureRecognizer(tapGesture)
 
@@ -118,36 +118,46 @@ final class AIRobotPopupViewController: UIViewController {
 
     private func setupLayout() {
         view.addSubview(backgroundView)
-        backgroundView.frame = view.bounds
-        
-        view.addSubview(robotImageView)
-        view.addSubview(bubbleView)
+
+        let contentStack = UIStackView(arrangedSubviews: [robotLottieView, bubbleView])
+        contentStack.axis = .horizontal
+        contentStack.spacing = 12
+        contentStack.alignment = .center
+        contentStack.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(contentStack)
         bubbleView.addSubview(messageLabel)
         view.addSubview(okButton)
 
         NSLayoutConstraint.activate([
-            robotImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            robotImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -140),
-            robotImageView.widthAnchor.constraint(equalToConstant: 80),
-            robotImageView.heightAnchor.constraint(equalToConstant: 80),
+            backgroundView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 
-            bubbleView.topAnchor.constraint(equalTo: robotImageView.bottomAnchor, constant: 20),
-            bubbleView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            bubbleView.widthAnchor.constraint(equalToConstant: 280),
+            robotLottieView.widthAnchor.constraint(equalToConstant: 100),
+            robotLottieView.heightAnchor.constraint(equalToConstant: 100),
             
+            bubbleView.widthAnchor.constraint(equalToConstant: 240),
+
+            contentStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            contentStack.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40),
+
             messageLabel.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 16),
             messageLabel.leadingAnchor.constraint(equalTo: bubbleView.leadingAnchor, constant: 16),
             messageLabel.trailingAnchor.constraint(equalTo: bubbleView.trailingAnchor, constant: -16),
             messageLabel.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -16),
 
-            okButton.topAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: 20),
+            okButton.topAnchor.constraint(equalTo: contentStack.bottomAnchor, constant: 20),
             okButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
-        
+
         okButton.addTarget(self, action: #selector(dismissPopup), for: .touchUpInside)
     }
+
 
     @objc private func dismissPopup() {
         dismiss(animated: true)
     }
+    
 }

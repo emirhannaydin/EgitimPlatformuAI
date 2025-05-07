@@ -62,9 +62,11 @@ final class ListeningScreenViewController: UIViewController {
 
     @objc private func handleAIFinalMessage() {
         let message = AIAPIManager.shared.currentMessage.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        let popup = AIRobotPopupViewController(message: message)
         DispatchQueue.main.async {
-            let popup = AIRobotPopupViewController(message: message)
-            self.present(popup, animated: true)
+            self.present(popup, animated: true){
+                self.hideLottieLoading()
+            }
         }
     }
     
@@ -121,24 +123,25 @@ final class ListeningScreenViewController: UIViewController {
     }
    
     @IBAction func checkButton(_ sender: Any) {
+        self.showLottieLoading()
         guard let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first,
-                 let cell = collectionView.cellForItem(at: selectedIndexPath),
-                 let label = cell.contentView.subviews.first(where: { $0 is UILabel }) as? UILabel,
-                 let selectedText = label.text?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-           else {
-               print("Seçim yapılmadı")
-               return
-           }
+              let cell = collectionView.cellForItem(at: selectedIndexPath),
+              let label = cell.contentView.subviews.first(where: { $0 is UILabel }) as? UILabel,
+              let selectedText = label.text?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+            else {
+            self.hideLottieLoading()
+            self.showAlert(title: "Error", message: "Choose one")
+            return
+        }
         let correctText = listeningLabel.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         let aiMessage = """
-        The user tried to understand the word they heard.
+        The user listened to a word and tried to understand its meaning.
         Correct answer: "\(correctText)"
-        User's choice: "\(selectedText)"
+        User's response: "\(selectedText)"
 
-        Evaluate the answer:
-        - If it is correct, confirm that the selected answer is correct and congratulate the user. End your sentence after the congratulations.
-        - If it is incorrect, politely say something like: "You selected '\(selectedText)', but the correct answer should be '\(correctText)'." Do not directly say "wrong." Provide supportive and encouraging feedback, preferably in the style of "You can do better" or similar. Do not suggest trying again. End your sentence after the explanation.
-
+        Please evaluate the response:
+        - If the user's choice is correct, clearly confirm it and provide a short, encouraging remark such as "Yes, this is the correct answer. Well done!" End your sentence there.
+        - If the answer is incorrect, say something like: "You selected '\(selectedText)', but the correct answer is '\(correctText)'." Avoid saying “wrong.” Then, briefly encourage the user by explaining that careful and focused listening can greatly improve understanding — for example, "With a bit more focus during listening, you'll catch it more easily next time." Do not suggest trying again. Finish your explanation in one sentence.
         """
         viewModel.sendMessage(aiMessage)
     }
@@ -183,9 +186,6 @@ extension ListeningScreenViewController: UICollectionViewDelegate, UICollectionV
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.contentView.backgroundColor = UIColor.mintGreen
 
-        if let label = cell?.contentView.subviews.first(where: { $0 is UILabel }) as? UILabel {
-            print("Seçilen label text: \(label.text ?? "")")
-        }
     }
 
 
