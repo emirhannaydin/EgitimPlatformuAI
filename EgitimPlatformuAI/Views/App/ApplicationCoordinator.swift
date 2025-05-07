@@ -19,7 +19,7 @@ final class ApplicationCoordinator: Coordinator {
     var window: UIWindow?
     let tabBarCoordinator = TabBarCoordinator.getInstance()
     func start() {
-        let loginCoordinator = LoginScreenCoordinator.getInstance()
+        /*let loginCoordinator = LoginScreenCoordinator.getInstance()
         loginCoordinator.start()
         if let window = self.window {
             UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {
@@ -27,7 +27,9 @@ final class ApplicationCoordinator: Coordinator {
             })
             window.makeKeyAndVisible()
         }
-        window?.makeKeyAndVisible()
+        window?.makeKeyAndVisible()*/
+        
+        initTabBar()
     }
     func navigateToMain() {
         tabBarCoordinator.tabBarController.selectedIndex = 0

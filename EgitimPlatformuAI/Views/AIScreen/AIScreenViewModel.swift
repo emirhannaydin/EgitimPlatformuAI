@@ -22,7 +22,8 @@ final class AIScreenViewModel {
 
     func sendMessage(_ message: String) {
         Task {
-            await aiAPIManager.send(message: message)
+            aiAPIManager.isStream = true
+            await aiAPIManager.send(message: message, appendToMessages: true)
         }
     }
 }
