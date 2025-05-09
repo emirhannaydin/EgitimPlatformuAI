@@ -10,16 +10,19 @@ import UIKit
 class ReadingTableViewCell: UITableViewCell {
 
     @IBOutlet var answerText: UILabel!
-
+    @IBOutlet var containerView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+        UIView.animate(withDuration: 0.3) {
+                self.containerView.backgroundColor = selected ? UIColor.mediumTurqoise : UIColor.paleGray
+        }
     }
     
 }
