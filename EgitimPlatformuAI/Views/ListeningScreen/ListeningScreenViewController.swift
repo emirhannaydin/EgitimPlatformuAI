@@ -64,9 +64,8 @@ final class ListeningScreenViewController: UIViewController {
         let message = AIAPIManager.shared.currentMessage.text.trimmingCharacters(in: .whitespacesAndNewlines)
         let popup = AIRobotPopupViewController(message: message)
         DispatchQueue.main.async {
-            self.present(popup, animated: true){
-                self.hideLottieLoading()
-            }
+            self.hideLottieLoading()
+            self.present(popup, animated: true)
         }
     }
     
