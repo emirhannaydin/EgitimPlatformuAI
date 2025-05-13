@@ -88,9 +88,7 @@ final class ListeningScreenViewController: UIViewController {
         lottieView.animation = animation
         lottieView.contentMode = .scaleAspectFill
         lottieView.loopMode = .playOnce
-        lottieView.layer.borderWidth = 1
-        lottieView.layer.cornerRadius = 12
-        lottieView.backgroundColor = .black
+        lottieView.backgroundColor = .clear
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleLottieTap))
         lottieView.isUserInteractionEnabled = true
@@ -144,15 +142,24 @@ final class ListeningScreenViewController: UIViewController {
         - If the user's choice is correct, clearly confirm it and provide a short, encouraging remark such as "Yes, this is the correct answer. Well done!" End your sentence there.
         - If the answer is incorrect, say something like: "You selected '\(selectedText)', but the correct answer is '\(correctText)'." Avoid saying “wrong.” Then, briefly encourage the user by explaining that careful and focused listening can greatly improve understanding — for example, "With a bit more focus during listening, you'll catch it more easily next time." Do not suggest trying again. Finish your explanation in one sentence.
         """
+        
+        checkButton.isHidden = true
+        cantHearButton.isHidden = true
         if selectedText == correctText {
-            cell.contentView.backgroundColor = .systemGreen
             self.hideLottieLoading()
-            checkButton.isHidden = true
-            cantHearButton.isHidden = true
             customContinueView.isHidden = false
+            cell.contentView.backgroundColor = .systemGreen
+            customContinueView.setCorrectAnswer()
+            customContinueView.animateIn()
             
         }else{
             viewModel.sendMessage(aiMessage)
+            customContinueView.isHidden = false
+            cell.contentView.backgroundColor = .systemRed
+            customContinueView.setWrongAnswer()
+            customContinueView.animateIn()
+
+            
         }
     }
     
@@ -183,7 +190,8 @@ extension ListeningScreenViewController: UICollectionViewDelegate, UICollectionV
         label.textColor = .white
 
         cell.contentView.layer.cornerRadius = 12
-        cell.contentView.layer.borderWidth = 1
+        cell.contentView.layer.borderWidth = 2
+        cell.contentView.layer.borderColor = UIColor.paleGray.cgColor
         cell.contentView.clipsToBounds = true
         cell.contentView.backgroundColor = .darkBlue
 
@@ -194,7 +202,7 @@ extension ListeningScreenViewController: UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-        cell?.contentView.backgroundColor = UIColor.blue
+        cell?.contentView.backgroundColor = UIColor.lightGray
 
     }
 
