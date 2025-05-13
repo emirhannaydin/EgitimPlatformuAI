@@ -20,8 +20,8 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jh1-HN-l2N" customClass="CustomBackButtonView" customModule="EgitimPlatformuAI" customModuleProvider="target">
                                 <rect key="frame" x="20" y="59" width="40" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="backDarkBlue"/>
+                                <color key="tintColor" name="backDarkBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="SDy-QI-4W3"/>
                                     <constraint firstAttribute="height" constant="40" id="iuc-ck-Urr"/>
@@ -54,7 +54,7 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VHP-xP-9vu" customClass="LottieAnimationView" customModule="Lottie">
                                 <rect key="frame" x="136.66666666666666" y="189" width="119.99999999999997" height="120"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" name="mintGreen"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="19m-wN-TuV"/>
@@ -63,7 +63,7 @@
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="caZ-Ja-sSi">
                                 <rect key="frame" x="20" y="349" width="353" height="384.33333333333326"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="kyZ-Nf-Pst">
                                     <size key="itemSize" width="150" height="150"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -146,11 +146,14 @@
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5DS-Jm-f3J" customClass="CustomContinueView" customModule="EgitimPlatformuAI" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="733.33333333333337" width="393" height="84.666666666666629"/>
+                                <rect key="frame" x="0.0" y="702" width="393" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="20L-b2-pVq"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="backDarkBlue"/>
                         <constraints>
                             <constraint firstItem="dbA-0d-iSp" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="1T8-lH-Lbb"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fwL-us-7d6" secondAttribute="trailing" constant="30" id="9qm-Ea-lLv"/>
@@ -161,7 +164,7 @@
                             <constraint firstItem="sPQ-dE-yfc" firstAttribute="top" secondItem="Jh1-HN-l2N" secondAttribute="bottom" constant="20" id="FEd-0T-wjt"/>
                             <constraint firstItem="5DS-Jm-f3J" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="FTV-Na-But"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="y2M-VA-kDS" secondAttribute="trailing" constant="30" id="IFo-D0-WRj"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="5DS-Jm-f3J" secondAttribute="bottom" id="M3R-ao-eUh"/>
+                            <constraint firstAttribute="bottom" secondItem="5DS-Jm-f3J" secondAttribute="bottom" id="M3R-ao-eUh"/>
                             <constraint firstItem="y2M-VA-kDS" firstAttribute="top" secondItem="caZ-Ja-sSi" secondAttribute="bottom" constant="10" id="NPD-ps-6Ua"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="sPQ-dE-yfc" secondAttribute="trailing" constant="20" id="Og8-Ao-lqw"/>
                             <constraint firstItem="VHP-xP-9vu" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="OjY-89-x79"/>
@@ -181,7 +184,6 @@
                             <constraint firstItem="ceb-tt-iXm" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="uxR-db-I4H"/>
                             <constraint firstItem="fwL-us-7d6" firstAttribute="top" secondItem="y2M-VA-kDS" secondAttribute="bottom" constant="10" id="vZ0-1T-A86"/>
                             <constraint firstItem="Jh1-HN-l2N" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="wL5-Ae-gwf"/>
-                            <constraint firstItem="5DS-Jm-f3J" firstAttribute="top" secondItem="caZ-Ja-sSi" secondAttribute="bottom" id="wai-6O-FjH"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ceb-tt-iXm" secondAttribute="trailing" constant="20" id="yII-ZF-Czy"/>
                         </constraints>
                     </view>
@@ -203,6 +205,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="backDarkBlue">
+            <color red="0.10588235294117647" green="0.12549019607843137" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="mintGreen">
             <color red="0.23529411764705882" green="0.81176470588235294" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -212,9 +217,6 @@
         <namedColor name="royalBlue">
             <color red="0.29019607843137257" green="0.3843137254901961" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
