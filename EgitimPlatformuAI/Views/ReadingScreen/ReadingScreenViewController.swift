@@ -15,6 +15,7 @@ final class ReadingScreenViewController: UIViewController {
     @IBOutlet var checkButton: UIButton!
     private var readingAnswer = "cevap 1"
     private var selectedText = ""
+    @IBOutlet var continueButton: CustomContinueView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +65,15 @@ final class ReadingScreenViewController: UIViewController {
         - If the user's choice is correct, clearly confirm it and provide a short, encouraging remark such as "Yes, this is the correct answer. Well done!" End your sentence there.
         - If the answer is incorrect, say something like: "You selected '\(selectedText)', but the correct answer is '\(correctText)'." Avoid saying “wrong.” Then, briefly encourage the user by explaining that careful and focused listening can greatly improve understanding — for example, "With a bit more focus during listening, you'll catch it more easily next time." Do not suggest trying again. Finish your explanation in one sentence.
         """
-        viewModel?.sendMessage(aiMessage)
+        
+        if selectedText != correctText {
+            viewModel?.sendMessage(aiMessage)
+        }
+        else {
+            hideLottieLoading()
+            checkButton.isHidden = true
+            continueButton.isHidden = false
+        }
     }
 
     private func setNotification(){

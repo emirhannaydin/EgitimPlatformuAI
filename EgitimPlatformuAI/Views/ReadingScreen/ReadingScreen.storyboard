@@ -75,7 +75,7 @@
                                                 <color key="textColor" name="porcelain"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="75" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4bH-jg-GvT">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="75" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4bH-jg-GvT">
                                                 <rect key="frame" x="0.0" y="40" width="361" height="297"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -162,15 +162,25 @@
                                     <action selector="checkButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="TwD-ry-xJF"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ENA-lG-739" customClass="CustomContinueView" customModule="EgitimPlatformuAI" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="718" width="393" height="100"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="OeW-H3-ULL"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="darkBlue"/>
                         <constraints>
                             <constraint firstItem="CtN-zR-ZsB" firstAttribute="top" secondItem="0Ch-zo-uFi" secondAttribute="bottom" constant="10" id="1kF-Tb-3Vf"/>
+                            <constraint firstItem="ENA-lG-739" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="FV2-ad-08Z"/>
                             <constraint firstItem="CtN-zR-ZsB" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="II4-Am-VSd"/>
+                            <constraint firstItem="ENA-lG-739" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="W3D-Yw-h5V"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="0Ch-zo-uFi" secondAttribute="trailing" constant="16" id="aN4-LB-tco"/>
                             <constraint firstItem="0Ch-zo-uFi" firstAttribute="top" secondItem="Ipu-xd-vvc" secondAttribute="bottom" id="gYw-5q-mzI"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CtN-zR-ZsB" secondAttribute="trailing" constant="30" id="kD0-M6-ZY9"/>
+                            <constraint firstItem="ENA-lG-739" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="sYR-Hz-F0Z"/>
                             <constraint firstItem="0Ch-zo-uFi" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="uAn-Dp-QGr"/>
                             <constraint firstItem="Ipu-xd-vvc" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="xvJ-jT-tmq"/>
                             <constraint firstItem="CtN-zR-ZsB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="zDA-A4-odP"/>
@@ -180,6 +190,7 @@
                     <connections>
                         <outlet property="backButton" destination="Ipu-xd-vvc" id="U0Q-YG-fbn"/>
                         <outlet property="checkButton" destination="CtN-zR-ZsB" id="oRH-bk-8v1"/>
+                        <outlet property="continueButton" destination="ENA-lG-739" id="7kF-1p-N5N"/>
                         <outlet property="tableView" destination="4bH-jg-GvT" id="DcK-yk-Eq0"/>
                     </connections>
                 </viewController>
