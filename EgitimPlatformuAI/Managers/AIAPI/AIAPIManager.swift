@@ -112,6 +112,52 @@ final class AIAPIManager {
         }
         NotificationCenter.default.post(name: .aiMessageFinished, object: nil)
     }
+    
+    func transcribeWhisperManually(audioURL: URL, expectedText: String) async -> (transcribedText: String, accuracy: Double)? {
+        let apiKey = Config.openAIKey
+        let endpoint = URL(string: "https://api.openai.com/v1/audio/transcriptions")!
+
+        var request = URLRequest(url: endpoint)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+
+        let boundary = UUID().uuidString
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+        var data = Data()
+
+        data.append("--\(boundary)\r\n")
+        data.append("Content-Disposition: form-data; name=\"model\"\r\n\r\n")
+        data.append("whisper-1\r\n")
+
+        data.append("--\(boundary)\r\n")
+        data.append("Content-Disposition: form-data; name=\"language\"\r\n\r\n")
+        data.append("tr\r\n")
+
+        let filename = "audio.m4a"
+        let audioData = try! Data(contentsOf: audioURL)
+        data.append("--\(boundary)\r\n")
+        data.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n")
+        data.append("Content-Type: audio/m4a\r\n\r\n")
+        data.append(audioData)
+        data.append("\r\n")
+
+        data.append("--\(boundary)--\r\n")
+
+        request.httpBody = data
+
+        do {
+            let (responseData, _) = try await URLSession.shared.data(for: request)
+            let json = try JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]
+            let transcribed = (json?["text"] as? String ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+            let accuracy = calculateSimilarity(between: transcribed, and: expectedText)
+            return (transcribed, accuracy)
+        } catch {
+            print("Whisper manual API hatası: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
 
 }
 
@@ -120,6 +166,45 @@ extension Notification.Name {
     static let aiMessageFinished = Notification.Name("AIMessageFinished")
 
 }
+
+extension Data {
+    mutating func append(_ string: String) {
+        if let data = string.data(using: .utf8) {
+            append(data)
+        }
+    }
+}
+
+private func calculateSimilarity(between str1: String, and str2: String) -> Double {
+    let distance = levenshtein(str1.lowercased(), str2.lowercased())
+    let maxLen = max(str1.count, str2.count)
+    return maxLen == 0 ? 1.0 : 1.0 - Double(distance) / Double(maxLen)
+}
+
+private func levenshtein(_ a: String, _ b: String) -> Int {
+    let a = Array(a)
+    let b = Array(b)
+    var dist = [[Int]](repeating: [Int](repeating: 0, count: b.count + 1), count: a.count + 1)
+
+    for i in 0...a.count { dist[i][0] = i }
+    for j in 0...b.count { dist[0][j] = j }
+
+    for i in 1...a.count {
+        for j in 1...b.count {
+            if a[i - 1] == b[j - 1] {
+                dist[i][j] = dist[i - 1][j - 1]
+            } else {
+                dist[i][j] = min(
+                    dist[i - 1][j - 1] + 1,
+                    min(dist[i][j - 1] + 1, dist[i - 1][j] + 1)
+                )
+            }
+        }
+    }
+    return dist[a.count][b.count]
+}
+
+
 
 
 

@@ -5,85 +5,107 @@
 //  Created by Başar Noyan on 28.04.2025.
 //
 
-import Foundation
 import UIKit
-
+import AVFoundation
 
 final class SpeakingScreenViewController: UIViewController {
-    var viewModel: SpeakingScreenViewModel?
-    private let recognizer = SpeechRecognizerManager()
-   private let resultLabel = UILabel()
-   private let micButton = UIButton(type: .system)
-   private var isRecording = false
-   
-   let textView = UITextView()
+    
+    var viewModel: SpeakingScreenViewModel!
+
+    private let recorder = AudioRecorderManager()
+    private let micButton = UIButton(type: .system)
+    private let resultLabel = UILabel()
+    private let targetTextLabel = UILabel()
+    
+    private let targetText = "Ben bugün sinemaya gittim."
+    
+    private var isRecording = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.isNavigationBarHidden = false
         setupUI()
-
-                recognizer.onTextRecognition = { [weak self] text in
-                    self?.resultLabel.text = text
-                }
-
-                recognizer.requestPermissions { granted in
-                    if !granted {
-                        print("Kullanıcı izin vermedi.")
-                    }
-                }
     }
-    override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-            
-        self.navigationController?.isNavigationBarHidden = false
+
+    private func setupUI() {
+        view.backgroundColor = .systemBackground
+        
+        targetTextLabel.text = "Lütfen şu metni okuyun:\n\n\(targetText)"
+        targetTextLabel.font = .systemFont(ofSize: 18, weight: .medium)
+        targetTextLabel.textAlignment = .center
+        targetTextLabel.numberOfLines = 0
+        
+        resultLabel.text = "Sonuç burada görünecek"
+        resultLabel.font = .systemFont(ofSize: 16)
+        resultLabel.textAlignment = .center
+        resultLabel.numberOfLines = 0
+        
+        micButton.setTitle("🎤 Kaydı Başlat", for: .normal)
+        micButton.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        micButton.addTarget(self, action: #selector(micTapped), for: .touchUpInside)
+        
+        [targetTextLabel, resultLabel, micButton].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview($0)
         }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        self.navigationController?.isNavigationBarHidden = false
+        NSLayoutConstraint.activate([
+            targetTextLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            targetTextLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            targetTextLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            
+            resultLabel.topAnchor.constraint(equalTo: targetTextLabel.bottomAnchor, constant: 40),
+            resultLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            resultLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            
+            micButton.topAnchor.constraint(equalTo: resultLabel.bottomAnchor, constant: 40),
+            micButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+
+    @objc private func micTapped() {
+        if isRecording {
+            recorder.stopRecording()
+            micButton.setTitle("🎤 Kaydı Başlat", for: .normal)
+            isRecording = false
+            
+            guard let url = recorder.getAudioFileURL() else { return }
+            
+            Task {
+                await handleTranscription(for: url)
+            }
+        } else {
+            do {
+                try recorder.startRecording()
+                micButton.setTitle("⏹️ Kaydı Durdur", for: .normal)
+                isRecording = true
+            } catch {
+                print("❌ Kayıt başlatılamadı: \(error)")
+            }
+        }
     }
     
-    private func setupUI() {
-            view.backgroundColor = .systemBackground
-            
-            resultLabel.text = "Burada sesiniz yazıya dönüşecek..."
-            resultLabel.font = .systemFont(ofSize: 18)
-            resultLabel.numberOfLines = 0
-            resultLabel.textAlignment = .center
-            
-            micButton.setTitle("🎤 Konuş", for: .normal)
-            micButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
-            micButton.addTarget(self, action: #selector(micTapped), for: .touchUpInside)
-
-            [resultLabel, micButton].forEach {
-                $0.translatesAutoresizingMaskIntoConstraints = false
-                view.addSubview($0)
-            }
-
-            NSLayoutConstraint.activate([
-                resultLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                resultLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
-                resultLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-                resultLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-                
-                micButton.topAnchor.constraint(equalTo: resultLabel.bottomAnchor, constant: 24),
-                micButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            ])
+    private func handleTranscription(for url: URL) async {
+        DispatchQueue.main.async {
+            self.resultLabel.text = "⏳ Transkripsiyon yapılıyor..."
         }
+        
+        if let result = await AIAPIManager.shared.transcribeWhisperManually(audioURL: url, expectedText: targetText) {
+            let score = Int(result.accuracy * 100)
+            let color: UIColor = score >= 85 ? .systemGreen : score >= 60 ? .systemOrange : .systemRed
+            
+            DispatchQueue.main.async {
+                self.resultLabel.text = """
+                🗣️ Algılanan Metin: \(result.transcribedText)
 
-        @objc private func micTapped() {
-            if isRecording {
-                recognizer.stopRecording()
-                micButton.setTitle("🎤 Konuş", for: .normal)
-            } else {
-                do {
-                    try recognizer.startRecording()
-                    micButton.setTitle("⏹️ Durdur", for: .normal)
-                } catch {
-                    print("Kayıt başlatılamadı: \(error)")
-                }
+                🎯 Doğruluk: %\(score)
+                """
+                self.resultLabel.textColor = color
             }
-            isRecording.toggle()
+        } else {
+            DispatchQueue.main.async {
+                self.resultLabel.text = "❌ Transkripsiyon yapılamadı."
+                self.resultLabel.textColor = .systemRed
+            }
         }
+    }
 }
