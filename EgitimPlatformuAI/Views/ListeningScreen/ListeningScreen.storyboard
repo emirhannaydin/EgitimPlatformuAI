@@ -62,7 +62,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="caZ-Ja-sSi">
-                                <rect key="frame" x="20" y="349" width="353" height="374.33333333333326"/>
+                                <rect key="frame" x="20" y="349" width="353" height="384.33333333333326"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="kyZ-Nf-Pst">
                                     <size key="itemSize" width="150" height="150"/>
@@ -106,7 +106,7 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fwL-us-7d6">
-                                <rect key="frame" x="30" y="773" width="333" height="35"/>
+                                <rect key="frame" x="30" y="783" width="333" height="35"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="fWC-kh-YPj"/>
@@ -135,7 +135,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y2M-VA-kDS">
-                                <rect key="frame" x="30" y="733.33333333333337" width="333" height="29.666666666666629"/>
+                                <rect key="frame" x="30" y="743.33333333333337" width="333" height="29.666666666666629"/>
                                 <color key="tintColor" name="royalBlue"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Can't hear now? Tap here">
@@ -145,6 +145,9 @@
                                     <action selector="cantHearButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="jbr-de-GSe"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5DS-Jm-f3J" customClass="CustomContinueView" customModule="EgitimPlatformuAI" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="733.33333333333337" width="393" height="84.666666666666629"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -153,10 +156,12 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fwL-us-7d6" secondAttribute="trailing" constant="30" id="9qm-Ea-lLv"/>
                             <constraint firstItem="VHP-xP-9vu" firstAttribute="top" secondItem="sPQ-dE-yfc" secondAttribute="bottom" constant="20" id="ABK-Ur-8jI"/>
                             <constraint firstItem="caZ-Ja-sSi" firstAttribute="top" secondItem="WwE-e0-b4n" secondAttribute="bottom" constant="10" id="AWD-s1-Gve"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="fwL-us-7d6" secondAttribute="bottom" constant="10" id="DV8-wz-kdc"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="fwL-us-7d6" secondAttribute="bottom" id="DV8-wz-kdc"/>
                             <constraint firstItem="caZ-Ja-sSi" firstAttribute="top" secondItem="dbA-0d-iSp" secondAttribute="bottom" constant="10" id="DeJ-33-ryS"/>
                             <constraint firstItem="sPQ-dE-yfc" firstAttribute="top" secondItem="Jh1-HN-l2N" secondAttribute="bottom" constant="20" id="FEd-0T-wjt"/>
+                            <constraint firstItem="5DS-Jm-f3J" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="FTV-Na-But"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="y2M-VA-kDS" secondAttribute="trailing" constant="30" id="IFo-D0-WRj"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="5DS-Jm-f3J" secondAttribute="bottom" id="M3R-ao-eUh"/>
                             <constraint firstItem="y2M-VA-kDS" firstAttribute="top" secondItem="caZ-Ja-sSi" secondAttribute="bottom" constant="10" id="NPD-ps-6Ua"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="sPQ-dE-yfc" secondAttribute="trailing" constant="20" id="Og8-Ao-lqw"/>
                             <constraint firstItem="VHP-xP-9vu" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="OjY-89-x79"/>
@@ -169,20 +174,24 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="caZ-Ja-sSi" secondAttribute="trailing" constant="20" id="f6K-a7-poL"/>
                             <constraint firstItem="WwE-e0-b4n" firstAttribute="top" secondItem="sPQ-dE-yfc" secondAttribute="bottom" constant="10" id="fSX-mb-eqe"/>
                             <constraint firstItem="WwE-e0-b4n" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="iU1-RI-FXs"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="5DS-Jm-f3J" secondAttribute="trailing" id="jBh-pE-s2L"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="WwE-e0-b4n" secondAttribute="trailing" constant="10" id="kEj-SC-3br"/>
                             <constraint firstItem="Jh1-HN-l2N" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="mAA-Ys-kDE"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="dbA-0d-iSp" secondAttribute="trailing" constant="20" id="r0t-73-0Aa"/>
                             <constraint firstItem="ceb-tt-iXm" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="uxR-db-I4H"/>
                             <constraint firstItem="fwL-us-7d6" firstAttribute="top" secondItem="y2M-VA-kDS" secondAttribute="bottom" constant="10" id="vZ0-1T-A86"/>
                             <constraint firstItem="Jh1-HN-l2N" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="wL5-Ae-gwf"/>
+                            <constraint firstItem="5DS-Jm-f3J" firstAttribute="top" secondItem="caZ-Ja-sSi" secondAttribute="bottom" id="wai-6O-FjH"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ceb-tt-iXm" secondAttribute="trailing" constant="20" id="yII-ZF-Czy"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="Jh1-HN-l2N" id="RkY-K3-7Ty"/>
+                        <outlet property="cantHearButton" destination="y2M-VA-kDS" id="Mms-fM-X8f"/>
                         <outlet property="cantListenLabel" destination="WwE-e0-b4n" id="UIY-Ta-gGP"/>
                         <outlet property="checkButton" destination="fwL-us-7d6" id="8x6-rx-jPQ"/>
                         <outlet property="collectionView" destination="caZ-Ja-sSi" id="12P-La-AA1"/>
+                        <outlet property="customContinueView" destination="5DS-Jm-f3J" id="giV-hM-zEq"/>
                         <outlet property="listensLeftLabel" destination="ceb-tt-iXm" id="0Cv-cg-EhC"/>
                         <outlet property="lottieView" destination="VHP-xP-9vu" id="FN9-Ai-qU5"/>
                         <outlet property="tapToSoundImageLabel" destination="dbA-0d-iSp" id="A7s-YE-TOP"/>

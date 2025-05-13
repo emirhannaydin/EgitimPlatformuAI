@@ -20,7 +20,9 @@ final class ListeningScreenViewController: UIViewController {
     @IBOutlet var checkButton: UIButton!
     @IBOutlet var backButton: CustomBackButtonView!
     @IBOutlet var cantListenLabel: UILabel!
+    @IBOutlet var cantHearButton: UIButton!
     @IBOutlet var tapToSoundImageLabel: UILabel!
+    @IBOutlet var customContinueView: CustomContinueView!
     private var tts: TextToSpeech = TextToSpeech()
     private var listeningLabel = "Bir "
     private let data = ["Bir", "İki", "Üç", "Dört"]
@@ -142,7 +144,16 @@ final class ListeningScreenViewController: UIViewController {
         - If the user's choice is correct, clearly confirm it and provide a short, encouraging remark such as "Yes, this is the correct answer. Well done!" End your sentence there.
         - If the answer is incorrect, say something like: "You selected '\(selectedText)', but the correct answer is '\(correctText)'." Avoid saying “wrong.” Then, briefly encourage the user by explaining that careful and focused listening can greatly improve understanding — for example, "With a bit more focus during listening, you'll catch it more easily next time." Do not suggest trying again. Finish your explanation in one sentence.
         """
-        viewModel.sendMessage(aiMessage)
+        if selectedText == correctText {
+            cell.contentView.backgroundColor = .systemGreen
+            self.hideLottieLoading()
+            checkButton.isHidden = true
+            cantHearButton.isHidden = true
+            customContinueView.isHidden = false
+            
+        }else{
+            viewModel.sendMessage(aiMessage)
+        }
     }
     
     @IBAction func cantHearButton(_ sender: Any) {
@@ -183,10 +194,9 @@ extension ListeningScreenViewController: UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
-        cell?.contentView.backgroundColor = UIColor.mintGreen
+        cell?.contentView.backgroundColor = UIColor.blue
 
     }
-
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
