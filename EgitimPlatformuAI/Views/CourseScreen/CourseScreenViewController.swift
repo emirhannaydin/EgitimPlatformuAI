@@ -17,10 +17,10 @@ final class CourseScreenViewController: UIViewController{
     @IBOutlet var courseName: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        courseName.text = viewModel.courseName
+        courseLevelName.text = viewModel.courseLevelName
     }
     
-    func updateCourseName(to newName: String) {
-            courseName.text = newName
-        }
+    
 
 }

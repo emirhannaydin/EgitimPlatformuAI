@@ -11,6 +11,8 @@ import SwiftOpenAI
 class ListeningScreenViewModel {
     var coordinator: ListeningScreenCoordinator?
     private var aiAPIManager = AIAPIManager.shared
+    var listensLeftText: String?
+
     var messages: [MessageChatGPT] {
         aiAPIManager.messages
     }

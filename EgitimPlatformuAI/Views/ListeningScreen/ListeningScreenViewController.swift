@@ -63,6 +63,8 @@ final class ListeningScreenViewController: UIViewController {
             super.viewWillAppear(animated)
             
         self.navigationController?.isNavigationBarHidden = false
+        listensLeftLabel.text = viewModel?.listensLeftText
+
         }
 
     override func viewWillDisappear(_ animated: Bool) {

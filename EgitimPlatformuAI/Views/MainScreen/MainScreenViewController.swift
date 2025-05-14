@@ -127,31 +127,28 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        let coordinator = CourseScreenCoordinator.getInstance()
+        
         switch indexPath.row {
         case 0:
-                            
-            ApplicationCoordinator.getInstance().pushWithoutTabBarFromTabBarCoordinator(CourseScreenCoordinator.self)
-            let vc = MainScreenCoordinator.getInstance().navigationController.viewControllers.first as? CourseScreenViewController
-            print(vc)
-
-            
+            coordinator.setCourseType(.reading)
         case 1:
-            ApplicationCoordinator.getInstance().pushWithoutTabBarFromTabBarCoordinator(ListeningScreenCoordinator.self)
+            coordinator.setCourseType(.listening)
         case 2:
-            ApplicationCoordinator.getInstance().pushWithoutTabBarFromTabBarCoordinator(WritingScreenCoordinator.self)
+            coordinator.setCourseType(.writing)
         case 3:
-            ApplicationCoordinator.getInstance().pushWithoutTabBarFromTabBarCoordinator(SpeakingScreenCoordinator.self)
+            coordinator.setCourseType(.speaking)
         default:
             print("invalid indexPath at CollectionView")
         }
+        
+        coordinator.start()
+        ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
         
     }
     
 }
 
-enum CourseType{
-    case reading, listening, writing, speaking
-}
 
 
 

@@ -59,24 +59,29 @@ final class ApplicationCoordinator: Coordinator {
         }
 
     }
-    func pushFromTabBarCoordinator<T: Coordinator>(_ coordinatorType: T.Type) {
-       let coordinator = coordinatorType.getInstance()
-       coordinator.start()
-       guard let navController = tabBarCoordinator.tabBarController.selectedViewController as? UINavigationController,
-             let newVC = coordinator.navigationController.viewControllers.first else { return }
-        newVC.hidesBottomBarWhenPushed = false
-       navController.pushViewController(newVC, animated: true)
-    }
-    func pushWithoutTabBarFromTabBarCoordinator<T: Coordinator>(_ coordinatorType: T.Type) {
+    func pushFromTabBarCoordinator<T: Coordinator>(_ coordinatorType: T.Type, hidesBottomBar: Bool) {
+       
         let coordinator = coordinatorType.getInstance()
+      
         coordinator.start()
-        
+       
         guard let navController = tabBarCoordinator.tabBarController.selectedViewController as? UINavigationController,
-              let newVC = coordinator.navigationController.viewControllers.first else { return }
+             let newVC = coordinator.navigationController.viewControllers.first else { return }
         
-        newVC.hidesBottomBarWhenPushed = true
+        newVC.hidesBottomBarWhenPushed = hidesBottomBar
         navController.pushViewController(newVC, animated: true)
     }
+    // Variables pushlanacağı zaman start yapılmalı!
+    func pushFromTabBarCoordinatorAndVariables(_ coordinator: Coordinator, hidesBottomBar: Bool = false) {
+        guard let navController = tabBarCoordinator.tabBarController.selectedViewController as? UINavigationController,
+              let newVC = coordinator.navigationController.viewControllers.first else {
+            return
+        }
+
+        newVC.hidesBottomBarWhenPushed = hidesBottomBar
+        navController.pushViewController(newVC, animated: true)
+    }
+
 
     func pushToRegisterScreen() {
         let navController = LoginScreenCoordinator.getInstance().navigationController

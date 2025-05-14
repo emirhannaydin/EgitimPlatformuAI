@@ -18,12 +18,13 @@ public final class CourseScreenCoordinator: Coordinator {
         }
         return instance!
     }
-    private(set) var courseViewController: CourseScreenViewController?
     var navigationController = UINavigationController()
-    
-    func setCourseName(_ name: String) {
-        pendingCourseName = name
-    }
+    private var courseType: CourseType = .reading // default
+
+       func setCourseType(_ type: CourseType) {
+           self.courseType = type
+       }
+   
 
     func start() {
         let storyboard = UIStoryboard(name: "CourseScreen", bundle: nil)
@@ -32,7 +33,7 @@ public final class CourseScreenCoordinator: Coordinator {
             fatalError("Failed to instantiate ListeningFirstScreenViewController")
         }
         
-        let viewModel = CourseScreenViewModel(coordinator: self)
+        let viewModel = CourseScreenViewModel(coordinator: self, courseType: courseType)
         viewController.viewModel = viewModel
         if let name = pendingCourseName {
             viewController.courseName.text = name
