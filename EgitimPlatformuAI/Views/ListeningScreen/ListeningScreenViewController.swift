@@ -24,19 +24,41 @@ final class ListeningScreenViewController: UIViewController {
     @IBOutlet var tapToSoundImageLabel: UILabel!
     @IBOutlet var customContinueView: CustomContinueView!
     private var tts: TextToSpeech = TextToSpeech()
-    private var listeningLabel = "Bir "
-    private let data = ["Bir", "İki", "Üç", "Dört"]
+    private var questions: [ListeningWord] = []
+    private var currentIndex = 0
+    private var listeningLabel: String = ""
     private var listensLeft = 3
     
+    @IBOutlet var questionNumber: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
         backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        questionNumber.text = "\(currentIndex + 1)/\(questions.count)"
+        setRandomListeningLabel()
+        setupQuestions()
+        loadCurrentQuestion()
         setCollectionView()
         setTapGesture()
         setLottie()
         setNotification()
     }
+    
+    private func setupQuestions() {
+        questions = [
+            ListeningWord(options: ["Bir", "İki", "Üç", "Dört"]),
+            ListeningWord(options: ["Elma", "Armut", "Çilek", "Karpuz"]),
+            ListeningWord(options: ["Kedi", "Köpek", "Kuş", "Balık"]),
+            ListeningWord(options: ["Mavi", "Kırmızı", "Yeşil", "Sarı"]),
+            ListeningWord(options: ["Kalem", "Silgi", "Defter", "Kitap"]),
+            ListeningWord(options: ["Araba", "Otobüs", "Tren", "Uçak"]),
+            ListeningWord(options: ["Gece", "Sabah", "Öğle", "Akşam"]),
+            ListeningWord(options: ["Göz", "Kulak", "Burun", "Yüz"]),
+            ListeningWord(options: ["Tablet", "Telefon", "Televizyon", "Bilgisayar"]),
+            ListeningWord(options: ["Su", "Süt", "Kola", "Meyve suyu"])
+        ]
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
             
@@ -53,6 +75,31 @@ final class ListeningScreenViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: .aiMessageUpdated, object: nil)
     }
     
+    private func loadCurrentQuestion() {
+        lottieView.isHidden = false
+        tapToSoundImageLabel.isHidden = false
+        cantListenLabel.isHidden = true
+        guard currentIndex < questions.count else {
+            showAlert(title: "Bitti", message: "Tüm sorular tamamlandı.")
+            return
+        }
+        
+        let currentQuestion = questions[currentIndex]
+        questionNumber.text = "\(currentIndex + 1)/\(questions.count)"
+        listeningLabel = currentQuestion.options.randomElement() ?? ""
+        listensLeft = 3
+        listensLeftLabel.text = "Listens Left: \(listensLeft)"
+        setRandomListeningLabel()
+        collectionView.reloadData()
+    }
+
+    private func setRandomListeningLabel() {
+        guard currentIndex < questions.count else { return }
+        if let randomWord = questions[currentIndex].options.randomElement() {
+            listeningLabel = randomWord
+        }
+    }
+
     private func setNotification(){
         NotificationCenter.default.addObserver(
             self,
@@ -140,27 +187,28 @@ final class ListeningScreenViewController: UIViewController {
 
         Please evaluate the response:
         - If the user's choice is correct, clearly confirm it and provide a short, encouraging remark such as "Yes, this is the correct answer. Well done!" End your sentence there.
-        - If the answer is incorrect, say something like: "You selected '\(selectedText)', but the correct answer is '\(correctText)'." Avoid saying “wrong.” Then, briefly encourage the user by explaining that careful and focused listening can greatly improve understanding — for example, "With a bit more focus during listening, you'll catch it more easily next time." Do not suggest trying again. Finish your explanation in one sentence.
+        - If the answer is incorrect, say something like: "You selected '\(selectedText)', but the correct answer is '\(correctText)'."  Instead, provide a new, one-sentence encouraging remark that is different from any previous messages. Gently highlight that focused listening helps. Avoid repeating phrases or structures.
+
         """
         
         checkButton.isHidden = true
         cantHearButton.isHidden = true
+        customContinueView.isHidden = false
         if selectedText == correctText {
             self.hideLottieLoading()
-            customContinueView.isHidden = false
             cell.contentView.backgroundColor = .systemGreen
             customContinueView.setCorrectAnswer()
-            customContinueView.animateIn()
             
         }else{
             viewModel.sendMessage(aiMessage)
-            customContinueView.isHidden = false
             cell.contentView.backgroundColor = .systemRed
             customContinueView.setWrongAnswer()
-            customContinueView.animateIn()
-
-            
         }
+        collectionView.allowsSelection = false
+        customContinueView.animateIn()
+        customContinueView.continueButton.addTarget(self, action: #selector(nextQuestion), for: .touchUpInside)
+        
+        
     }
     
     @IBAction func cantHearButton(_ sender: Any) {
@@ -171,11 +219,21 @@ final class ListeningScreenViewController: UIViewController {
         
     }
     
+    @objc func nextQuestion(){
+        collectionView.allowsSelection = true
+        currentIndex += 1
+        checkButton.isHidden = false
+        cantHearButton.isHidden = false
+        customContinueView.isHidden = true
+        loadCurrentQuestion()
+
+    }
+    
 }
 
 extension ListeningScreenViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        data.count
+        return questions[currentIndex].options.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -184,7 +242,7 @@ extension ListeningScreenViewController: UICollectionViewDelegate, UICollectionV
         cell.contentView.subviews.forEach { $0.removeFromSuperview() }
 
         let label = UILabel(frame: cell.contentView.bounds)
-        label.text = data[indexPath.item]
+        label.text = questions[currentIndex].options[indexPath.item]
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .white

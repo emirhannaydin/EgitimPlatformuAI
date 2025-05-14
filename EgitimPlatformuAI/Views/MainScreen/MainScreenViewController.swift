@@ -129,7 +129,12 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
         
         switch indexPath.row {
         case 0:
-            ApplicationCoordinator.getInstance().pushWithoutTabBarFromTabBarCoordinator(ReadingScreenCoordinator.self)
+                            
+            ApplicationCoordinator.getInstance().pushWithoutTabBarFromTabBarCoordinator(CourseScreenCoordinator.self)
+            let vc = MainScreenCoordinator.getInstance().navigationController.viewControllers.first as? CourseScreenViewController
+            print(vc)
+
+            
         case 1:
             ApplicationCoordinator.getInstance().pushWithoutTabBarFromTabBarCoordinator(ListeningScreenCoordinator.self)
         case 2:
@@ -143,6 +148,11 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
     }
     
 }
+
+enum CourseType{
+    case reading, listening, writing, speaking
+}
+
 
 
     
