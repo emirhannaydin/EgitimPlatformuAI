@@ -7,4 +7,5 @@
 
 struct ListeningWord: Decodable {
     let options: [String]
+    let level: String
 }

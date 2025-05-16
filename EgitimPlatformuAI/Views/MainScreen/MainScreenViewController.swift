@@ -27,6 +27,8 @@ final class MainScreenViewController: UIViewController{
         hamburgerMenuManager = HamburgerMenuManager(viewController: self)
         hamburgerMenuManager.setNavigationBar()
         setCollectionView()
+        UserDefaults.standard.removeObject(forKey: "enrolled_reading")
+        UserDefaults.standard.removeObject(forKey: "enrolled_listening")
 
         nameContainerView.hamburgerMenuManager = hamburgerMenuManager
         navigationController?.navigationBar.isHidden = true

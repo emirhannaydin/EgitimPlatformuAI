@@ -10,6 +10,8 @@ import UIKit
 
 final class ReadingScreenViewController: UIViewController {
     var viewModel: ReadingScreenViewModel?
+    var courseType: CourseType = .reading
+
     @IBOutlet var backButton: CustomBackButtonView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var checkButton: UIButton!
@@ -112,6 +114,7 @@ final class ReadingScreenViewController: UIViewController {
                 loadQuestion()
             } else {
                 showAlert(title: "Completed", message: "You have finished all questions.")
+                courseType.markUserAsEnrolled()
             }
     }
 

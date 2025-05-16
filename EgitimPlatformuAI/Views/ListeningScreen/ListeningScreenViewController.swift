@@ -43,22 +43,33 @@ final class ListeningScreenViewController: UIViewController {
         setTapGesture()
         setLottie()
         setNotification()
+
     }
     
     private func setupQuestions() {
         questions = [
-            ListeningWord(options: ["Bir", "İki", "Üç", "Dört"]),
-            ListeningWord(options: ["Elma", "Armut", "Çilek", "Karpuz"]),
-            ListeningWord(options: ["Kedi", "Köpek", "Kuş", "Balık"]),
-            ListeningWord(options: ["Mavi", "Kırmızı", "Yeşil", "Sarı"]),
-            ListeningWord(options: ["Kalem", "Silgi", "Defter", "Kitap"]),
-            ListeningWord(options: ["Araba", "Otobüs", "Tren", "Uçak"]),
-            ListeningWord(options: ["Gece", "Sabah", "Öğle", "Akşam"]),
-            ListeningWord(options: ["Göz", "Kulak", "Burun", "Yüz"]),
-            ListeningWord(options: ["Tablet", "Telefon", "Televizyon", "Bilgisayar"]),
-            ListeningWord(options: ["Su", "Süt", "Kola", "Meyve suyu"])
+            // A1 - Basit nesneler ve temel kelimeler
+            ListeningWord(options: ["Elma", "Kalem", "Kitap", "Ev"], level: "A1"),
+            ListeningWord(options: ["Masa", "Kapı", "Sandalye", "Pencere"],level: "A1"),
+            
+            // A2 - Temel cümleler ve günlük ifadeler
+            ListeningWord(options: ["Benim adım Ali", "O bir öğretmen", "Bu bir kalemdir", "Annem evde"],level: "A2"),
+            ListeningWord(options: ["Okula gidiyorum", "Kardeşim oyun oynuyor", "Kitap okuyorum", "Arkadaşım sinemaya gitti"],level: "A2"),
+            
+            // B1 - Bağlaçlı ve basit yapılı cümleler
+            ListeningWord(options: ["Yemekten sonra sinemaya gittik", "Hava güzeldi, dışarı çıktık", "Yeni bir telefon aldım", "Kitabı çok beğendim"],level: "B1"),
+            ListeningWord(options: ["Sabah erken kalkıp yürüyüş yaptım", "Trafik yüzünden geç kaldım", "Film beklediğimden güzeldi", "Misafirler geldiğinde ev hazırdı"],level: "B1"),
+            
+            // B2 - Sebep-sonuç ve açıklayıcı cümleler
+            ListeningWord(options: ["Egzersiz yapmak sağlığımız için önemlidir", "Teknoloji hayatımızı kolaylaştırıyor", "Düzenli uyku verimli çalışmayı sağlar", "Gürültü yüzünden odaklanamıyorum"],level: "B2"),
+            ListeningWord(options: ["Yabancı dil öğrenmek kariyer için avantajlıdır", "İyi bir sunum hazırlık gerektirir", "Sosyal medya dikkat dağıtabilir", "Kitap okumak kelime dağarcığını geliştirir"],level: "B2"),
+            
+            // C1 - Akademik ve soyut içerikli cümleler
+            ListeningWord(options: ["Eleştirel düşünme, problemi farklı açılardan değerlendirmeyi gerektirir", "Zaman yönetimi, akademik başarıyı etkileyen önemli bir beceridir", "Karmaşık metinleri anlamak ileri düzey okuryazarlık ister", "İletişim becerileri, iş hayatında büyük rol oynar"],level: "C1"),
+            ListeningWord(options: ["Disiplinler arası düşünce yapısı, yaratıcı çözümler üretmeyi sağlar", "Kültürel farklılıkları anlamak empatiyi artırır", "Yapay zekâ etik soruları da beraberinde getirir", "Globalleşme çok yönlü düşünmeyi zorunlu kılar"],level: "C1")
         ]
     }
+
     
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
@@ -245,11 +256,21 @@ extension ListeningScreenViewController: UICollectionViewDelegate, UICollectionV
 
         cell.contentView.subviews.forEach { $0.removeFromSuperview() }
 
-        let label = UILabel(frame: cell.contentView.bounds)
+        let label = UILabel()
         label.text = questions[currentIndex].options[indexPath.item]
-        label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .white
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+
+        cell.contentView.addSubview(label)
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 12),
+            label.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -12),
+            label.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 16),
+            label.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -16)
+        ])
 
         cell.contentView.layer.cornerRadius = 12
         cell.contentView.layer.borderWidth = 2
@@ -257,11 +278,9 @@ extension ListeningScreenViewController: UICollectionViewDelegate, UICollectionV
         cell.contentView.clipsToBounds = true
         cell.contentView.backgroundColor = .darkBlue
 
-        cell.contentView.addSubview(label)
         return cell
-        
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.contentView.backgroundColor = UIColor.lightGray
@@ -283,4 +302,29 @@ extension ListeningScreenViewController: UIGestureRecognizerDelegate{
             return true
         }
 
+}
+
+extension ListeningScreenViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        let optionText = questions[currentIndex].options[indexPath.item]
+        let maxWidth = collectionView.bounds.width - 32
+
+        let font = UIFont.systemFont(ofSize: 16)
+        let maxSize = CGSize(width: maxWidth - 32, height: .greatestFiniteMagnitude)
+        let attributes = [NSAttributedString.Key.font: font]
+        let boundingBox = NSString(string: optionText).boundingRect(with: maxSize,
+                                                                    options: .usesLineFragmentOrigin,
+                                                                    attributes: attributes,
+                                                                    context: nil)
+
+        let textHeight = ceil(boundingBox.height)
+        let baseHeight: CGFloat = 50
+
+        let finalHeight = max(baseHeight, textHeight + 24)
+
+        return CGSize(width: maxWidth, height: finalHeight)
+    }
 }
