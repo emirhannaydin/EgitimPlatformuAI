@@ -19,6 +19,11 @@ public final class ListeningScreenCoordinator: Coordinator {
     }
     
     var navigationController = UINavigationController()
+    private var courseType: CourseType = .listening
+
+        func setCourseType(_ type: CourseType) {
+            self.courseType = type
+        }
     
     func start() {
         let storyboard = UIStoryboard(name: "ListeningScreen", bundle: nil)

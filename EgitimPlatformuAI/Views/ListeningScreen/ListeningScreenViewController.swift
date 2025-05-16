@@ -13,7 +13,8 @@ final class ListeningScreenViewController: UIViewController {
     
     
     var viewModel: ListeningScreenViewModel!
-    
+    var courseType: CourseType = .listening
+
     @IBOutlet var listensLeftLabel: UILabel!
     @IBOutlet var lottieView: LottieAnimationView!
     @IBOutlet var collectionView: UICollectionView!
@@ -83,6 +84,7 @@ final class ListeningScreenViewController: UIViewController {
         cantListenLabel.isHidden = true
         guard currentIndex < questions.count else {
             showAlert(title: "Bitti", message: "Tüm sorular tamamlandı.")
+            courseType.markUserAsEnrolled()
             return
         }
         

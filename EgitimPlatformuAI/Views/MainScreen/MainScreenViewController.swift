@@ -131,19 +131,17 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
         
         switch indexPath.row {
         case 0:
-            coordinator.setCourseType(.reading)
+            ApplicationCoordinator.getInstance().handleCourseEntry(.reading)
         case 1:
-            coordinator.setCourseType(.listening)
+            ApplicationCoordinator.getInstance().handleCourseEntry(.listening)
         case 2:
-            coordinator.setCourseType(.writing)
+            ApplicationCoordinator.getInstance().handleCourseEntry(.writing)
         case 3:
-            coordinator.setCourseType(.speaking)
+            ApplicationCoordinator.getInstance().handleCourseEntry(.speaking)
         default:
-            print("invalid indexPath at CollectionView")
+            break
         }
-        
-        coordinator.start()
-        ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+
         
     }
     

@@ -113,7 +113,23 @@ final class ApplicationCoordinator: Coordinator {
         }
     }
 
+    func handleCourseEntry(_ courseType: CourseType) {
+        if courseType.isUserEnrolled {
+            let courseCoordinator = CourseScreenCoordinator.getInstance()
+            courseCoordinator.setCourseType(courseType)
+            courseCoordinator.start()
+            pushFromTabBarCoordinatorAndVariables(courseCoordinator, hidesBottomBar: true)
+        } else {
+            let introCoordinator = courseType.introCoordinator
+            if let configurable = introCoordinator as? CourseTypeConfigurable {
+                configurable.setCourseType(courseType)
+            }
+            introCoordinator.start()
+            pushFromTabBarCoordinatorAndVariables(introCoordinator, hidesBottomBar: true)
+        }
+    }
+}
 
-
-
+protocol CourseTypeConfigurable {
+    func setCourseType(_ type: CourseType)
 }
