@@ -15,6 +15,7 @@ final class ListeningScreenViewController: UIViewController {
     var viewModel: ListeningScreenViewModel!
     var courseType: CourseType = .listening
 
+    @IBOutlet var questionLabel: UILabel!
     @IBOutlet var listensLeftLabel: UILabel!
     @IBOutlet var lottieView: LottieAnimationView!
     @IBOutlet var collectionView: UICollectionView!
@@ -27,16 +28,15 @@ final class ListeningScreenViewController: UIViewController {
     private var tts: TextToSpeech = TextToSpeech()
     private var questions: [ListeningWord] = []
     private var currentIndex = 0
-    private var listeningLabel: String = ""
     private var listensLeft = 3
-    
+    private var correctText = ""
+
     @IBOutlet var questionNumber: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
         backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         questionNumber.text = "\(currentIndex + 1)/\(questions.count)"
-        setRandomListeningLabel()
         setupQuestions()
         loadCurrentQuestion()
         setCollectionView()
@@ -48,26 +48,125 @@ final class ListeningScreenViewController: UIViewController {
     
     private func setupQuestions() {
         questions = [
-            // A1 - Basit nesneler ve temel kelimeler
-            ListeningWord(options: ["Elma", "Kalem", "Kitap", "Ev"], level: "A1"),
-            ListeningWord(options: ["Masa", "Kapı", "Sandalye", "Pencere"],level: "A1"),
-            
-            // A2 - Temel cümleler ve günlük ifadeler
-            ListeningWord(options: ["Benim adım Ali", "O bir öğretmen", "Bu bir kalemdir", "Annem evde"],level: "A2"),
-            ListeningWord(options: ["Okula gidiyorum", "Kardeşim oyun oynuyor", "Kitap okuyorum", "Arkadaşım sinemaya gitti"],level: "A2"),
-            
-            // B1 - Bağlaçlı ve basit yapılı cümleler
-            ListeningWord(options: ["Yemekten sonra sinemaya gittik", "Hava güzeldi, dışarı çıktık", "Yeni bir telefon aldım", "Kitabı çok beğendim"],level: "B1"),
-            ListeningWord(options: ["Sabah erken kalkıp yürüyüş yaptım", "Trafik yüzünden geç kaldım", "Film beklediğimden güzeldi", "Misafirler geldiğinde ev hazırdı"],level: "B1"),
-            
-            // B2 - Sebep-sonuç ve açıklayıcı cümleler
-            ListeningWord(options: ["Egzersiz yapmak sağlığımız için önemlidir", "Teknoloji hayatımızı kolaylaştırıyor", "Düzenli uyku verimli çalışmayı sağlar", "Gürültü yüzünden odaklanamıyorum"],level: "B2"),
-            ListeningWord(options: ["Yabancı dil öğrenmek kariyer için avantajlıdır", "İyi bir sunum hazırlık gerektirir", "Sosyal medya dikkat dağıtabilir", "Kitap okumak kelime dağarcığını geliştirir"],level: "B2"),
-            
-            // C1 - Akademik ve soyut içerikli cümleler
-            ListeningWord(options: ["Eleştirel düşünme, problemi farklı açılardan değerlendirmeyi gerektirir", "Zaman yönetimi, akademik başarıyı etkileyen önemli bir beceridir", "Karmaşık metinleri anlamak ileri düzey okuryazarlık ister", "İletişim becerileri, iş hayatında büyük rol oynar"],level: "C1"),
-            ListeningWord(options: ["Disiplinler arası düşünce yapısı, yaratıcı çözümler üretmeyi sağlar", "Kültürel farklılıkları anlamak empatiyi artırır", "Yapay zekâ etik soruları da beraberinde getirir", "Globalleşme çok yönlü düşünmeyi zorunlu kılar"],level: "C1")
+            ListeningWord(
+                question: "Which word did you hear?",
+                hearingSound: "Elma",
+                options: ["Kalem", "Kitap", "Elma", "Ev"],
+                level: "A1"
+            ),
+            ListeningWord(
+                question: "Which word matches the sound?",
+                hearingSound: "Kapı",
+                options: ["Kapı", "Masa", "Çanta", "Pencere"],
+                level: "A1"
+            ),
+
+            ListeningWord(
+                question: "Who is being described?",
+                hearingSound: "O bir öğretmen",
+                options: ["Ben bir doktorum", "O bir öğretmen", "Sen öğrencisin", "Biz evdeyiz"],
+                level: "A2"
+            ),
+            ListeningWord(
+                question: "What is the person doing?",
+                hearingSound: "Kitap okuyorum",
+                options: ["Oyun oynuyorum", "Kitap okuyorum", "Ders çalışıyorum", "Uyuyorum"],
+                level: "A2"
+            ),
+
+            ListeningWord(
+                question: "What happened before going to the cinema?",
+                hearingSound: "Yemekten sonra sinemaya gittik",
+                options: [
+                    "Sinema iptal oldu",
+                    "Önce ders çalıştık",
+                    "Yemekten sonra sinemaya gittik",
+                    "Sinema çok uzaktaydı"
+                ],
+                level: "B1"
+            ),
+            ListeningWord(
+                question: "Why was the person late?",
+                hearingSound: "Trafik yüzünden geç kaldım",
+                options: [
+                    "Otobüs erken geldi",
+                    "Erken uyandım",
+                    "Trafik yüzünden geç kaldım",
+                    "Yürüyerek geldim"
+                ],
+                level: "B1"
+            ),
+
+            ListeningWord(
+                question: "What is important for health?",
+                hearingSound: "Egzersiz yapmak sağlığımız için önemlidir",
+                options: [
+                    "Film izlemek faydalıdır",
+                    "Egzersiz yapmak sağlığımız için önemlidir",
+                    "Tatlı yemek iyi gelir",
+                    "Yalnız kalmak sağlıklıdır"
+                ],
+                level: "B2"
+            ),
+            ListeningWord(
+                question: "What is useful for a career?",
+                hearingSound: "Yabancı dil öğrenmek kariyer için avantajlıdır",
+                options: [
+                    "Tatilde dinlenmek önemlidir",
+                    "Yabancı dil öğrenmek kariyer için avantajlıdır",
+                    "Alışveriş yapmak güzeldir",
+                    "Kitap okumak hobi olabilir"
+                ],
+                level: "B2"
+            ),
+
+            ListeningWord(
+                question: "What does critical thinking involve?",
+                hearingSound: "Eleştirel düşünme, problemi farklı açılardan değerlendirmeyi gerektirir",
+                options: [
+                    "Ezberlemek",
+                    "Tek yönden bakmak",
+                    "Eleştirel düşünmek",
+                    "Yüzeysel düşünmek"
+                ],
+                level: "C1"
+            ),
+            ListeningWord(
+                question: "What is necessary for academic success?",
+                hearingSound: "Zaman yönetimi, akademik başarıyı etkileyen önemli bir beceridir",
+                options: [
+                    "Sabah uyanmak",
+                    "Zaman yönetimi",
+                    "Telefonla çalışmak",
+                    "Kütüphane gezmek"
+                ],
+                level: "C1"
+            ),
+
+            ListeningWord(
+                question: "What is essential in a globalized world?",
+                hearingSound: "Globalleşme çağında, bireylerin kültürel zekâ geliştirmesi kaçınılmaz bir gereklilik haline gelmiştir",
+                options: [
+                    "Farklı dilleri bilmek",
+                    "Kültürel zekâ geliştirmek",
+                    "Evde çalışmak",
+                    "Tatilde kitap okumak"
+                ],
+                level: "C2"
+            ),
+            ListeningWord(
+                question: "What is the benefit of interdisciplinary thinking?",
+                hearingSound: "Disiplinler arası çalışmalar, bilgiyi bütüncül bir yaklaşımla değerlendirme olanağı sağlar",
+                options: [
+                    "Çok kitap okumak",
+                    "Yaratıcı çözümler üretmek",
+                    "Yalnız çalışmak",
+                    "Ders notlarını ezberlemek"
+                ],
+                level: "C2"
+            )
         ]
+
     }
 
     
@@ -101,19 +200,13 @@ final class ListeningScreenViewController: UIViewController {
         
         let currentQuestion = questions[currentIndex]
         questionNumber.text = "\(currentIndex + 1)/\(questions.count)"
-        listeningLabel = currentQuestion.options.randomElement() ?? ""
+        questionLabel.text = currentQuestion.question
         listensLeft = 3
         listensLeftLabel.text = "Listens Left: \(listensLeft)"
-        setRandomListeningLabel()
         collectionView.reloadData()
     }
 
-    private func setRandomListeningLabel() {
-        guard currentIndex < questions.count else { return }
-        if let randomWord = questions[currentIndex].options.randomElement() {
-            listeningLabel = randomWord
-        }
-    }
+    
 
     private func setNotification(){
         NotificationCenter.default.addObserver(
@@ -123,15 +216,33 @@ final class ListeningScreenViewController: UIViewController {
             object: nil
         )
     }
-
+    
     @objc private func handleAIFinalMessage() {
         let message = AIAPIManager.shared.currentMessage.text.trimmingCharacters(in: .whitespacesAndNewlines)
-        let popup = AIRobotPopupViewController(message: message)
-        DispatchQueue.main.async {
-            self.hideLottieLoading()
-            self.present(popup, animated: true)
+        print(message)
+        if message.contains("Yes, this is the correct answer") {
+            DispatchQueue.main.async {
+                self.hideLottieLoading()
+                self.customContinueView.setCorrectAnswer()
+            }
+        } else {
+            DispatchQueue.main.async {
+                let popup = AIRobotPopupViewController(message: message)
+                self.hideLottieLoading()
+                self.present(popup, animated: true)
+                self.customContinueView.setWrongAnswer()
+            }
         }
+
+        self.collectionView.allowsSelection = false
+        self.checkButton.isHidden = true
+        self.cantHearButton.isHidden = true
+        self.customContinueView.isHidden = false
+        self.customContinueView.animateIn()
+        self.customContinueView.continueButton.addTarget(self, action: #selector(self.nextQuestion), for: .touchUpInside)
     }
+
+
     
     private func setCollectionView(){
         collectionView.delegate = self
@@ -160,7 +271,7 @@ final class ListeningScreenViewController: UIViewController {
         if listensLeft > 0 {
             listensLeft -= 1
             listensLeftLabel.text = "Listens Left: \(listensLeft)"
-            tts.speak(text:listeningLabel)
+            tts.speak(text:questions[currentIndex].hearingSound)
             tts.startSpeaking()
             lottieView.stop()
             lottieView.play()
@@ -185,49 +296,48 @@ final class ListeningScreenViewController: UIViewController {
    
     @IBAction func checkButton(_ sender: Any) {
         self.showLottieLoading()
+
         guard let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first,
               let cell = collectionView.cellForItem(at: selectedIndexPath),
               let label = cell.contentView.subviews.first(where: { $0 is UILabel }) as? UILabel,
-              let selectedText = label.text?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-            else {
+              let selectedText = label.text
+        else {
             self.hideLottieLoading()
             self.showAlert(title: "Error", message: "Choose one")
             return
         }
-        let correctText = listeningLabel.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
-        let aiMessage = """
-        The user listened to a word and tried to understand its meaning.
-        Correct answer: "\(correctText)"
-        User's response: "\(selectedText)"
 
-        Please evaluate the response:
-        - If the user's choice is correct, clearly confirm it and provide a short, encouraging remark such as "Yes, this is the correct answer. Well done!" End your sentence there.
-        - If the answer is incorrect, say something like: "You selected '\(selectedText)', but the correct answer is '\(correctText)'."  Instead, provide a new, one-sentence encouraging remark that is different from any previous messages. Gently highlight that focused listening helps. Avoid repeating phrases or structures.
-
-        """
-        
+        let currentQuestion = questions[currentIndex]
+        collectionView.allowsSelection = false
         checkButton.isHidden = true
         cantHearButton.isHidden = true
-        customContinueView.isHidden = false
-        if selectedText == correctText {
-            self.hideLottieLoading()
-            cell.contentView.backgroundColor = .systemGreen
-            customContinueView.setCorrectAnswer()
-            
-        }else{
-            viewModel.sendMessage(aiMessage)
-            cell.contentView.backgroundColor = .systemRed
-            customContinueView.setWrongAnswer()
-        }
-        collectionView.allowsSelection = false
-        customContinueView.animateIn()
-        customContinueView.continueButton.addTarget(self, action: #selector(nextQuestion), for: .touchUpInside)
-        
-        
+
+        let aiMessage = """
+        You are evaluating a listening comprehension question.
+
+        Sound played to the user: "\(currentQuestion.hearingSound)"
+        Question asked: "\(currentQuestion.question)"
+        Answer options: \(currentQuestion.options)
+        User's selected answer: "\(selectedText)"
+
+        Your task:
+        - First, identify the correct answer from the options based on the sound and the question.
+        - Then compare it with the user's selection.
+        - Respond with only the final evaluation — do not explain the correct answer selection logic.
+        - Do not include any additional text before or after the response.
+
+        Response format:
+        - If correct: "Yes, this is the correct answer. Well done!"
+        - If incorrect: "You selected 'USER_ANSWER', but the correct answer is 'CORRECT_ANSWER'. [One-sentence encouraging remark — different from earlier ones.]"
+        """
+
+
+        viewModel.sendMessage(aiMessage)
     }
-    
+
+
     @IBAction func cantHearButton(_ sender: Any) {
-        cantListenLabel.text = listeningLabel
+        cantListenLabel.text = "\(questions[currentIndex].hearingSound)"
         lottieView.isHidden = true
         tapToSoundImageLabel.isHidden = true
         cantListenLabel.isHidden = false
