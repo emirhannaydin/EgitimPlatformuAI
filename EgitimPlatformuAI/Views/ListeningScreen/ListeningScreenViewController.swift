@@ -38,6 +38,7 @@ final class ListeningScreenViewController: UIViewController {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
         backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        listensLeftLabel.text = "Listens Left: \(listensLeft)"
         questionNumber.text = "\(currentIndex + 1)/\(questions.count)"
         setupQuestions()
         loadCurrentQuestion()
@@ -162,10 +163,9 @@ final class ListeningScreenViewController: UIViewController {
 
     
     override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
+        super.viewWillAppear(animated)
             
         self.navigationController?.isNavigationBarHidden = false
-        listensLeftLabel.text = viewModel?.listensLeftText
 
         }
 
@@ -186,7 +186,6 @@ final class ListeningScreenViewController: UIViewController {
         guard currentIndex < questions.count else {
             let level = evaluateUserLevel()
             UserDefaults.standard.set(level, forKey: "listeningLevel")
-            
             showAlert(title: "Test Bitti", message: "Tahmini seviyeniz: \(level)")
             courseType.markUserAsEnrolled()
             return

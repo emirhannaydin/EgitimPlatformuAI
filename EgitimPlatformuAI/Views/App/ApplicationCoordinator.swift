@@ -113,12 +113,11 @@ final class ApplicationCoordinator: Coordinator {
         }
     }
 
-    func handleCourseEntry(_ courseType: CourseType) {
+    func handleCourseEntry(_ courseType: CourseType, with viewModel: CourseScreenViewModel) {
         if courseType.isUserEnrolled {
-            let courseCoordinator = CourseScreenCoordinator.getInstance()
-            courseCoordinator.setCourseType(courseType)
-            courseCoordinator.start()
-            pushFromTabBarCoordinatorAndVariables(courseCoordinator, hidesBottomBar: true)
+            let coordinator = CourseScreenCoordinator.getInstance()
+            coordinator.start(with: viewModel)
+            pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
         } else {
             let introCoordinator = courseType.introCoordinator
             if let configurable = introCoordinator as? CourseTypeConfigurable {
@@ -128,6 +127,8 @@ final class ApplicationCoordinator: Coordinator {
             pushFromTabBarCoordinatorAndVariables(introCoordinator, hidesBottomBar: true)
         }
     }
+
+
 }
 
 protocol CourseTypeConfigurable {

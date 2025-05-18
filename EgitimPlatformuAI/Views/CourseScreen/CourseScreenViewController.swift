@@ -35,7 +35,8 @@ final class CourseScreenViewController: UIViewController{
     ]
     override func viewDidLoad() {
         super.viewDidLoad()
-        courseName.text = viewModel.courseName
+        courseName.text = viewModel.courseType.courseName
+        courseLevelName.text = viewModel.courseLevelName
         courseName.layer.cornerRadius = 10
         courseName.layer.borderWidth = 2
         courseName.layer.borderColor = UIColor.black.cgColor
@@ -45,7 +46,6 @@ final class CourseScreenViewController: UIViewController{
         tableView.register(CourseScreenHeaderFooterView.nib(), forHeaderFooterViewReuseIdentifier: CourseScreenHeaderFooterView.identifier)
         tableView.register(CourseScreenTableViewCell.nib(), forCellReuseIdentifier: CourseScreenTableViewCell.identifier)
         tableView.sectionHeaderTopPadding = 5
-        
         
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTableViewTap(_:)))

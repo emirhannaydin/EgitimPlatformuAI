@@ -12,7 +12,6 @@ class CourseScreenViewModel {
     
     let courseType: CourseType
     let courseLevelName: String
-
     init(coordinator: CourseScreenCoordinator?,
          courseType: CourseType,
          courseLevelName: String) {
@@ -21,7 +20,4 @@ class CourseScreenViewModel {
         self.courseLevelName = courseLevelName
     }
     
-    var courseName: String {
-        courseType.courseName
-    }
 }

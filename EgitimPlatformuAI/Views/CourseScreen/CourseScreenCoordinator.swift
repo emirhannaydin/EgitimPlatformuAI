@@ -19,27 +19,16 @@ final class CourseScreenCoordinator: Coordinator {
 
     var navigationController = UINavigationController()
 
-    private var courseType: CourseType = .reading
-    private var courseLevelName: String = "A1" // default
-
-    func setCourseType(_ type: CourseType) {
-        self.courseType = type
-    }
-    
-    func setCourseLevelName(_ name: String) {
-        self.courseLevelName = name
-    }
-
     func start() {
         let storyboard = UIStoryboard(name: "CourseScreen", bundle: nil)
         guard let viewController = storyboard.instantiateViewController(withIdentifier: "CourseScreen") as? CourseScreenViewController else {
             fatalError("Failed to instantiate CourseScreenViewController")
         }
-
+        // default
         let viewModel = CourseScreenViewModel(
             coordinator: self,
-            courseType: courseType,
-            courseLevelName: courseLevelName
+            courseType: .reading,
+            courseLevelName: "A1"
         )
 
         viewController.viewModel = viewModel
@@ -48,6 +37,20 @@ final class CourseScreenCoordinator: Coordinator {
             navigationController.viewControllers = [viewController]
         }
     }
+    
+    func start(with viewModel: CourseScreenViewModel) {
+        let storyboard = UIStoryboard(name: "CourseScreen", bundle: nil)
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "CourseScreen") as? CourseScreenViewController else {
+            fatalError("Failed to instantiate CourseScreenViewController")
+        }
+
+        viewController.viewModel = viewModel
+
+        if navigationController.viewControllers.isEmpty {
+            navigationController.viewControllers = [viewController]
+        }
+    }
+
 }
 
 
