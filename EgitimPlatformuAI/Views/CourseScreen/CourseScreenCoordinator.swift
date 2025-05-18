@@ -8,42 +8,46 @@
 import Foundation
 import UIKit
 
-public final class CourseScreenCoordinator: Coordinator {
+final class CourseScreenCoordinator: Coordinator {
     private static var instance: CourseScreenCoordinator?
-    private var pendingCourseName: String?
-
     static func getInstance() -> CourseScreenCoordinator {
         if instance == nil {
             instance = CourseScreenCoordinator()
         }
         return instance!
     }
-    var navigationController = UINavigationController()
-    private var courseType: CourseType = .reading // default
 
-       func setCourseType(_ type: CourseType) {
-           self.courseType = type
-       }
-   
+    var navigationController = UINavigationController()
+
+    private var courseType: CourseType = .reading
+    private var courseLevelName: String = "A1" // default
+
+    func setCourseType(_ type: CourseType) {
+        self.courseType = type
+    }
+    
+    func setCourseLevelName(_ name: String) {
+        self.courseLevelName = name
+    }
 
     func start() {
         let storyboard = UIStoryboard(name: "CourseScreen", bundle: nil)
-        guard let viewController = storyboard.instantiateViewController(withIdentifier: "CourseScreen")
-                as? CourseScreenViewController else {
-            fatalError("Failed to instantiate ListeningFirstScreenViewController")
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "CourseScreen") as? CourseScreenViewController else {
+            fatalError("Failed to instantiate CourseScreenViewController")
         }
-        
-        let viewModel = CourseScreenViewModel(coordinator: self, courseType: courseType)
+
+        let viewModel = CourseScreenViewModel(
+            coordinator: self,
+            courseType: courseType,
+            courseLevelName: courseLevelName
+        )
+
         viewController.viewModel = viewModel
-        if let name = pendingCourseName {
-            viewController.courseName.text = name
-        }
 
         if navigationController.viewControllers.isEmpty {
             navigationController.viewControllers = [viewController]
-        } else {
-            navigationController.pushViewController(viewController, animated: true)
         }
     }
 }
+
 

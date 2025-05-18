@@ -36,7 +36,6 @@ final class CourseScreenViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         courseName.text = viewModel.courseName
-        courseLevelName.text = viewModel.courseLevelName
         courseName.layer.cornerRadius = 10
         courseName.layer.borderWidth = 2
         courseName.layer.borderColor = UIColor.black.cgColor

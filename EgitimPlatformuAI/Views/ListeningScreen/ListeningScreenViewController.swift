@@ -30,6 +30,8 @@ final class ListeningScreenViewController: UIViewController {
     private var currentIndex = 0
     private var listensLeft = 3
     private var correctText = ""
+    private var levelStats: [String: (correct: Int, total: Int)] = [:]
+
 
     @IBOutlet var questionNumber: UILabel!
     override func viewDidLoad() {
@@ -50,14 +52,16 @@ final class ListeningScreenViewController: UIViewController {
         questions = [
             ListeningWord(
                 question: "Which word did you hear?",
-                hearingSound: "Elma",
+                hearingSound: "Elmaasdsadasdasdasd",
                 options: ["Kalem", "Kitap", "Elma", "Ev"],
+                correctAnswer: "Elma",
                 level: "A1"
             ),
             ListeningWord(
                 question: "Which word matches the sound?",
                 hearingSound: "Kapı",
                 options: ["Kapı", "Masa", "Çanta", "Pencere"],
+                correctAnswer: "Kapı",
                 level: "A1"
             ),
 
@@ -65,12 +69,14 @@ final class ListeningScreenViewController: UIViewController {
                 question: "Who is being described?",
                 hearingSound: "O bir öğretmen",
                 options: ["Ben bir doktorum", "O bir öğretmen", "Sen öğrencisin", "Biz evdeyiz"],
+                correctAnswer: "O bir öğretmen",
                 level: "A2"
             ),
             ListeningWord(
                 question: "What is the person doing?",
                 hearingSound: "Kitap okuyorum",
                 options: ["Oyun oynuyorum", "Kitap okuyorum", "Ders çalışıyorum", "Uyuyorum"],
+                correctAnswer: "Kitap okuyorum",
                 level: "A2"
             ),
 
@@ -83,6 +89,7 @@ final class ListeningScreenViewController: UIViewController {
                     "Yemekten sonra sinemaya gittik",
                     "Sinema çok uzaktaydı"
                 ],
+                correctAnswer: "Yemekten sonra sinemaya gittik",
                 level: "B1"
             ),
             ListeningWord(
@@ -94,6 +101,7 @@ final class ListeningScreenViewController: UIViewController {
                     "Trafik yüzünden geç kaldım",
                     "Yürüyerek geldim"
                 ],
+                correctAnswer: "Trafik yüzünden geç kaldım",
                 level: "B1"
             ),
 
@@ -106,6 +114,7 @@ final class ListeningScreenViewController: UIViewController {
                     "Tatlı yemek iyi gelir",
                     "Yalnız kalmak sağlıklıdır"
                 ],
+                correctAnswer: "Egzersiz yapmak sağlığımız için önemlidir",
                 level: "B2"
             ),
             ListeningWord(
@@ -117,6 +126,7 @@ final class ListeningScreenViewController: UIViewController {
                     "Alışveriş yapmak güzeldir",
                     "Kitap okumak hobi olabilir"
                 ],
+                correctAnswer: "Yabancı dil öğrenmek kariyer için avantajlıdır",
                 level: "B2"
             ),
 
@@ -129,17 +139,7 @@ final class ListeningScreenViewController: UIViewController {
                     "Eleştirel düşünmek",
                     "Yüzeysel düşünmek"
                 ],
-                level: "C1"
-            ),
-            ListeningWord(
-                question: "What is necessary for academic success?",
-                hearingSound: "Zaman yönetimi, akademik başarıyı etkileyen önemli bir beceridir",
-                options: [
-                    "Sabah uyanmak",
-                    "Zaman yönetimi",
-                    "Telefonla çalışmak",
-                    "Kütüphane gezmek"
-                ],
+                correctAnswer: "Eleştirel düşünmek",
                 level: "C1"
             ),
 
@@ -152,19 +152,10 @@ final class ListeningScreenViewController: UIViewController {
                     "Evde çalışmak",
                     "Tatilde kitap okumak"
                 ],
+                correctAnswer: "Kültürel zekâ geliştirmek",
                 level: "C2"
             ),
-            ListeningWord(
-                question: "What is the benefit of interdisciplinary thinking?",
-                hearingSound: "Disiplinler arası çalışmalar, bilgiyi bütüncül bir yaklaşımla değerlendirme olanağı sağlar",
-                options: [
-                    "Çok kitap okumak",
-                    "Yaratıcı çözümler üretmek",
-                    "Yalnız çalışmak",
-                    "Ders notlarını ezberlemek"
-                ],
-                level: "C2"
-            )
+            
         ]
 
     }
@@ -193,16 +184,21 @@ final class ListeningScreenViewController: UIViewController {
         tapToSoundImageLabel.isHidden = false
         cantListenLabel.isHidden = true
         guard currentIndex < questions.count else {
-            showAlert(title: "Bitti", message: "Tüm sorular tamamlandı.")
+            let level = evaluateUserLevel()
+            UserDefaults.standard.set(level, forKey: "listeningLevel")
+            
+            showAlert(title: "Test Bitti", message: "Tahmini seviyeniz: \(level)")
             courseType.markUserAsEnrolled()
             return
         }
+
         
         let currentQuestion = questions[currentIndex]
         questionNumber.text = "\(currentIndex + 1)/\(questions.count)"
         questionLabel.text = currentQuestion.question
         listensLeft = 3
         listensLeftLabel.text = "Listens Left: \(listensLeft)"
+        listensLeftLabel.textColor = .lightGray
         collectionView.reloadData()
     }
 
@@ -220,30 +216,16 @@ final class ListeningScreenViewController: UIViewController {
     @objc private func handleAIFinalMessage() {
         let message = AIAPIManager.shared.currentMessage.text.trimmingCharacters(in: .whitespacesAndNewlines)
         print(message)
-        if message.contains("Yes, this is the correct answer") {
-            DispatchQueue.main.async {
-                self.hideLottieLoading()
-                self.customContinueView.setCorrectAnswer()
-            }
-        } else {
-            DispatchQueue.main.async {
-                let popup = AIRobotPopupViewController(message: message)
-                self.hideLottieLoading()
-                self.present(popup, animated: true)
-                self.customContinueView.setWrongAnswer()
-            }
-        }
 
-        self.collectionView.allowsSelection = false
-        self.checkButton.isHidden = true
-        self.cantHearButton.isHidden = true
-        self.customContinueView.isHidden = false
-        self.customContinueView.animateIn()
-        self.customContinueView.continueButton.addTarget(self, action: #selector(self.nextQuestion), for: .touchUpInside)
+        DispatchQueue.main.async {
+            self.hideLottieLoading()
+
+            let popup = AIRobotPopupViewController(message: message)
+            self.present(popup, animated: true)
+            self.customContinueView.animateIn()
+        }
     }
 
-
-    
     private func setCollectionView(){
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -296,6 +278,7 @@ final class ListeningScreenViewController: UIViewController {
    
     @IBAction func checkButton(_ sender: Any) {
         self.showLottieLoading()
+        tts.stopSpeaking()
 
         guard let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first,
               let cell = collectionView.cellForItem(at: selectedIndexPath),
@@ -311,28 +294,62 @@ final class ListeningScreenViewController: UIViewController {
         collectionView.allowsSelection = false
         checkButton.isHidden = true
         cantHearButton.isHidden = true
+        customContinueView.isHidden = false
+        
+        let level = currentQuestion.level
+        if levelStats[level] == nil {
+            levelStats[level] = (0, 0)
+        }
+        levelStats[level]?.total += 1
 
-        let aiMessage = """
-        You are evaluating a listening comprehension question.
+        if selectedText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() ==
+            currentQuestion.correctAnswer.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() {
+            levelStats[level]?.correct += 1
+            self.hideLottieLoading()
+            cell.contentView.backgroundColor = .systemGreen
+            customContinueView.setCorrectAnswer()
 
-        Sound played to the user: "\(currentQuestion.hearingSound)"
-        Question asked: "\(currentQuestion.question)"
-        Answer options: \(currentQuestion.options)
-        User's selected answer: "\(selectedText)"
+            customContinueView.animateIn()
+            customContinueView.continueButton.addTarget(self, action: #selector(nextQuestion), for: .touchUpInside)
 
-        Your task:
-        - First, identify the correct answer from the options based on the sound and the question.
-        - Then compare it with the user's selection.
-        - Respond with only the final evaluation — do not explain the correct answer selection logic.
-        - Do not include any additional text before or after the response.
+        } else {
+            cell.contentView.backgroundColor = .systemRed
+            customContinueView.setWrongAnswer()
 
-        Response format:
-        - If correct: "Yes, this is the correct answer. Well done!"
-        - If incorrect: "You selected 'USER_ANSWER', but the correct answer is 'CORRECT_ANSWER'. [One-sentence encouraging remark — different from earlier ones.]"
-        """
+            let aiMessage = """
+            You are evaluating a listening comprehension question.
 
+            Sound played to the user: "\(currentQuestion.hearingSound)"
+            Question asked: "\(currentQuestion.question)"
+            Answer options: \(currentQuestion.options)
+            User's selected answer: "\(selectedText)"
+            Correct answer: "\(currentQuestion.correctAnswer)"
 
-        viewModel.sendMessage(aiMessage)
+            Your task:
+            - Respond only if the user's answer is incorrect.
+            - Format: "You selected 'USER_ANSWER', but the correct answer is 'CORRECT_ANSWER'. [One-sentence encouraging remark.]"
+            """
+
+            viewModel.sendMessage(aiMessage)
+        }
+    }
+
+    private func evaluateUserLevel() -> String {
+        let levelOrder = ["C2", "C1", "B2", "B1", "A2", "A1"]
+        let maxAllowedLevel = "B2"
+        
+        // B2’den yüksek seviyeleri dışla
+        let allowedLevels = levelOrder.drop { $0 > maxAllowedLevel }
+
+        for level in allowedLevels {
+            if let stats = levelStats[level], stats.total > 0 {
+                let accuracy = Double(stats.correct) / Double(stats.total)
+                if accuracy >= 0.8 {
+                    return level
+                }
+            }
+        }
+        return "A1"
     }
 
 

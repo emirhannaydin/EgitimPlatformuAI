@@ -9,22 +9,19 @@ import Foundation
 
 class CourseScreenViewModel {
     var coordinator: CourseScreenCoordinator?
-    var courseType: CourseType
+    
+    let courseType: CourseType
+    let courseLevelName: String
 
-    init(coordinator: CourseScreenCoordinator?, courseType: CourseType) {
+    init(coordinator: CourseScreenCoordinator?,
+         courseType: CourseType,
+         courseLevelName: String) {
         self.coordinator = coordinator
         self.courseType = courseType
+        self.courseLevelName = courseLevelName
     }
     
-    var courseName: String{
+    var courseName: String {
         courseType.courseName
     }
-    
-    var courseLevelName: String{
-        courseType.courseLevelName
-    }
-    
-    
-    
-    
 }

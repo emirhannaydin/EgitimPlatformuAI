@@ -22,15 +22,6 @@ enum CourseType: String {
         }
     }
 
-    var courseLevelName: String {
-        switch self {
-        case .reading: return "A1"
-        case .listening: return "B1"
-        case .writing: return "B2"
-        case .speaking: return "B3"
-        }
-    }
-
     var isUserEnrolled: Bool {
         UserDefaults.standard.bool(forKey: "enrolled_\(self.rawValue)")
     }

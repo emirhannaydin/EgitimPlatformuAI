@@ -28,7 +28,6 @@ final class MainScreenViewController: UIViewController{
         hamburgerMenuManager.setNavigationBar()
         setCollectionView()
         UserDefaults.standard.removeObject(forKey: "enrolled_reading")
-        UserDefaults.standard.removeObject(forKey: "enrolled_listening")
 
         nameContainerView.hamburgerMenuManager = hamburgerMenuManager
         navigationController?.navigationBar.isHidden = true
@@ -128,13 +127,14 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let coordinator = CourseScreenCoordinator.getInstance()
-        
+                
         switch indexPath.row {
         case 0:
             ApplicationCoordinator.getInstance().handleCourseEntry(.reading)
         case 1:
+            let coordinator = CourseScreenCoordinator.getInstance()
+            coordinator.setCourseType(.listening)
+            coordinator.setCourseLevelName("Intermediate")
             ApplicationCoordinator.getInstance().handleCourseEntry(.listening)
         case 2:
             ApplicationCoordinator.getInstance().handleCourseEntry(.writing)

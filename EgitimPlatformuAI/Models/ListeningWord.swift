@@ -9,5 +9,6 @@ struct ListeningWord: Decodable {
     let question: String
     let hearingSound: String
     let options: [String]
+    let correctAnswer: String
     let level: String
 }
