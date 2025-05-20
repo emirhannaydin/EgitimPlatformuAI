@@ -65,7 +65,7 @@ final class AIAPIManager {
         } else {
             do {
                 let chatCompletions = try await openAI.createChatCompletions(
-                    model: .gpt3_5(.turbo),
+                    model: .gpt4(.base),
                     messages: messageList,
                     optionalParameters: optionalParameters
                 )

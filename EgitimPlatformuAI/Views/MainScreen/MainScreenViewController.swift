@@ -27,6 +27,9 @@ final class MainScreenViewController: UIViewController{
         hamburgerMenuManager = HamburgerMenuManager(viewController: self)
         hamburgerMenuManager.setNavigationBar()
         setCollectionView()
+        UserDefaults.standard.removeObject(forKey: "enrolled_reading")
+        UserDefaults.standard.removeObject(forKey: "enrolled_listening")
+
 
         nameContainerView.hamburgerMenuManager = hamburgerMenuManager
         navigationController?.navigationBar.isHidden = true
@@ -126,23 +129,48 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let coordinator = CourseScreenCoordinator.getInstance()
         
         switch indexPath.row {
         case 0:
-            ApplicationCoordinator.getInstance().pushWithoutTabBarFromTabBarCoordinator(ReadingScreenCoordinator.self)
+            let viewModel = CourseScreenViewModel(
+                coordinator: coordinator,
+                courseType: .reading,
+                courseLevelName: "A2"
+            )
+            ApplicationCoordinator.getInstance().handleCourseEntry(.reading, with: viewModel)
         case 1:
-            ApplicationCoordinator.getInstance().pushWithoutTabBarFromTabBarCoordinator(ListeningScreenCoordinator.self)
+            let level = UserDefaults.standard.string(forKey: "level_listening")
+            let viewModel = CourseScreenViewModel(
+                coordinator: coordinator,
+                courseType: .listening,
+                courseLevelName: level ?? "A1"
+            )
+            ApplicationCoordinator.getInstance().handleCourseEntry(.listening, with: viewModel)
         case 2:
-            ApplicationCoordinator.getInstance().pushWithoutTabBarFromTabBarCoordinator(WritingScreenCoordinator.self)
+            let viewModel = CourseScreenViewModel(
+                coordinator: coordinator,
+                courseType: .writing,
+                courseLevelName: "B2"
+            )
+            ApplicationCoordinator.getInstance().handleCourseEntry(.writing, with: viewModel)
         case 3:
-            ApplicationCoordinator.getInstance().pushWithoutTabBarFromTabBarCoordinator(SpeakingScreenCoordinator.self)
+            let viewModel = CourseScreenViewModel(
+                coordinator: coordinator,
+                courseType: .speaking,
+                courseLevelName: "C1"
+            )
+            ApplicationCoordinator.getInstance().handleCourseEntry(.speaking, with: viewModel)
         default:
-            print("invalid indexPath at CollectionView")
+            break
         }
+
         
     }
     
 }
+
+
 
 
     
