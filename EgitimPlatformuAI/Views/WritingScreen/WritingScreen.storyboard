@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLa-0C-EE8">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLa-0C-EE8">
                                 <rect key="frame" x="30" y="783" width="333" height="35"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <constraints>
@@ -34,6 +34,28 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translate this sentence." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZY-le-ZbV">
+                                <rect key="frame" x="15" y="114" width="378" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="TgQ-ZK-OvK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="3Xr-BV-2O1">
+                                <rect key="frame" x="15" y="159" width="363" height="594"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kBa-37-pOn">
+                                        <rect key="frame" x="0.0" y="0.0" width="363" height="297"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m9q-Sd-2df">
+                                        <rect key="frame" x="0.0" y="297" width="363" height="297"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fXq-Ad-CjZ" customClass="CustomBackButtonView" customModule="EgitimPlatformuAI" customModuleProvider="target">
                                 <rect key="frame" x="20" y="59" width="40" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -49,21 +71,21 @@
                                     <constraint firstAttribute="height" constant="150" id="Slf-eB-EgC"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translate this sentence." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZY-le-ZbV">
-                                <rect key="frame" x="15" y="114" width="378" height="30"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="uLa-0C-EE8" secondAttribute="trailing" constant="30" id="7r6-J2-Crc"/>
+                            <constraint firstItem="3Xr-BV-2O1" firstAttribute="top" secondItem="HZY-le-ZbV" secondAttribute="bottom" constant="15" id="9za-dg-IaX"/>
+                            <constraint firstItem="3Xr-BV-2O1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="15" id="AYj-IE-JOx"/>
                             <constraint firstItem="fXq-Ad-CjZ" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="CEz-ai-QMW"/>
                             <constraint firstItem="HZY-le-ZbV" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="15" id="GjZ-CQ-vqd"/>
                             <constraint firstItem="HZY-le-ZbV" firstAttribute="top" secondItem="fXq-Ad-CjZ" secondAttribute="bottom" constant="15" id="K2G-AM-vKX"/>
                             <constraint firstItem="jAy-iw-8GD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Mfe-e1-Z56"/>
                             <constraint firstItem="jAy-iw-8GD" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="N4j-Kc-G1c"/>
+                            <constraint firstItem="uLa-0C-EE8" firstAttribute="top" secondItem="3Xr-BV-2O1" secondAttribute="bottom" constant="30" id="RON-sk-Xxc"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="3Xr-BV-2O1" secondAttribute="trailing" constant="15" id="XhX-Qt-waK"/>
+                            <constraint firstItem="uLa-0C-EE8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="ZU6-Y7-NvJ"/>
                             <constraint firstItem="fXq-Ad-CjZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="fQh-kw-dYn"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="HZY-le-ZbV" secondAttribute="trailing" id="kGk-eg-86e"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="uLa-0C-EE8" secondAttribute="bottom" id="m8l-vN-TT3"/>
@@ -73,7 +95,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="12" y="-2"/>
+            <point key="canvasLocation" x="11.450381679389313" y="-2.1126760563380285"/>
         </scene>
     </scenes>
     <resources>
