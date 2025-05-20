@@ -7,105 +7,115 @@
 
 import UIKit
 import AVFoundation
+import Lottie
 
 final class SpeakingScreenViewController: UIViewController {
     
     var viewModel: SpeakingScreenViewModel!
 
+    @IBOutlet var backButton: CustomBackButtonView!
+    @IBOutlet var speakingLottie: LottieAnimationView!
+    @IBOutlet var questionCount: UILabel!
+    @IBOutlet var questionLabel: UILabel!
+    @IBOutlet var speakingLabel: UILabel!
+    @IBOutlet var speakButton: UIButton!
+    @IBOutlet var hearingYouLabel: UILabel!
+    @IBOutlet var successRateLabel: UILabel!
+    @IBOutlet var speaksView: UIView!
+    @IBOutlet var speaksLeftLabel: UILabel!
+    @IBOutlet var checkButton: UIButton!
+    @IBOutlet var customContinueView: CustomContinueView!
     private let recorder = AudioRecorderManager()
-    private let micButton = UIButton(type: .system)
-    private let resultLabel = UILabel()
-    private let targetTextLabel = UILabel()
     
-    private let targetText = "Ben bugün sinemaya gittim."
+    @IBOutlet var iconImageView: UIImageView!
     
+    private var isButtonClicked = false
+    private var speaksLeftCount: Int = 3
     private var isRecording = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
-    }
+        setLottie()
+        setSpeakingButton()
+        speakingLabel.text = """
+    In recent years, the rapid advancement of technology has significantly transformed the way we communicate. While digital platforms such as social media, instant messaging, and video calls have made it easier to stay in touch with people across the globe, they have also changed the nature of human interaction.
 
-    private func setupUI() {
-        view.backgroundColor = .systemBackground
-        
-        targetTextLabel.text = "Lütfen şu metni okuyun:\n\n\(targetText)"
-        targetTextLabel.font = .systemFont(ofSize: 18, weight: .medium)
-        targetTextLabel.textAlignment = .center
-        targetTextLabel.numberOfLines = 0
-        
-        resultLabel.text = "Sonuç burada görünecek"
-        resultLabel.font = .systemFont(ofSize: 16)
-        resultLabel.textAlignment = .center
-        resultLabel.numberOfLines = 0
-        
-        micButton.setTitle("🎤 Kaydı Başlat", for: .normal)
-        micButton.titleLabel?.font = .boldSystemFont(ofSize: 18)
-        micButton.addTarget(self, action: #selector(micTapped), for: .touchUpInside)
-        
-        [targetTextLabel, resultLabel, micButton].forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview($0)
-        }
+    Face-to-face conversations, once considered essential for building trust and emotional connection, are now often replaced by text messages or online meetings. Although these tools offer convenience and speed, some argue that they contribute to a decline in the quality of our relationships. Emotional cues such as tone of voice, facial expressions, and body language are frequently lost in digital communication, leading to misunderstandings and a sense of detachment.
 
-        NSLayoutConstraint.activate([
-            targetTextLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            targetTextLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            targetTextLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-            
-            resultLabel.topAnchor.constraint(equalTo: targetTextLabel.bottomAnchor, constant: 40),
-            resultLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            resultLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
-            
-            micButton.topAnchor.constraint(equalTo: resultLabel.bottomAnchor, constant: 40),
-            micButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-    }
+    On the other hand, digitalization has provided new opportunities for people with disabilities, those living in remote areas, or individuals with social anxiety, enabling them to connect with others more comfortably. Online platforms have also encouraged cross-cultural dialogue and global collaboration, enriching our understanding of different perspectives.
 
-    @objc private func micTapped() {
-        if isRecording {
-            recorder.stopRecording()
-            micButton.setTitle("🎤 Kaydı Başlat", for: .normal)
-            isRecording = false
-            
-            guard let url = recorder.getAudioFileURL() else { return }
-            
-            Task {
-                await handleTranscription(for: url)
-            }
-        } else {
-            do {
-                try recorder.startRecording()
-                micButton.setTitle("⏹️ Kaydı Durdur", for: .normal)
-                isRecording = true
-            } catch {
-                print("❌ Kayıt başlatılamadı: \(error)")
-            }
-        }
+    In conclusion, while digital communication has its drawbacks, it also offers significant advantages. The key lies in finding a balance—using technology to enhance our interactions without letting it replace the human touch.
+    """
     }
     
-    private func handleTranscription(for url: URL) async {
-        DispatchQueue.main.async {
-            self.resultLabel.text = "⏳ Transkripsiyon yapılıyor..."
-        }
+    private func setLottie(){
+        let animation = LottieAnimation.named("speakingScreenGreen")
+        speakingLottie.animation = animation
+        speakingLottie.contentMode = .scaleAspectFit
+        speakingLottie.loopMode = .loop
+        speakingLottie.stop()
+        backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         
-        if let result = await AIAPIManager.shared.transcribeWhisperManually(audioURL: url, expectedText: targetText) {
-            let score = Int(result.accuracy * 100)
-            let color: UIColor = score >= 85 ? .systemGreen : score >= 60 ? .systemOrange : .systemRed
-            
-            DispatchQueue.main.async {
-                self.resultLabel.text = """
-                🗣️ Algılanan Metin: \(result.transcribedText)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(speaksViewTapped))
+        speaksView.addGestureRecognizer(tapGesture)
 
-                🎯 Doğruluk: %\(score)
-                """
-                self.resultLabel.textColor = color
-            }
-        } else {
-            DispatchQueue.main.async {
-                self.resultLabel.text = "❌ Transkripsiyon yapılamadı."
-                self.resultLabel.textColor = .systemRed
-            }
-        }
     }
+    
+    private func setSpeakingButton(){
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 50, weight: .regular)
+        let micImage = UIImage(systemName: "microphone", withConfiguration: largeConfig)
+        speakButton.setImage(micImage, for: .normal)
+        speakButton.tintColor = .mintGreen
+        
+    }
+    
+    @objc func backButtonTapped(){
+        navigationController?.popViewController(animated: true)
+    }
+
+    @objc func speaksViewTapped(){
+        handleSpeaks()
+    }
+
+    @IBAction func speakButton(_ sender: Any) {
+        handleSpeaks()
+    }
+    
+    private func handleSpeaks(){
+        isButtonClicked.toggle()
+            if isButtonClicked {
+                if speaksLeftCount > 0 {
+                    let largeConfig = UIImage.SymbolConfiguration(pointSize: 50, weight: .regular)
+                    let micImage = UIImage(systemName: "microphone.fill", withConfiguration: largeConfig)
+                    
+                    speaksView.layer.borderColor = UIColor.summer.cgColor
+                    speakButton.setImage(micImage, for: .normal)
+                    speakButton.tintColor = .summer
+                    hearingYouLabel.text = "🎤 We're listening... keep going!"
+                    hearingYouLabel.textColor = .summer
+                    speaksLeftCount -= 1
+                    speaksLeftLabel.text = "Speaks Left:\(speaksLeftCount)"
+                    let animation = LottieAnimation.named("speakingScreen")
+                    speakingLottie.animation = animation
+                    speakingLottie.play()
+                }else{
+                    speaksLeftLabel.textColor = .red
+                    animateLabelShake(speaksLeftLabel)
+                }
+            }else{
+                setSpeakingButton()
+                hearingYouLabel.text = "Tap to speaking..."
+                speakButton.tintColor = .mintGreen
+                hearingYouLabel.textColor = .mintGreen
+                setLottie()
+
+            }
+    }
+    @IBAction func checkButton(_ sender: Any) {
+        customContinueView.isHidden = false
+        checkButton.isHidden = true
+        
+        customContinueView.animateIn()
+    }
+    
 }
