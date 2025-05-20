@@ -6,3 +6,4 @@ EgitimPlatformuAI.xcodeproj/xcuserdata/emirhan.xcuserdatad/xcdebugger/Breakpoint
 EgitimPlatformuAI/Config.plist
 Pods/Pods.xcodeproj/xcuserdata/basarnoyan.xcuserdatad/xcschemes/xcschememanagement.plist
 EgitimPlatformuAI.xcworkspace/xcuserdata/basarnoyan.xcuserdatad/UserInterfaceState.xcuserstate
+*.xcbkptlist
