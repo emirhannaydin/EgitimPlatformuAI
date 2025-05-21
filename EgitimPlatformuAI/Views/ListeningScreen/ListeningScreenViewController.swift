@@ -53,7 +53,7 @@ final class ListeningScreenViewController: UIViewController {
         questions = [
             ListeningWord(
                 question: "Which word did you hear?",
-                hearingSound: "Elmaasdsadasdasdasd",
+                hearingSound: "Elma",
                 options: ["Kalem", "Kitap", "Elma", "Ev"],
                 correctAnswer: "Elma",
                 level: "A1"

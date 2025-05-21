@@ -7,9 +7,13 @@
 
 import SwiftOpenAI
 import Foundation
+import AVFoundation
 
-final class AIAPIManager {
+final class AIAPIManager: NSObject {
     static let shared = AIAPIManager()
+
+    var openAIAudioPlayer: AVAudioPlayer?
+    var shouldPlayAudio = true
 
     struct Config {
         static var openAIKey: String {
@@ -157,13 +161,63 @@ final class AIAPIManager {
             return nil
         }
     }
+    
+    @MainActor
+    func openAISpeak(text: String, voice: OpenAIVoiceType = .nova) async {
+        shouldPlayAudio = true
+        do {
+            let data = try await openAI.createSpeech(
+                model: .tts(.tts1),
+                input: text,
+                voice: voice,
+                responseFormat: .mp3,
+                speed: 1.0
+            )
 
+            let fileURL = FileManager.default.temporaryDirectory.appendingPathComponent("speech.mp3")
 
+            if FileManager.default.fileExists(atPath: fileURL.path) {
+                try FileManager.default.removeItem(at: fileURL)
+            }
+
+            try data!.write(to: fileURL)
+            NotificationCenter.default.post(name: .aiSpeechDidStart, object: nil)
+            openAIAudioPlayer = try AVAudioPlayer(contentsOf: fileURL)
+            openAIAudioPlayer?.delegate = self
+            
+        } catch {
+            print("TTS Hatası: \(error.localizedDescription)")
+        }
+    }
+
+    func openAIStartPlayback() {
+        guard shouldPlayAudio else { return }
+        openAIAudioPlayer?.play()
+    }
+
+    func openAIStopPlayback() {
+        shouldPlayAudio = false
+        openAIAudioPlayer?.stop()
+        openAIAudioPlayer?.currentTime = 0
+    }
+
+}
+
+extension AIAPIManager: AVAudioPlayerDelegate{
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        
+        NotificationCenter.default.post(name: .aiSpeechFinished, object: nil)
+        
+    }
+
+    
 }
 
 extension Notification.Name {
     static let aiMessageUpdated = Notification.Name("AIMessageUpdated")
     static let aiMessageFinished = Notification.Name("AIMessageFinished")
+    static let aiSpeechFinished = Notification.Name("AISpeechFinished")
+    static let aiSpeechDidStart = Notification.Name("AISpeechDidStart")
 
 }
 
@@ -203,6 +257,8 @@ private func levenshtein(_ a: String, _ b: String) -> Int {
     }
     return dist[a.count][b.count]
 }
+
+
 
 
 
