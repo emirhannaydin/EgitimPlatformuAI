@@ -8,15 +8,20 @@
 import AVFoundation
 
 final class AudioRecorderManager {
+
+    static let shared = AudioRecorderManager()
+
+    private init() {}
+
     private var audioRecorder: AVAudioRecorder?
     private var audioFilename: URL?
 
     func startRecording() throws {
         let session = AVAudioSession.sharedInstance()
-        try session.setCategory(.playAndRecord, mode: .default)
+        try session.setCategory(.playAndRecord, mode: .default, options: .defaultToSpeaker)
         try session.setActive(true)
 
-        let settings = [
+        let settings: [String: Any] = [
             AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
             AVSampleRateKey: 12000,
             AVNumberOfChannelsKey: 1,
@@ -28,15 +33,17 @@ final class AudioRecorderManager {
         audioFilename = documentsPath.appendingPathComponent(fileName)
 
         audioRecorder = try AVAudioRecorder(url: audioFilename!, settings: settings)
+        audioRecorder?.prepareToRecord()
         audioRecorder?.record()
     }
 
     func stopRecording() {
         audioRecorder?.stop()
-        print(audioFilename?.path)
+        audioRecorder = nil
     }
 
     func getAudioFileURL() -> URL? {
         return audioFilename
     }
 }
+

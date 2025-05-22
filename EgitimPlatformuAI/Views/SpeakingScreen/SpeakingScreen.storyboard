@@ -172,12 +172,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Success Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYL-30-Gij">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYL-30-Gij">
                                 <rect key="frame" x="20" y="681.66666666666663" width="353" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="xdU-n1-xhO"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" name="porcelain"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -246,11 +246,11 @@
                         <outlet property="checkButton" destination="lu1-92-sGc" id="Ylo-gR-lDt"/>
                         <outlet property="customContinueView" destination="uGI-xk-yPW" id="dGs-gs-1u6"/>
                         <outlet property="hearingYouLabel" destination="t6K-a0-ftx" id="Kxp-xf-lVP"/>
+                        <outlet property="listeningActivityIndicator" destination="HDg-hc-elD" id="eRa-CU-nhy"/>
                         <outlet property="listeningButton" destination="G4u-N4-ksQ" id="dJk-5q-iql"/>
                         <outlet property="questionCount" destination="sfe-bZ-qgb" id="1UH-Wi-J9C"/>
                         <outlet property="questionLabel" destination="yJx-bL-i8B" id="h2K-jl-mM6"/>
                         <outlet property="speakButton" destination="Dsn-Bf-4Bo" id="9tM-1F-N7a"/>
-                        <outlet property="speakingActivity" destination="HDg-hc-elD" id="eRa-CU-nhy"/>
                         <outlet property="speakingLabel" destination="aPC-vW-0y8" id="qfW-nf-RHp"/>
                         <outlet property="speakingLottie" destination="ZMf-ty-iGT" id="iFc-Wk-mw6"/>
                         <outlet property="speaksLeftLabel" destination="eau-Lw-H7y" id="GXX-9A-aHf"/>
