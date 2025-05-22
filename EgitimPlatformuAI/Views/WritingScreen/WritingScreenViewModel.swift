@@ -20,12 +20,10 @@ class WritingScreenViewModel {
         self.coordinator = coordinator
     }
 
-    func sendMessage(_ prompt: String, completion: @escaping (Result<String, Error>) -> Void) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
-            let fakeResponse = """
-            No. You translated it as "Ben okula gittim", but the correct translation is "I went to school." Keep it up! You're doing great — just a little more attention to verb tense.
-            """
-            completion(.success(fakeResponse))
+    func sendMessage(_ message: String) {
+        Task {
+            aiAPIManager.isStream = false
+            await aiAPIManager.send(message: message, appendToMessages: false)
         }
     }
 
