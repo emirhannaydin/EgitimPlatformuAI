@@ -46,7 +46,7 @@ final class SpeakingScreenViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewModel.stopListening()
+        viewModel.stopAISpeaking()
     }
     
     private func setupUI() {
@@ -118,7 +118,7 @@ final class SpeakingScreenViewController: UIViewController {
                 return
             }
             
-            viewModel.stopListening()
+            viewModel.stopAISpeaking()
             listeningActivityIndicator.stopAnimating()
             setSpeakingActivityHidden()
             listeningButton.alpha = 0
@@ -155,7 +155,7 @@ final class SpeakingScreenViewController: UIViewController {
         listeningButton.setImage(UIImage(systemName: "speaker"), for: .normal)
         listeningActivityIndicator.stopAnimating()
         setSpeakingActivityHidden()
-        viewModel.stopListening()
+        viewModel.stopAISpeaking()
         
         viewModel.stopRecordingAndEvaluate { [weak self] text, similarity in
             DispatchQueue.main.async {
@@ -193,12 +193,12 @@ final class SpeakingScreenViewController: UIViewController {
             listeningButton.setImage(UIImage(systemName: "speaker.fill"), for: .normal)
             listeningActivityIndicator.startAnimating()
             listeningActivityIndicator.alpha = 1
-            viewModel.startSpeaking(text: questions[currentIndex].speakingLabel)
+            viewModel.startAISpeaking(text: questions[currentIndex].speakingLabel)
         } else {
             setListeningButton()
             listeningActivityIndicator.stopAnimating()
             setSpeakingActivityHidden()
-            viewModel.stopListening()
+            viewModel.stopAISpeaking()
         }
     }
     
@@ -245,7 +245,7 @@ final class SpeakingScreenViewController: UIViewController {
     }
     
     private func resetAfterSpeaking() {
-        viewModel.stopListening()
+        viewModel.stopAISpeaking()
         listeningButton.alpha = 1
         listeningButton.isUserInteractionEnabled = true
         updateMicButtonImage(filled: false, color: .mintGreen)

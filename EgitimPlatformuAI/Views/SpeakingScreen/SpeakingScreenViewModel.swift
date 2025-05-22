@@ -14,7 +14,7 @@ class SpeakingScreenViewModel {
         self.coordinator = coordinator
     }
     
-    func startSpeaking(text: String){
+    func startAISpeaking(text: String){
         Task{
             await AIAPIManager.shared.openAISpeak(text: text)
             AIAPIManager.shared.openAIStartPlayback()
@@ -22,7 +22,7 @@ class SpeakingScreenViewModel {
         }
     }
     
-    func stopListening(){
+    func stopAISpeaking(){
         AIAPIManager.shared.openAIStopPlayback()
     }
     

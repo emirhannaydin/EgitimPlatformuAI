@@ -25,7 +25,6 @@ final class ListeningScreenViewController: UIViewController {
     @IBOutlet var cantHearButton: UIButton!
     @IBOutlet var tapToSoundImageLabel: UILabel!
     @IBOutlet var customContinueView: CustomContinueView!
-    private var tts: TextToSpeech = TextToSpeech()
     private var questions: [ListeningWord] = []
     private var currentIndex = 0
     private var listensLeft = 3
@@ -53,9 +52,9 @@ final class ListeningScreenViewController: UIViewController {
         questions = [
             ListeningWord(
                 question: "Which word did you hear?",
-                hearingSound: "Elma",
+                hearingSound: "Kitap",
                 options: ["Kalem", "Kitap", "Elma", "Ev"],
-                correctAnswer: "Elma",
+                correctAnswer: "Kitap",
                 level: "A1"
             ),
             ListeningWord(
@@ -173,6 +172,7 @@ final class ListeningScreenViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         self.navigationController?.isNavigationBarHidden = false
+        viewModel.stopAIListening()
     }
     
     deinit {
@@ -252,8 +252,7 @@ final class ListeningScreenViewController: UIViewController {
         if listensLeft > 0 {
             listensLeft -= 1
             listensLeftLabel.text = "Listens Left: \(listensLeft)"
-            tts.speak(text:questions[currentIndex].hearingSound)
-            tts.startSpeaking()
+            viewModel.startAIListening(text:questions[currentIndex].hearingSound)
             lottieView.stop()
             lottieView.play()
         }else{
@@ -277,7 +276,7 @@ final class ListeningScreenViewController: UIViewController {
    
     @IBAction func checkButton(_ sender: Any) {
         self.showLottieLoading()
-        tts.stopSpeaking()
+        viewModel.stopAIListening()
 
         guard let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first,
               let cell = collectionView.cellForItem(at: selectedIndexPath),
