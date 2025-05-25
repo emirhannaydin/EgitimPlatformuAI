@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let appCoordinator = ApplicationCoordinator.getInstance()
         appCoordinator.window = window
-        appCoordinator.initTabBar()
+        appCoordinator.start()
         
         self.window = window
     }

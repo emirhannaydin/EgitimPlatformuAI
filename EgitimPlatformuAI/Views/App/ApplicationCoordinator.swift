@@ -19,7 +19,7 @@ final class ApplicationCoordinator: Coordinator {
     var window: UIWindow?
     let tabBarCoordinator = TabBarCoordinator.getInstance()
     func start() {
-        /*let loginCoordinator = LoginScreenCoordinator.getInstance()
+        let loginCoordinator = LoginScreenCoordinator.getInstance()
         loginCoordinator.start()
         if let window = self.window {
             UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {
@@ -27,9 +27,9 @@ final class ApplicationCoordinator: Coordinator {
             })
             window.makeKeyAndVisible()
         }
-        window?.makeKeyAndVisible()*/
+        window?.makeKeyAndVisible()
         
-        initTabBar()
+        
     }
     func navigateToMain() {
         tabBarCoordinator.tabBarController.selectedIndex = 0
@@ -45,6 +45,9 @@ final class ApplicationCoordinator: Coordinator {
     }
     func navigateToMainLogin(){
         pushToMainLoginScreen()
+    }
+    func navigateToLevelScreen(){
+        
     }
 
     func initTabBar(){
@@ -105,6 +108,21 @@ final class ApplicationCoordinator: Coordinator {
             navController.popToViewController(existingLoginVC, animated: true)
         } else {
             let mainLoginCoordinator = MainLoginScreenCoordinator.getInstance()
+            mainLoginCoordinator.start()
+            
+            if let mainLoginVC = mainLoginCoordinator.navigationController.viewControllers.first {
+                navController.pushViewController(mainLoginVC, animated: true)
+            }
+        }
+    }
+    
+    func pushToLevelScreen() {
+        let navController = LoginScreenCoordinator.getInstance().navigationController
+
+        if let existingLoginVC = navController.viewControllers.first(where: { $0 is LevelScreenViewController }) {
+            navController.popToViewController(existingLoginVC, animated: true)
+        } else {
+            let mainLoginCoordinator = LevelScreenCoordinator.getInstance()
             mainLoginCoordinator.start()
             
             if let mainLoginVC = mainLoginCoordinator.navigationController.viewControllers.first {
