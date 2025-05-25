@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,14 +19,21 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rjf-lY-w2j">
                                 <rect key="frame" x="0.0" y="0.0" width="402" height="50"/>
-                                <color key="backgroundColor" name="darkBlue"/>
+                                <color key="backgroundColor" name="backDarkBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="aVy-G5-Jmx"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uq3-W5-OgN" userLabel="DividerView">
+                                <rect key="frame" x="0.0" y="150" width="402" height="2"/>
+                                <color key="backgroundColor" name="charcoal"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="Iu2-lc-W3d"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4u2-oV-Dgl" customClass="CustomNameContainer" customModule="EgitimPlatformuAI" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="402" height="100"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="backDarkBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="gQ2-wg-VJD"/>
                                 </constraints>
@@ -38,12 +44,12 @@
                                     <constraint firstAttribute="height" constant="30" id="FK4-t3-o0X"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
-                                <color key="textColor" name="charcoal"/>
+                                <color key="textColor" name="summer"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="maW-RO-0Cj">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="maW-RO-0Cj">
                                 <rect key="frame" x="0.0" y="190" width="402" height="250"/>
-                                <color key="backgroundColor" name="paleGray"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="uVd-9g-nEe"/>
                                 </constraints>
@@ -78,12 +84,12 @@
                                     <constraint firstAttribute="height" constant="50" id="Biz-ZU-Gu4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
-                                <color key="textColor" name="charcoal"/>
+                                <color key="textColor" name="summer"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AuW-VA-f6H">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AuW-VA-f6H">
                                 <rect key="frame" x="0.0" y="500" width="402" height="200"/>
-                                <color key="backgroundColor" name="paleGray"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="IDv-z5-T8B"/>
                                 </constraints>
@@ -101,14 +107,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="270" height="170"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" name="paleGray"/>
+                        <color key="backgroundColor" name="backDarkBlue"/>
                         <constraints>
                             <constraint firstItem="L4E-nM-gSH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="5tg-b0-ZzE"/>
+                            <constraint firstAttribute="trailing" secondItem="Uq3-W5-OgN" secondAttribute="trailing" id="6LC-yW-7xE"/>
                             <constraint firstItem="rjf-lY-w2j" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9RJ-ir-Ofw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4u2-oV-Dgl" secondAttribute="trailing" id="9oS-WY-8P8"/>
                             <constraint firstItem="rjf-lY-w2j" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="9v9-k2-TJh"/>
@@ -116,6 +126,7 @@
                             <constraint firstItem="QiV-Uu-rhd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="EMN-ju-kel"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QiV-Uu-rhd" secondAttribute="trailing" constant="10" id="Iyf-Fz-pZi"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="AuW-VA-f6H" secondAttribute="trailing" id="LB8-KB-IbP"/>
+                            <constraint firstItem="Uq3-W5-OgN" firstAttribute="top" secondItem="4u2-oV-Dgl" secondAttribute="bottom" id="QAJ-xH-08b"/>
                             <constraint firstItem="4u2-oV-Dgl" firstAttribute="top" secondItem="rjf-lY-w2j" secondAttribute="bottom" id="Whp-gC-Wvk"/>
                             <constraint firstItem="AuW-VA-f6H" firstAttribute="top" secondItem="L4E-nM-gSH" secondAttribute="bottom" id="gNA-wp-IOq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="maW-RO-0Cj" secondAttribute="trailing" id="iUf-hM-VBC"/>
@@ -126,6 +137,7 @@
                             <constraint firstItem="QiV-Uu-rhd" firstAttribute="top" secondItem="4u2-oV-Dgl" secondAttribute="bottom" constant="10" id="sfF-rM-lvj"/>
                             <constraint firstItem="maW-RO-0Cj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tDy-NV-Mke"/>
                             <constraint firstItem="4u2-oV-Dgl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="u6i-58-cF1"/>
+                            <constraint firstItem="Uq3-W5-OgN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="u9u-c6-7zZ"/>
                         </constraints>
                     </view>
                     <connections>
@@ -140,17 +152,14 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="backDarkBlue">
+            <color red="0.10588235294117647" green="0.12549019607843137" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="charcoal">
             <color red="0.17254901960784313" green="0.20000000000000001" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="darkBlue">
-            <color red="0.11764705882352941" green="0.13725490196078433" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="summer">
+            <color red="0.94117647058823528" green="0.73333333333333328" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="paleGray">
-            <color red="0.88235294117647056" green="0.89411764705882357" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

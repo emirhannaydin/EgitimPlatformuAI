@@ -114,18 +114,9 @@ final class ApplicationCoordinator: Coordinator {
     }
 
     func handleCourseEntry(_ courseType: CourseType, with viewModel: CourseScreenViewModel) {
-        if courseType.isUserEnrolled {
-            let coordinator = CourseScreenCoordinator.getInstance()
-            coordinator.start(with: viewModel)
-            pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
-        } else {
-            let introCoordinator = courseType.introCoordinator
-            if let configurable = introCoordinator as? CourseTypeConfigurable {
-                configurable.setCourseType(courseType)
-            }
-            introCoordinator.start()
-            pushFromTabBarCoordinatorAndVariables(introCoordinator, hidesBottomBar: true)
-        }
+        let coordinator = CourseScreenCoordinator.getInstance()
+        coordinator.start(with: viewModel)
+        pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
     }
 
 

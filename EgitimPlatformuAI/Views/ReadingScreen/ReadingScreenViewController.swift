@@ -114,7 +114,6 @@ final class ReadingScreenViewController: UIViewController {
                 loadQuestion()
             } else {
                 showAlert(title: "Completed", message: "You have finished all questions.")
-                courseType.markUserAsEnrolled()
             }
     }
 

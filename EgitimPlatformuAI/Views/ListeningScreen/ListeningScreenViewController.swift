@@ -29,7 +29,6 @@ final class ListeningScreenViewController: UIViewController {
     private var currentIndex = 0
     private var listensLeft = 3
     private var correctText = ""
-    private var levelStats: [String: (correct: Int, total: Int)] = [:]
 
 
     @IBOutlet var questionNumber: UILabel!
@@ -184,10 +183,7 @@ final class ListeningScreenViewController: UIViewController {
         tapToSoundImageLabel.isHidden = false
         cantListenLabel.isHidden = true
         guard currentIndex < questions.count else {
-            let level = evaluateUserLevel()
-            UserDefaults.standard.set(level, forKey: "listeningLevel")
-            showAlert(title: "Test Bitti", message: "Tahmini seviyeniz: \(level)")
-            courseType.markUserAsEnrolled()
+            showAlert(title: "Test Bitti", message: "")
             return
         }
 
@@ -293,16 +289,9 @@ final class ListeningScreenViewController: UIViewController {
         checkButton.isHidden = true
         cantHearButton.isHidden = true
         customContinueView.isHidden = false
-        
-        let level = currentQuestion.level
-        if levelStats[level] == nil {
-            levelStats[level] = (0, 0)
-        }
-        levelStats[level]?.total += 1
 
         if selectedText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() ==
             currentQuestion.correctAnswer.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() {
-            levelStats[level]?.correct += 1
             self.hideLottieLoading()
             cell.contentView.backgroundColor = .systemGreen
             customContinueView.setCorrectAnswer()
@@ -331,25 +320,6 @@ final class ListeningScreenViewController: UIViewController {
             viewModel.sendMessage(aiMessage)
         }
     }
-
-    private func evaluateUserLevel() -> String {
-        let levelOrder = ["C2", "C1", "B2", "B1", "A2", "A1"]
-        let maxAllowedLevel = "B2"
-        
-        // B2’den yüksek seviyeleri dışla
-        let allowedLevels = levelOrder.drop { $0 > maxAllowedLevel }
-
-        for level in allowedLevels {
-            if let stats = levelStats[level], stats.total > 0 {
-                let accuracy = Double(stats.correct) / Double(stats.total)
-                if accuracy >= 0.8 {
-                    return level
-                }
-            }
-        }
-        return "A1"
-    }
-
 
     @IBAction func cantHearButton(_ sender: Any) {
         cantListenLabel.text = "\(questions[currentIndex].hearingSound)"

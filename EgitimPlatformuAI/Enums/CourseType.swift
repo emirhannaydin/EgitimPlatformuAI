@@ -22,14 +22,6 @@ enum CourseType: String {
         }
     }
 
-    var isUserEnrolled: Bool {
-        UserDefaults.standard.bool(forKey: "enrolled_\(self.rawValue)")
-    }
-
-    func markUserAsEnrolled() {
-        UserDefaults.standard.set(true, forKey: "enrolled_\(self.rawValue)")
-    }
-
     var introCoordinator: Coordinator {
         switch self {
         case .reading:
