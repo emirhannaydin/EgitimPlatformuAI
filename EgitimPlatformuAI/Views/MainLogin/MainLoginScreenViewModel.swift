@@ -31,5 +31,17 @@ class MainLoginScreenViewModel {
             }
         }
     }
+    func getCourses(completion: @escaping (Result<[Course], Error>) -> Void) {
+        NetworkManager.shared.getCourses { result in
+            switch result {
+            case .success(let courses):
+                // Eğer gerekiyorsa burada courses saklanabilir (viewModel içinde)
+                completion(.success(courses))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
 }
 
