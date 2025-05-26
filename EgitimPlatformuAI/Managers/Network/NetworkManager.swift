@@ -179,18 +179,6 @@ class NetworkManager {
 
 }
 
-struct Course: Codable {
-    let name: String
-    let description: String
-    let duration: Int
-    let level: Int
-    let courseType: Int
-    let classes: [String] // veya sınıf yapısına göre `[YourClassModel]`
-    let id: String
-    let createdDate: String
-    let updatedDate: String
-}
-
 
 
 

@@ -30,6 +30,8 @@ final class LevelScreenViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.reloadData()
+        fetchCourses()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +73,19 @@ final class LevelScreenViewController: UIViewController {
                 Question(title: "Expert", description: "Speak fluently with advanced vocabulary and coherence")
             ]
         ]
+    }
+    
+    func fetchCourses(){
+        viewModel?.getCourses { result in
+            switch result {
+            case .success(let courses):
+                DispatchQueue.main.async {
+                    print("controller calisti")
+                }
+            case .failure(let error):
+                print("Error: \(error.localizedDescription)")
+            }
+        }
     }
     
     @IBAction func continueButtonTapped(_ sender: Any) {
