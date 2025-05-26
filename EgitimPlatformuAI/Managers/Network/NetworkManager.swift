@@ -174,6 +174,57 @@ class NetworkManager {
 
         }.resume()
     }
+    
+    func submitCourseSelections(request: CourseRegisterRequest, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let endPoint = "Student/AllCourseRegister"
+        
+        guard let url = URL(string: "\(baseUrl)\(endPoint)") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0)))
+            return
+        }
+
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "POST"
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        do {
+            let jsonData = try JSONEncoder().encode(request)
+            urlRequest.httpBody = jsonData
+
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                print("Giden JSON: \(jsonString)")
+            }
+        } catch {
+            completion(.failure(error))
+            return
+        }
+
+        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(NSError(domain: "No response", code: 0)))
+                return
+            }
+
+            guard (200..<300).contains(httpResponse.statusCode) else {
+                if let data = data, let errorMessage = String(data: data, encoding: .utf8) {
+                    let backendError = NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+                    completion(.failure(backendError))
+                } else {
+                    completion(.failure(NSError(domain: "Invalid response", code: httpResponse.statusCode)))
+                }
+                return
+            }
+
+            completion(.success(true))
+        }.resume()
+    }
+
 
 
 

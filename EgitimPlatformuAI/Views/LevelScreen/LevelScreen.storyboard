@@ -84,6 +84,7 @@
                     </view>
                     <connections>
                         <outlet property="continueButton" destination="Mvo-Gr-tAC" id="ybm-k8-0WC"/>
+                        <outlet property="levelQuestionLabel" destination="cq1-A7-DEn" id="8TP-64-u3y"/>
                         <outlet property="tableView" destination="Jao-SJ-5lF" id="bcx-bP-Rjl"/>
                     </connections>
                 </viewController>

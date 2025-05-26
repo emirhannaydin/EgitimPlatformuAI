@@ -9,11 +9,12 @@ import Foundation
 import UIKit
 
 final class LevelScreenViewController: UIViewController {
-    var viewModel: LevelScreenViewModel?
+    var viewModel: LevelScreenViewModel!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var continueButton: UIButton!
     var questionGroups: [[Question]] = []
     var currentIndex = 0
+    @IBOutlet var levelQuestionLabel: UILabel!
     
     
     struct Question {
@@ -89,19 +90,38 @@ final class LevelScreenViewController: UIViewController {
     }
     
     @IBAction func continueButtonTapped(_ sender: Any) {
-        guard tableView.indexPathForSelectedRow != nil else {
+        guard let selectedIndexPath = tableView.indexPathForSelectedRow else {
             showSelectionAlert()
             return
         }
-        
-        if currentIndex < questionGroups.count - 1 {
+        let selectedLevel = selectedIndexPath.row
+        let selectedCourse = viewModel.courses[currentIndex]
+        viewModel.addCourseSelection(courseId: selectedCourse.id, level: selectedLevel)
+
+        if currentIndex < viewModel.courses.count - 1 {
             currentIndex += 1
             tableView.reloadData()
             continueButton.isEnabled = false
         } else {
-            goToNextPage()
+            if let userId = UserDefaults.standard.string(forKey: "userID") {
+                print(userId)
+                viewModel.submitSelections(studentId: userId) { result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success:
+                            print("Başarıyla gönderildi.")
+                            self.goToNextPage()
+                        case .failure(let error):
+                            print("Gönderim hatası: \(error.localizedDescription)")
+                        }
+                    }
+                }
+            } else {
+                print("UserID bulunamadı.")
+            }
         }
     }
+
     
     func goToNextPage() {
         ApplicationCoordinator.getInstance().initTabBar()

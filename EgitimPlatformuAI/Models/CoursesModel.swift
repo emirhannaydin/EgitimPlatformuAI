@@ -20,3 +20,14 @@ struct Course: Codable {
     let updatedDate: String
 }
 
+struct CourseRegisterRequest: Codable {
+    let studentId: String
+    let courseRegisters: [CourseRegister]
+}
+
+struct CourseRegister: Codable {
+    let courseId: String
+    let level: Int
+}
+
+
