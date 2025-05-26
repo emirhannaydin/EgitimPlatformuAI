@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,12 +30,14 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mar-Qn-PCj">
                                 <rect key="frame" x="60" y="0.0" width="228" height="60"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="porcelain"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <color key="backgroundColor" name="charcoal"/>
                     </stackView>
                 </subviews>
+                <color key="backgroundColor" name="charcoal"/>
                 <constraints>
                     <constraint firstItem="l7P-zJ-wVA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="3Tc-6K-HHF"/>
                     <constraint firstAttribute="bottom" secondItem="l7P-zJ-wVA" secondAttribute="bottom" constant="10" id="9gh-Ge-fJD"/>
@@ -50,4 +53,12 @@
             <point key="canvasLocation" x="111.45038167938931" y="32.394366197183103"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="charcoal">
+            <color red="0.17254901960784313" green="0.20000000000000001" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="porcelain">
+            <color red="0.96862745098039216" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

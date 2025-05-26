@@ -44,21 +44,22 @@ class MainLoginScreenViewController: UIViewController {
     }
     
     func login() {
-        guard let email = emailText.text, !email.isEmpty,
-              let password = passwordText.text, !password.isEmpty else {
-            self.showAlert(title: "Error", message: "Email or password is empty.")
-            return
-        }
-        
-        viewModel?.login(email: email, password: password) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success:
-                    ApplicationCoordinator.getInstance().initTabBar()
-                case .failure(let error):
-                    self?.showAlert(title: "Login Error", message: error.localizedDescription)
-                }
-            }
-        }
+//        guard let email = emailText.text, !email.isEmpty,
+//              let password = passwordText.text, !password.isEmpty else {
+//            self.showAlert(title: "Error", message: "Email or password is empty.")
+//            return
+//        }
+//        
+//        viewModel?.login(email: email, password: password) { [weak self] result in
+//            DispatchQueue.main.async {
+//                switch result {
+//                case .success:
+//                    ApplicationCoordinator.getInstance().pushToLevelScreen()
+//                case .failure(let error):
+//                    self?.showAlert(title: "Login Error", message: error.localizedDescription)
+//                }
+//            }
+//        }
+        ApplicationCoordinator.getInstance().pushToLevelScreen()
     }
 }

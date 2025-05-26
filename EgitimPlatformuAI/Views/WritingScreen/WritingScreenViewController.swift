@@ -30,6 +30,7 @@ final class WritingScreenViewController: UIViewController {
         tapGesture.cancelsTouchesInView = false
         view.addGestureRecognizer(tapGesture)
         setNotification()
+        translatedText.delegate = self
     }
     
     private func configureView() {
@@ -40,10 +41,7 @@ final class WritingScreenViewController: UIViewController {
         exampleLabelView.layer.cornerRadius = 8
         translatedLabelView.layer.cornerRadius = 8
         
-        translatedText.layer.borderColor = UIColor.lightGray.cgColor
-        translatedText.layer.borderWidth = 1.0
-        translatedText.layer.cornerRadius = 8.0
-        translatedText.clipsToBounds = true
+        
     }
     
     @objc func backButtonTapped() {
