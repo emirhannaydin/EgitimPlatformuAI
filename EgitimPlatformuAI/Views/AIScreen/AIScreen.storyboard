@@ -3,8 +3,8 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,18 +18,19 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="wwQ-qT-mS4">
                                 <rect key="frame" x="0.0" y="59" width="393" height="704"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="backDarkBlue"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RR2-Ys-Qsg">
                                 <rect key="frame" x="0.0" y="768" width="393" height="50"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Text Here.." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="55C-Ol-jPk">
                                         <rect key="frame" x="5" y="0.0" width="320" height="50"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" name="charcoal"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="9C3-Vx-voO"/>
                                             <constraint firstAttribute="width" constant="320" id="iHA-Cj-FIx"/>
                                         </constraints>
+                                        <color key="textColor" name="porcelain"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -38,6 +39,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="O9g-yh-HQ1"/>
                                         </constraints>
+                                        <color key="tintColor" name="royalBlue"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="paperplane.fill" catalog="system"/>
                                         <connections>
@@ -45,7 +47,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="charcoal"/>
                                 <constraints>
                                     <constraint firstItem="55C-Ol-jPk" firstAttribute="top" secondItem="RR2-Ys-Qsg" secondAttribute="top" id="1OX-Db-Dgz"/>
                                     <constraint firstAttribute="trailing" secondItem="0qF-zB-DN8" secondAttribute="trailing" constant="10" id="AZy-pn-LHz"/>
@@ -57,7 +59,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="backDarkBlue"/>
                         <constraints>
                             <constraint firstItem="wwQ-qT-mS4" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="An2-l8-XVn"/>
                             <constraint firstItem="wwQ-qT-mS4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="B0V-lz-eVF"/>
@@ -82,8 +84,17 @@
     </scenes>
     <resources>
         <image name="paperplane.fill" catalog="system" width="128" height="119"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="backDarkBlue">
+            <color red="0.10588235294117647" green="0.12549019607843137" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="charcoal">
+            <color red="0.17254901960784313" green="0.20000000000000001" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="porcelain">
+            <color red="0.96862745098039216" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="royalBlue">
+            <color red="0.29019607843137257" green="0.3843137254901961" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

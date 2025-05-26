@@ -14,7 +14,7 @@ class AIChatTableViewCell: UITableViewCell {
     private let messageLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.textColor = .white
+        label.textColor = .darkBlue
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -37,7 +37,7 @@ class AIChatTableViewCell: UITableViewCell {
     private let timestampLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 10)
-        label.textColor = .white
+        label.textColor = .darkBlue
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -47,6 +47,7 @@ class AIChatTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.backgroundColor = .backDarkBlue
         selectionStyle = .none
         contentView.addSubview(bubbleView)
         bubbleView.addSubview(messageLabel)
@@ -80,12 +81,13 @@ class AIChatTableViewCell: UITableViewCell {
 
     func configure(with message: MessageChatGPT) {
         if message.role == .user {
-            bubbleView.backgroundColor = .systemBlue
+            bubbleView.backgroundColor = .summer
             messageLabel.textAlignment = .right
+            messageLabel.textColor = .darkBlue
             bubbleTrailingConstraint.isActive = true
             bubbleLeadingConstraint.isActive = false
         } else {
-            bubbleView.backgroundColor = .gray
+            bubbleView.backgroundColor = .porcelain
             messageLabel.textAlignment = .left
             bubbleTrailingConstraint.isActive = false
             bubbleLeadingConstraint.isActive = true

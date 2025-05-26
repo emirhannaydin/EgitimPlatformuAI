@@ -22,7 +22,7 @@ public final class TabBarCoordinator: Coordinator {
     func start() {
         tabBarController.tabBar.tintColor = .summer
         tabBarController.tabBar.unselectedItemTintColor = .white
-        tabBarController.tabBar.backgroundColor = .charcoal
+        tabBarController.tabBar.backgroundColor = .backDarkBlue
 
         let mainCoordinator = MainScreenCoordinator.getInstance()
         let profileCoordinator = ProfileScreenCoordinator.getInstance()

@@ -49,7 +49,7 @@ private extension AIScreenViewController {
         
         textView.layer.cornerRadius = 12
         textView.layer.borderWidth = 1
-        textView.layer.borderColor = UIColor.lightGray.cgColor
+        textView.layer.borderColor = UIColor.backDarkBlue.cgColor
     }
     
     func setupHamburgerMenu() {

@@ -27,7 +27,7 @@ class HamburgerMenuManager: NSObject, UITableViewDataSource, UITableViewDelegate
     private func configureNavigationBarAppearance() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.systemGreen
+        appearance.backgroundColor = UIColor.backDarkBlue
         appearance.titleTextAttributes = [
             .foregroundColor: UIColor.white,
             .font: UIFont.boldSystemFont(ofSize: 20)
@@ -43,7 +43,7 @@ class HamburgerMenuManager: NSObject, UITableViewDataSource, UITableViewDelegate
             target: self,
             action: #selector(toggleSlideMenu)
         )
-        menuButton.tintColor = .black
+        menuButton.tintColor = .summer
         viewController.navigationItem.leftBarButtonItem = menuButton
     }
     
@@ -100,7 +100,7 @@ class HamburgerMenuManager: NSObject, UITableViewDataSource, UITableViewDelegate
     private func createMenuView(in window: UIWindow) -> UIView {
         let menuView = UIView()
         menuView.tag = 999
-        menuView.backgroundColor = .systemBackground
+        menuView.backgroundColor = .darkBlue
         menuView.frame = CGRect(x: -300, y: 0, width: window.frame.width * 2/3, height: window.frame.height)
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         menuView.addGestureRecognizer(panGesture)
@@ -175,14 +175,15 @@ class HamburgerMenuManager: NSObject, UITableViewDataSource, UITableViewDelegate
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(HamburgerTableViewCell.nib(), forCellReuseIdentifier: HamburgerTableViewCell.identifier)
+        tableView.backgroundColor = .darkBlue
         return tableView
     }
     
     private func getImageView() -> UIImageView {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person.circle.fill")
+        imageView.image = UIImage(systemName: "person.circle")
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .label
+        imageView.tintColor = .porcelain
         return imageView
     }
     
@@ -194,25 +195,30 @@ class HamburgerMenuManager: NSObject, UITableViewDataSource, UITableViewDelegate
         let cell = tableView.dequeueReusableCell(withIdentifier: HamburgerTableViewCell.identifier) as! HamburgerTableViewCell
         switch indexPath.row {
         case 0:
+            cell.backgroundColor = .charcoal
             cell.labelText.text = "Login"
             cell.logoImageView.image = UIImage(systemName: "lock")
-            cell.logoImageView.tintColor = .green
+            cell.logoImageView.tintColor = .mintGreen
         case 1:
+            cell.backgroundColor = .charcoal
             cell.labelText.text = "Profile"
             cell.logoImageView.image = UIImage(systemName: "person.circle")
-            cell.logoImageView.tintColor = .blue
+            cell.logoImageView.tintColor = .royalBlue
         case 2:
+            cell.backgroundColor = .charcoal
             cell.labelText.text = "Home"
             cell.logoImageView.image = UIImage(systemName: "house")
-            cell.logoImageView.tintColor = .red
+            cell.logoImageView.tintColor = .softRed
         case 3:
+            cell.backgroundColor = .charcoal
             cell.labelText.text = "AI"
             cell.logoImageView.image = UIImage(systemName: "checkmark.message")
-            cell.logoImageView.tintColor = .yellow
+            cell.logoImageView.tintColor = .summer
         default:
+            cell.backgroundColor = .charcoal
             cell.labelText.text = "--"
             cell.logoImageView.image = UIImage(systemName: "link")
-            cell.logoImageView.tintColor = .darkGray
+            cell.logoImageView.tintColor = .lightGray
         }
         return cell
     }
