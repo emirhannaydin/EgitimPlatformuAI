@@ -12,7 +12,8 @@ class LevelTableViewCell: UITableViewCell {
 
     @IBOutlet var levelLabel: UILabel!
     @IBOutlet var containerView: UIView!
-
+    @IBOutlet var infoLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -22,7 +23,7 @@ class LevelTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         UIView.animate(withDuration: 0.3) {
-            self.containerView.backgroundColor = selected ? UIColor.royalBlue : UIColor.darkBlue
+            self.containerView.backgroundColor = selected ? UIColor.summer : UIColor.silver
         }
     }
 }

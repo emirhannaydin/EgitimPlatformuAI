@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,7 +27,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Jao-SJ-5lF">
-                                <rect key="frame" x="50" y="236" width="293" height="452"/>
+                                <rect key="frame" x="30" y="236" width="333" height="452"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -41,11 +42,23 @@
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mvo-Gr-tAC">
                                 <rect key="frame" x="50" y="718" width="293" height="50"/>
+                                <color key="backgroundColor" name="darkBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ba0-jJ-UJZ"/>
                                 </constraints>
+                                <color key="tintColor" name="darkBlue"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Continue"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Continue">
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                    <color key="baseForegroundColor" name="porcelain"/>
+                                    <color key="baseBackgroundColor" name="darkBlue"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="continueButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="4so-lQ-Jiy"/>
                                 </connections>
@@ -56,12 +69,12 @@
                         <constraints>
                             <constraint firstItem="fbj-Wf-0Yp" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="AfX-Il-MEQ"/>
                             <constraint firstItem="cq1-A7-DEn" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Cxw-qj-jLb"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Jao-SJ-5lF" secondAttribute="trailing" constant="50" id="Pa7-AY-2Fi"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Jao-SJ-5lF" secondAttribute="trailing" constant="30" id="Pa7-AY-2Fi"/>
                             <constraint firstItem="Mvo-Gr-tAC" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="50" id="QSm-GJ-Alm"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Mvo-Gr-tAC" secondAttribute="trailing" constant="50" id="QVo-wX-Onn"/>
                             <constraint firstItem="fbj-Wf-0Yp" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Qzi-Za-Un2"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Mvo-Gr-tAC" secondAttribute="bottom" constant="50" id="TcW-he-Brj"/>
-                            <constraint firstItem="Jao-SJ-5lF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="50" id="Uq9-Oi-ZUu"/>
+                            <constraint firstItem="Jao-SJ-5lF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="Uq9-Oi-ZUu"/>
                             <constraint firstItem="cq1-A7-DEn" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="100" id="WeT-jE-S0l"/>
                             <constraint firstItem="Mvo-Gr-tAC" firstAttribute="top" secondItem="Jao-SJ-5lF" secondAttribute="bottom" constant="30" id="nhe-xc-awN"/>
                             <constraint firstAttribute="bottom" secondItem="fbj-Wf-0Yp" secondAttribute="bottom" id="uQ9-xP-j13"/>
@@ -81,6 +94,12 @@
     </scenes>
     <resources>
         <image name="v960-ning-29" width="5000" height="3333"/>
+        <namedColor name="darkBlue">
+            <color red="0.11764705882352941" green="0.13725490196078433" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="porcelain">
+            <color red="0.96862745098039216" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
