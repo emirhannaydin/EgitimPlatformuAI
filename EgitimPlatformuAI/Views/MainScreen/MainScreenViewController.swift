@@ -18,8 +18,8 @@ final class MainScreenViewController: UIViewController{
     var coursesName: [String] = ["Reading Course", "Listening Course", "Writing Course", "Speaking Course"]
     var lottieAnimations: [String] = ["reading", "listening", "writing", "speaking"]
     var lessonCount: [Int] = [10,20,30,40]
-    var progressCount: [Int] = [3,8,15,20]
-    var cellBackgroundColor: [UIColor] = [.silver, .sapphireBlue, .darkBlue, .mintGreen]
+    var progressCount: [Int] = [0,0,0,0]
+    var cellBackgroundColor: [UIColor] = [.silver, .sapphireBlue, .softRed, .mintGreen]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,8 @@ final class MainScreenViewController: UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         let username = UserDefaults.standard.string(forKey: "username") ?? "Unknown"
-        nameContainerView.configureView(nameText: username.capitalizingFirstLetter(), statusText: "Online", imageName: "person.fill")
+        let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
+        nameContainerView.configureView(nameText: username.capitalizingFirstLetter(), welcomeLabelText: userID, imageName: "person.fill")
 
     }
     override func viewDidDisappear(_ animated: Bool) {
@@ -140,11 +141,10 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
             )
             ApplicationCoordinator.getInstance().handleCourseEntry(.reading, with: viewModel)
         case 1:
-            let level = UserDefaults.standard.string(forKey: "level_listening")
             let viewModel = CourseScreenViewModel(
                 coordinator: coordinator,
                 courseType: .listening,
-                courseLevelName: level ?? "A1"
+                courseLevelName: "A1"
             )
             ApplicationCoordinator.getInstance().handleCourseEntry(.listening, with: viewModel)
         case 2:

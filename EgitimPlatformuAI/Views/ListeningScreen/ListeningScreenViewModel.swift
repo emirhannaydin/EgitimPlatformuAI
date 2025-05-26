@@ -19,6 +19,18 @@ class ListeningScreenViewModel {
         self.coordinator = coordinator
     }
     
+    func startAIListening(text: String){
+        Task{
+            await AIAPIManager.shared.openAISpeak(text: text)
+            AIAPIManager.shared.openAIStartPlayback()
+
+        }
+    }
+    
+    func stopAIListening(){
+        AIAPIManager.shared.openAIStopPlayback()
+    }
+    
     func sendMessage(_ message: String) {
         Task {
             aiAPIManager.isStream = false

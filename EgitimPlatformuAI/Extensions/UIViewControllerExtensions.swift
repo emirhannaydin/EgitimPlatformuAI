@@ -31,6 +31,16 @@ extension UIViewController {
         label.layer.add(animation, forKey: "position")
     }
     
+    func animateViewShake(_ view: UIView) {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.05
+        animation.repeatCount = 3
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: view.center.x - 5, y: view.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: view.center.x + 5, y: view.center.y))
+        view.layer.add(animation, forKey: "position")
+    }
+    
     
     func showLottieLoading(animationName: String = "loading") {
         guard let window = UIApplication.shared.connectedScenes

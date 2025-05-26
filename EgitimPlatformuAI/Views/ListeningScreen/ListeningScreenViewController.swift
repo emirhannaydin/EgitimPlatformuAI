@@ -25,12 +25,10 @@ final class ListeningScreenViewController: UIViewController {
     @IBOutlet var cantHearButton: UIButton!
     @IBOutlet var tapToSoundImageLabel: UILabel!
     @IBOutlet var customContinueView: CustomContinueView!
-    private var tts: TextToSpeech = TextToSpeech()
     private var questions: [ListeningWord] = []
     private var currentIndex = 0
     private var listensLeft = 3
     private var correctText = ""
-    private var levelStats: [String: (correct: Int, total: Int)] = [:]
 
 
     @IBOutlet var questionNumber: UILabel!
@@ -53,9 +51,9 @@ final class ListeningScreenViewController: UIViewController {
         questions = [
             ListeningWord(
                 question: "Which word did you hear?",
-                hearingSound: "Elmaasdsadasdasdasd",
+                hearingSound: "Kitap",
                 options: ["Kalem", "Kitap", "Elma", "Ev"],
-                correctAnswer: "Elma",
+                correctAnswer: "Kitap",
                 level: "A1"
             ),
             ListeningWord(
@@ -173,6 +171,7 @@ final class ListeningScreenViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         self.navigationController?.isNavigationBarHidden = false
+        viewModel.stopAIListening()
     }
     
     deinit {
@@ -184,10 +183,7 @@ final class ListeningScreenViewController: UIViewController {
         tapToSoundImageLabel.isHidden = false
         cantListenLabel.isHidden = true
         guard currentIndex < questions.count else {
-            let level = evaluateUserLevel()
-            UserDefaults.standard.set(level, forKey: "listeningLevel")
-            showAlert(title: "Test Bitti", message: "Tahmini seviyeniz: \(level)")
-            courseType.markUserAsEnrolled()
+            showAlert(title: "Test Bitti", message: "")
             return
         }
 
@@ -252,8 +248,7 @@ final class ListeningScreenViewController: UIViewController {
         if listensLeft > 0 {
             listensLeft -= 1
             listensLeftLabel.text = "Listens Left: \(listensLeft)"
-            tts.speak(text:questions[currentIndex].hearingSound)
-            tts.startSpeaking()
+            viewModel.startAIListening(text:questions[currentIndex].hearingSound)
             lottieView.stop()
             lottieView.play()
         }else{
@@ -277,7 +272,7 @@ final class ListeningScreenViewController: UIViewController {
    
     @IBAction func checkButton(_ sender: Any) {
         self.showLottieLoading()
-        tts.stopSpeaking()
+        viewModel.stopAIListening()
 
         guard let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first,
               let cell = collectionView.cellForItem(at: selectedIndexPath),
@@ -294,16 +289,9 @@ final class ListeningScreenViewController: UIViewController {
         checkButton.isHidden = true
         cantHearButton.isHidden = true
         customContinueView.isHidden = false
-        
-        let level = currentQuestion.level
-        if levelStats[level] == nil {
-            levelStats[level] = (0, 0)
-        }
-        levelStats[level]?.total += 1
 
         if selectedText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() ==
             currentQuestion.correctAnswer.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() {
-            levelStats[level]?.correct += 1
             self.hideLottieLoading()
             cell.contentView.backgroundColor = .systemGreen
             customContinueView.setCorrectAnswer()
@@ -332,25 +320,6 @@ final class ListeningScreenViewController: UIViewController {
             viewModel.sendMessage(aiMessage)
         }
     }
-
-    private func evaluateUserLevel() -> String {
-        let levelOrder = ["C2", "C1", "B2", "B1", "A2", "A1"]
-        let maxAllowedLevel = "B2"
-        
-        // B2’den yüksek seviyeleri dışla
-        let allowedLevels = levelOrder.drop { $0 > maxAllowedLevel }
-
-        for level in allowedLevels {
-            if let stats = levelStats[level], stats.total > 0 {
-                let accuracy = Double(stats.correct) / Double(stats.total)
-                if accuracy >= 0.8 {
-                    return level
-                }
-            }
-        }
-        return "A1"
-    }
-
 
     @IBAction func cantHearButton(_ sender: Any) {
         cantListenLabel.text = "\(questions[currentIndex].hearingSound)"

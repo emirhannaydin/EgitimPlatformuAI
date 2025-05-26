@@ -22,7 +22,7 @@ class MainLoginScreenViewModel {
                 if let tokenData = loginResponse.token.data(using: .utf8) {
                     KeychainHelper.shared.save(tokenData, service: "access-token", account: "user")
                 }
-                
+                UserDefaults.standard.set(loginResponse.user.id, forKey: "userID")
                 UserDefaults.standard.set(loginResponse.user.name, forKey: "username")
                 completion(.success(()))
 

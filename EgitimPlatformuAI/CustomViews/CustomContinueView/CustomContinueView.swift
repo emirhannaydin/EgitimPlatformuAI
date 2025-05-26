@@ -39,17 +39,19 @@ final class CustomContinueView: UIView {
         }, completion: nil)
     }
     
-    func setCorrectAnswer(){
+    func setCorrectAnswer(_ text: String = "Great Job!"){
         
-        self.descLabel.text = "Great Job!"
+        self.descLabel.text = text
         self.descLabel.textColor = .systemGreen
         self.continueButton.backgroundColor = .systemGreen
+        self.continueButton.setTitle("Continue", for: .normal)
     }
     
-    func setWrongAnswer(){
-        self.descLabel.text = "Incorrect"
+    func setWrongAnswer(_ text: String = "Incorrect"){
+        self.descLabel.text = text
         self.descLabel.textColor = .systemRed
         self.continueButton.backgroundColor = .systemRed
+        self.continueButton.setTitle("Continue", for: .normal)
         
     }
 
