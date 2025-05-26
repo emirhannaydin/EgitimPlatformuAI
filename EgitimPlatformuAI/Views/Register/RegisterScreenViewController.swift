@@ -8,7 +8,6 @@
 import UIKit
 class RegisterScreenViewController: UIViewController {
     
-    
 
     @IBOutlet var socialLoginView: SocialLoginView!
     @IBOutlet var backButton: CustomBackButtonView!

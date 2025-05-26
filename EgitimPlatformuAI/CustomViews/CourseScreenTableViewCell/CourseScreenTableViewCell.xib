@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +20,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A1 Listening" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64Q-x2-luQ">
                         <rect key="frame" x="5" y="10" width="111" height="39"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" name="aliceblUE"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="qnR-Qj-nn2">
@@ -40,6 +41,7 @@
                         </constraints>
                     </stackView>
                 </subviews>
+                <color key="backgroundColor" name="charcoal"/>
                 <constraints>
                     <constraint firstItem="64Q-x2-luQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Anc-GX-xN1"/>
                     <constraint firstAttribute="bottom" secondItem="64Q-x2-luQ" secondAttribute="bottom" constant="10" id="dV4-io-XAa"/>
@@ -60,4 +62,12 @@
             <point key="canvasLocation" x="72.51908396946564" y="25.704225352112676"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="aliceblUE">
+            <color red="0.96078431372549022" green="0.97647058823529409" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="charcoal">
+            <color red="0.17254901960784313" green="0.20000000000000001" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
