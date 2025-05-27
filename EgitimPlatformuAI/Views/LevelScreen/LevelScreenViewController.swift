@@ -97,7 +97,7 @@ final class LevelScreenViewController: UIViewController {
         let selectedLevel = selectedIndexPath.row
         let selectedCourse = viewModel.courses[currentIndex]
         viewModel.addCourseSelection(courseId: selectedCourse.id, level: selectedLevel)
-
+        
         if currentIndex < viewModel.courses.count - 1 {
             currentIndex += 1
             tableView.reloadData()
@@ -109,6 +109,7 @@ final class LevelScreenViewController: UIViewController {
                     DispatchQueue.main.async {
                         switch result {
                         case .success:
+                            UserDefaults.standard.set(true, forKey: "hasSubmittedLevels")
                             print("Başarıyla gönderildi.")
                             self.goToNextPage()
                         case .failure(let error):
@@ -121,7 +122,7 @@ final class LevelScreenViewController: UIViewController {
             }
         }
     }
-
+    
     
     func goToNextPage() {
         ApplicationCoordinator.getInstance().initTabBar()

@@ -54,7 +54,14 @@ class MainLoginScreenViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    ApplicationCoordinator.getInstance().pushToLevelScreen()
+                    let hasSubmitted = UserDefaults.standard.bool(forKey: "hasSubmittedLevels")
+                    if hasSubmitted{
+                        ApplicationCoordinator.getInstance().initTabBar()
+                    }else{
+                        ApplicationCoordinator.getInstance().pushToLevelScreen()
+                    }
+                    
+
                 case .failure(let error):
                     self?.showAlert(title: "Login Error", message: error.localizedDescription)
                 }
