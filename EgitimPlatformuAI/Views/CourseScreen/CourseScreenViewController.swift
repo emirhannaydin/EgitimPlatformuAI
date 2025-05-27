@@ -8,13 +8,6 @@
 import Foundation
 import UIKit
 
-struct TestSection {
-    let title: String
-    let tests: [String]
-    var isExpanded: Bool
-
-}
-
 final class CourseScreenViewController: UIViewController{
 
     
@@ -24,18 +17,13 @@ final class CourseScreenViewController: UIViewController{
     @IBOutlet var tableView: UITableView!
     @IBOutlet var courseName: UILabel!
     
-    var sections: [TestSection] = [
-        TestSection(title: "A1", tests: ["Greetings", "Family", "Numbers"], isExpanded: true),
-        TestSection(title: "A2", tests: ["Shopping", "Directions"], isExpanded: false),
-        TestSection(title: "B1", tests: ["Work", "Travel"], isExpanded: false),
-        TestSection(title: "B2", tests: ["Debate", "News"], isExpanded: false),
-        TestSection(title: "C1", tests: ["deneme", "deneme","deneme","deneme","deneme","deneme","deneme","deneme","deneme","deneme","deneme","deneme","deneme","deneme"], isExpanded: false),
-        TestSection(title: "C2", tests: ["Debate", "News"], isExpanded: false)
+    var sections: [TestSection] {
+        return viewModel.sections
+    }
 
-    ]
     override func viewDidLoad() {
         super.viewDidLoad()
-        courseName.text = viewModel.courseClasses[0].name
+        courseName.text = viewModel.courseType.courseName
         courseLevelName.text = viewModel.courseLevelName
         courseName.layer.cornerRadius = 10
         courseName.layer.borderWidth = 1
@@ -54,6 +42,7 @@ final class CourseScreenViewController: UIViewController{
         tapGesture.delegate = self
 
     }
+    
     
     @objc private func handleTableViewTap(_ gesture: UITapGestureRecognizer) {
         let location = gesture.location(in: tableView)
@@ -76,19 +65,29 @@ extension CourseScreenViewController: UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections[section].isExpanded ? sections[section].tests.count : 0
+        return sections[section].tests.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CourseScreenTableViewCell.identifier) as! CourseScreenTableViewCell
-        
-        cell.levelName.text = sections[indexPath.section].tests[indexPath.row]
-        cell.firstStar.image = UIImage(systemName: "star.fill")
-        cell.secondStar.image = UIImage(systemName: "star.fill")
-        cell.thirdStar.image = UIImage(systemName: "star")
+
+        let lesson = sections[indexPath.section].tests[indexPath.row]
+        cell.levelName.text = lesson.content
+
+        let isCompleted = lesson.isCompleted
+
+        if isCompleted {
+            cell.firstStar.image = UIImage(systemName: "star.fill")
+            cell.secondStar.image = UIImage(systemName: "star.fill")
+            cell.thirdStar.image = UIImage(systemName: "star.fill")
+        } else {
+            cell.firstStar.image = UIImage(systemName: "star")
+            cell.secondStar.image = UIImage(systemName: "star")
+            cell.thirdStar.image = UIImage(systemName: "star")
+        }
 
         return cell
     }
+
     
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -98,17 +97,11 @@ extension CourseScreenViewController: UITableViewDataSource, UITableViewDelegate
 
         header.titleLabel.text = sections[section].title
         header.tag = section
-
-        let isExpanded = sections[section].isExpanded
-        header.imageView.image = UIImage(systemName: isExpanded ? "chevron.down" : "chevron.right")
-
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleHeaderTap(_:)))
-        tap.delegate = self
-
-        header.addGestureRecognizer(tap)
+        header.imageView.isHidden = true // açılır kapanır gerek yok artık
 
         return header
     }
+
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         ApplicationCoordinator.getInstance().pushFromTabBarCoordinator(SpeakingScreenCoordinator.self, hidesBottomBar: true)
@@ -118,36 +111,7 @@ extension CourseScreenViewController: UITableViewDataSource, UITableViewDelegate
         return tableView.estimatedSectionHeaderHeight
     }
 
-    @objc private func handleHeaderTap(_ gesture: UITapGestureRecognizer) {
-        guard let tappedSection = gesture.view?.tag else { return }
-
-        let isExpanded = sections[tappedSection].isExpanded
-        tableView.beginUpdates()
-
-        for (i, section) in sections.enumerated() {
-            if section.isExpanded {
-                sections[i].isExpanded = false
-                let indexPathsToDelete = section.tests.indices.map {
-                    IndexPath(row: $0, section: i)
-                }
-                tableView.deleteRows(at: indexPathsToDelete, with: .fade)
-            }
-        }
-
-        if isExpanded {
-            tableView.endUpdates()
-            tableView.reloadSections(IndexSet(integer: tappedSection), with: .none)
-            return
-        }
-
-        sections[tappedSection].isExpanded = true
-        let indexPathsToInsert = sections[tappedSection].tests.indices.map {
-            IndexPath(row: $0, section: tappedSection)
-        }
-        tableView.insertRows(at: indexPathsToInsert, with: .fade)
-        tableView.endUpdates()
-        tableView.reloadSections(IndexSet(integer: tappedSection), with: .none)
-    }
+    
 }
 extension CourseScreenViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
