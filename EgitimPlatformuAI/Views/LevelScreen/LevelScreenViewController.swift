@@ -74,6 +74,9 @@ final class LevelScreenViewController: UIViewController {
                 Question(title: "Expert", description: "Speak fluently with advanced vocabulary and coherence")
             ]
         ]
+        DispatchQueue.main.async {
+            self.levelQuestionLabel.text = (self.viewModel.courses[self.currentIndex].name)
+        }
     }
     
     func fetchCourses(){
@@ -101,6 +104,7 @@ final class LevelScreenViewController: UIViewController {
         if currentIndex < viewModel.courses.count - 1 {
             currentIndex += 1
             tableView.reloadData()
+            levelQuestionLabel.text = (viewModel.courses[currentIndex].name)
             continueButton.isEnabled = false
         } else {
             if let userId = UserDefaults.standard.string(forKey: "userID") {
