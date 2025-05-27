@@ -18,6 +18,7 @@ public final class MainScreenCoordinator: Coordinator {
         return instance!
     }
     var navigationController = UINavigationController()
+    var courseClasses: [CourseClass] = []
 
     func start() {
         let storyboard = UIStoryboard(name: "MainScreen", bundle: nil)
@@ -27,7 +28,7 @@ public final class MainScreenCoordinator: Coordinator {
         }
         
         
-        let viewModel = MainScreenViewModel(coordinator: self)
+        let viewModel = MainScreenViewModel(coordinator: self, courseClasses: courseClasses)
         viewController.viewModel = viewModel
         navigationController.isNavigationBarHidden = false
         navigationController.viewControllers = [viewController]

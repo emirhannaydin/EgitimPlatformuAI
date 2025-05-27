@@ -167,31 +167,31 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
         case 0:
             let viewModel = CourseScreenViewModel(
                 coordinator: coordinator,
-                courseType: .reading,
-                courseLevelName: "A2"
+                courseType: .writing,
+                courseLevelName: "\(level[indexPath.row])", courseClasses: viewModel!.courseClasses
             )
-            ApplicationCoordinator.getInstance().handleCourseEntry(.reading, with: viewModel)
+            ApplicationCoordinator.getInstance().handleCourseEntry(.writing, with: viewModel)
         case 1:
             let viewModel = CourseScreenViewModel(
                 coordinator: coordinator,
-                courseType: .listening,
-                courseLevelName: "A1"
+                courseType: .speaking,
+                courseLevelName: "\(level[indexPath.row])", courseClasses: viewModel!.courseClasses
             )
-            ApplicationCoordinator.getInstance().handleCourseEntry(.listening, with: viewModel)
+            ApplicationCoordinator.getInstance().handleCourseEntry(.speaking, with: viewModel)
         case 2:
             let viewModel = CourseScreenViewModel(
                 coordinator: coordinator,
-                courseType: .writing,
-                courseLevelName: "B2"
+                courseType: .listening,
+                courseLevelName: "\(level[indexPath.row])", courseClasses: viewModel!.courseClasses
             )
-            ApplicationCoordinator.getInstance().handleCourseEntry(.writing, with: viewModel)
+            ApplicationCoordinator.getInstance().handleCourseEntry(.listening, with: viewModel)
         case 3:
             let viewModel = CourseScreenViewModel(
                 coordinator: coordinator,
-                courseType: .speaking,
-                courseLevelName: "C1"
+                courseType: .reading,
+                courseLevelName: "\(level[indexPath.row])", courseClasses: viewModel!.courseClasses
             )
-            ApplicationCoordinator.getInstance().handleCourseEntry(.speaking, with: viewModel)
+            ApplicationCoordinator.getInstance().handleCourseEntry(.reading, with: viewModel)
         default:
             break
         }

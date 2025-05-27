@@ -9,12 +9,13 @@ import Foundation
 class MainScreenViewModel {
 
     var coordinator: MainScreenCoordinator?
+    var courseClasses: [CourseClass] = []
 
-    init(coordinator: MainScreenCoordinator?) {
+    init(coordinator: MainScreenCoordinator?, courseClasses: [CourseClass]) {
         self.coordinator = coordinator
+        self.courseClasses = courseClasses
     }
     
-    var courseClasses: [CourseClass] = []
 
         func loadCourseClasses(studentId: String, completion: @escaping (Result<Void, Error>) -> Void) {
             NetworkManager.shared.fetchCourseClasses(for: studentId) { [weak self] result in

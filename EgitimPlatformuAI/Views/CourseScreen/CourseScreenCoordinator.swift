@@ -18,6 +18,7 @@ final class CourseScreenCoordinator: Coordinator {
     }
 
     var navigationController = UINavigationController()
+    var courseClasses: [CourseClass] = []
 
     func start() {
         let storyboard = UIStoryboard(name: "CourseScreen", bundle: nil)
@@ -28,7 +29,8 @@ final class CourseScreenCoordinator: Coordinator {
         let viewModel = CourseScreenViewModel(
             coordinator: self,
             courseType: .reading,
-            courseLevelName: "A1"
+            courseLevelName: "A1",
+            courseClasses: courseClasses
         )
 
         viewController.viewModel = viewModel
