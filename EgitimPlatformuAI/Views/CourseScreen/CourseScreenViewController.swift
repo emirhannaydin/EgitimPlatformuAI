@@ -40,6 +40,18 @@ final class CourseScreenViewController: UIViewController{
             tapGesture.cancelsTouchesInView = false
             view.addGestureRecognizer(tapGesture)
         tapGesture.delegate = self
+        
+        let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
+            viewModel.loadCourseLessons(studentId: userID) { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success:
+                        self?.tableView.reloadData()
+                    case .failure(let error):
+                        self?.showAlert(title: "Error", message: error.localizedDescription)
+                    }
+                }
+            }
 
     }
     
@@ -73,20 +85,14 @@ extension CourseScreenViewController: UITableViewDataSource, UITableViewDelegate
         let lesson = sections[indexPath.section].tests[indexPath.row]
         cell.levelName.text = lesson.content
 
-        let isCompleted = lesson.isCompleted
-
-        if isCompleted {
-            cell.firstStar.image = UIImage(systemName: "star.fill")
-            cell.secondStar.image = UIImage(systemName: "star.fill")
-            cell.thirdStar.image = UIImage(systemName: "star.fill")
-        } else {
-            cell.firstStar.image = UIImage(systemName: "star")
-            cell.secondStar.image = UIImage(systemName: "star")
-            cell.thirdStar.image = UIImage(systemName: "star")
-        }
+        let starImage = lesson.isCompleted ? "star.fill" : "star"
+        cell.firstStar.image = UIImage(systemName: starImage)
+        cell.secondStar.image = UIImage(systemName: starImage)
+        cell.thirdStar.image = UIImage(systemName: starImage)
 
         return cell
     }
+
 
     
     

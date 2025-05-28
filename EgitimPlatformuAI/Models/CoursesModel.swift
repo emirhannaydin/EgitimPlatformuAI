@@ -41,8 +41,8 @@ struct Lesson: Codable {
 struct CourseClass: Codable {
     let id: String
     let level: Int
-    let courseName: String
-    let courseId: String
+    let courseName: String?
+    let courseId: String?
     let name: String
     let completedLessonCount: Int
     let studentStatus: Int

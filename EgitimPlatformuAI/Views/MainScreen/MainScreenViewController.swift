@@ -52,7 +52,7 @@ final class MainScreenViewController: UIViewController{
                                 self?.lessonCount = coursesClasses.map { $0.lessons.count }
                                 self?.progressCount = coursesClasses.map { $0.completedLessonCount }
                                 self?.level = coursesClasses.map { $0.level }
-                                self?.coursesName = coursesClasses.map { $0.courseName }
+                                self?.coursesName = coursesClasses.map { $0.courseName ?? "asdad" }
                                 self?.collectionView.reloadData()
                                 self?.collectionView2.reloadData()
                             }

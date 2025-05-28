@@ -54,12 +54,23 @@ class MainLoginScreenViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success:
+                    if let currentUserID = UserDefaults.standard.string(forKey: "userID") {
+                        let previousUserID = UserDefaults.standard.string(forKey: "previousUserID")
+
+                        if currentUserID != previousUserID {
+                            UserDefaults.standard.set(false, forKey: "hasSubmittedLevels")
+                        }
+
+                        UserDefaults.standard.set(currentUserID, forKey: "previousUserID")
+                    }
+
                     let hasSubmitted = UserDefaults.standard.bool(forKey: "hasSubmittedLevels")
-                    if hasSubmitted{
+                    if hasSubmitted {
                         ApplicationCoordinator.getInstance().initTabBar()
-                    }else{
+                    } else {
                         ApplicationCoordinator.getInstance().pushToLevelScreen()
                     }
+
                     
 
                 case .failure(let error):
