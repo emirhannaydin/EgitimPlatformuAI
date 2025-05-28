@@ -57,7 +57,7 @@ final class AIAPIManager: NSObject {
         if isStream {
             do {
                 for try await newMessage in try await openAI.createChatCompletionsStream(
-                    model: .gpt3_5(.turbo),
+                    model: .gpt4(.base),
                     messages: messageList,
                     optionalParameters: optionalParameters
                 ) {
