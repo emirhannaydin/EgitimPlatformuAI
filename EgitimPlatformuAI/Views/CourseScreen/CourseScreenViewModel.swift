@@ -71,15 +71,13 @@ class CourseScreenViewModel {
         default: return "Unknown"
         }
     }
-    
+    //burası düzeltilecek
     func levelTextForString(for level: String) -> String {
         switch level {
         case "0": return "A1"
-        case "1": return "A2"
-        case "2": return "B1"
-        case "3": return "B2"
-        case "4": return "C1"
-        case "5": return "C2"
+        case "1": return "B1"
+        case "2": return "B2"
+        case "3": return "C1"
         default: return "Unknown"
         }
     }
