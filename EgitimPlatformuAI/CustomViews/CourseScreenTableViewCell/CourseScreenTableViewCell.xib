@@ -18,46 +18,33 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A1 Listening" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64Q-x2-luQ">
-                        <rect key="frame" x="5" y="10" width="111" height="39"/>
+                        <rect key="frame" x="5" y="10" width="82.666666666666671" height="39"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" name="aliceblUE"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="qnR-Qj-nn2">
-                        <rect key="frame" x="136" y="10" width="200" height="39"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bAr-3B-tp8">
-                                <rect key="frame" x="0.0" y="0.0" width="66" height="39"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lZZ-hz-gSc">
-                                <rect key="frame" x="67" y="0.0" width="66" height="39"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cWt-eb-Dez">
-                                <rect key="frame" x="134" y="0.0" width="66" height="39"/>
-                            </imageView>
-                        </subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l0Q-XD-Z5z">
+                        <rect key="frame" x="292" y="10" width="39" height="39"/>
+                        <color key="tintColor" name="summer"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="200" id="WdV-SF-OoL"/>
+                            <constraint firstAttribute="width" constant="39" id="6yL-TB-vae"/>
                         </constraints>
-                    </stackView>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" name="charcoal"/>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="l0Q-XD-Z5z" secondAttribute="trailing" constant="10" id="4e1-6l-bff"/>
                     <constraint firstItem="64Q-x2-luQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Anc-GX-xN1"/>
                     <constraint firstAttribute="bottom" secondItem="64Q-x2-luQ" secondAttribute="bottom" constant="10" id="dV4-io-XAa"/>
-                    <constraint firstAttribute="trailing" secondItem="qnR-Qj-nn2" secondAttribute="trailing" constant="5" id="ecp-fM-rHp"/>
-                    <constraint firstItem="qnR-Qj-nn2" firstAttribute="leading" secondItem="64Q-x2-luQ" secondAttribute="trailing" constant="20" id="h1L-jf-AB9"/>
-                    <constraint firstItem="qnR-Qj-nn2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="nuq-5K-P2Z"/>
+                    <constraint firstItem="l0Q-XD-Z5z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="hlH-HQ-hK4"/>
                     <constraint firstItem="64Q-x2-luQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="q8g-kP-dft"/>
-                    <constraint firstAttribute="bottom" secondItem="qnR-Qj-nn2" secondAttribute="bottom" constant="10" id="sDD-v8-y0l"/>
+                    <constraint firstAttribute="bottom" secondItem="l0Q-XD-Z5z" secondAttribute="bottom" constant="10" id="uai-Gh-gLZ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="firstStar" destination="bAr-3B-tp8" id="J9Y-gk-qZF"/>
+                <outlet property="checkImage" destination="l0Q-XD-Z5z" id="mCj-9R-vze"/>
                 <outlet property="levelName" destination="64Q-x2-luQ" id="JPD-ne-DOq"/>
-                <outlet property="secondStar" destination="lZZ-hz-gSc" id="vzm-E5-BMG"/>
-                <outlet property="thirdStar" destination="cWt-eb-Dez" id="vfG-if-HTp"/>
             </connections>
             <point key="canvasLocation" x="72.51908396946564" y="25.704225352112676"/>
         </tableViewCell>
@@ -68,6 +55,9 @@
         </namedColor>
         <namedColor name="charcoal">
             <color red="0.17254901960784313" green="0.20000000000000001" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="summer">
+            <color red="0.94117647058823528" green="0.73333333333333328" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -113,7 +113,7 @@ final class LevelScreenViewController: UIViewController {
                     DispatchQueue.main.async {
                         switch result {
                         case .success:
-                            UserDefaults.standard.set(true, forKey: "hasSubmittedLevels")
+                            UserDefaults.standard.set(true, forKey: "hasSubmittedLevels_\(userId)")
                             print("Başarıyla gönderildi.")
                             self.goToNextPage()
                         case .failure(let error):

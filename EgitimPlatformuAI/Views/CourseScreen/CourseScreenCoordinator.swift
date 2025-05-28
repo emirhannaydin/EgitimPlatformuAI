@@ -29,8 +29,8 @@ final class CourseScreenCoordinator: Coordinator {
         let viewModel = CourseScreenViewModel(
             coordinator: self,
             courseType: .reading,
-            courseLevelName: "A1",
-            courseClasses: courseClasses
+            courseLevelName: "none",
+            courseId: ""
         )
 
         viewController.viewModel = viewModel

@@ -10,9 +10,7 @@ import UIKit
 class CourseScreenTableViewCell: UITableViewCell {
 
     @IBOutlet var levelName: UILabel!
-    @IBOutlet var firstStar: UIImageView!
-    @IBOutlet var secondStar: UIImageView!
-    @IBOutlet var thirdStar: UIImageView!
+    @IBOutlet var checkImage: UIImageView!
     static let identifier = "CourseScreenTableViewCell"
     
     static func nib() -> UINib{

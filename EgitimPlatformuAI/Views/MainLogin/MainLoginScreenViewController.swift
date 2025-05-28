@@ -49,29 +49,23 @@ class MainLoginScreenViewController: UIViewController {
             self.showAlert(title: "Error", message: "Email or password is empty.")
             return
         }
-        
+
         viewModel?.login(email: email, password: password) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
                     if let currentUserID = UserDefaults.standard.string(forKey: "userID") {
-                        let previousUserID = UserDefaults.standard.string(forKey: "previousUserID")
-
-                        if currentUserID != previousUserID {
-                            UserDefaults.standard.set(false, forKey: "hasSubmittedLevels")
+                        let hasSubmittedKey = "hasSubmittedLevels_\(currentUserID)"
+                        let hasSubmitted = UserDefaults.standard.bool(forKey: hasSubmittedKey)
+                        
+                        if hasSubmitted {
+                            ApplicationCoordinator.getInstance().initTabBar()
+                        } else {
+                            ApplicationCoordinator.getInstance().pushToLevelScreen()
                         }
-
-                        UserDefaults.standard.set(currentUserID, forKey: "previousUserID")
-                    }
-
-                    let hasSubmitted = UserDefaults.standard.bool(forKey: "hasSubmittedLevels")
-                    if hasSubmitted {
-                        ApplicationCoordinator.getInstance().initTabBar()
                     } else {
-                        ApplicationCoordinator.getInstance().pushToLevelScreen()
+                        self?.showAlert(title: "Error", message: "UserID not found.")
                     }
-
-                    
 
                 case .failure(let error):
                     self?.showAlert(title: "Login Error", message: error.localizedDescription)
@@ -79,5 +73,6 @@ class MainLoginScreenViewController: UIViewController {
             }
         }
     }
+
 
 }

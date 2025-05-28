@@ -21,7 +21,6 @@ final class MainScreenViewController: UIViewController{
     var lessonCount: [Int] = []
     var progressCount: [Int] = []
     var level: [Int] = []
-    var cellBackgroundColor: [UIColor] = [.softRed, .mintGreen, .sapphireBlue, .silver]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,11 +106,11 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
             }
             let formatted = String(format: "%g", cell.progressView.maxValue)
             cell.progressView.unitString = " / \(formatted)"
-            cell.backgroundColor = cellBackgroundColor[indexPath.row]
             if cell.courseName.text == "Reading Class"{
                 cell.progressView.progressColor = .darkBlue
                 cell.progressView.progressStrokeColor = .darkBlue
                 cell.progressView.fontColor = .darkBlue
+                cell.backgroundColor = .silver
                 cell.lessonLabel.textColor = .black
                 cell.levelLabel.textColor = .black
                 cell.courseName.textColor = .black
@@ -120,13 +119,16 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
                 cell.progressView.progressColor = .porcelain
                 cell.progressView.progressStrokeColor = .porcelain
                 cell.progressView.fontColor = .white
+                cell.backgroundColor = .sapphireBlue
             }else if cell.courseName.text == "Writing Class"{
                 cell.courseName.textColor = .winter
+                cell.backgroundColor = .softRed
                 cell.progressView.progressColor = .winter
                 cell.progressView.progressStrokeColor = .winter
                 cell.progressView.fontColor = .white
             }else if cell.courseName.text == "Speaking Class"{
                 cell.courseName.textColor = .coldPurple
+                cell.backgroundColor = .mintGreen
                 cell.progressView.progressColor = .coldPurple
                 cell.progressView.progressStrokeColor = .coldPurple
                 cell.progressView.fontColor = .white
@@ -135,7 +137,6 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeScreenCourseCollectionViewCell.identifier, for: indexPath) as! HomeScreenCourseCollectionViewCell
-            cell.backgroundColor = cellBackgroundColor[indexPath.row]
             cell.courseNameLabel.text = coursesName[indexPath.row]
             
             let animation = LottieAnimation.named(lottieAnimations[indexPath.row])
@@ -147,13 +148,17 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
             if cell.courseNameLabel.text == "Reading"{
                 cell.enrollLabel.textColor = .black
                 cell.courseNameLabel.textColor = .black
+                cell.backgroundColor = .silver
             }else if cell.courseNameLabel.text == "Listening"{
                 cell.courseNameLabel.textColor = .porcelain
+                cell.backgroundColor = .sapphireBlue
             }else if cell.courseNameLabel.text == "Writing"{
                 cell.courseNameLabel.textColor = .winter
+                cell.backgroundColor = .softRed
             }else if cell.courseNameLabel.text == "Speaking"{
                 cell.courseNameLabel.textColor = .coldPurple
                 cell.enrollLabel.textColor = .white
+                cell.backgroundColor = .mintGreen
             }
             
             return cell
@@ -163,38 +168,39 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let coordinator = CourseScreenCoordinator.getInstance()
         
-        switch indexPath.row {
-        case 0:
-            let viewModel = CourseScreenViewModel(
-                coordinator: coordinator,
-                courseType: .writing,
-                courseLevelName: "\(level[indexPath.row])", courseClasses: viewModel!.courseClasses
-            )
-            ApplicationCoordinator.getInstance().handleCourseEntry(.writing, with: viewModel)
-        case 1:
-            let viewModel = CourseScreenViewModel(
-                coordinator: coordinator,
-                courseType: .speaking,
-                courseLevelName: "\(level[indexPath.row])", courseClasses: viewModel!.courseClasses
-            )
-            ApplicationCoordinator.getInstance().handleCourseEntry(.speaking, with: viewModel)
-        case 2:
-            let viewModel = CourseScreenViewModel(
-                coordinator: coordinator,
-                courseType: .listening,
-                courseLevelName: "\(level[indexPath.row])", courseClasses: viewModel!.courseClasses
-            )
-            ApplicationCoordinator.getInstance().handleCourseEntry(.listening, with: viewModel)
-        case 3:
-            let viewModel = CourseScreenViewModel(
-                coordinator: coordinator,
-                courseType: .reading,
-                courseLevelName: "\(level[indexPath.row])", courseClasses: viewModel!.courseClasses
-            )
-            ApplicationCoordinator.getInstance().handleCourseEntry(.reading, with: viewModel)
-        default:
-            break
+        let selectedCourse = viewModel!.courseClasses[indexPath.row]
+
+        guard let rawCourseName = selectedCourse.courseName?.lowercased() else {
+            print("courseName bulunamadı.")
+            return
         }
+        guard let courseId = selectedCourse.courseId else {
+                print("courseId bulunamadı.")
+                return
+            }
+        
+        let courseType: CourseType
+            if rawCourseName.contains("writing") {
+                courseType = .writing
+            } else if rawCourseName.contains("speaking") {
+                courseType = .speaking
+            } else if rawCourseName.contains("listening") {
+                courseType = .listening
+            } else if rawCourseName.contains("reading") {
+                courseType = .reading
+            } else {
+                print("Eşleşen courseType bulunamadı.")
+                return
+            }
+
+        let viewModel = CourseScreenViewModel(
+                coordinator: coordinator,
+                courseType: courseType,
+                courseLevelName: "\(selectedCourse.level)",
+                courseId: courseId
+            )
+
+        ApplicationCoordinator.getInstance().handleCourseEntry(courseType, with: viewModel)
 
         
     }

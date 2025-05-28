@@ -23,9 +23,7 @@ final class CourseScreenViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        courseName.text = viewModel.courseType.courseName
-        courseLevelName.text = viewModel.courseLevelName
-        courseName.layer.cornerRadius = 10
+        self.showLottieLoading()
         courseName.layer.borderWidth = 1
         courseName.layer.borderColor = UIColor.black.cgColor
         courseName.layer.masksToBounds = true
@@ -41,18 +39,30 @@ final class CourseScreenViewController: UIViewController{
             view.addGestureRecognizer(tapGesture)
         tapGesture.delegate = self
         
+
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
             viewModel.loadCourseLessons(studentId: userID) { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success:
+                        self?.hideLottieLoading()
+                        self?.courseName.text = self?.viewModel.courseType.courseName
+                        if let level = self?.viewModel.courseLevelName{
+                            self?.courseLevelName.text = self?.viewModel.levelTextForString(for: level)
+                        }
                         self?.tableView.reloadData()
                     case .failure(let error):
+                        self?.hideLottieLoading()
                         self?.showAlert(title: "Error", message: error.localizedDescription)
                     }
                 }
-            }
-
+        }
+        
+        
     }
     
     
@@ -85,10 +95,8 @@ extension CourseScreenViewController: UITableViewDataSource, UITableViewDelegate
         let lesson = sections[indexPath.section].tests[indexPath.row]
         cell.levelName.text = lesson.content
 
-        let starImage = lesson.isCompleted ? "star.fill" : "star"
-        cell.firstStar.image = UIImage(systemName: starImage)
-        cell.secondStar.image = UIImage(systemName: starImage)
-        cell.thirdStar.image = UIImage(systemName: starImage)
+        let checkImage = lesson.isCompleted ? "checkmark.circle.fill" : "checkmark.circle"
+        cell.checkImage.image = UIImage(systemName: checkImage)
 
         return cell
     }
