@@ -193,10 +193,8 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let coordinator = CourseScreenCoordinator.getInstance()
         let selectedCourse = viewModel!.courseClasses[indexPath.row]
-        guard let rawCourseName = selectedCourse.courseName?.lowercased(), let courseId = selectedCourse.courseId else {
-            print("courseName veya courseId bulunamadı.")
-            return
-        }
+        let rawCourseName = selectedCourse.courseName.lowercased()
+        let courseId = selectedCourse.courseId
 
         let courseType: CourseType
         if rawCourseName.contains("writing") {
