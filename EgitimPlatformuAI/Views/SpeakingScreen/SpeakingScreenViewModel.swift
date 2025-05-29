@@ -9,9 +9,12 @@ import Foundation
 
 class SpeakingScreenViewModel {
     var coordinator: SpeakingScreenCoordinator?
+    var questions: [Lessons] = []
 
-    init(coordinator: SpeakingScreenCoordinator?) {
+    let lessonId: String?
+    init(coordinator: SpeakingScreenCoordinator?, lessonId: String? = nil) {
         self.coordinator = coordinator
+        self.lessonId = lessonId
     }
     
     func startAISpeaking(text: String){
@@ -50,6 +53,22 @@ class SpeakingScreenViewModel {
             } else {
                 completion("❌ Transkripsiyon başarısız", 0)
             }
+        }
+    }
+    
+    func loadLessonData(lessonId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        NetworkManager.shared.fetchLessonsData(for: lessonId ) { [weak self]
+            result in
+            switch result {
+            case .success(let lessons):
+                self?.questions = lessons
+                completion(.success(()))
+                
+            case .failure(let error):
+            print("Error: \(error)")
+            completion(.failure(error))
+            }
+            
         }
     }
 

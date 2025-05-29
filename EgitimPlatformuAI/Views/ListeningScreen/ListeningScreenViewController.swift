@@ -25,7 +25,6 @@ final class ListeningScreenViewController: UIViewController {
     @IBOutlet var cantHearButton: UIButton!
     @IBOutlet var tapToSoundImageLabel: UILabel!
     @IBOutlet var customContinueView: CustomContinueView!
-    private var questions: [ListeningWord] = []
     private var currentIndex = 0
     private var listensLeft = 3
     private var correctText = ""
@@ -35,130 +34,14 @@ final class ListeningScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
+        self.showLottieLoading()
         backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         listensLeftLabel.text = "Listens Left: \(listensLeft)"
-        questionNumber.text = "\(currentIndex + 1)/\(questions.count)"
-        setupQuestions()
-        loadCurrentQuestion()
-        setCollectionView()
         setTapGesture()
         setLottie()
         setNotification()
 
     }
-    
-    private func setupQuestions() {
-        questions = [
-            ListeningWord(
-                question: "Which word did you hear?",
-                hearingSound: "Kitap",
-                options: ["Kalem", "Kitap", "Elma", "Ev"],
-                correctAnswer: "Kitap",
-                level: "A1"
-            ),
-            ListeningWord(
-                question: "Which word matches the sound?",
-                hearingSound: "Kapı",
-                options: ["Kapı", "Masa", "Çanta", "Pencere"],
-                correctAnswer: "Kapı",
-                level: "A1"
-            ),
-
-            ListeningWord(
-                question: "Who is being described?",
-                hearingSound: "O bir öğretmen",
-                options: ["Ben bir doktorum", "O bir öğretmen", "Sen öğrencisin", "Biz evdeyiz"],
-                correctAnswer: "O bir öğretmen",
-                level: "A2"
-            ),
-            ListeningWord(
-                question: "What is the person doing?",
-                hearingSound: "Kitap okuyorum",
-                options: ["Oyun oynuyorum", "Kitap okuyorum", "Ders çalışıyorum", "Uyuyorum"],
-                correctAnswer: "Kitap okuyorum",
-                level: "A2"
-            ),
-
-            ListeningWord(
-                question: "What happened before going to the cinema?",
-                hearingSound: "Yemekten sonra sinemaya gittik",
-                options: [
-                    "Sinema iptal oldu",
-                    "Önce ders çalıştık",
-                    "Yemekten sonra sinemaya gittik",
-                    "Sinema çok uzaktaydı"
-                ],
-                correctAnswer: "Yemekten sonra sinemaya gittik",
-                level: "B1"
-            ),
-            ListeningWord(
-                question: "Why was the person late?",
-                hearingSound: "Trafik yüzünden geç kaldım",
-                options: [
-                    "Otobüs erken geldi",
-                    "Erken uyandım",
-                    "Trafik yüzünden geç kaldım",
-                    "Yürüyerek geldim"
-                ],
-                correctAnswer: "Trafik yüzünden geç kaldım",
-                level: "B1"
-            ),
-
-            ListeningWord(
-                question: "What is important for health?",
-                hearingSound: "Egzersiz yapmak sağlığımız için önemlidir",
-                options: [
-                    "Film izlemek faydalıdır",
-                    "Egzersiz yapmak sağlığımız için önemlidir",
-                    "Tatlı yemek iyi gelir",
-                    "Yalnız kalmak sağlıklıdır"
-                ],
-                correctAnswer: "Egzersiz yapmak sağlığımız için önemlidir",
-                level: "B2"
-            ),
-            ListeningWord(
-                question: "What is useful for a career?",
-                hearingSound: "Yabancı dil öğrenmek kariyer için avantajlıdır",
-                options: [
-                    "Tatilde dinlenmek önemlidir",
-                    "Yabancı dil öğrenmek kariyer için avantajlıdır",
-                    "Alışveriş yapmak güzeldir",
-                    "Kitap okumak hobi olabilir"
-                ],
-                correctAnswer: "Yabancı dil öğrenmek kariyer için avantajlıdır",
-                level: "B2"
-            ),
-
-            ListeningWord(
-                question: "What does critical thinking involve?",
-                hearingSound: "Eleştirel düşünme, problemi farklı açılardan değerlendirmeyi gerektirir",
-                options: [
-                    "Ezberlemek",
-                    "Tek yönden bakmak",
-                    "Eleştirel düşünmek",
-                    "Yüzeysel düşünmek"
-                ],
-                correctAnswer: "Eleştirel düşünmek",
-                level: "C1"
-            ),
-
-            ListeningWord(
-                question: "What is essential in a globalized world?",
-                hearingSound: "Globalleşme çağında, bireylerin kültürel zekâ geliştirmesi kaçınılmaz bir gereklilik haline gelmiştir",
-                options: [
-                    "Farklı dilleri bilmek",
-                    "Kültürel zekâ geliştirmek",
-                    "Evde çalışmak",
-                    "Tatilde kitap okumak"
-                ],
-                correctAnswer: "Kültürel zekâ geliştirmek",
-                level: "C2"
-            ),
-            
-        ]
-
-    }
-
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -166,6 +49,11 @@ final class ListeningScreenViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
 
         }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setLessonData()
+    }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -178,19 +66,39 @@ final class ListeningScreenViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: .aiMessageUpdated, object: nil)
     }
     
+    private func setLessonData(){
+        if let lessonId = viewModel.lessonId{
+            viewModel.loadLessonData(lessonId: lessonId) { [weak self] result in
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    switch result{
+                        case(.success(_)):
+                        self.questionNumber.text = "\(self.currentIndex + 1)/\(self.viewModel.questions.count)"
+                        self.loadCurrentQuestion()
+                        self.setCollectionView()
+                        self.collectionView.reloadData()
+                        self.hideLottieLoading()
+                        case ( .failure(let error)):
+                        print(error)
+                        
+                    }
+                }
+            
+            }
+        }
+    }
+    
     private func loadCurrentQuestion() {
         lottieView.isHidden = false
         tapToSoundImageLabel.isHidden = false
         cantListenLabel.isHidden = true
-        guard currentIndex < questions.count else {
-            showAlert(title: "Test Bitti", message: "")
+        guard currentIndex < viewModel.questions.count else {
+            showAlert(title: "Test Done", message: "")
             return
         }
-
-        
-        let currentQuestion = questions[currentIndex]
-        questionNumber.text = "\(currentIndex + 1)/\(questions.count)"
-        questionLabel.text = currentQuestion.question
+        let currentQuestion = viewModel.questions[currentIndex]
+        questionNumber.text = "\(currentIndex + 1)/\(viewModel.questions.count)"
+        questionLabel.text = currentQuestion.questionString
         listensLeft = 3
         listensLeftLabel.text = "Listens Left: \(listensLeft)"
         listensLeftLabel.textColor = .lightGray
@@ -214,7 +122,6 @@ final class ListeningScreenViewController: UIViewController {
 
         DispatchQueue.main.async {
             self.hideLottieLoading()
-
             let popup = AIRobotPopupViewController(message: message)
             self.present(popup, animated: true)
             self.customContinueView.animateIn()
@@ -248,7 +155,9 @@ final class ListeningScreenViewController: UIViewController {
         if listensLeft > 0 {
             listensLeft -= 1
             listensLeftLabel.text = "Listens Left: \(listensLeft)"
-            viewModel.startAIListening(text:questions[currentIndex].hearingSound)
+            if let listeningText = viewModel.questions[currentIndex].listeningSentence{
+                viewModel.startAIListening(text: listeningText)
+            }
             lottieView.stop()
             lottieView.play()
         }else{
@@ -284,30 +193,28 @@ final class ListeningScreenViewController: UIViewController {
             return
         }
 
-        let currentQuestion = questions[currentIndex]
+        let currentQuestion = viewModel.questions[currentIndex]
         collectionView.allowsSelection = false
         checkButton.isHidden = true
         cantHearButton.isHidden = true
         customContinueView.isHidden = false
 
-        if selectedText.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() ==
-            currentQuestion.correctAnswer.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() {
+        if selectedText.cleanedForComparison() == currentQuestion.correctAnswer?.cleanedForComparison() {
             self.hideLottieLoading()
             cell.contentView.backgroundColor = .systemGreen
             customContinueView.setCorrectAnswer()
-
             customContinueView.animateIn()
             customContinueView.continueButton.addTarget(self, action: #selector(nextQuestion), for: .touchUpInside)
-
-        } else {
+        }
+ else {
             cell.contentView.backgroundColor = .systemRed
             customContinueView.setWrongAnswer()
 
             let aiMessage = """
             You are evaluating a listening comprehension question.
 
-            Sound played to the user: "\(currentQuestion.hearingSound)"
-            Question asked: "\(currentQuestion.question)"
+            Sound played to the user: "\(currentQuestion.listeningSentence)"
+            Question asked: "\(currentQuestion.questionString)"
             Answer options: \(currentQuestion.options)
             User's selected answer: "\(selectedText)"
             Correct answer: "\(currentQuestion.correctAnswer)"
@@ -322,7 +229,9 @@ final class ListeningScreenViewController: UIViewController {
     }
 
     @IBAction func cantHearButton(_ sender: Any) {
-        cantListenLabel.text = "\(questions[currentIndex].hearingSound)"
+        if let listeningText = viewModel.questions[currentIndex].listeningSentence{
+            cantListenLabel.text = "\(listeningText)"
+        }
         lottieView.isHidden = true
         tapToSoundImageLabel.isHidden = true
         cantListenLabel.isHidden = false
@@ -343,7 +252,7 @@ final class ListeningScreenViewController: UIViewController {
 
 extension ListeningScreenViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return questions[currentIndex].options.count
+        return viewModel.questions[currentIndex].options.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -352,7 +261,7 @@ extension ListeningScreenViewController: UICollectionViewDelegate, UICollectionV
         cell.contentView.subviews.forEach { $0.removeFromSuperview() }
 
         let label = UILabel()
-        label.text = questions[currentIndex].options[indexPath.item]
+        label.text = viewModel.questions[currentIndex].options[indexPath.item]
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .white
         label.numberOfLines = 0
@@ -404,7 +313,7 @@ extension ListeningScreenViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let optionText = questions[currentIndex].options[indexPath.item]
+        let optionText = "asd"
         let maxWidth = collectionView.bounds.width - 32
 
         let font = UIFont.systemFont(ofSize: 16)

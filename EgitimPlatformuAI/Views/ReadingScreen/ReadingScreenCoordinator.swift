@@ -28,4 +28,19 @@ public final class ReadingScreenCoordinator: Coordinator {
             navigationController.pushViewController(viewController, animated: true)
         }
     }
+    
+    func start(with viewModel: ReadingScreenViewModel) {
+        let storyboard = UIStoryboard(name: "ReadingScreen", bundle: nil)
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "ReadingScreen") as? ReadingScreenViewController else {
+            fatalError("Failed to instantiate ReadingScreenViewController")
+        }
+
+        viewController.viewModel = viewModel
+
+        if navigationController.viewControllers.isEmpty {
+            navigationController.viewControllers = [viewController]
+        }
+    }
+    
+    
 }

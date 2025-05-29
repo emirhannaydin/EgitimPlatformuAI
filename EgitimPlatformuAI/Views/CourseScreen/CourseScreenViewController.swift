@@ -65,7 +65,9 @@ private extension CourseScreenViewController {
                 self?.hideLottieLoading()
                 switch result {
                 case .success:
-                    self?.courseName.text = self?.viewModel.courseType.courseName
+                    if let courseName = self?.viewModel.courseClasses[0].courseName {
+                        self?.courseName.text = "\(courseName) Class"
+                    }
                     if let level = self?.viewModel.courseLevelName {
                         self?.courseLevelName.text = self?.viewModel.levelTextForString(for: level)
                     }
@@ -109,7 +111,32 @@ extension CourseScreenViewController: UITableViewDataSource, UITableViewDelegate
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        ApplicationCoordinator.getInstance().pushFromTabBarCoordinator(SpeakingScreenCoordinator.self, hidesBottomBar: true)
+        let lessonId = sections[indexPath.section].tests[indexPath.row].id
+        print(lessonId)
+        switch self.viewModel.courseClasses[0].courseName {
+        case "Writing":
+            let coordinator = WritingScreenCoordinator.getInstance()
+            let viewModel = WritingScreenViewModel(coordinator: coordinator, lessonId: lessonId)
+            coordinator.start(with: viewModel)
+            ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+        case "Listening":
+            let coordinator = ListeningScreenCoordinator.getInstance()
+            let viewModel = ListeningScreenViewModel(coordinator: coordinator, lessonId: lessonId)
+            coordinator.start(with: viewModel)
+            ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+        case "Reading":
+            let coordinator = ReadingScreenCoordinator.getInstance()
+            let viewModel = ReadingScreenViewModel(coordinator: coordinator, lessonId: lessonId)
+            coordinator.start(with: viewModel)
+            ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+        case "Speaking":
+            let coordinator = SpeakingScreenCoordinator.getInstance()
+            let viewModel = SpeakingScreenViewModel(coordinator: coordinator, lessonId: lessonId)
+            coordinator.start(with: viewModel)
+            ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+        default:
+                break
+        }
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

@@ -35,4 +35,17 @@ public final class ListeningScreenCoordinator: Coordinator {
             navigationController.pushViewController(viewController, animated: true)
         }
     }
+    
+    func start(with viewModel: ListeningScreenViewModel) {
+        let storyboard = UIStoryboard(name: "ListeningScreen", bundle: nil)
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "ListeningScreen") as? ListeningScreenViewController else {
+            fatalError("Failed to instantiate ListeningScreenViewController")
+        }
+
+        viewController.viewModel = viewModel
+
+        if navigationController.viewControllers.isEmpty {
+            navigationController.viewControllers = [viewController]
+        }
+    }
 }

@@ -8,8 +8,10 @@ class ReadingScreenViewModel {
         aiAPIManager.messages
     }
 
-    init(coordinator: ReadingScreenCoordinator?) {
+    let lessonId: String?
+    init(coordinator: ReadingScreenCoordinator?, lessonId: String? = nil) {
         self.coordinator = coordinator
+        self.lessonId = lessonId
     }
 
     func sendMessage(_ message: String) {

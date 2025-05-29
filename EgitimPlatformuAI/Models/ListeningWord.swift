@@ -12,3 +12,4 @@ struct ListeningWord: Decodable {
     let correctAnswer: String
     let level: String
 }
+

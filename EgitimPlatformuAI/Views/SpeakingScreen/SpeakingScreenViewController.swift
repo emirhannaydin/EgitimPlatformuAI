@@ -29,7 +29,6 @@ final class SpeakingScreenViewController: UIViewController {
     @IBOutlet var listeningButton: UIButton!
     
     var viewModel: SpeakingScreenViewModel!
-    private var questions: [Speaking] = []
     private var isMicButtonClicked = false
     private var isListeningsButtonClicked = false
     private var speaksLeftCount: Int = 3
@@ -38,15 +37,18 @@ final class SpeakingScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.showLottieLoading()
         setupUI()
         setupNotifications()
-        loadQuestions()
-        loadCurrentQuestion()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         viewModel.stopAISpeaking()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setLessonData()
     }
     
     private func setupUI() {
@@ -64,27 +66,35 @@ final class SpeakingScreenViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(onSpeechReady), name: .aiSpeechDidStart, object: nil)
     }
     
-    private func loadQuestions() {
-        questions = [
-            Speaking(question: "Please speak the text below", speakingLabel: "Saat 7’de uyanırım. Kahvaltı yaparım, sonra okula giderim. Okuldan sonra ödevimi yapar ve televizyon izlerim.", level: "A1"),
-            Speaking(question: "Please speak the text below", speakingLabel: "Kitap okumaktan, müzik dinlemekten ve ailemle arkadaşlarımla vakit geçirmekten hoşlanırım.", level: "A2"),
-            Speaking(question: "Please speak the text below", speakingLabel: "En sevdiğim tatil Yılbaşı Gecesi. Genellikle aileyle bir araya geliriz, birlikte akşam yemeği yeriz ve gece yarısı havai fişek izleriz.", level: "A2"),
-            Speaking(question: "Please speak the text below", speakingLabel: "En unutulmaz deneyimlerimden biri ortaokulda bir bilim yarışmasını kazanmaktı. Bu bana özgüven verdi ve daha çok çalışmamı sağladı.", level: "B1"),
-            Speaking(question: "Please speak the text below", speakingLabel: "Sosyal medya insanların bağlantıda kalmasına ve fikirlerini paylaşmasına yardımcı olur. Ancak dikkat dağınıklığına ve yüz yüze iletişimin azalmasına da yol açabilir.", level: "B1"),
-            Speaking(question: "Please speak the text below", speakingLabel: "Teknoloji öğrenmeyi destekleyebilirken, öğretmenlerin öğrencileri yönlendirme ve motive etme konusunda çok önemli bir rolü olduğunu düşünüyorum; makineler bunu tamamen yerine getiremez.", level: "B2"),
-            Speaking(question: "Please speak the text below", speakingLabel: "Vejetaryen olmak karbon salımını azaltabilir, ancak herkes bu yaşam tarzını benimseyemez ya da istemeyebilir. Dengeli ve uygulanabilir çözümler bulmak önemlidir.", level: "B2")
-        ]
+    private func setLessonData(){
+        if let lessonId = viewModel.lessonId{
+            viewModel.loadLessonData(lessonId: lessonId) { [weak self] result in
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    switch result{
+                        
+                    case(.success(_)):
+                        self.loadCurrentQuestion()
+                        self.hideLottieLoading()
+
+                    case ( .failure(let error)):
+                        print(error)
+                    }
+                }
+            
+            }
+        }
     }
     
     private func loadCurrentQuestion() {
-        guard currentIndex < questions.count else {
+        guard currentIndex < viewModel.questions.count else {
             showAlert(title: "Test Bitti", message: "")
             return
         }
-        let current = questions[currentIndex]
-        questionCount.text = "\(currentIndex + 1)/\(questions.count)"
-        questionLabel.text = current.question
-        speakingLabel.text = current.speakingLabel
+        let current = viewModel.questions[currentIndex]
+        questionCount.text = "\(currentIndex + 1)/\(viewModel.questions.count)"
+        questionLabel.text = "Please speak the text below"
+        speakingLabel.text = current.questionString
     }
     
     @objc private func onSpeechEnd() {
@@ -130,7 +140,7 @@ final class SpeakingScreenViewController: UIViewController {
             speaksLeftLabel.text = "Speaks Left:\(speaksLeftCount)"
             configureLottie(named: "speakingScreen", play: true)
             
-            viewModel.expectedText = questions[currentIndex].speakingLabel
+            viewModel.expectedText = viewModel.questions[currentIndex].questionString
             viewModel.startRecording()
             successRateLabel.text = "Evaluating your speech..."
         } else {
@@ -193,7 +203,7 @@ final class SpeakingScreenViewController: UIViewController {
             listeningButton.setImage(UIImage(systemName: "speaker.fill"), for: .normal)
             listeningActivityIndicator.startAnimating()
             listeningActivityIndicator.alpha = 1
-            viewModel.startAISpeaking(text: questions[currentIndex].speakingLabel)
+            viewModel.startAISpeaking(text: viewModel.questions[currentIndex].questionString)
         } else {
             setListeningButton()
             listeningActivityIndicator.stopAnimating()

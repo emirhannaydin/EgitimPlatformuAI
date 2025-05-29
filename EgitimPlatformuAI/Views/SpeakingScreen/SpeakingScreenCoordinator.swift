@@ -35,4 +35,17 @@ public final class SpeakingScreenCoordinator: Coordinator {
             navigationController.pushViewController(viewController, animated: true)
         }
     }
+    
+    func start(with viewModel: SpeakingScreenViewModel) {
+        let storyboard = UIStoryboard(name: "SpeakingScreen", bundle: nil)
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "SpeakingScreen") as? SpeakingScreenViewController else {
+            fatalError("Failed to instantiate SpeakingScreenViewController")
+        }
+
+        viewController.viewModel = viewModel
+
+        if navigationController.viewControllers.isEmpty {
+            navigationController.viewControllers = [viewController]
+        }
+    }
 }

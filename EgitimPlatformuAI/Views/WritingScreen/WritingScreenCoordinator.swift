@@ -35,4 +35,17 @@ public final class WritingScreenCoordinator: Coordinator {
             navigationController.pushViewController(viewController, animated: true)
         }
     }
+    
+    func start(with viewModel: WritingScreenViewModel) {
+        let storyboard = UIStoryboard(name: "WritingScreen", bundle: nil)
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "WritingScreen") as? WritingScreenViewController else {
+            fatalError("Failed to instantiate WritingScreenViewController")
+        }
+
+        viewController.viewModel = viewModel
+
+        if navigationController.viewControllers.isEmpty {
+            navigationController.viewControllers = [viewController]
+        }
+    }
 }

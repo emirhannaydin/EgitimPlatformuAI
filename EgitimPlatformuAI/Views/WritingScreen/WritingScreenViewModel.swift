@@ -16,8 +16,10 @@ class WritingScreenViewModel {
         aiAPIManager.messages
     }
 
-    init(coordinator: WritingScreenCoordinator?) {
+    let lessonId: String?
+    init(coordinator: WritingScreenCoordinator?, lessonId: String? = nil) {
         self.coordinator = coordinator
+        self.lessonId = lessonId
     }
 
     func sendMessage(_ message: String) {

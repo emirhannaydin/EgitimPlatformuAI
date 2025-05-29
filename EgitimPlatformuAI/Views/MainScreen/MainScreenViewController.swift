@@ -216,7 +216,7 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
             courseLevelName: "\(selectedCourse.level)",
             courseId: courseId
         )
-
+        
         ApplicationCoordinator.getInstance().handleCourseEntry(courseType, with: viewModel)
     }
 }
