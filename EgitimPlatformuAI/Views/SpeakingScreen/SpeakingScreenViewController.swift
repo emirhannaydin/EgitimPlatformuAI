@@ -172,9 +172,12 @@ final class SpeakingScreenViewController: UIViewController {
                 self?.hideLottieLoading()
                 let score = Int(similarity * 100)
                 self?.successRateLabel.text = "🎯 Score: %\(score)"
-                if score > 50 {
+                if score > 75 {
                     self?.customContinueView.setCorrectAnswer("Great Speech!")
-                } else {
+                } else if score >= 50 && score <= 75 {
+                    self?.customContinueView.setMedLevelAnswer()
+                }
+                else {
                     self?.customContinueView.setWrongAnswer("Wrong Speech")
                 }
                 self?.customContinueView.animateIn()

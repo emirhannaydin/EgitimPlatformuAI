@@ -27,7 +27,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speaks Left: 3" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eau-Lw-H7y">
-                                <rect key="frame" x="242.66666666666663" y="69" width="130.33333333333337" height="30"/>
+                                <rect key="frame" x="201.66666666666663" y="69" width="171.33333333333337" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="c8e-7S-WRh"/>
                                 </constraints>
@@ -35,8 +35,8 @@
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Soru sayısı" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfe-bZ-qgb">
-                                <rect key="frame" x="155.66666666666666" y="69" width="82" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfe-bZ-qgb">
+                                <rect key="frame" x="196.66666666666666" y="69" width="0.0" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Jac-8J-PhP"/>
                                 </constraints>
@@ -44,21 +44,21 @@
                                 <color key="textColor" name="summer"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speak label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJx-bL-i8B">
-                                <rect key="frame" x="20" y="119.00000000000001" width="353" height="21.666666666666671"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yJx-bL-i8B">
+                                <rect key="frame" x="20" y="119" width="353" height="0.0"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
                                 <color key="textColor" name="porcelain"/>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="WOc-OU-C94">
-                                <rect key="frame" x="20" y="184.66666666666663" width="353" height="250"/>
+                                <rect key="frame" x="20" y="163" width="353" height="250"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CIm-LX-fm5">
-                                        <rect key="frame" x="0.0" y="0.0" width="353" height="52.666666666666664"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="0.0"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="denemedenemedenemedenemedenemedenemedenemedenemedenemedenemedenemedenemedenemedeneme" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPC-vW-0y8">
-                                                <rect key="frame" x="0.0" y="0.0" width="353" height="52.666666666666664"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPC-vW-0y8">
+                                                <rect key="frame" x="0.0" y="0.0" width="353" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                 <color key="textColor" name="porcelain"/>
                                                 <nil key="highlightedColor"/>
@@ -111,21 +111,21 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7yS-AH-6ea" userLabel="DividerView">
-                                <rect key="frame" x="20" y="436.66666666666669" width="353" height="2"/>
+                                <rect key="frame" x="20" y="415" width="353" height="2"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="fED-sg-MZ3"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Slj-O7-oA9" userLabel="DividerView">
-                                <rect key="frame" x="20" y="180.66666666666666" width="353" height="2"/>
+                                <rect key="frame" x="20" y="159" width="353" height="2"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="dRx-k3-qAr"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WVQ-Qr-Wbg">
-                                <rect key="frame" x="20" y="484.66666666666674" width="353" height="177"/>
+                                <rect key="frame" x="20" y="463" width="353" height="177"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dPk-Wi-Liy">
                                         <rect key="frame" x="0.0" y="0.0" width="353" height="150"/>
@@ -150,7 +150,7 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to speaking " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t6K-a0-ftx">
-                                        <rect key="frame" x="0.0" y="154.99999999999994" width="353" height="17"/>
+                                        <rect key="frame" x="0.0" y="155" width="353" height="17"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="14"/>
                                         <color key="textColor" name="mintGreen"/>
                                         <nil key="highlightedColor"/>
@@ -173,7 +173,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYL-30-Gij">
-                                <rect key="frame" x="20" y="681.66666666666663" width="353" height="50"/>
+                                <rect key="frame" x="20" y="660" width="353" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="xdU-n1-xhO"/>
                                 </constraints>
@@ -182,7 +182,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bbw-QU-aE9">
-                                <rect key="frame" x="20" y="145.66666666666666" width="40" height="30"/>
+                                <rect key="frame" x="20" y="124" width="40" height="30"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G4u-N4-ksQ">
                                         <rect key="frame" x="0.0" y="8" width="17.666666666666668" height="14"/>

@@ -54,6 +54,13 @@ final class CustomContinueView: UIView {
         self.continueButton.setTitle("Continue", for: .normal)
         
     }
+    
+    func setMedLevelAnswer(_ text: String = "Almost There!"){
+        self.descLabel.text = text
+        self.descLabel.textColor = .summer
+        self.continueButton.backgroundColor = .summer
+        self.continueButton.setTitle("Continue", for: .normal)
+    }
 
     
 }
