@@ -22,8 +22,6 @@ class HomeScreenCollectionViewCell: UICollectionViewCell {
     }
     override func awakeFromNib() {
         super.awakeFromNib()
-        progressView.value = 20
-        progressView.maxValue = 100
         let formatted = String(format: "%g", progressView.maxValue)
         progressView.unitString = " / \(formatted)"
     }

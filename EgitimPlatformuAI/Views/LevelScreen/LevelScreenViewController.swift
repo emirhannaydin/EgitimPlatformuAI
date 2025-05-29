@@ -50,32 +50,41 @@ final class LevelScreenViewController: UIViewController {
     func setupData() {
         questionGroups = [
             [ // Reading
-                Question(title: "Beginner", description: "Read short texts"),
-                Question(title: "Intermediate", description: "Read emails and letters"),
-                Question(title: "Advanced", description: "Read articles and reports"),
-                Question(title: "Expert", description: "Read academic texts")
+                Question(title: "A1 - Beginner", description: "Read short texts"),
+                Question(title: "A2 - Elementary", description: "Read emails and letters"),
+                Question(title: "B1 - Intermediate", description: "Read articles and reports"),
+                Question(title: "B2 - Upper-Intermediate", description: "Read complex passages"),
+                Question(title: "C1 - Advanced", description: "Read academic and professional texts"),
+                Question(title: "C2 - Proficient", description: "Understand nuanced literary or academic materials")
             ],
             [ // Listening
-                Question(title: "Beginner", description: "Understand simple phrases"),
-                Question(title: "Intermediate", description: "Follow basic conversations"),
-                Question(title: "Advanced", description: "Understand native speed speech"),
-                Question(title: "Expert", description: "Comprehend complex audio")
+                Question(title: "A1 - Beginner", description: "Understand simple phrases"),
+                Question(title: "A2 - Elementary", description: "Understand short, clear speech"),
+                Question(title: "B1 - Intermediate", description: "Follow conversations on familiar topics"),
+                Question(title: "B2 - Upper-Intermediate", description: "Understand native-speed discussions"),
+                Question(title: "C1 - Advanced", description: "Follow lectures and detailed speech"),
+                Question(title: "C2 - Proficient", description: "Comprehend complex or idiomatic audio")
             ],
-            [
-                Question(title: "Beginner", description: "Write simple sentences about familiar topics"),
-                Question(title: "Intermediate", description: "Compose short paragraphs with correct structure"),
-                Question(title: "Advanced", description: "Develop essays with arguments and proper grammar"),
-                Question(title: "Expert", description: "Produce professional-level writing with clarity and style")
+            [ // Writing
+                Question(title: "A1 - Beginner", description: "Write simple sentences"),
+                Question(title: "A2 - Elementary", description: "Write short personal messages"),
+                Question(title: "B1 - Intermediate", description: "Compose structured paragraphs"),
+                Question(title: "B2 - Upper-Intermediate", description: "Write emails, stories, and essays"),
+                Question(title: "C1 - Advanced", description: "Develop formal writing with arguments"),
+                Question(title: "C2 - Proficient", description: "Produce polished academic or professional documents")
             ],
-            [
-                Question(title: "Beginner", description: "Introduce yourself and use common expressions"),
-                Question(title: "Intermediate", description: "Participate in everyday conversations confidently"),
-                Question(title: "Advanced", description: "Express opinions clearly in discussions"),
-                Question(title: "Expert", description: "Speak fluently with advanced vocabulary and coherence")
+            [ // Speaking
+                Question(title: "A1 - Beginner", description: "Introduce yourself and use simple phrases"),
+                Question(title: "A2 - Elementary", description: "Handle basic interactions in daily situations"),
+                Question(title: "B1 - Intermediate", description: "Hold conversations on familiar topics"),
+                Question(title: "B2 - Upper-Intermediate", description: "Discuss abstract topics confidently"),
+                Question(title: "C1 - Advanced", description: "Express ideas fluently in debates"),
+                Question(title: "C2 - Proficient", description: "Speak clearly with subtle nuance and accuracy")
             ]
         ]
+        
         DispatchQueue.main.async {
-            self.levelQuestionLabel.text = (self.viewModel.courses[self.currentIndex].name)
+            self.levelQuestionLabel.text = self.viewModel.courses[self.currentIndex].name
         }
     }
     
@@ -104,7 +113,7 @@ final class LevelScreenViewController: UIViewController {
         if currentIndex < viewModel.courses.count - 1 {
             currentIndex += 1
             tableView.reloadData()
-            levelQuestionLabel.text = (viewModel.courses[currentIndex].name)
+            levelQuestionLabel.text = "What is your \((viewModel.courses[currentIndex].name)) level?"
             continueButton.isEnabled = false
         } else {
             if let userId = UserDefaults.standard.string(forKey: "userID") {

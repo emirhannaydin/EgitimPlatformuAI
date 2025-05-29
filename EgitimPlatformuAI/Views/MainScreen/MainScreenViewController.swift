@@ -138,9 +138,13 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
     func formattedLevel(_ level: Int) -> String {
         switch level {
         case 0: return " - A1"
-        case 1: return " - B1"
-        case 2: return " - B2"
-        default: return " - C1"
+        case 1: return " - A2"
+        case 2: return " - B1"
+        case 3: return " - B2"
+        case 4: return " - C1"
+        case 5: return " - C2"
+
+        default: return " - "
         }
     }
 
@@ -196,28 +200,13 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
         let rawCourseName = selectedCourse.courseName.lowercased()
         let courseId = selectedCourse.courseId
 
-        let courseType: CourseType
-        if rawCourseName.contains("writing") {
-            courseType = .writing
-        } else if rawCourseName.contains("speaking") {
-            courseType = .speaking
-        } else if rawCourseName.contains("listening") {
-            courseType = .listening
-        } else if rawCourseName.contains("reading") {
-            courseType = .reading
-        } else {
-            print("Eşleşen courseType bulunamadı.")
-            return
-        }
-
         let viewModel = CourseScreenViewModel(
             coordinator: coordinator,
-            courseType: courseType,
             courseLevelName: "\(selectedCourse.level)",
             courseId: courseId
         )
         
-        ApplicationCoordinator.getInstance().handleCourseEntry(courseType, with: viewModel)
+        ApplicationCoordinator.getInstance().handleCourseEntry(with: viewModel)
     }
 }
 

@@ -131,7 +131,7 @@ final class ApplicationCoordinator: Coordinator {
         }
     }
 
-    func handleCourseEntry(_ courseType: CourseType, with viewModel: CourseScreenViewModel) {
+    func handleCourseEntry(with viewModel: CourseScreenViewModel) {
         let coordinator = CourseScreenCoordinator.getInstance()
         coordinator.start(with: viewModel)
         pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
@@ -140,6 +140,4 @@ final class ApplicationCoordinator: Coordinator {
 
 }
 
-protocol CourseTypeConfigurable {
-    func setCourseType(_ type: CourseType)
-}
+

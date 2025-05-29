@@ -45,7 +45,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="xEG-wB-hUD"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" name="aliceblUE"/>
                                 <nil key="highlightedColor"/>
                             </label>

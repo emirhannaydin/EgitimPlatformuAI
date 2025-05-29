@@ -69,8 +69,17 @@ private extension CourseScreenViewController {
                         self?.courseName.text = "\(courseName) Class"
                     }
                     if let level = self?.viewModel.courseLevelName {
-                        self?.courseLevelName.text = self?.viewModel.levelTextForString(for: level)
+                        let levelText = self?.viewModel.levelTextForString(for: level) ?? "-"
+                        
+                        let fullText = "Current Level = \(levelText)"
+                        let attributedText = NSMutableAttributedString(string: fullText)
+                        
+                        let range = (fullText as NSString).range(of: levelText)
+                        attributedText.addAttribute(.foregroundColor, value: UIColor.summer, range: range)
+
+                        self?.courseLevelName.attributedText = attributedText
                     }
+
                     self?.tableView.reloadData()
                 case .failure(let error):
                     self?.showAlert(title: "Error", message: error.localizedDescription)

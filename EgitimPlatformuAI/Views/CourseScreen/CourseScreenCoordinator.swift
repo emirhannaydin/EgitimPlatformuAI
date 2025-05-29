@@ -28,7 +28,6 @@ final class CourseScreenCoordinator: Coordinator {
         // default
         let viewModel = CourseScreenViewModel(
             coordinator: self,
-            courseType: .reading,
             courseLevelName: "none",
             courseId: ""
         )

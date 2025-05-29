@@ -16,17 +16,14 @@ struct TestSection {
 class CourseScreenViewModel {
     var coordinator: CourseScreenCoordinator?
     var courseClasses: [CourseClass] = []
-    let courseType: CourseType
     var courseId: String
     var sections: [TestSection] = []
     var courseLevelName: String
     
     init(coordinator: CourseScreenCoordinator?,
-         courseType: CourseType,
          courseLevelName: String,
          courseId: String) {
         self.coordinator = coordinator
-        self.courseType = courseType
         self.courseId = courseId
         self.courseLevelName = courseLevelName
         self.sections = self.convertToSections(classes: courseClasses)
@@ -68,17 +65,22 @@ class CourseScreenViewModel {
         case 3: return "B2"
         case 4: return "C1"
         case 5: return "C2"
-        default: return "Unknown"
+
+        default: return " - "
         }
     }
     //burası düzeltilecek
     func levelTextForString(for level: String) -> String {
+        
         switch level {
         case "0": return "A1"
-        case "1": return "B1"
-        case "2": return "B2"
-        case "3": return "C1"
-        default: return "Unknown"
+        case "1": return "A2"
+        case "2": return "B1"
+        case "3": return "B2"
+        case "4": return "C1"
+        case "5": return "C2"
+
+        default: return " - "
         }
     }
 }

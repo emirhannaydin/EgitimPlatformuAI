@@ -13,7 +13,6 @@ final class ListeningScreenViewController: UIViewController {
     
     
     var viewModel: ListeningScreenViewModel!
-    var courseType: CourseType = .listening
 
     @IBOutlet var questionLabel: UILabel!
     @IBOutlet var listensLeftLabel: UILabel!
