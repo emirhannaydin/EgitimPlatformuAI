@@ -84,7 +84,7 @@ final class LevelScreenViewController: UIViewController {
         ]
         
         DispatchQueue.main.async {
-            self.levelQuestionLabel.text = self.viewModel.courses[self.currentIndex].name
+            self.levelQuestionLabel.text = "What is your \((self.viewModel.courses[self.currentIndex].name)) level?"
         }
     }
     

@@ -21,13 +21,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is your level on reading?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cq1-A7-DEn">
-                                <rect key="frame" x="42" y="159" width="309.33333333333331" height="27"/>
+                                <rect key="frame" x="42" y="79" width="309.33333333333331" height="27"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Jao-SJ-5lF">
-                                <rect key="frame" x="30" y="236" width="333" height="452"/>
+                                <rect key="frame" x="20" y="126" width="353" height="572"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -69,16 +69,16 @@
                         <constraints>
                             <constraint firstItem="fbj-Wf-0Yp" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="AfX-Il-MEQ"/>
                             <constraint firstItem="cq1-A7-DEn" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Cxw-qj-jLb"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Jao-SJ-5lF" secondAttribute="trailing" constant="30" id="Pa7-AY-2Fi"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Jao-SJ-5lF" secondAttribute="trailing" constant="20" id="Pa7-AY-2Fi"/>
                             <constraint firstItem="Mvo-Gr-tAC" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="50" id="QSm-GJ-Alm"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Mvo-Gr-tAC" secondAttribute="trailing" constant="50" id="QVo-wX-Onn"/>
                             <constraint firstItem="fbj-Wf-0Yp" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="Qzi-Za-Un2"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Mvo-Gr-tAC" secondAttribute="bottom" constant="50" id="TcW-he-Brj"/>
-                            <constraint firstItem="Jao-SJ-5lF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="30" id="Uq9-Oi-ZUu"/>
-                            <constraint firstItem="cq1-A7-DEn" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="100" id="WeT-jE-S0l"/>
-                            <constraint firstItem="Mvo-Gr-tAC" firstAttribute="top" secondItem="Jao-SJ-5lF" secondAttribute="bottom" constant="30" id="nhe-xc-awN"/>
+                            <constraint firstItem="Jao-SJ-5lF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="Uq9-Oi-ZUu"/>
+                            <constraint firstItem="cq1-A7-DEn" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="WeT-jE-S0l"/>
+                            <constraint firstItem="Mvo-Gr-tAC" firstAttribute="top" secondItem="Jao-SJ-5lF" secondAttribute="bottom" constant="20" id="nhe-xc-awN"/>
                             <constraint firstAttribute="bottom" secondItem="fbj-Wf-0Yp" secondAttribute="bottom" id="uQ9-xP-j13"/>
-                            <constraint firstItem="Jao-SJ-5lF" firstAttribute="top" secondItem="cq1-A7-DEn" secondAttribute="bottom" constant="50" id="vSG-ds-PQw"/>
+                            <constraint firstItem="Jao-SJ-5lF" firstAttribute="top" secondItem="cq1-A7-DEn" secondAttribute="bottom" constant="20" id="vSG-ds-PQw"/>
                             <constraint firstItem="fbj-Wf-0Yp" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="xnP-iq-Rrn"/>
                         </constraints>
                     </view>
