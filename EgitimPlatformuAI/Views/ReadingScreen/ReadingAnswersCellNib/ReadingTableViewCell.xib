@@ -21,7 +21,7 @@
                         <rect key="frame" x="10" y="10" width="300" height="65"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QI2-2h-VsW">
-                                <rect key="frame" x="10" y="22.333333333333336" width="41.333333333333336" height="20.333333333333336"/>
+                                <rect key="frame" x="10" y="22.333333333333336" width="280" height="20.333333333333336"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" name="darkBlue"/>
                                 <nil key="highlightedColor"/>
@@ -31,6 +31,7 @@
                         <constraints>
                             <constraint firstItem="QI2-2h-VsW" firstAttribute="leading" secondItem="FnY-6o-u9A" secondAttribute="leading" constant="10" id="28y-Ix-Iio"/>
                             <constraint firstItem="QI2-2h-VsW" firstAttribute="centerY" secondItem="FnY-6o-u9A" secondAttribute="centerY" id="pO2-3C-tZe"/>
+                            <constraint firstAttribute="trailing" secondItem="QI2-2h-VsW" secondAttribute="trailing" constant="10" id="xJS-Fc-4HM"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">

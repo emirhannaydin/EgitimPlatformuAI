@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class ReadingScreenViewController: UIViewController {
-    var viewModel: ReadingScreenViewModel?
+    var viewModel: ReadingScreenViewModel!
 
     @IBOutlet var backButton: CustomBackButtonView!
     @IBOutlet var tableView: UITableView!
@@ -20,37 +20,26 @@ final class ReadingScreenViewController: UIViewController {
     private var readingAnswer = "cevap 1"
     private var selectedText = ""
     @IBOutlet var continueButton: CustomContinueView!
-    
-    public let readingQuestions: [ReadingQuestion] = [
-        ReadingQuestion(
-            passage: "Cats are small mammals known for their agility and independence.",
-            question: "What are cats known for?",
-            answers: ["Loyalty", "Flying", "Independence", "Swimming"],
-            correctAnswerIndex: 2
-        ),
-        ReadingQuestion(
-            passage: "The sun is the center of our solar system and provides energy to Earth.",
-            question: "What is the sun's role in the solar system?",
-            answers: ["A planet", "Center of the solar system", "Moon", "Comet"],
-            correctAnswerIndex: 1
-        ),
-    ]
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.showLottieLoading()
         navigationController?.isNavigationBarHidden = false
         backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        let cellNib = UINib(nibName: "ReadingTableViewCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: "ReadingCell")
         setNotification()
-        loadQuestion()
-        
+        setTableView()
+
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController?.isNavigationBarHidden = false
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setLessonData()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -61,6 +50,32 @@ final class ReadingScreenViewController: UIViewController {
     
     @objc func backButtonTapped(){
         navigationController?.popViewController(animated: true)
+    }
+    
+    private func setLessonData(){
+        if let lessonId = viewModel.lessonId{
+            viewModel.loadLessonData(lessonId: lessonId) { [weak self] result in
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    switch result{
+                        
+                    case(.success(_)):
+                        self.loadQuestion()
+                        self.tableView.reloadData()
+                        self.hideLottieLoading()
+                        print("kamdksamd")
+
+                    case ( .failure(let error)):
+                        print(error)
+                    }
+                }
+            
+            }
+        }
+    }
+    private func setTableView(){
+        let cellNib = UINib(nibName: "ReadingTableViewCell", bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: "ReadingCell")
     }
     
     @IBAction func checkButton(_ sender: Any) {
@@ -75,9 +90,9 @@ final class ReadingScreenViewController: UIViewController {
         }
 
         let correctText = readingAnswer
-        let currentQuestion = readingQuestions[currentQuestionIndex]
-        let passageText = currentQuestion.passage
-        let questionText = currentQuestion.question
+        let currentQuestion = viewModel.questions[currentQuestionIndex]
+        let passageText = currentQuestion.questionString
+        let questionText = "Answer the question"
         let aiMessage = """
         The user read a short passage in Turkish and tried to understand its meaning by answering a question.
         passage: "\(passageText)"
@@ -109,7 +124,7 @@ final class ReadingScreenViewController: UIViewController {
     
     @objc func continueButtonTapped(){
         currentQuestionIndex += 1
-            if currentQuestionIndex < readingQuestions.count {
+            if currentQuestionIndex < viewModel.questions.count {
                 loadQuestion()
             } else {
                 showAlert(title: "Completed", message: "You have finished all questions.")
@@ -140,10 +155,12 @@ final class ReadingScreenViewController: UIViewController {
     }
     
     private func loadQuestion() {
-        let currentQuestion = readingQuestions[currentQuestionIndex]
-        passageLabel.text = currentQuestion.passage
-        questionLabel.text = currentQuestion.question
-        readingAnswer = currentQuestion.answers[currentQuestion.correctAnswerIndex]
+        let currentQuestion = viewModel.questions[currentQuestionIndex]
+        passageLabel.text = currentQuestion.questionString
+        questionLabel.text = "Answer the question"
+        if let _correctAnswer = currentQuestion.correctAnswer{
+            readingAnswer = _correctAnswer
+        }
         tableView.allowsSelection = true
         checkButton.isHidden = false
         continueButton.isHidden = true
@@ -159,8 +176,11 @@ extension ReadingScreenViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard indexPath.row < viewModel.questions.count else {
+                return UITableViewCell()
+            }
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReadingCell", for: indexPath) as! ReadingTableViewCell
-        let currentAnswers = readingQuestions[currentQuestionIndex].answers
+        let currentAnswers = viewModel.questions[currentQuestionIndex].options
         cell.answerText.text = currentAnswers[indexPath.row]
         return cell
     }
@@ -174,3 +194,7 @@ extension ReadingScreenViewController: UITableViewDelegate{
             }
     }
 }
+
+
+
+
