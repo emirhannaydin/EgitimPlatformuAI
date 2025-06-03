@@ -23,12 +23,17 @@ class MainLoginScreenViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.isNavigationBarHidden = true
+        
+        emailText.text = ""
+        passwordText.text = ""
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         self.navigationController?.isNavigationBarHidden = false
+        view.endEditing(true)
+
     }
     
     @objc func backButtonTapped() {
@@ -55,13 +60,17 @@ class MainLoginScreenViewController: UIViewController {
                 switch result {
                 case .success:
                     if let currentUserID = UserDefaults.standard.string(forKey: "userID") {
-                        let hasSubmittedKey = "hasSubmittedLevels_\(currentUserID)"
-                        let hasSubmitted = UserDefaults.standard.bool(forKey: hasSubmittedKey)
-                        
-                        if hasSubmitted {
-                            ApplicationCoordinator.getInstance().initTabBar()
-                        } else {
-                            ApplicationCoordinator.getInstance().pushToLevelScreen()
+                        if self?.viewModel?.mail == "e"{ // teacher girişi için mail şifre e e
+                            ApplicationCoordinator.getInstance().pushToTeacherScreen()
+                        }else{
+                            let hasSubmittedKey = "hasSubmittedLevels_\(currentUserID)"
+                            let hasSubmitted = UserDefaults.standard.bool(forKey: hasSubmittedKey)
+                            
+                            if hasSubmitted {
+                                ApplicationCoordinator.getInstance().initTabBar()
+                            } else {
+                                ApplicationCoordinator.getInstance().pushToLevelScreen()
+                            }
                         }
                     } else {
                         self?.showAlert(title: "Error", message: "UserID not found.")

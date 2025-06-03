@@ -85,6 +85,20 @@ final class ApplicationCoordinator: Coordinator {
         navController.pushViewController(newVC, animated: true)
     }
 
+    func pushToTeacherScreen(){
+        let navController = LoginScreenCoordinator.getInstance().navigationController
+
+        if let existingRegisterVC = navController.viewControllers.first(where: { $0 is TeacherScreenViewController }) {
+            navController.popToViewController(existingRegisterVC, animated: true)
+        } else {
+            let registerCoordinator = TeacherScreenCoordinator.getInstance()
+            registerCoordinator.start()
+            
+            if let registerVC = registerCoordinator.navigationController.viewControllers.first {
+                navController.pushViewController(registerVC, animated: true)
+            }
+        }
+    }
 
     func pushToRegisterScreen() {
         let navController = LoginScreenCoordinator.getInstance().navigationController

@@ -19,10 +19,17 @@ final class MainScreenViewController: UIViewController{
     var screenLogo: [String] = ["house", "person.circle", "book", "lock", "lock"]
     var coursesClassName: [String] = []
     var coursesName: [String] = []
-    var lottieAnimations: [String] = ["writing", "speaking", "listening", "reading"]
+    let courseAnimationMap: [String: String] = [
+        "Writing": "writing",
+        "Speaking": "speaking",
+        "Listening": "listening",
+        "Reading": "reading"]
     var lessonCount: [Int] = []
     var progressCount: [Int] = []
     var level: [Int] = []
+    
+    let username = UserDefaults.standard.string(forKey: "username") ?? "Unknown"
+    let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +60,12 @@ private extension MainScreenViewController {
     func configureNameContainer() {
         nameContainerView.hamburgerMenuManager = hamburgerMenuManager
         navigationController?.navigationBar.isHidden = true
+        nameContainerView.configureView(nameText: username.capitalizingFirstLetter(), welcomeLabelText: "Welcome", imageName: "person.fill")
+        nameContainerView.onLogoutTapped = { [weak self] in
+            self?.showAlertWithAction(title: "Logout", message: "Are you sure you want to log out?") {
+                ApplicationCoordinator.getInstance().start()
+            }
+        }
     }
 
     func setupCollectionViews() {
@@ -72,9 +85,6 @@ private extension MainScreenViewController {
     }
 
     func loadCourseData() {
-        let username = UserDefaults.standard.string(forKey: "username") ?? "Unknown"
-        let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
-        nameContainerView.configureView(nameText: username.capitalizingFirstLetter(), welcomeLabelText: userID, imageName: "person.fill")
 
         viewModel?.loadCourseClasses(studentId: userID) { [weak self] result in
             DispatchQueue.main.async {
@@ -85,7 +95,7 @@ private extension MainScreenViewController {
                     self?.lessonCount = classes.map { $0.lessons.count }
                     self?.progressCount = classes.map { $0.completedLessonCount }
                     self?.level = classes.map { $0.level }
-                    self?.coursesName = classes.map { $0.courseName ?? "Unknown" }
+                    self?.coursesName = classes.map { $0.courseName }
                     self?.collectionView.reloadData()
                     self?.collectionView2.reloadData()
                 case .failure(let error):
@@ -125,15 +135,21 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
 
     func configureCourseCell(at indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView2.dequeueReusableCell(withReuseIdentifier: HomeScreenCourseCollectionViewCell.identifier, for: indexPath) as! HomeScreenCourseCollectionViewCell
-        cell.courseNameLabel.text = coursesName[indexPath.row]
-        let animation = LottieAnimation.named(lottieAnimations[indexPath.row])
-        cell.lottieView.animation = animation
-        cell.lottieView.contentMode = .scaleAspectFill
-        cell.lottieView.loopMode = .loop
-        cell.lottieView.play()
+        
+        let courseName = coursesName[indexPath.row]
+        cell.courseNameLabel.text = courseName
+
+        if let animationName = courseAnimationMap[courseName] {
+            let animation = LottieAnimation.named(animationName)
+            cell.lottieView.animation = animation
+            cell.lottieView.contentMode = .scaleAspectFill
+            cell.lottieView.loopMode = .loop
+            cell.lottieView.play()
+        }
         styleCourseCell(cell)
         return cell
     }
+
 
     func formattedLevel(_ level: Int) -> String {
         switch level {
