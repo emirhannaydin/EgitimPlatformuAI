@@ -24,15 +24,10 @@ final class LevelScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let cellNib = UINib(nibName: "LevelTableViewCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: "LevelCell")
-        continueButton.isEnabled = false
-        setupData()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.reloadData()
         fetchCourses()
-        
+        setupData()
+        continueButton.isEnabled = false
+        setTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +40,14 @@ final class LevelScreenViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    func setTableView(){
+        let cellNib = UINib(nibName: "LevelTableViewCell", bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: "LevelCell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        
     }
     
     func setupData() {
@@ -83,9 +86,6 @@ final class LevelScreenViewController: UIViewController {
             ]
         ]
         
-        DispatchQueue.main.async {
-            self.levelQuestionLabel.text = "What is your \((self.viewModel.courses[self.currentIndex].name)) level?"
-        }
     }
     
     func fetchCourses(){
@@ -93,6 +93,8 @@ final class LevelScreenViewController: UIViewController {
             switch result {
             case .success(let courses):
                 DispatchQueue.main.async {
+                    self.levelQuestionLabel.text = "What is your \((self.viewModel.courses[self.currentIndex].name)) level?"
+                    self.tableView.reloadData()
                     print("controller calisti")
                 }
             case .failure(let error):

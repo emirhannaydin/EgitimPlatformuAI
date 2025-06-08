@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class WritingScreenViewController: UIViewController {
-    var viewModel: WritingScreenViewModel?
+    var viewModel: WritingScreenViewModel!
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var exampleLabelView: UIView!
     @IBOutlet var translatedLabelView: UIView!
@@ -18,9 +18,13 @@ final class WritingScreenViewController: UIViewController {
     @IBOutlet var continueButton: CustomContinueView!
     @IBOutlet var translatedText: UITextView!
     @IBOutlet var exampleLabel: UILabel!
+    private var currentQuestionIndex = 0
+    @IBOutlet var questionCount: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        showLottieLoading()
         backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         navigationController?.isNavigationBarHidden = false
         configureView()
@@ -33,6 +37,11 @@ final class WritingScreenViewController: UIViewController {
         translatedText.delegate = self
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setLessonData()
+    }
+    
     private func configureView() {
         exampleLabelView.layer.borderColor = UIColor.mediumTurqoise.cgColor
         translatedLabelView.layer.borderColor = UIColor.mediumTurqoise.cgColor
@@ -43,11 +52,40 @@ final class WritingScreenViewController: UIViewController {
         
         
     }
+
+    private func setLessonData(){
+        if let lessonId = viewModel.lessonId{
+            viewModel.loadLessonData(lessonId: lessonId) { [weak self] result in
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    switch result{
+                        
+                    case(.success(_)):
+                        self.loadQuestion()
+                        self.hideLottieLoading()
+                        print("kamdksamd")
+
+                    case ( .failure(let error)):
+                        print(error)
+                    }
+                }
+            
+            }
+        }
+    }
     
+    private func loadQuestion() {
+        let currentQuestion = viewModel.questions[currentQuestionIndex]
+        exampleLabel.text = currentQuestion.questionString
+        questionCount.text = "\(currentQuestionIndex + 1)/\(viewModel.questions.count)"
+        checkButton.isHidden = false
+        continueButton.isHidden = true
+    }
+
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
-    
+
     @IBAction func checkButton(_ sender: Any) {
         dismissKeyboard()
         showLottieLoading()
@@ -85,9 +123,12 @@ final class WritingScreenViewController: UIViewController {
     }
     
     @objc func continueButtonTapped() {
-        // Tek soruluk yapıysa:
-        showAlert(title: "Completed", message: "You have completed this writing task.")
-        // navigationController?.popViewController(animated: true)
+        currentQuestionIndex += 1
+            if currentQuestionIndex < viewModel.questions.count {
+                loadQuestion()
+            } else {
+                showAlert(title: "Completed", message: "You have finished all questions.")
+            }
     }
     
     private func setNotification() {

@@ -17,10 +17,11 @@ final class ReadingScreenViewController: UIViewController {
     @IBOutlet var passageLabel: UILabel!
     @IBOutlet var questionLabel: UILabel!
     private var currentQuestionIndex = 0
-    private var readingAnswer = "cevap 1"
+    private var readingAnswer = ""
     private var selectedText = ""
     @IBOutlet var continueButton: CustomContinueView!
-
+    @IBOutlet var questionCount: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -157,6 +158,7 @@ final class ReadingScreenViewController: UIViewController {
     private func loadQuestion() {
         let currentQuestion = viewModel.questions[currentQuestionIndex]
         passageLabel.text = currentQuestion.questionString
+        questionCount.text = "\(currentQuestionIndex + 1)/\(viewModel.questions.count)"
         questionLabel.text = "Answer the question"
         if let _correctAnswer = currentQuestion.correctAnswer{
             readingAnswer = _correctAnswer

@@ -18,6 +18,7 @@ public final class ProfileScreenCoordinator: Coordinator {
         return instance!
     }
     var navigationController = UINavigationController()
+    var courseClasses: [CourseClass] = []
 
     func start() {
         let storyboard = UIStoryboard(name: "ProfileScreen", bundle: nil)
@@ -26,7 +27,7 @@ public final class ProfileScreenCoordinator: Coordinator {
             fatalError("Failed  to instantiate HomeViewController")
         }
         
-        let viewModel = ProfileScreenViewModel(coordinator: self)
+        let viewModel = ProfileScreenViewModel(coordinator: self, courseClasses: courseClasses)
         viewController.viewModel = viewModel
         
         navigationController.isNavigationBarHidden = false
