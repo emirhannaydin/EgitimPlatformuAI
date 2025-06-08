@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -43,19 +42,19 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="393" height="66.666666666666671"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DsQ-Dk-JYf">
-                                                                <rect key="frame" x="24.999999999999996" y="23.333333333333314" width="49.666666666666657" height="20.333333333333329"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
+                                                                <rect key="frame" x="25" y="23.333333333333314" width="50" height="20"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                                <color key="textColor" name="porcelain"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPq-lo-K82">
-                                                                <rect key="frame" x="99.666666666666671" y="23.333333333333314" width="41.333333333333329" height="20.333333333333329"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
+                                                                <rect key="frame" x="100" y="23.333333333333314" width="41.666666666666657" height="20"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                                <color key="textColor" name="porcelain"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstItem="DsQ-Dk-JYf" firstAttribute="centerY" secondItem="doQ-Gs-h7p" secondAttribute="centerY" id="J9L-pB-wvg"/>
                                                             <constraint firstItem="gPq-lo-K82" firstAttribute="centerY" secondItem="doQ-Gs-h7p" secondAttribute="centerY" id="Saa-lP-fKc"/>
@@ -67,19 +66,19 @@
                                                         <rect key="frame" x="0.0" y="66.666666666666686" width="393" height="66.666666666666686"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Surname:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Maa-SZ-SEI">
-                                                                <rect key="frame" x="25" y="23.333333333333314" width="73" height="20.333333333333329"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
+                                                                <rect key="frame" x="25" y="23.333333333333314" width="73.666666666666671" height="20"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                                <color key="textColor" name="porcelain"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q3B-Dj-DFl">
-                                                                <rect key="frame" x="122.99999999999999" y="23.333333333333314" width="41.333333333333329" height="20.333333333333329"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
+                                                                <rect key="frame" x="123.66666666666667" y="23.333333333333314" width="41.666666666666671" height="20"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                                <color key="textColor" name="porcelain"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstItem="Maa-SZ-SEI" firstAttribute="leading" secondItem="Qbw-NM-g3j" secondAttribute="leading" constant="25" id="JD3-Zu-Z6V"/>
                                                             <constraint firstItem="Q3B-Dj-DFl" firstAttribute="centerY" secondItem="Qbw-NM-g3j" secondAttribute="centerY" id="KbI-Xv-ea8"/>
@@ -91,19 +90,19 @@
                                                         <rect key="frame" x="0.0" y="133.33333333333331" width="393" height="66.666666666666686"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="eMail:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2q-C8-rd9">
-                                                                <rect key="frame" x="25" y="23.333333333333371" width="45" height="20.333333333333329"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
+                                                                <rect key="frame" x="24.999999999999996" y="23.333333333333371" width="45.666666666666657" height="20"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                                <color key="textColor" name="porcelain"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8i-Sd-xJr">
-                                                                <rect key="frame" x="95" y="23.333333333333371" width="41.333333333333343" height="20.333333333333329"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                <nil key="textColor"/>
+                                                                <rect key="frame" x="95.666666666666671" y="23.333333333333371" width="41.666666666666671" height="20"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                                <color key="textColor" name="porcelain"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstItem="z8i-Sd-xJr" firstAttribute="centerY" secondItem="6RX-4w-QZZ" secondAttribute="centerY" id="8xH-m8-ZFw"/>
                                                             <constraint firstItem="F2q-C8-rd9" firstAttribute="leading" secondItem="6RX-4w-QZZ" secondAttribute="leading" constant="25" id="H8p-ax-Wlo"/>
@@ -112,28 +111,29 @@
                                                         </constraints>
                                                     </view>
                                                 </subviews>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" name="charcoal"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="97d-zM-cip"/>
                                                 </constraints>
                                             </stackView>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="K2M-JH-kKr">
                                                 <rect key="frame" x="0.0" y="410" width="393" height="300"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="backgroundColor" name="backDarkBlue"/>
+                                                <color key="tintColor" name="backDarkBlue"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="300" id="2DW-JG-NJ3"/>
                                                 </constraints>
-                                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="sectionIndexColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="separatorColor" name="backDarkBlue"/>
+                                                <color key="sectionIndexColor" name="backDarkBlue"/>
+                                                <color key="sectionIndexBackgroundColor" name="backDarkBlue"/>
+                                                <color key="sectionIndexTrackingBackgroundColor" name="backDarkBlue"/>
                                                 <connections>
                                                     <outlet property="dataSource" destination="Y6W-OH-hqX" id="KfN-zh-mz7"/>
                                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="HG3-e1-m16"/>
                                                 </connections>
                                             </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpK-6y-3qs">
-                                                <rect key="frame" x="96.666666666666686" y="730" width="200" height="63"/>
+                                                <rect key="frame" x="96.666666666666686" y="730" width="200" height="43"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="200" id="ihB-hh-cua"/>
                                                 </constraints>
@@ -141,13 +141,13 @@
                                                 <buttonConfiguration key="configuration" style="gray" title="Sign out"/>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" name="backDarkBlue"/>
                                         <constraints>
                                             <constraint firstItem="tpK-6y-3qs" firstAttribute="top" secondItem="K2M-JH-kKr" secondAttribute="bottom" constant="20" id="3fH-Fe-4s0"/>
                                             <constraint firstAttribute="trailing" secondItem="K2M-JH-kKr" secondAttribute="trailing" id="4o9-nw-ovX"/>
                                             <constraint firstItem="Qy0-aS-8eB" firstAttribute="centerX" secondItem="r0M-ZP-Aup" secondAttribute="centerX" id="B6q-rl-ma2"/>
                                             <constraint firstItem="Nrn-Rk-fOn" firstAttribute="leading" secondItem="r0M-ZP-Aup" secondAttribute="leading" id="E3V-0S-CNr"/>
-                                            <constraint firstAttribute="bottom" secondItem="tpK-6y-3qs" secondAttribute="bottom" id="G77-w2-v7E"/>
+                                            <constraint firstAttribute="bottom" secondItem="tpK-6y-3qs" secondAttribute="bottom" constant="20" id="G77-w2-v7E"/>
                                             <constraint firstItem="Qy0-aS-8eB" firstAttribute="top" secondItem="r0M-ZP-Aup" secondAttribute="top" constant="50" id="N6f-I6-t3H"/>
                                             <constraint firstItem="Nrn-Rk-fOn" firstAttribute="top" secondItem="Qy0-aS-8eB" secondAttribute="bottom" constant="30" id="NPO-RN-TBA"/>
                                             <constraint firstItem="K2M-JH-kKr" firstAttribute="top" secondItem="Nrn-Rk-fOn" secondAttribute="bottom" constant="30" id="VJi-2P-imz"/>
@@ -196,8 +196,11 @@
         <namedColor name="backDarkBlue">
             <color red="0.10588235294117647" green="0.12549019607843137" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="charcoal">
+            <color red="0.17254901960784313" green="0.20000000000000001" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="porcelain">
+            <color red="0.96862745098039216" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

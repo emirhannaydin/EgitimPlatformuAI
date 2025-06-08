@@ -7,7 +7,7 @@
 
 import UIKit
 class ProfileScreenViewController: UIViewController {
-
+    
     var viewModel: ProfileScreenViewModel?
     private var hamburgerMenuManager: HamburgerMenuManager!
     var student: Student?
@@ -37,7 +37,7 @@ class ProfileScreenViewController: UIViewController {
     
     func loadStudentData() {
         let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
-
+        
         viewModel?.loadStudent(studentId: userID) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
@@ -53,10 +53,10 @@ class ProfileScreenViewController: UIViewController {
         }
         
     }
-
+    
     func loadCourseData() {
         let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
-
+        
         viewModel?.loadCourseClasses(studentId: userID) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
@@ -74,7 +74,7 @@ class ProfileScreenViewController: UIViewController {
             }
         }
     }
-
+    
     func loadProfileImage() {
         viewModel?.fetchProfileImage { [weak self] result in
             DispatchQueue.main.async {
@@ -98,7 +98,7 @@ class ProfileScreenViewController: UIViewController {
         surnameLabel.text = student?.surname ?? "-"
         emailLabel.text = student?.email ?? "-"
     }
-
+    
     
     
 }
@@ -113,7 +113,7 @@ extension ProfileScreenViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "LessonInfoCell", for: indexPath) as? LessonInfoTableViewCell else {
             return UITableViewCell()
         }
-
+        
         let courseName = coursesClassName[indexPath.row]
         let levelText = formattedLevel(level[indexPath.row])
         
@@ -122,7 +122,7 @@ extension ProfileScreenViewController: UITableViewDataSource {
         
         return cell
     }
-
+    
     private func formattedLevel(_ level: Int) -> String {
         switch level {
         case 0: return "A1"
