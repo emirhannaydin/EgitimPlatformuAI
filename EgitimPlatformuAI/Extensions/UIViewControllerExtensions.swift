@@ -21,6 +21,23 @@ extension UIViewController {
         present(alertController, animated: true)
     }
     
+    func showAlertWithAction(title: String, message: String, okAction: @escaping () -> Void) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+
+        let okButton = UIAlertAction(title: "OK", style: .default) { _ in
+            okAction()
+        }
+
+        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel)
+
+        alertController.addAction(okButton)
+        alertController.addAction(cancelButton)
+
+        present(alertController, animated: true)
+    }
+
+
+    
     func animateLabelShake(_ label: UILabel) {
         let animation = CABasicAnimation(keyPath: "position")
         animation.duration = 0.05

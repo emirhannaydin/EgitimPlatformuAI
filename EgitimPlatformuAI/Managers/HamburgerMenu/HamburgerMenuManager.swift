@@ -233,7 +233,6 @@ class HamburgerMenuManager: NSObject, UITableViewDataSource, UITableViewDelegate
             ApplicationCoordinator.getInstance().start()
         case 1:
             ApplicationCoordinator.getInstance().navigateToProfile()
-            
         case 2:
             ApplicationCoordinator.getInstance().navigateToMain()
         case 3:

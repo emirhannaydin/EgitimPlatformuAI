@@ -12,7 +12,10 @@ final class CustomNameContainer: UIView {
     weak var hamburgerMenuManager: HamburgerMenuManager?
     @IBOutlet var welcomeLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet var logoutImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    
+    var onLogoutTapped: (() -> Void)?
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setViews()
@@ -23,7 +26,7 @@ final class CustomNameContainer: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.setViews()
-
+        
     }
     
     private func setViews() {
@@ -32,23 +35,26 @@ final class CustomNameContainer: UIView {
            self.addSubview(view)
        }
        
-   func configureView(nameText: String, welcomeLabelText: String, imageName: String) {
-       self.nameLabel.adjustsFontSizeToFitWidth = true
-       self.nameLabel.text = nameText
-       self.imageView.image = UIImage(systemName: imageName)
-       imageView.isUserInteractionEnabled = true
-       self.welcomeLabel.text = welcomeLabelText
-       
-       let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
-       imageView.addGestureRecognizer(tapGesture)
-   }
+    func configureView(nameText: String, welcomeLabelText: String, imageName: String) {
+        self.nameLabel.adjustsFontSizeToFitWidth = true
+        self.nameLabel.text = nameText
+        self.imageView.image = UIImage(systemName: imageName)
+        imageView.isUserInteractionEnabled = true
+        self.welcomeLabel.text = welcomeLabelText
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        imageView.addGestureRecognizer(tapGesture)
+        
+        let logoutTapGesture = UITapGestureRecognizer(target: self, action: #selector(logoutImageTapped))
+        logoutImage.addGestureRecognizer(logoutTapGesture)
+        
+    }
    
-   @objc private func imageTapped() {
-       hamburgerMenuManager?.toggleSlideMenu()
-   }
-
-
+    @objc private func imageTapped() {
+        hamburgerMenuManager?.toggleSlideMenu()
+    }
     
-    
-    
+    @objc private func logoutImageTapped() {
+        onLogoutTapped?()
+    }
 }

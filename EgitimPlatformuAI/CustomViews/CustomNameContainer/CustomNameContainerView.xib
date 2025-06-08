@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomNameContainer" customModule="EgitimPlatformuAI" customModuleProvider="target">
             <connections>
                 <outlet property="imageView" destination="L5M-bK-GFP" id="JmQ-4A-9SH"/>
+                <outlet property="logoutImage" destination="Lx3-fg-x0s" id="znt-ha-Mmp"/>
                 <outlet property="nameLabel" destination="4rN-vp-yWD" id="lTU-U0-lLr"/>
                 <outlet property="welcomeLabel" destination="95m-fs-raK" id="KXM-AX-lRx"/>
             </connections>
@@ -47,8 +48,8 @@
                         <constraint firstAttribute="height" constant="50" id="eLo-1j-dJf"/>
                     </constraints>
                 </stackView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bell.badge.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Lx3-fg-x0s">
-                    <rect key="frame" x="357" y="14.333333333333332" width="30" height="30.333333333333339"/>
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="power" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Lx3-fg-x0s">
+                    <rect key="frame" x="357" y="24.999999999999996" width="30" height="29.333333333333332"/>
                     <color key="tintColor" name="porcelain"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="6YT-Ts-3Bd"/>
@@ -63,16 +64,16 @@
                 <constraint firstItem="L5M-bK-GFP" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Grw-i1-msW"/>
                 <constraint firstItem="pTR-6V-eTq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="Hwx-Ye-WBZ"/>
                 <constraint firstAttribute="trailing" secondItem="Lx3-fg-x0s" secondAttribute="trailing" constant="15" id="SH7-6x-85f"/>
-                <constraint firstItem="Lx3-fg-x0s" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="W1c-9x-gJt"/>
                 <constraint firstAttribute="bottom" secondItem="pTR-6V-eTq" secondAttribute="bottom" constant="15" id="cAd-fW-jg5"/>
                 <constraint firstItem="Lx3-fg-x0s" firstAttribute="leading" secondItem="pTR-6V-eTq" secondAttribute="trailing" constant="10" id="fgT-cf-rx4"/>
+                <constraint firstItem="Lx3-fg-x0s" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="h3Z-Js-b2r"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="100.76335877862596" y="19.718309859154932"/>
         </view>
     </objects>
     <resources>
-        <image name="bell.badge.fill" catalog="system" width="117" height="128"/>
+        <image name="power" catalog="system" width="127" height="128"/>
         <namedColor name="backDarkBlue">
             <color red="0.10588235294117647" green="0.12549019607843137" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
