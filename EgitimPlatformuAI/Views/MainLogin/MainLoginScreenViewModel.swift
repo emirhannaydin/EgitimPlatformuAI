@@ -11,6 +11,8 @@ class MainLoginScreenViewModel {
 
     var coordinator: MainLoginScreenCoordinator?
     var mail: String = ""
+    var user: User?
+
     init(coordinator: MainLoginScreenCoordinator?) {
         self.coordinator = coordinator
     }
@@ -22,6 +24,7 @@ class MainLoginScreenViewModel {
                 if let tokenData = loginResponse.token.data(using: .utf8) {
                     KeychainHelper.shared.save(tokenData, service: "access-token", account: "user")
                 }
+                self.user = loginResponse.user
                 print(loginResponse.user.id)
                 self.mail = email
                 UserDefaults.standard.set(loginResponse.user.id, forKey: "userID")
