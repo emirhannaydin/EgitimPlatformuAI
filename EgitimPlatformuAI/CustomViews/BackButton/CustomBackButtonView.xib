@@ -19,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUn-Rc-wOO">
-                    <rect key="frame" x="11" y="11" width="19" height="19"/>
+                    <rect key="frame" x="0.0" y="0.0" width="41" height="41"/>
                     <color key="tintColor" systemColor="systemGray2Color"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain"/>
@@ -28,10 +28,10 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="tUn-Rc-wOO" secondAttribute="bottom" constant="11" id="5EM-6e-XYq"/>
-                <constraint firstItem="tUn-Rc-wOO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="11" id="DrW-ic-PMD"/>
-                <constraint firstItem="tUn-Rc-wOO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="11" id="hVn-np-oU2"/>
-                <constraint firstAttribute="trailing" secondItem="tUn-Rc-wOO" secondAttribute="trailing" constant="11" id="p6P-QE-oBu"/>
+                <constraint firstAttribute="bottom" secondItem="tUn-Rc-wOO" secondAttribute="bottom" id="5EM-6e-XYq"/>
+                <constraint firstItem="tUn-Rc-wOO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="DrW-ic-PMD"/>
+                <constraint firstItem="tUn-Rc-wOO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hVn-np-oU2"/>
+                <constraint firstAttribute="trailing" secondItem="tUn-Rc-wOO" secondAttribute="trailing" id="p6P-QE-oBu"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-138.93129770992365" y="-269.01408450704224"/>

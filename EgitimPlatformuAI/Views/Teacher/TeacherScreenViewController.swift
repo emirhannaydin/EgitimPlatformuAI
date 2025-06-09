@@ -126,6 +126,42 @@ extension TeacherScreenViewController: UICollectionViewDataSource, UICollectionV
             break
         }
     }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let courseName = coursesName[indexPath.row]
+        print(courseName)
+        let coordinator = AddQuestionScreenCoordinator.getInstance()
+        switch courseName {
+        case "Reading Class":
+            print("clicked to reading")
+            let viewModel = AddQuestionScreenViewModel(coordinator: coordinator)
+            coordinator.start(with: viewModel)
+            ApplicationCoordinator.getInstance().navigateToAddQuestionScreen()
+            break
+        case "Listening Class":
+            print("clicked to listening")
+            let viewModel = AddQuestionScreenViewModel(coordinator: coordinator)
+            coordinator.start(with: viewModel)
+            ApplicationCoordinator.getInstance().navigateToAddQuestionScreen()
+            break
+        case "Writing Class":
+            print("clicked to writing")
+            let viewModel = AddQuestionScreenViewModel(coordinator: coordinator)
+            coordinator.start(with: viewModel)
+            ApplicationCoordinator.getInstance().navigateToAddQuestionScreen()
+            break
+        case "Speaking Class":
+            print("clicked to speaking")
+            let viewModel = AddQuestionScreenViewModel(coordinator: coordinator)
+            coordinator.start(with: viewModel)
+            ApplicationCoordinator.getInstance().navigateToAddQuestionScreen()
+            break
+        default:
+            print("switch case error on teacher collectionView cell")
+            break
+        }
+
+    }
 }
 
 

@@ -49,6 +49,9 @@ final class ApplicationCoordinator: Coordinator {
     func navigateToLevelScreen(){
         
     }
+    func navigateToAddQuestionScreen(){
+        pushToAddQuestionScreen()
+    }
 
     func initTabBar(){
         tabBarCoordinator.start()
@@ -137,6 +140,21 @@ final class ApplicationCoordinator: Coordinator {
             navController.popToViewController(existingLoginVC, animated: true)
         } else {
             let mainLoginCoordinator = LevelScreenCoordinator.getInstance()
+            mainLoginCoordinator.start()
+            
+            if let mainLoginVC = mainLoginCoordinator.navigationController.viewControllers.first {
+                navController.pushViewController(mainLoginVC, animated: true)
+            }
+        }
+    }
+    
+    func pushToAddQuestionScreen() {
+        let navController = LoginScreenCoordinator.getInstance().navigationController
+
+        if let existingLoginVC = navController.viewControllers.first(where: { $0 is AddQuestionScreenViewController }) {
+            navController.popToViewController(existingLoginVC, animated: true)
+        } else {
+            let mainLoginCoordinator = AddQuestionScreenCoordinator.getInstance()
             mainLoginCoordinator.start()
             
             if let mainLoginVC = mainLoginCoordinator.navigationController.viewControllers.first {
