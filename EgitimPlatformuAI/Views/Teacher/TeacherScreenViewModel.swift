@@ -8,13 +8,17 @@
 class TeacherScreenViewModel{
     var coordinator: TeacherScreenCoordinator?
     var courseClasses: [CourseClass] = []
+    var uniqueCourseClasses: [CourseClass] {
+        Dictionary(grouping: courseClasses, by: { $0.name })
+            .compactMap { $0.value.first }
+    }
     
     init(coordinator: TeacherScreenCoordinator?) {
         self.coordinator = coordinator
     }
     
     func loadCourseClasses(teacherId: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        NetworkManager.shared.fetchCourseClasses(for: teacherId) { [weak self] result in
+        NetworkManager.shared.fetchTeacherClasses(for: teacherId) { [weak self] result in
             switch result {
             case .success(let classes):
                 self?.courseClasses = classes

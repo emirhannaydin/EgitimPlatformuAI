@@ -104,7 +104,7 @@ extension CourseScreenViewController: UITableViewDataSource, UITableViewDelegate
         let cell = tableView.dequeueReusableCell(withIdentifier: CourseScreenTableViewCell.identifier, for: indexPath) as! CourseScreenTableViewCell
         let lesson = sections[indexPath.section].tests[indexPath.row]
         cell.levelName.text = lesson.content
-        let checkImage = lesson.isCompleted ? "checkmark.circle.fill" : "checkmark.circle"
+        let checkImage = lesson.isCompleted! ? "checkmark.circle.fill" : "checkmark.circle"
         cell.checkImage.image = UIImage(systemName: checkImage)
         return cell
     }

@@ -258,6 +258,39 @@ class NetworkManager {
             }
         }.resume()
     }
+
+    func fetchTeacherClasses(for studentId: String, completion: @escaping (Result<[CourseClass], Error>) -> Void) {
+        let endpoint = "Teacher/GetTeacherClasses/\(studentId)"
+        guard let url = URL(string: "\(baseUrl)\(endpoint)") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0)))
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let data = data,
+                  let httpResponse = response as? HTTPURLResponse,
+                  (200..<300).contains(httpResponse.statusCode) else {
+                completion(.failure(NSError(domain: "Invalid response", code: 0)))
+                return
+            }
+
+            do {
+                let classes = try JSONDecoder().decode([CourseClass].self, from: data)
+                completion(.success(classes))
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
     
     func fetchCourseLessons(for studentId: String, for courseId: String, completion: @escaping (Result<[CourseClass], Error>) -> Void) {
         let endpoint = "Class/\(courseId)/\(studentId)/classes"

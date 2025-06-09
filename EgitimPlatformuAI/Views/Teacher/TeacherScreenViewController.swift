@@ -51,7 +51,7 @@ final class TeacherScreenViewController: UIViewController{
                 switch result{
                 case .success:
                     guard let classes = self?.viewModel?.courseClasses else { return }
-                    self?.coursesName = classes.map { $0.name }
+                    self?.coursesName = self?.viewModel.uniqueCourseClasses.map { $0.name } ?? []
                     self?.collectionView.reloadData()
                 case .failure(let error):
                     self?.showAlert(title: "Error", message: error.localizedDescription)
@@ -127,3 +127,5 @@ extension TeacherScreenViewController: UICollectionViewDataSource, UICollectionV
         }
     }
 }
+
+
