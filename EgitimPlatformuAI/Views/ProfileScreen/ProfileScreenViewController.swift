@@ -29,6 +29,9 @@ class ProfileScreenViewController: UIViewController {
         hamburgerMenuManager.setNavigationBar()
         loadStudentData()
         loadCourseData()
+        self.navigationController?.navigationBar.standardAppearance.backgroundColor = .clear
+        self.navigationController?.navigationBar.standardAppearance.backgroundEffect = .none
+        self.navigationController?.navigationBar.standardAppearance.shadowColor = .clear
     }
     
     override func viewDidDisappear(_ animated: Bool) {

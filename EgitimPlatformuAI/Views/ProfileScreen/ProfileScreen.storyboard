@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R9m-rn-IaB">
-                                <rect key="frame" x="0.0" y="59" width="393" height="793"/>
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r0M-ZP-Aup">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="793"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="784.33333333333337"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qy0-aS-8eB">
                                                 <rect key="frame" x="146.66666666666666" y="50" width="100" height="100"/>
@@ -133,7 +133,7 @@
                                                 </connections>
                                             </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpK-6y-3qs">
-                                                <rect key="frame" x="96.666666666666686" y="730" width="200" height="43"/>
+                                                <rect key="frame" x="96.666666666666686" y="730" width="200" height="34.333333333333371"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="200" id="ihB-hh-cua"/>
                                                 </constraints>
@@ -159,7 +159,6 @@
                                 </subviews>
                                 <color key="backgroundColor" name="backDarkBlue"/>
                                 <constraints>
-                                    <constraint firstItem="r0M-ZP-Aup" firstAttribute="height" secondItem="R9m-rn-IaB" secondAttribute="height" id="AaZ-Mr-9c2"/>
                                     <constraint firstItem="r0M-ZP-Aup" firstAttribute="leading" secondItem="R9m-rn-IaB" secondAttribute="leading" id="NyQ-oY-LWN"/>
                                     <constraint firstAttribute="trailing" secondItem="r0M-ZP-Aup" secondAttribute="trailing" id="Yg9-7s-cYD"/>
                                     <constraint firstAttribute="bottom" secondItem="r0M-ZP-Aup" secondAttribute="bottom" id="f6s-GN-CLK"/>
@@ -174,7 +173,7 @@
                         <color key="backgroundColor" name="backDarkBlue"/>
                         <constraints>
                             <constraint firstItem="R9m-rn-IaB" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="ANU-f3-Ap8"/>
-                            <constraint firstAttribute="bottom" secondItem="R9m-rn-IaB" secondAttribute="bottom" id="EKu-ed-ojh"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="R9m-rn-IaB" secondAttribute="bottom" id="EKu-ed-ojh"/>
                             <constraint firstItem="R9m-rn-IaB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Ek2-Wc-9es"/>
                             <constraint firstItem="R9m-rn-IaB" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="xkh-ej-a7i"/>
                         </constraints>

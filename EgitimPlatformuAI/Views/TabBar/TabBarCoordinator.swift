@@ -20,10 +20,16 @@ public final class TabBarCoordinator: Coordinator {
     var navigationController = UINavigationController()
 
     func start() {
-        tabBarController.tabBar.tintColor = .summer
         tabBarController.tabBar.unselectedItemTintColor = .white
-        tabBarController.tabBar.backgroundColor = .backDarkBlue
+        tabBarController.tabBar.tintColor = .summer
+        
+        let appearance = UITabBarAppearance()
+        appearance.configureWithTransparentBackground()
+        tabBarController.tabBar.standardAppearance = appearance
+        tabBarController.tabBar.scrollEdgeAppearance = appearance
+    
 
+        
         let mainCoordinator = MainScreenCoordinator.getInstance()
         let profileCoordinator = ProfileScreenCoordinator.getInstance()
         let aiCoordinator = AIScreenCoordinator.getInstance()
