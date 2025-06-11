@@ -193,33 +193,35 @@ class HamburgerMenuManager: NSObject, UITableViewDataSource, UITableViewDelegate
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HamburgerTableViewCell.identifier) as! HamburgerTableViewCell
+        cell.logoImageView.backgroundColor = .clear
+        cell.labelText.backgroundColor = .clear
+        cell.backgroundColor = .charcoal
         switch indexPath.row {
         case 0:
-            cell.backgroundColor = .charcoal
             cell.labelText.text = "Login"
             cell.logoImageView.image = UIImage(systemName: "lock")
             cell.logoImageView.tintColor = .mintGreen
         case 1:
-            cell.backgroundColor = .charcoal
             cell.labelText.text = "Profile"
             cell.logoImageView.image = UIImage(systemName: "person.circle")
             cell.logoImageView.tintColor = .royalBlue
         case 2:
-            cell.backgroundColor = .charcoal
             cell.labelText.text = "Home"
             cell.logoImageView.image = UIImage(systemName: "house")
             cell.logoImageView.tintColor = .softRed
         case 3:
-            cell.backgroundColor = .charcoal
             cell.labelText.text = "AI"
             cell.logoImageView.image = UIImage(systemName: "checkmark.message")
             cell.logoImageView.tintColor = .summer
         default:
-            cell.backgroundColor = .charcoal
             cell.labelText.text = "--"
             cell.logoImageView.image = UIImage(systemName: "link")
             cell.logoImageView.tintColor = .lightGray
         }
+        let selectedBackgroundView = UIView()
+        selectedBackgroundView.backgroundColor = .backDarkBlue
+        cell.selectedBackgroundView = selectedBackgroundView
+        
         return cell
     }
     

@@ -19,6 +19,7 @@ class ProfileScreenViewController: UIViewController {
     @IBOutlet var surnameLabel: UILabel!
     @IBOutlet var emailLabel: UILabel!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var signOutButton: UIButton!
     
     @IBOutlet var profileImageView: UIImageView!
     
@@ -44,6 +45,11 @@ class ProfileScreenViewController: UIViewController {
         loadCourseData()
     }
     
+    @IBAction func signOutButtonTapped(_ sender: Any) {
+        self.showAlertWithAction(title: "Logout", message: "Are you sure you want to log out?") {
+            ApplicationCoordinator.getInstance().start()
+        }
+    }
     func loadStudentData() {
         let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
         

@@ -21,19 +21,19 @@
                         <rect key="frame" x="10" y="10" width="300" height="50"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79Y-96-XFA">
-                                <rect key="frame" x="10" y="14.666666666666668" width="42" height="21.000000000000004"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="9.9999999999999964" y="15" width="44.666666666666657" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" name="darkBlue"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dg9-Oi-AkL">
-                                <rect key="frame" x="248" y="14.666666666666668" width="42" height="21.000000000000004"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" name="darkBlue"/>
+                                <rect key="frame" x="250" y="15" width="40" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" name="paleGray"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5FH-4l-geP">
-                                <rect key="frame" x="62" y="23" width="176" height="4"/>
+                                <rect key="frame" x="64.666666666666671" y="23" width="175.33333333333331" height="4"/>
                                 <color key="backgroundColor" name="paleGray"/>
                                 <color key="tintColor" name="backDarkBlue"/>
                             </progressView>
