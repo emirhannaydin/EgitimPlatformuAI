@@ -168,6 +168,12 @@ final class ApplicationCoordinator: Coordinator {
         coordinator.start(with: viewModel)
         pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
     }
+    
+    func handleAddQuestionEntry(with viewModel: AddQuestionScreenViewModel) {
+        let coordinator = AddQuestionScreenCoordinator.getInstance()
+        coordinator.start(with: viewModel)
+        pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+    }
 
 
 }

@@ -3,8 +3,8 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,35 +12,67 @@
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="AddQuestionScreen" title="AddQuestionScreen" id="Y6W-OH-hqX" customClass="AddQuestionScreenViewController" customModule="EgitimPlatformuAI" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                    <view key="view" contentMode="scaleToFill" id="imu-Tx-qdE">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="AddQuestionScreen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MST-1Q-QaZ">
-                                <rect key="frame" x="120" y="291" width="153" height="81"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1qB-HJ-O7o">
+                                <rect key="frame" x="20" y="79" width="353" height="50"/>
+                                <color key="backgroundColor" name="charcoal"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="ts3-s0-57R"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" name="aliceblUE"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PA2-eW-rjk" customClass="CustomBackButtonView" customModule="EgitimPlatformuAI" customModuleProvider="target">
-                                <rect key="frame" x="20" y="59" width="40" height="40"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="f6j-nd-oP6">
+                                <rect key="frame" x="5" y="219" width="383" height="579"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="uD9-zl-Vq0">
+                                        <rect key="frame" x="0.0" y="50" width="383" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uD9-zl-Vq0" id="UZP-Dh-CGO">
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="EDu-CC-l53"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="dNj-Ee-80T"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QR-we-POJ">
+                                <rect key="frame" x="10" y="149" width="373" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="28D-fF-OCo"/>
-                                    <constraint firstAttribute="height" constant="40" id="3lV-dy-T9T"/>
+                                    <constraint firstAttribute="height" constant="50" id="JlF-Jc-uba"/>
                                 </constraints>
-                            </view>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" name="aliceblUE"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="9Uu-0j-6NO"/>
+                        <color key="backgroundColor" name="darkBlue"/>
                         <constraints>
-                            <constraint firstItem="PA2-eW-rjk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="0Jp-ht-zze"/>
-                            <constraint firstItem="PA2-eW-rjk" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="LLO-rH-j4h"/>
+                            <constraint firstItem="9Uu-0j-6NO" firstAttribute="bottom" secondItem="f6j-nd-oP6" secondAttribute="bottom" constant="20" id="6uo-1I-RBj"/>
+                            <constraint firstItem="1qB-HJ-O7o" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="20" id="82W-8g-oRH"/>
+                            <constraint firstItem="f6j-nd-oP6" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="5" id="BMq-Ms-lBP"/>
+                            <constraint firstItem="1qB-HJ-O7o" firstAttribute="top" secondItem="9Uu-0j-6NO" secondAttribute="top" constant="20" id="TIW-fo-80P"/>
+                            <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="1qB-HJ-O7o" secondAttribute="trailing" constant="20" id="VIh-7Y-b5f"/>
+                            <constraint firstItem="f6j-nd-oP6" firstAttribute="top" secondItem="1QR-we-POJ" secondAttribute="bottom" constant="20" id="adc-La-1Zg"/>
+                            <constraint firstItem="1QR-we-POJ" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="10" id="gwn-xr-xF8"/>
+                            <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="f6j-nd-oP6" secondAttribute="trailing" constant="5" id="mQb-BS-kWu"/>
+                            <constraint firstItem="1QR-we-POJ" firstAttribute="top" secondItem="1qB-HJ-O7o" secondAttribute="bottom" constant="20" id="wxm-Mm-H3Y"/>
+                            <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="1QR-we-POJ" secondAttribute="trailing" constant="10" id="zv4-Q8-kNq"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="backButton" destination="PA2-eW-rjk" id="Tgb-5S-AK0"/>
+                        <outlet property="courseLevelName" destination="1QR-we-POJ" id="4pZ-xA-YoP"/>
+                        <outlet property="courseName" destination="1qB-HJ-O7o" id="o0E-Jd-q66"/>
+                        <outlet property="tableView" destination="f6j-nd-oP6" id="XBe-mR-Mub"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -49,8 +81,14 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="aliceblUE">
+            <color red="0.96078431372549022" green="0.97647058823529409" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="charcoal">
+            <color red="0.17254901960784313" green="0.20000000000000001" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="darkBlue">
+            <color red="0.11764705882352941" green="0.13725490196078433" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

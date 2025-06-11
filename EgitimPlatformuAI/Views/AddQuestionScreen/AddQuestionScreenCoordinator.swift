@@ -26,12 +26,16 @@ public final class AddQuestionScreenCoordinator: Coordinator {
             fatalError("Failed to instantiate TeacherScreenViewController")
         }
         
-        let viewModel = AddQuestionScreenViewModel(coordinator: self)
+        let viewModel = AddQuestionScreenViewModel(
+            coordinator: self,
+            courseLevelName: "none",
+            courseId: ""
+        )
+        
         viewController.viewModel = viewModel
+
         if navigationController.viewControllers.isEmpty {
             navigationController.viewControllers = [viewController]
-        } else {
-            navigationController.pushViewController(viewController, animated: true)
         }
     }
 
