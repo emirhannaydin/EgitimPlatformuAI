@@ -1,9 +1,10 @@
 //
-//  Untitled.swift
+//  ListeningFirstScreenViewModel.swift
 //  EgitimPlatformuAI
 //
-//  Created by Başar Noyan on 9.06.2025.
+//  Created by Emirhan Aydın on 13.05.2025.
 //
+
 import Foundation
 
 class AddQuestionScreenViewModel {
@@ -77,3 +78,4 @@ class AddQuestionScreenViewModel {
         }
     }
 }
+

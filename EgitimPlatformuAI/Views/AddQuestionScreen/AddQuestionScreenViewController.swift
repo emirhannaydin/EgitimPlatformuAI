@@ -11,7 +11,6 @@ import Lottie
 
 final class AddQuestionScreenViewController: UIViewController{
     
-    @IBOutlet var backButton: CustomBackButtonView!
     var viewModel: AddQuestionScreenViewModel!
     @IBOutlet var courseName: UILabel!
     @IBOutlet var courseLevelName: UILabel!
@@ -23,33 +22,16 @@ final class AddQuestionScreenViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = true
-        backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         self.showLottieLoading()
         setupUI()
         setupTableView()
         setupTapGesture()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationController?.isNavigationBarHidden = true
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         fetchCourseLessons()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        self.navigationController?.isNavigationBarHidden = true
-    }
-    
-    @objc func backButtonTapped(){
-        print("back button tapped")
-        navigationController?.popViewController(animated: true)
+
     }
     
 }
@@ -59,6 +41,7 @@ private extension AddQuestionScreenViewController {
         courseName.layer.borderWidth = 1
         courseName.layer.borderColor = UIColor.black.cgColor
         courseName.layer.masksToBounds = true
+
     }
 
     func setupTableView() {

@@ -65,7 +65,7 @@ class MainLoginScreenViewController: UIViewController {
                     self?.user = user
                     if let currentUserID = UserDefaults.standard.string(forKey: "userID") {
                         if self?.user?.userType == 0{
-                            ApplicationCoordinator.getInstance().pushToTeacherScreen()
+                            ApplicationCoordinator.getInstance().initTeacherScreen()
                         }else{
                             let hasSubmittedKey = "hasSubmittedLevels_\(currentUserID)"
                             let hasSubmitted = UserDefaults.standard.bool(forKey: hasSubmittedKey)
