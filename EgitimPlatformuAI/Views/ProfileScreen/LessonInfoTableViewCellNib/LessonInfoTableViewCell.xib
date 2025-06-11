@@ -18,31 +18,39 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ouq-3t-l3k">
-                        <rect key="frame" x="5" y="10" width="310" height="50"/>
+                        <rect key="frame" x="10" y="10" width="300" height="50"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79Y-96-XFA">
                                 <rect key="frame" x="10" y="14.666666666666668" width="42" height="21.000000000000004"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="darkBlue"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dg9-Oi-AkL">
-                                <rect key="frame" x="72" y="14.666666666666668" width="42" height="21.000000000000004"/>
+                                <rect key="frame" x="248" y="14.666666666666668" width="42" height="21.000000000000004"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="darkBlue"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5FH-4l-geP">
+                                <rect key="frame" x="62" y="23" width="176" height="4"/>
+                                <color key="backgroundColor" name="paleGray"/>
+                                <color key="tintColor" name="backDarkBlue"/>
+                            </progressView>
                         </subviews>
-                        <color key="backgroundColor" name="softBlue"/>
+                        <color key="backgroundColor" name="porcelain"/>
                         <constraints>
                             <constraint firstItem="79Y-96-XFA" firstAttribute="centerY" secondItem="ouq-3t-l3k" secondAttribute="centerY" id="NON-J5-Qo3"/>
+                            <constraint firstAttribute="trailing" secondItem="Dg9-Oi-AkL" secondAttribute="trailing" constant="10" id="PYI-BV-WVh"/>
                             <constraint firstItem="Dg9-Oi-AkL" firstAttribute="centerY" secondItem="ouq-3t-l3k" secondAttribute="centerY" id="SwN-61-4FC"/>
-                            <constraint firstItem="Dg9-Oi-AkL" firstAttribute="leading" secondItem="79Y-96-XFA" secondAttribute="trailing" constant="20" id="eEc-ye-4jB"/>
+                            <constraint firstItem="5FH-4l-geP" firstAttribute="centerY" secondItem="ouq-3t-l3k" secondAttribute="centerY" id="Xwt-vp-crA"/>
+                            <constraint firstItem="Dg9-Oi-AkL" firstAttribute="leading" secondItem="5FH-4l-geP" secondAttribute="trailing" constant="10" id="kTe-wB-9x6"/>
+                            <constraint firstItem="5FH-4l-geP" firstAttribute="leading" secondItem="79Y-96-XFA" secondAttribute="trailing" constant="10" id="px9-yt-NXn"/>
                             <constraint firstItem="79Y-96-XFA" firstAttribute="leading" secondItem="ouq-3t-l3k" secondAttribute="leading" constant="10" id="ubu-IJ-m8M"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="5"/>
+                                <integer key="value" value="6"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                         </userDefinedRuntimeAttributes>
@@ -52,22 +60,33 @@
                 <constraints>
                     <constraint firstItem="ouq-3t-l3k" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="71c-ar-sTe"/>
                     <constraint firstAttribute="bottom" secondItem="ouq-3t-l3k" secondAttribute="bottom" constant="10" id="7y5-c5-bwf"/>
-                    <constraint firstAttribute="trailing" secondItem="ouq-3t-l3k" secondAttribute="trailing" constant="5" id="Ak9-iJ-InI"/>
-                    <constraint firstItem="ouq-3t-l3k" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="wDT-hH-z3h"/>
+                    <constraint firstAttribute="trailing" secondItem="ouq-3t-l3k" secondAttribute="trailing" constant="10" id="Ak9-iJ-InI"/>
+                    <constraint firstItem="ouq-3t-l3k" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="wDT-hH-z3h"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="backView" destination="ouq-3t-l3k" id="Gfn-gw-8cX"/>
                 <outlet property="lessonLevelLabel" destination="Dg9-Oi-AkL" id="psg-A2-d0d"/>
                 <outlet property="lessonNameLabel" destination="79Y-96-XFA" id="Udn-Gb-PxS"/>
+                <outlet property="progressBar" destination="5FH-4l-geP" id="q4w-1d-loB"/>
             </connections>
             <point key="canvasLocation" x="79" y="21"/>
         </tableViewCell>
     </objects>
     <resources>
-        <namedColor name="softBlue">
-            <color red="0.8901960784313725" green="0.94901960784313721" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="backDarkBlue">
+            <color red="0.10588235294117647" green="0.12549019607843137" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="darkBlue">
+            <color red="0.11764705882352941" green="0.13725490196078433" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="paleGray">
+            <color red="0.88235294117647056" green="0.89411764705882357" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="porcelain">
+            <color red="0.96862745098039216" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r0M-ZP-Aup">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="784.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="764.33333333333337"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qy0-aS-8eB">
                                                 <rect key="frame" x="146.66666666666666" y="50" width="100" height="100"/>
@@ -35,26 +35,26 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </imageView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Nrn-Rk-fOn">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Nrn-Rk-fOn">
                                                 <rect key="frame" x="0.0" y="180" width="393" height="200"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="doQ-Gs-h7p">
-                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="66.666666666666671"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="63.333333333333336"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DsQ-Dk-JYf">
-                                                                <rect key="frame" x="25" y="23.333333333333314" width="50" height="20"/>
+                                                                <rect key="frame" x="25" y="21.666666666666686" width="50" height="20"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                 <color key="textColor" name="porcelain"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPq-lo-K82">
-                                                                <rect key="frame" x="100" y="23.333333333333314" width="41.666666666666657" height="20"/>
+                                                                <rect key="frame" x="100" y="21.666666666666686" width="41.666666666666657" height="20"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                 <color key="textColor" name="porcelain"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" name="charcoal"/>
                                                         <constraints>
                                                             <constraint firstItem="DsQ-Dk-JYf" firstAttribute="centerY" secondItem="doQ-Gs-h7p" secondAttribute="centerY" id="J9L-pB-wvg"/>
                                                             <constraint firstItem="gPq-lo-K82" firstAttribute="centerY" secondItem="doQ-Gs-h7p" secondAttribute="centerY" id="Saa-lP-fKc"/>
@@ -63,22 +63,22 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qbw-NM-g3j">
-                                                        <rect key="frame" x="0.0" y="66.666666666666686" width="393" height="66.666666666666686"/>
+                                                        <rect key="frame" x="0.0" y="68.333333333333314" width="393" height="63.333333333333343"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Surname:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Maa-SZ-SEI">
-                                                                <rect key="frame" x="25" y="23.333333333333314" width="73.666666666666671" height="20"/>
+                                                                <rect key="frame" x="25" y="21.666666666666686" width="73.666666666666671" height="20"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                 <color key="textColor" name="porcelain"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q3B-Dj-DFl">
-                                                                <rect key="frame" x="123.66666666666667" y="23.333333333333314" width="41.666666666666671" height="20"/>
+                                                                <rect key="frame" x="123.66666666666667" y="21.666666666666686" width="41.666666666666671" height="20"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                 <color key="textColor" name="porcelain"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" name="charcoal"/>
                                                         <constraints>
                                                             <constraint firstItem="Maa-SZ-SEI" firstAttribute="leading" secondItem="Qbw-NM-g3j" secondAttribute="leading" constant="25" id="JD3-Zu-Z6V"/>
                                                             <constraint firstItem="Q3B-Dj-DFl" firstAttribute="centerY" secondItem="Qbw-NM-g3j" secondAttribute="centerY" id="KbI-Xv-ea8"/>
@@ -87,22 +87,22 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6RX-4w-QZZ">
-                                                        <rect key="frame" x="0.0" y="133.33333333333331" width="393" height="66.666666666666686"/>
+                                                        <rect key="frame" x="0.0" y="136.66666666666669" width="393" height="63.333333333333343"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="eMail:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2q-C8-rd9">
-                                                                <rect key="frame" x="24.999999999999996" y="23.333333333333371" width="45.666666666666657" height="20"/>
+                                                                <rect key="frame" x="24.999999999999996" y="21.666666666666629" width="45.666666666666657" height="20"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                 <color key="textColor" name="porcelain"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8i-Sd-xJr">
-                                                                <rect key="frame" x="95.666666666666671" y="23.333333333333371" width="41.666666666666671" height="20"/>
+                                                                <rect key="frame" x="95.666666666666671" y="21.666666666666629" width="41.666666666666671" height="20"/>
                                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                 <color key="textColor" name="porcelain"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="backgroundColor" name="charcoal"/>
                                                         <constraints>
                                                             <constraint firstItem="z8i-Sd-xJr" firstAttribute="centerY" secondItem="6RX-4w-QZZ" secondAttribute="centerY" id="8xH-m8-ZFw"/>
                                                             <constraint firstItem="F2q-C8-rd9" firstAttribute="leading" secondItem="6RX-4w-QZZ" secondAttribute="leading" constant="25" id="H8p-ax-Wlo"/>
@@ -111,40 +111,50 @@
                                                         </constraints>
                                                     </view>
                                                 </subviews>
-                                                <color key="backgroundColor" name="charcoal"/>
+                                                <color key="backgroundColor" name="darkBlue"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="200" id="97d-zM-cip"/>
                                                 </constraints>
                                             </stackView>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="K2M-JH-kKr">
-                                                <rect key="frame" x="0.0" y="410" width="393" height="300"/>
-                                                <color key="backgroundColor" name="backDarkBlue"/>
-                                                <color key="tintColor" name="backDarkBlue"/>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="K2M-JH-kKr">
+                                                <rect key="frame" x="10" y="410" width="373" height="280"/>
+                                                <color key="backgroundColor" name="charcoal"/>
+                                                <color key="tintColor" name="charcoal"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="300" id="2DW-JG-NJ3"/>
+                                                    <constraint firstAttribute="height" constant="280" id="2DW-JG-NJ3"/>
                                                 </constraints>
-                                                <color key="separatorColor" name="backDarkBlue"/>
+                                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="sectionIndexColor" name="backDarkBlue"/>
                                                 <color key="sectionIndexBackgroundColor" name="backDarkBlue"/>
                                                 <color key="sectionIndexTrackingBackgroundColor" name="backDarkBlue"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <outlet property="dataSource" destination="Y6W-OH-hqX" id="KfN-zh-mz7"/>
                                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="HG3-e1-m16"/>
                                                 </connections>
                                             </tableView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpK-6y-3qs">
-                                                <rect key="frame" x="96.666666666666686" y="730" width="200" height="34.333333333333371"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tpK-6y-3qs">
+                                                <rect key="frame" x="96.666666666666686" y="710" width="200" height="34.333333333333371"/>
+                                                <color key="backgroundColor" name="softRed"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="200" id="ihB-hh-cua"/>
                                                 </constraints>
+                                                <color key="tintColor" name="porcelain"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="gray" title="Sign out"/>
+                                                <buttonConfiguration key="configuration" style="gray" title="Sign out">
+                                                    <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                                </buttonConfiguration>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" name="backDarkBlue"/>
                                         <constraints>
                                             <constraint firstItem="tpK-6y-3qs" firstAttribute="top" secondItem="K2M-JH-kKr" secondAttribute="bottom" constant="20" id="3fH-Fe-4s0"/>
-                                            <constraint firstAttribute="trailing" secondItem="K2M-JH-kKr" secondAttribute="trailing" id="4o9-nw-ovX"/>
+                                            <constraint firstAttribute="trailing" secondItem="K2M-JH-kKr" secondAttribute="trailing" constant="10" id="4o9-nw-ovX"/>
                                             <constraint firstItem="Qy0-aS-8eB" firstAttribute="centerX" secondItem="r0M-ZP-Aup" secondAttribute="centerX" id="B6q-rl-ma2"/>
                                             <constraint firstItem="Nrn-Rk-fOn" firstAttribute="leading" secondItem="r0M-ZP-Aup" secondAttribute="leading" id="E3V-0S-CNr"/>
                                             <constraint firstAttribute="bottom" secondItem="tpK-6y-3qs" secondAttribute="bottom" constant="20" id="G77-w2-v7E"/>
@@ -153,7 +163,7 @@
                                             <constraint firstItem="K2M-JH-kKr" firstAttribute="top" secondItem="Nrn-Rk-fOn" secondAttribute="bottom" constant="30" id="VJi-2P-imz"/>
                                             <constraint firstAttribute="trailing" secondItem="Nrn-Rk-fOn" secondAttribute="trailing" id="WIf-c8-uG6"/>
                                             <constraint firstItem="tpK-6y-3qs" firstAttribute="centerX" secondItem="r0M-ZP-Aup" secondAttribute="centerX" id="bLy-g9-bEq"/>
-                                            <constraint firstItem="K2M-JH-kKr" firstAttribute="leading" secondItem="r0M-ZP-Aup" secondAttribute="leading" id="eAT-Jf-Ge8"/>
+                                            <constraint firstItem="K2M-JH-kKr" firstAttribute="leading" secondItem="r0M-ZP-Aup" secondAttribute="leading" constant="10" id="eAT-Jf-Ge8"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -198,8 +208,14 @@
         <namedColor name="charcoal">
             <color red="0.17254901960784313" green="0.20000000000000001" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="darkBlue">
+            <color red="0.11764705882352941" green="0.13725490196078433" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="porcelain">
             <color red="0.96862745098039216" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="softRed">
+            <color red="0.94901960784313721" green="0.42745098039215684" blue="0.42745098039215684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

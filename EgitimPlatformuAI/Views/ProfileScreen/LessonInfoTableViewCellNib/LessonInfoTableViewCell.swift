@@ -11,7 +11,9 @@ class LessonInfoTableViewCell: UITableViewCell {
 
     @IBOutlet var lessonLevelLabel: UILabel!
     @IBOutlet var lessonNameLabel: UILabel! 
-
+    @IBOutlet var backView: UIView!
+    @IBOutlet var progressBar: UIProgressView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

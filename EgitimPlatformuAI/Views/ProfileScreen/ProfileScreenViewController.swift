@@ -24,11 +24,10 @@ class ProfileScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.showLottieLoading()
         self.title = "Profile"
         hamburgerMenuManager = HamburgerMenuManager(viewController: self)
         hamburgerMenuManager.setNavigationBar()
-        loadStudentData()
-        loadCourseData()
         self.navigationController?.navigationBar.standardAppearance.backgroundColor = .clear
         self.navigationController?.navigationBar.standardAppearance.backgroundEffect = .none
         self.navigationController?.navigationBar.standardAppearance.shadowColor = .clear
@@ -36,6 +35,13 @@ class ProfileScreenViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.showLottieLoading()
+        loadStudentData()
+        loadCourseData()
     }
     
     func loadStudentData() {
@@ -116,13 +122,38 @@ extension ProfileScreenViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "LessonInfoCell", for: indexPath) as? LessonInfoTableViewCell else {
             return UITableViewCell()
         }
-        
+        cell.progressBar.progress = 0
         let courseName = coursesClassName[indexPath.row]
         let levelText = formattedLevel(level[indexPath.row])
-        
-        cell.lessonNameLabel.text = courseName
-        cell.lessonLevelLabel.text = levelText
-        
+
+        cell.lessonNameLabel.text = "\(courseName):"
+        cell.lessonLevelLabel.text = "\(levelText)"
+        self.hideLottieLoading()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            cell.progressBar.setProgress(self.formattedProgress(self.level[indexPath.row]), animated: true)
+            }
+
+        switch cell.lessonNameLabel.text {
+        case "Reading Class:":
+            cell.backView.backgroundColor = .silver
+            cell.lessonNameLabel.textColor = .backDarkBlue
+            cell.lessonLevelLabel.textColor = .backDarkBlue
+        case "Listening Class:":
+            cell.backView.backgroundColor = .sapphireBlue
+            cell.lessonNameLabel.textColor = .porcelain
+            cell.lessonLevelLabel.textColor = .porcelain
+        case "Writing Class:":
+            cell.backView.backgroundColor = .softRed
+            cell.lessonNameLabel.textColor = .winter
+            cell.lessonLevelLabel.textColor = .winter
+        case "Speaking Class:":
+            cell.backView.backgroundColor = .mintGreen
+            cell.lessonNameLabel.textColor = .coldPurple
+            cell.lessonLevelLabel.textColor = .coldPurple
+        default:
+            break
+        }
+
         return cell
     }
     
@@ -135,6 +166,18 @@ extension ProfileScreenViewController: UITableViewDataSource {
         case 4: return "C1"
         case 5: return "C2"
         default: return "-"
+        }
+    }
+    
+    private func formattedProgress(_ level: Int) -> Float {
+        switch level {
+        case 0: return 0.16
+        case 1: return 0.32
+        case 2: return 0.48
+        case 3: return 0.65
+        case 4: return 0.81
+        case 5: return 1
+        default: return 0
         }
     }
 }
