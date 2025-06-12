@@ -123,6 +123,32 @@ extension UIViewController {
         sender.setImage(UIImage(systemName: imageName), for: .normal)
     }
     
+    func applyGradientBackground() {
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.frame = view.bounds
+
+            gradientLayer.colors = [
+                UIColor.backDarkBlue.cgColor,
+                UIColor.charcoal.cgColor
+            ]
+
+            gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+            gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+
+            view.layer.insertSublayer(gradientLayer, at: 0)
+        }
+    
+    func hideKeyboardWhenTappedAround() {
+            let tapGesture = UITapGestureRecognizer(target: self,
+                                                    action: #selector(dismissKeyboard))
+            tapGesture.cancelsTouchesInView = false
+            view.addGestureRecognizer(tapGesture)
+        }
+
+        @objc private func dismissKeyboard() {
+            view.endEditing(true)
+        }
+    
 }
 
 

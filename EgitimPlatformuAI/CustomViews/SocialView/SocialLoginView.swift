@@ -25,7 +25,7 @@ final class SocialLoginView: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Or Register with"
-        label.textColor = .darkGray
+        label.textColor = .white
         label.font = UIFont(name: "Helvetica Neue Bold", size: 14.0)
         label.textAlignment = .center
         return label

@@ -23,7 +23,6 @@ class RegisterScreenViewController: UIViewController {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
         setupUI()
-        setRegisterButton()
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +37,10 @@ class RegisterScreenViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
     }
     private func setupUI(){
+        applyGradientBackground()
+        hideKeyboardWhenTappedAround()
+        registerButton.layer.cornerRadius = 8
+        registerButton.layer.masksToBounds = true
         backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         setupPasswordToggle(for: passwordLabel)
         setupPasswordToggle(for: confirmPasswordLabel)
@@ -49,17 +52,41 @@ class RegisterScreenViewController: UIViewController {
         confirmPasswordLabel.autocorrectionType = .no
         confirmPasswordLabel.autocapitalizationType = .none
         
-        nameLabel.backgroundColor = .porcelain
-        emailLabel.backgroundColor = .porcelain
-        passwordLabel.backgroundColor = .porcelain
-        confirmPasswordLabel.backgroundColor = .porcelain
+        nameLabel.layer.borderWidth = 1
+        nameLabel.layer.borderColor = UIColor.systemGray.cgColor
+        nameLabel.layer.cornerRadius = 8
+        nameLabel.layer.masksToBounds = true
+        nameLabel.attributedPlaceholder = NSAttributedString(
+                string: "Enter your name",
+                attributes: [.foregroundColor: UIColor.backDarkBlue.withAlphaComponent(0.5)]
+            )
+        emailLabel.layer.borderWidth = 1
+        emailLabel.layer.borderColor = UIColor.systemGray.cgColor
+        emailLabel.layer.cornerRadius = 8
+        emailLabel.layer.masksToBounds = true
+        emailLabel.attributedPlaceholder = NSAttributedString(
+                string: "Enter your email",
+                attributes: [.foregroundColor: UIColor.backDarkBlue.withAlphaComponent(0.5)]
+            )
+        passwordLabel.layer.borderWidth = 1
+        passwordLabel.layer.borderColor = UIColor.systemGray.cgColor
+        passwordLabel.layer.cornerRadius = 8
+        passwordLabel.layer.masksToBounds = true
+        passwordLabel.attributedPlaceholder = NSAttributedString(
+                string: "Enter your password",
+                attributes: [.foregroundColor: UIColor.backDarkBlue.withAlphaComponent(0.5)]
+            )
+        confirmPasswordLabel.layer.borderWidth = 1
+        confirmPasswordLabel.layer.borderColor = UIColor.systemGray.cgColor
+        confirmPasswordLabel.layer.cornerRadius = 8
+        confirmPasswordLabel.layer.masksToBounds = true
+        confirmPasswordLabel.attributedPlaceholder = NSAttributedString(
+                string: "Confirm your password",
+                attributes: [.foregroundColor: UIColor.backDarkBlue.withAlphaComponent(0.5)]
+            )
+        
     }
-    
-    private func setRegisterButton(){
-        registerButton.backgroundColor = UIColor.darkBlue
-        registerButton.layer.cornerRadius = 8
-        registerButton.layer.masksToBounds = true
-    }
+
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }

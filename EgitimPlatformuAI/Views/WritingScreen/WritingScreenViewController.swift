@@ -30,10 +30,9 @@ final class WritingScreenViewController: UIViewController {
         configureView()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tapGesture.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapGesture)
+        
         setNotification()
+        hideKeyboardWhenTappedAround()
         translatedText.delegate = self
     }
     
@@ -87,7 +86,6 @@ final class WritingScreenViewController: UIViewController {
     }
 
     @IBAction func checkButton(_ sender: Any) {
-        dismissKeyboard()
         showLottieLoading()
         
         guard let userAnswer = translatedText.text,
@@ -195,9 +193,5 @@ final class WritingScreenViewController: UIViewController {
             }
         }
         return nil
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
 }

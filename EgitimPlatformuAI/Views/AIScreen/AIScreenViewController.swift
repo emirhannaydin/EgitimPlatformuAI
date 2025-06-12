@@ -43,7 +43,7 @@ private extension AIScreenViewController {
         setupUI()
         setupHamburgerMenu()
         setupNotifications()
-        setupDismissKeyboardGesture()
+        hideKeyboardWhenTappedAround()
     }
     
     func setupUI() {
@@ -73,10 +73,6 @@ private extension AIScreenViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(handleAIMessageUpdated), name: .aiMessageUpdated, object: nil)
     }
     
-    func setupDismissKeyboardGesture() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(gesture)
-    }
 }
 
 
@@ -105,9 +101,6 @@ private extension AIScreenViewController {
         viewModel.sendMessage(message)
     }
     
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
     
     @objc func textFieldEditingChanged(_ textField: UITextField) {
         let trimmedText = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""

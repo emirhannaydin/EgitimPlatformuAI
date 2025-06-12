@@ -13,6 +13,7 @@ class MainLoginScreenViewController: UIViewController {
     
     @IBOutlet var emailText: UITextField!
     @IBOutlet var passwordText: UITextField!
+    @IBOutlet var loginButton: UIButton!
     @IBOutlet var backButton: CustomBackButtonView!
     var user: User?
     
@@ -39,8 +40,29 @@ class MainLoginScreenViewController: UIViewController {
     }
     
     private func setupUI(){
+        applyGradientBackground()
+        hideKeyboardWhenTappedAround()
         backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         setupPasswordToggle(for: passwordText)
+        loginButton.layer.cornerRadius = 8
+        loginButton.layer.masksToBounds = true
+        
+        emailText.layer.borderWidth = 1
+        emailText.layer.borderColor = UIColor.systemGray.cgColor
+        emailText.layer.cornerRadius = 8
+        emailText.layer.masksToBounds = true
+        emailText.attributedPlaceholder = NSAttributedString(
+                string: "Email",
+                attributes: [.foregroundColor: UIColor.backDarkBlue.withAlphaComponent(0.5)]
+            )
+        passwordText.layer.borderWidth = 1
+        passwordText.layer.borderColor = UIColor.systemGray.cgColor
+        passwordText.layer.cornerRadius = 8
+        passwordText.layer.masksToBounds = true
+        passwordText.attributedPlaceholder = NSAttributedString(
+                string: "Password",
+                attributes: [.foregroundColor: UIColor.backDarkBlue.withAlphaComponent(0.5)]
+            )
     }
     
     @objc func backButtonTapped() {
