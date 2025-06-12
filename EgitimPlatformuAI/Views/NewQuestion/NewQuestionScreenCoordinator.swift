@@ -43,19 +43,20 @@ public final class NewQuestionScreenCoordinator: Coordinator {
         }
 
         viewController.viewModel = viewModel
-
         viewController.modalPresentationStyle = .pageSheet
-        
+
         if #available(iOS 15.0, *) {
             if let sheet = viewController.sheetPresentationController {
-                sheet.detents = [.medium(), .large()]
-                sheet.prefersGrabberVisible = true
+                sheet.detents = [.medium()] // Sadece medium, yukarı çıkamaz
+                sheet.prefersGrabberVisible = true // Yukarıdaki çubuk
+                sheet.largestUndimmedDetentIdentifier = .medium // Arka planı karart
+                sheet.prefersScrollingExpandsWhenScrolledToEdge = false // Scroll varsa büyümesin
             }
         }
 
-
         UIApplication.shared.windows.first?.rootViewController?.present(viewController, animated: true)
     }
+
 
 
     

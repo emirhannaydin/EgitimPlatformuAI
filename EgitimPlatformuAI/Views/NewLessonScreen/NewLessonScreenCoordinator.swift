@@ -47,13 +47,16 @@ public final class NewLessonScreenCoordinator: Coordinator {
 
         if #available(iOS 15.0, *) {
             if let sheet = viewController.sheetPresentationController {
-                sheet.detents = [.medium(), .large()]
-                sheet.prefersGrabberVisible = true
+                sheet.detents = [.medium()] // Sadece medium seviyeye kadar açılsın
+                sheet.prefersGrabberVisible = true // Yukarıdaki tutma çubuğu görünsün
+                sheet.largestUndimmedDetentIdentifier = .medium // Arka plan kararsın
+                sheet.prefersScrollingExpandsWhenScrolledToEdge = false // Scroll olsa bile büyümesin
             }
         }
 
         UIApplication.shared.windows.first?.rootViewController?.present(viewController, animated: true)
     }
+
 
     
     
