@@ -1,0 +1,53 @@
+//
+//  NewQuestionScreenCoordinator.swift
+//  EgitimPlatformuAI
+//
+//  Created by Başar Noyan on 12.06.2025.
+//
+
+import Foundation
+import UIKit
+
+public final class NewQuestionScreenCoordinator: Coordinator {
+    private static var instance: NewQuestionScreenCoordinator?
+    
+    static func getInstance() -> NewQuestionScreenCoordinator {
+        if instance == nil {
+            instance = NewQuestionScreenCoordinator()
+        }
+        return instance!
+    }
+    
+    var navigationController = UINavigationController()
+    
+    func start() {
+        let storyboard = UIStoryboard(name: "NewQuestionScreen", bundle: nil)
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "NewQuestionScreen")
+                as? NewQuestionScreenViewController else {
+            fatalError("Failed to instantiate NewQuestionScreenViewController")
+        }
+        
+        let viewModel = NewQuestionScreenViewModel(coordinator: self, selectedLessonId: nil)
+        viewController.viewModel = viewModel
+        if navigationController.viewControllers.isEmpty {
+            navigationController.viewControllers = [viewController]
+        } else {
+            navigationController.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func start(with viewModel: NewQuestionScreenViewModel) {
+        let storyboard = UIStoryboard(name: "NewQuestionScreen", bundle: nil)
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "NewQuestionScreen") as? NewQuestionScreenViewController else {
+            fatalError("Failed to instantiate NewQuestionScreenViewController")
+        }
+
+        viewController.viewModel = viewModel
+
+        if navigationController.viewControllers.isEmpty {
+            navigationController.viewControllers = [viewController]
+        }
+    }
+    
+    
+}

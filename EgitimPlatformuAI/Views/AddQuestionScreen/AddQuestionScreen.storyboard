@@ -44,33 +44,41 @@
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="dNj-Ee-80T"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QR-we-POJ">
-                                <rect key="frame" x="10" y="149" width="373" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="JlF-Jc-uba"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
-                                <color key="textColor" name="aliceblUE"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nXL-ze-Wqi">
+                                <rect key="frame" x="20" y="149" width="113" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Add Lesson"/>
+                                <connections>
+                                    <action selector="addLessonButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Hz5-4V-CdG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lty-6h-ZZb">
+                                <rect key="frame" x="245.33333333333334" y="149" width="127.66666666666666" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Add Question"/>
+                                <connections>
+                                    <action selector="addQuestionButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="cgG-Kn-Tgg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9Uu-0j-6NO"/>
                         <color key="backgroundColor" name="darkBlue"/>
                         <constraints>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="bottom" secondItem="f6j-nd-oP6" secondAttribute="bottom" constant="20" id="6uo-1I-RBj"/>
                             <constraint firstItem="1qB-HJ-O7o" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="20" id="82W-8g-oRH"/>
+                            <constraint firstItem="nXL-ze-Wqi" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="20" id="8dw-00-J0g"/>
                             <constraint firstItem="f6j-nd-oP6" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="5" id="BMq-Ms-lBP"/>
+                            <constraint firstItem="f6j-nd-oP6" firstAttribute="top" secondItem="nXL-ze-Wqi" secondAttribute="bottom" constant="35" id="Lvf-9r-ap5"/>
+                            <constraint firstItem="lty-6h-ZZb" firstAttribute="top" secondItem="1qB-HJ-O7o" secondAttribute="bottom" constant="20" id="MbK-tf-E3Y"/>
                             <constraint firstItem="1qB-HJ-O7o" firstAttribute="top" secondItem="9Uu-0j-6NO" secondAttribute="top" constant="20" id="TIW-fo-80P"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="1qB-HJ-O7o" secondAttribute="trailing" constant="20" id="VIh-7Y-b5f"/>
-                            <constraint firstItem="f6j-nd-oP6" firstAttribute="top" secondItem="1QR-we-POJ" secondAttribute="bottom" constant="20" id="adc-La-1Zg"/>
-                            <constraint firstItem="1QR-we-POJ" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="10" id="gwn-xr-xF8"/>
+                            <constraint firstItem="nXL-ze-Wqi" firstAttribute="top" secondItem="1qB-HJ-O7o" secondAttribute="bottom" constant="20" id="gQB-hb-Ijb"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="f6j-nd-oP6" secondAttribute="trailing" constant="5" id="mQb-BS-kWu"/>
-                            <constraint firstItem="1QR-we-POJ" firstAttribute="top" secondItem="1qB-HJ-O7o" secondAttribute="bottom" constant="20" id="wxm-Mm-H3Y"/>
-                            <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="1QR-we-POJ" secondAttribute="trailing" constant="10" id="zv4-Q8-kNq"/>
+                            <constraint firstItem="f6j-nd-oP6" firstAttribute="top" secondItem="lty-6h-ZZb" secondAttribute="bottom" constant="35" id="otU-5i-2jX"/>
+                            <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="lty-6h-ZZb" secondAttribute="trailing" constant="20" id="y3G-V6-Zxb"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="courseLevelName" destination="1QR-we-POJ" id="4pZ-xA-YoP"/>
                         <outlet property="courseName" destination="1qB-HJ-O7o" id="o0E-Jd-q66"/>
                         <outlet property="tableView" destination="f6j-nd-oP6" id="XBe-mR-Mub"/>
                     </connections>

@@ -1,0 +1,53 @@
+//
+//  NewLessonScreenCoordinator.swift
+//  EgitimPlatformuAI
+//
+//  Created by Başar Noyan on 12.06.2025.
+//
+
+import Foundation
+import UIKit
+
+public final class NewLessonScreenCoordinator: Coordinator {
+    private static var instance: NewLessonScreenCoordinator?
+    
+    static func getInstance() -> NewLessonScreenCoordinator {
+        if instance == nil {
+            instance = NewLessonScreenCoordinator()
+        }
+        return instance!
+    }
+    
+    var navigationController = UINavigationController()
+    
+    func start() {
+        let storyboard = UIStoryboard(name: "NewLessonScreen", bundle: nil)
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "NewLessonScreen")
+                as? NewLessonScreenViewController else {
+            fatalError("Failed to instantiate NewLessonScreenViewController")
+        }
+        
+        let viewModel = NewLessonScreenViewModel(coordinator: self, selectedLessonId: nil)
+        viewController.viewModel = viewModel
+        if navigationController.viewControllers.isEmpty {
+            navigationController.viewControllers = [viewController]
+        } else {
+            navigationController.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func start(with viewModel: NewLessonScreenViewModel) {
+        let storyboard = UIStoryboard(name: "NewLessonScreen", bundle: nil)
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "NewLessonScreen") as? NewLessonScreenViewController else {
+            fatalError("Failed to instantiate NewLessonScreenViewController")
+        }
+
+        viewController.viewModel = viewModel
+
+        if navigationController.viewControllers.isEmpty {
+            navigationController.viewControllers = [viewController]
+        }
+    }
+    
+    
+}
