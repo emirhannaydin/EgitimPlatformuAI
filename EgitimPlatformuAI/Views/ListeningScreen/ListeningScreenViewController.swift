@@ -92,7 +92,23 @@ final class ListeningScreenViewController: UIViewController {
         tapToSoundImageLabel.isHidden = false
         cantListenLabel.isHidden = true
         guard currentIndex < viewModel.questions.count else {
-            showAlert(title: "Test Done", message: "")
+            let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
+            viewModel.completeLesson(studentId: userID, lessonId: viewModel.lessonId!) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let isCompleted):
+                        if isCompleted {
+                            self.showAlert(title: "Success", message: "The lesson completed..") {
+                                self.navigationController?.popViewController(animated: true)
+                            }
+                        } else {
+                            self.showAlert(title: "Error", message: "Failed to complete the lesson.")
+                        }
+                    case .failure(let error):
+                        self.showAlert(title: "Hata", message: error.localizedDescription)
+                    }
+                }
+            }
             return
         }
         let currentQuestion = viewModel.questions[currentIndex]
@@ -202,10 +218,8 @@ final class ListeningScreenViewController: UIViewController {
             self.hideLottieLoading()
             cell.contentView.backgroundColor = .systemGreen
             customContinueView.setCorrectAnswer()
-            customContinueView.animateIn()
-            customContinueView.continueButton.addTarget(self, action: #selector(nextQuestion), for: .touchUpInside)
-        }
- else {
+            
+        } else {
             cell.contentView.backgroundColor = .systemRed
             customContinueView.setWrongAnswer()
 
@@ -225,6 +239,8 @@ final class ListeningScreenViewController: UIViewController {
 
             viewModel.sendMessage(aiMessage)
         }
+        customContinueView.animateIn()
+        customContinueView.continueButton.addTarget(self, action: #selector(nextQuestion), for: .touchUpInside)
     }
 
     @IBAction func cantHearButton(_ sender: Any) {
