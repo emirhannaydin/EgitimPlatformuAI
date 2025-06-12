@@ -35,7 +35,9 @@ struct Lesson: Codable {
     let order: Int
     let classId: String
     let content: String
-    let isCompleted: Bool
+    let isCompleted: Bool?
+    let students: [String]?
+    let questions: [String]?
 }
 
 struct CourseClass: Codable {

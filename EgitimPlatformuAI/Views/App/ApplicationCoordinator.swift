@@ -18,6 +18,8 @@ final class ApplicationCoordinator: Coordinator {
     var navigationController = UINavigationController()
     var window: UIWindow?
     let tabBarCoordinator = TabBarCoordinator.getInstance()
+    let teacherCoordinator = TeacherScreenCoordinator.getInstance()
+
     func start() {
         let loginCoordinator = LoginScreenCoordinator.getInstance()
         loginCoordinator.start()
@@ -49,6 +51,9 @@ final class ApplicationCoordinator: Coordinator {
     func navigateToLevelScreen(){
         
     }
+    func navigateToAddQuestionScreen(){
+        pushToAddQuestionScreen()
+    }
 
     func initTabBar(){
         tabBarCoordinator.start()
@@ -61,6 +66,16 @@ final class ApplicationCoordinator: Coordinator {
             window.makeKeyAndVisible()
         }
 
+    }
+    
+    func initTeacherScreen(){
+        teacherCoordinator.start()
+        if let window = self.window {
+            UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                self.window?.rootViewController = self.teacherCoordinator.navigationController
+            })
+            window.makeKeyAndVisible()
+        }
     }
     func pushFromTabBarCoordinator<T: Coordinator>(_ coordinatorType: T.Type, hidesBottomBar: Bool) {
        
@@ -83,6 +98,14 @@ final class ApplicationCoordinator: Coordinator {
 
         newVC.hidesBottomBarWhenPushed = hidesBottomBar
         navController.pushViewController(newVC, animated: true)
+    }
+    
+    func pushFromTeacherScreenCoordinatorAndVariables(_ coordinator: Coordinator, hidesBottomBar: Bool = false) {
+        let navController = teacherCoordinator.navigationController
+        if let newVC = coordinator.navigationController.viewControllers.first {
+            newVC.hidesBottomBarWhenPushed = hidesBottomBar
+            navController.pushViewController(newVC, animated: true)
+        }
     }
 
     func pushToTeacherScreen(){
@@ -144,11 +167,32 @@ final class ApplicationCoordinator: Coordinator {
             }
         }
     }
+    
+    func pushToAddQuestionScreen() {
+        let navController = LoginScreenCoordinator.getInstance().navigationController
+
+        if let existingLoginVC = navController.viewControllers.first(where: { $0 is AddQuestionScreenViewController }) {
+            navController.popToViewController(existingLoginVC, animated: true)
+        } else {
+            let mainLoginCoordinator = AddQuestionScreenCoordinator.getInstance()
+            mainLoginCoordinator.start()
+            
+            if let mainLoginVC = mainLoginCoordinator.navigationController.viewControllers.first {
+                navController.pushViewController(mainLoginVC, animated: true)
+            }
+        }
+    }
 
     func handleCourseEntry(with viewModel: CourseScreenViewModel) {
         let coordinator = CourseScreenCoordinator.getInstance()
         coordinator.start(with: viewModel)
         pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+    }
+    
+    func handleAddQuestionEntry(with viewModel: AddQuestionScreenViewModel) {
+        let coordinator = AddQuestionScreenCoordinator.getInstance()
+        coordinator.start(with: viewModel)
+        pushFromTeacherScreenCoordinatorAndVariables(coordinator, hidesBottomBar: true)
     }
 
 

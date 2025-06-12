@@ -1,22 +1,21 @@
 //
-//  ListeningFirstScreenViewController.swift
+//  AddQuestionScreenViewController.swift
 //  EgitimPlatformuAI
 //
-//  Created by Emirhan Aydın on 13.05.2025.
+//  Created by Başar Noyan on 9.06.2025.
 //
 
-import Foundation
 import UIKit
+import Foundation
+import Lottie
 
-final class CourseScreenViewController: UIViewController{
-
+final class AddQuestionScreenViewController: UIViewController{
     
-    var viewModel: CourseScreenViewModel!
-
+    var viewModel: AddQuestionScreenViewModel!
+    @IBOutlet var courseName: UILabel!
     @IBOutlet var courseLevelName: UILabel!
     @IBOutlet var tableView: UITableView!
-    @IBOutlet var courseName: UILabel!
-    
+
     var sections: [TestSection] {
         return viewModel.sections
     }
@@ -32,15 +31,17 @@ final class CourseScreenViewController: UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         fetchCourseLessons()
+
     }
+    
 }
 
-// MARK: - Setup Methods
-private extension CourseScreenViewController {
+private extension AddQuestionScreenViewController {
     func setupUI() {
         courseName.layer.borderWidth = 1
         courseName.layer.borderColor = UIColor.black.cgColor
         courseName.layer.masksToBounds = true
+
     }
 
     func setupTableView() {
@@ -90,7 +91,7 @@ private extension CourseScreenViewController {
 }
 
 // MARK: - TableView DataSource & Delegate
-extension CourseScreenViewController: UITableViewDataSource, UITableViewDelegate {
+extension AddQuestionScreenViewController: UITableViewDataSource, UITableViewDelegate {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
@@ -154,7 +155,7 @@ extension CourseScreenViewController: UITableViewDataSource, UITableViewDelegate
 }
 
 // MARK: - Gesture Handling
-extension CourseScreenViewController: UIGestureRecognizerDelegate {
+extension AddQuestionScreenViewController: UIGestureRecognizerDelegate {
     @objc private func handleTableViewTap(_ gesture: UITapGestureRecognizer) {
         let location = gesture.location(in: tableView)
         if tableView.indexPathForRow(at: location) != nil { return }
@@ -168,3 +169,6 @@ extension CourseScreenViewController: UIGestureRecognizerDelegate {
         return true
     }
 }
+
+
+

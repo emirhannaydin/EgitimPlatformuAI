@@ -7,18 +7,18 @@
 
 class TeacherScreenViewModel{
     var coordinator: TeacherScreenCoordinator?
-    var courseClasses: [CourseClass] = []
+    var courses: [Course] = []
     
     init(coordinator: TeacherScreenCoordinator?) {
         self.coordinator = coordinator
     }
     
-    func loadCourseClasses(teacherId: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        NetworkManager.shared.fetchCourseClasses(for: teacherId) { [weak self] result in
+    func getCourses(completion: @escaping (Result<[Course], Error>) -> Void) {
+        NetworkManager.shared.getCourses { result in
             switch result {
-            case .success(let classes):
-                self?.courseClasses = classes
-                completion(.success(()))
+            case .success(let courses):
+                self.courses = courses
+                completion(.success(courses))
             case .failure(let error):
                 completion(.failure(error))
             }

@@ -14,6 +14,8 @@ class MainLoginScreenViewController: UIViewController {
     @IBOutlet var emailText: UITextField!
     @IBOutlet var passwordText: UITextField!
     @IBOutlet var backButton: CustomBackButtonView!
+    var user: User?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
@@ -59,9 +61,11 @@ class MainLoginScreenViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success:
+                    guard let user = self?.viewModel?.user else { return }
+                    self?.user = user
                     if let currentUserID = UserDefaults.standard.string(forKey: "userID") {
-                        if self?.viewModel?.mail == "e"{ // teacher girişi için mail şifre e e
-                            ApplicationCoordinator.getInstance().pushToTeacherScreen()
+                        if self?.user?.userType == 0{
+                            ApplicationCoordinator.getInstance().initTeacherScreen()
                         }else{
                             let hasSubmittedKey = "hasSubmittedLevels_\(currentUserID)"
                             let hasSubmitted = UserDefaults.standard.bool(forKey: hasSubmittedKey)
