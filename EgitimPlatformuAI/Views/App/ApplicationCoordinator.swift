@@ -22,6 +22,7 @@ final class ApplicationCoordinator: Coordinator {
 
     func start() {
         let loginCoordinator = LoginScreenCoordinator.getInstance()
+        loginCoordinator.navigationController = UINavigationController()
         loginCoordinator.start()
         if let window = self.window {
             UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {

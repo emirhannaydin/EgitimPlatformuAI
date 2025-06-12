@@ -18,7 +18,7 @@ class MainLoginScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +38,11 @@ class MainLoginScreenViewController: UIViewController {
 
     }
     
+    private func setupUI(){
+        backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        setupPasswordToggle(for: passwordText)
+    }
+    
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
@@ -45,6 +50,7 @@ class MainLoginScreenViewController: UIViewController {
     @IBAction func registerNowButton(_ sender: Any) {
         ApplicationCoordinator.getInstance().navigateToRegister()
     }
+
     
     @IBAction func loginButton(_ sender: Any) {
         login()

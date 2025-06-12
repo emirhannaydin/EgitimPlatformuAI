@@ -102,6 +102,27 @@ extension UIViewController {
         
     }
     
+    func setupPasswordToggle(for textField: UITextField) {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+        button.tintColor = .gray
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.addTarget(self, action: #selector(togglePasswordVisibility(_:)), for: .touchUpInside)
+        
+        textField.rightView = button
+        textField.rightViewMode = .always
+        textField.isSecureTextEntry = true
+    }
+    
+    @objc func togglePasswordVisibility(_ sender: UIButton) {
+        guard let textField = sender.superview as? UITextField ?? (sender.superview?.superview as? UITextField) else { return }
+
+        textField.isSecureTextEntry.toggle()
+        
+        let imageName = textField.isSecureTextEntry ? "eye.slash" : "eye"
+        sender.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+    
 }
 
 
