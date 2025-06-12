@@ -43,11 +43,18 @@ public final class NewLessonScreenCoordinator: Coordinator {
         }
 
         viewController.viewModel = viewModel
+        viewController.modalPresentationStyle = .pageSheet
 
-        if navigationController.viewControllers.isEmpty {
-            navigationController.viewControllers = [viewController]
+        if #available(iOS 15.0, *) {
+            if let sheet = viewController.sheetPresentationController {
+                sheet.detents = [.medium(), .large()]
+                sheet.prefersGrabberVisible = true
+            }
         }
+
+        UIApplication.shared.windows.first?.rootViewController?.present(viewController, animated: true)
     }
+
     
     
 }

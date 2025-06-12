@@ -110,6 +110,7 @@ extension AddQuestionScreenViewController: UITableViewDataSource, UITableViewDel
         cell.levelName.text = lesson.content
         let checkImage = lesson.isCompleted! ? "checkmark.circle.fill" : "checkmark.circle"
         cell.checkImage.image = UIImage(systemName: checkImage)
+
         return cell
     }
 

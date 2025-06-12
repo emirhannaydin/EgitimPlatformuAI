@@ -44,10 +44,20 @@ public final class NewQuestionScreenCoordinator: Coordinator {
 
         viewController.viewModel = viewModel
 
-        if navigationController.viewControllers.isEmpty {
-            navigationController.viewControllers = [viewController]
+        viewController.modalPresentationStyle = .pageSheet
+        
+        if #available(iOS 15.0, *) {
+            if let sheet = viewController.sheetPresentationController {
+                sheet.detents = [.medium(), .large()]
+                sheet.prefersGrabberVisible = true
+            }
         }
+
+
+        UIApplication.shared.windows.first?.rootViewController?.present(viewController, animated: true)
     }
+
+
     
     
 }
