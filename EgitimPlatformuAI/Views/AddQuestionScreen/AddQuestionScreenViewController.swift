@@ -13,8 +13,9 @@ final class AddQuestionScreenViewController: UIViewController{
     
     var viewModel: AddQuestionScreenViewModel!
     @IBOutlet var courseName: UILabel!
-    @IBOutlet var courseLevelName: UILabel!
     @IBOutlet var tableView: UITableView!
+    var lessonId: String!
+    
 
     var sections: [TestSection] {
         return viewModel.sections
@@ -33,7 +34,20 @@ final class AddQuestionScreenViewController: UIViewController{
         fetchCourseLessons()
 
     }
+
+    @IBAction func addLessonButtonTapped(_ sender: Any) {
+        let coordinator = NewLessonScreenCoordinator.getInstance()
+        let viewModel = NewLessonScreenViewModel(coordinator: coordinator, selectedLessonId: lessonId)
+        coordinator.start(with: viewModel)
+        ApplicationCoordinator.getInstance().pushFromTeacherScreenCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+    }
     
+    @IBAction func addQuestionButtonTapped(_ sender: Any) {
+        let coordinator = NewQuestionScreenCoordinator.getInstance()
+        let viewModel = NewQuestionScreenViewModel(coordinator: coordinator, selectedLessonId: lessonId)
+        coordinator.start(with: viewModel)
+        ApplicationCoordinator.getInstance().pushFromTeacherScreenCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+    }
 }
 
 private extension AddQuestionScreenViewController {
@@ -59,6 +73,7 @@ private extension AddQuestionScreenViewController {
         tapGesture.delegate = self
     }
 
+
     func fetchCourseLessons() {
         let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
         viewModel.loadCourseLessons(studentId: userID) { [weak self] result in
@@ -69,18 +84,6 @@ private extension AddQuestionScreenViewController {
                     if let courseName = self?.viewModel.courseClasses[0].courseName {
                         self?.courseName.text = "\(courseName) Class"
                     }
-                    if let level = self?.viewModel.courseLevelName {
-                        let levelText = self?.viewModel.levelTextForString(for: level) ?? "-"
-                        
-                        let fullText = "Current Level = \(levelText)"
-                        let attributedText = NSMutableAttributedString(string: fullText)
-                        
-                        let range = (fullText as NSString).range(of: levelText)
-                        attributedText.addAttribute(.foregroundColor, value: UIColor.summer, range: range)
-
-                        self?.courseLevelName.attributedText = attributedText
-                    }
-
                     self?.tableView.reloadData()
                 case .failure(let error):
                     self?.showAlert(title: "Error", message: error.localizedDescription)
@@ -107,6 +110,7 @@ extension AddQuestionScreenViewController: UITableViewDataSource, UITableViewDel
         cell.levelName.text = lesson.content
         let checkImage = lesson.isCompleted! ? "checkmark.circle.fill" : "checkmark.circle"
         cell.checkImage.image = UIImage(systemName: checkImage)
+
         return cell
     }
 
@@ -121,8 +125,9 @@ extension AddQuestionScreenViewController: UITableViewDataSource, UITableViewDel
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let lessonId = sections[indexPath.section].tests[indexPath.row].id
-        print(lessonId)
+        self.lessonId = sections[indexPath.section].tests[indexPath.row].id
+        let selectedLessonId = sections[indexPath.section].tests[indexPath.row].id
+        viewModel.selectedLessonId = selectedLessonId
         switch self.viewModel.courseClasses[0].courseName {
         case "Writing":
             let coordinator = WritingScreenCoordinator.getInstance()
