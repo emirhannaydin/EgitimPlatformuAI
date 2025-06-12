@@ -15,6 +15,7 @@ final class AddQuestionScreenViewController: UIViewController{
     @IBOutlet var courseName: UILabel!
     @IBOutlet var tableView: UITableView!
     var lessonId: String!
+    var courseId: String!
     
 
     var sections: [TestSection] {

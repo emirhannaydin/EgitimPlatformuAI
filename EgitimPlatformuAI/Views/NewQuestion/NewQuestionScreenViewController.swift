@@ -7,14 +7,17 @@
 
 import Foundation
 import UIKit
+import Lottie
 
 final class NewQuestionScreenViewController: UIViewController {
     var viewModel: NewQuestionScreenViewModel!
+    @IBOutlet var lottieView: LottieAnimationView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print(viewModel.selectedLessonId!)
+        setLottieAnimation()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -30,6 +33,14 @@ final class NewQuestionScreenViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         self.navigationController?.isNavigationBarHidden = false
+    }
+
+    private func setLottieAnimation(){
+        let animation = LottieAnimation.named("questionAnimation")
+        lottieView.animation = animation
+        lottieView.contentMode = .scaleAspectFit
+        lottieView.loopMode = .loop
+        lottieView.play()
     }
     
 }

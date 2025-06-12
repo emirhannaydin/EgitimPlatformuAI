@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,9 +16,105 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dx0-VB-ZfD" customClass="LottieAnimationView" customModule="Lottie">
+                                <rect key="frame" x="159" y="89" width="75" height="75"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="0A5-9v-7EV"/>
+                                    <constraint firstAttribute="width" constant="75" id="9Ss-Pd-rHL"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="5rY-xO-ofB">
+                                <rect key="frame" x="20" y="513.66666666666663" width="353" height="210"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DwT-Ut-5i4">
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="34"/>
+                                        <color key="backgroundColor" name="aliceblUE"/>
+                                        <color key="textColor" name="darkBlue"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 2" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xIA-NY-Xu5">
+                                        <rect key="frame" x="0.0" y="44" width="353" height="34"/>
+                                        <color key="backgroundColor" name="aliceblUE"/>
+                                        <color key="textColor" name="darkBlue"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 3" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ht5-tf-YdQ">
+                                        <rect key="frame" x="0.0" y="88" width="353" height="34"/>
+                                        <color key="backgroundColor" name="aliceblUE"/>
+                                        <color key="textColor" name="darkBlue"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 4" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YE9-mo-dhg">
+                                        <rect key="frame" x="0.0" y="132" width="353" height="34"/>
+                                        <color key="backgroundColor" name="aliceblUE"/>
+                                        <color key="textColor" name="darkBlue"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the Correct Answer" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lc7-c2-3sT">
+                                        <rect key="frame" x="0.0" y="176" width="353" height="34"/>
+                                        <color key="backgroundColor" name="aliceblUE"/>
+                                        <color key="textColor" name="darkBlue"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the Question" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CNB-Ia-y9T">
+                                <rect key="frame" x="20" y="449.66666666666669" width="353" height="34"/>
+                                <color key="backgroundColor" name="aliceblUE"/>
+                                <color key="textColor" name="darkBlue"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rXR-Q5-Bv4">
+                                <rect key="frame" x="132.66666666666666" y="753.66666666666663" width="127.66666666666666" height="34.333333333333371"/>
+                                <color key="backgroundColor" name="sapphireBlue"/>
+                                <color key="tintColor" name="porcelain"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Add Question"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Example Question" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="O9j-9L-fBf">
+                                <rect key="frame" x="20" y="184" width="353" height="235.66666666666663"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" name="softBlue"/>
+                        <color key="backgroundColor" name="charcoal"/>
+                        <constraints>
+                            <constraint firstItem="5rY-xO-ofB" firstAttribute="top" secondItem="CNB-Ia-y9T" secondAttribute="bottom" constant="30" id="0SO-m8-yRv"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="rXR-Q5-Bv4" secondAttribute="bottom" constant="30" id="0vS-fe-PYd"/>
+                            <constraint firstItem="CNB-Ia-y9T" firstAttribute="top" secondItem="O9j-9L-fBf" secondAttribute="bottom" constant="30" id="3Dc-h4-YQw"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CNB-Ia-y9T" secondAttribute="trailing" constant="20" id="Gg9-3r-N5L"/>
+                            <constraint firstItem="dx0-VB-ZfD" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="30" id="IVV-bS-aoJ"/>
+                            <constraint firstItem="dx0-VB-ZfD" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="OfU-Uv-IBz"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="5rY-xO-ofB" secondAttribute="trailing" constant="20" id="eLO-c7-Pao"/>
+                            <constraint firstItem="O9j-9L-fBf" firstAttribute="top" secondItem="dx0-VB-ZfD" secondAttribute="bottom" constant="20" id="fBd-F0-yZi"/>
+                            <constraint firstItem="rXR-Q5-Bv4" firstAttribute="top" secondItem="5rY-xO-ofB" secondAttribute="bottom" constant="30" id="gUS-oG-wxq"/>
+                            <constraint firstItem="rXR-Q5-Bv4" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="hzP-NB-6MP"/>
+                            <constraint firstItem="CNB-Ia-y9T" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="iQk-CT-V4W"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="O9j-9L-fBf" secondAttribute="trailing" constant="20" id="pz9-hf-sgZ"/>
+                            <constraint firstItem="5rY-xO-ofB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="qCJ-Yu-RNz"/>
+                            <constraint firstItem="O9j-9L-fBf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="yhW-AV-itW"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="lottieView" destination="dx0-VB-ZfD" id="IGP-ah-Fdk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -25,8 +122,26 @@
         </scene>
     </scenes>
     <resources>
-        <namedColor name="softBlue">
-            <color red="0.8901960784313725" green="0.94901960784313721" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="aliceblUE">
+            <color red="0.96078431372549022" green="0.97647058823529409" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="charcoal">
+            <color red="0.17254901960784313" green="0.20000000000000001" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="darkBlue">
+            <color red="0.11764705882352941" green="0.13725490196078433" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="porcelain">
+            <color red="0.96862745098039216" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="sapphireBlue">
+            <color red="0.23921568627450981" green="0.41960784313725491" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

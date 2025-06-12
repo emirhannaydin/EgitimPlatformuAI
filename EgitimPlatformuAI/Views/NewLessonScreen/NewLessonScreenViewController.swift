@@ -7,18 +7,21 @@
 
 import Foundation
 import UIKit
+import Lottie
 
 final class NewLessonScreenViewController: UIViewController {
     var viewModel: NewLessonScreenViewModel!
     @IBOutlet var levelTextField: UITextField!
     let pickerView = UIPickerView()
     let options = ["A1", "A2", "B1", "B2", "C1", "C2"]
+    @IBOutlet var lottieView: LottieAnimationView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print(viewModel.selectedLessonId!)
         setupLevelTextField()
+        setLottieAnimation()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -55,6 +58,14 @@ final class NewLessonScreenViewController: UIViewController {
     
     @objc func doneTapped() {
         levelTextField.resignFirstResponder()
+    }
+    
+    private func setLottieAnimation(){
+        let animation = LottieAnimation.named("bookAnimation")
+        lottieView.animation = animation
+        lottieView.contentMode = .scaleAspectFit
+        lottieView.loopMode = .loop
+        lottieView.play()
     }
     
 }

@@ -47,7 +47,7 @@ public final class NewQuestionScreenCoordinator: Coordinator {
 
         if #available(iOS 15.0, *) {
             if let sheet = viewController.sheetPresentationController {
-                sheet.detents = [.medium()] // Sadece medium, yukarı çıkamaz
+                sheet.detents = [.large()] // Sadece medium, yukarı çıkamaz
                 sheet.prefersGrabberVisible = true // Yukarıdaki çubuk
                 sheet.largestUndimmedDetentIdentifier = .medium // Arka planı karart
                 sheet.prefersScrollingExpandsWhenScrolledToEdge = false // Scroll varsa büyümesin
