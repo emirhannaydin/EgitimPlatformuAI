@@ -133,6 +133,7 @@
                         <outlet property="emailText" destination="wTj-vj-Pyc" id="Zuw-sl-rOj"/>
                         <outlet property="loginButton" destination="dv3-jb-sG4" id="72b-4l-Qen"/>
                         <outlet property="passwordText" destination="y5r-zH-K88" id="C3c-yY-TND"/>
+                        <outlet property="registerNowButton" destination="DSn-FK-9Yz" id="dSP-2v-jOm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

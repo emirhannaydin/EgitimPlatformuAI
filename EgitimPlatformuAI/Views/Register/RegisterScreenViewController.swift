@@ -85,6 +85,19 @@ class RegisterScreenViewController: UIViewController {
                 attributes: [.foregroundColor: UIColor.backDarkBlue.withAlphaComponent(0.5)]
             )
         
+        let loginText = "Login Now"
+        let fullText = "Already have an account? \(loginText)"
+        let attributedText = NSMutableAttributedString(string: fullText)
+
+        let fullRange = NSRange(location: 0, length: fullText.count)
+        attributedText.addAttribute(.font, value: UIFont(name: "HelveticaNeue", size: 15)!, range: fullRange)
+
+        let loginRange = (fullText as NSString).range(of: loginText)
+        attributedText.addAttribute(.foregroundColor, value: UIColor.summer, range: loginRange)
+        attributedText.addAttribute(.font, value: UIFont(name: "HelveticaNeue-Bold", size: 15)!, range: loginRange)
+
+        loginNowButton.setAttributedTitle(attributedText, for: .normal)
+        
     }
 
     @objc func backButtonTapped() {
