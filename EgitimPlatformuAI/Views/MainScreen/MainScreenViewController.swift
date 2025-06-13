@@ -13,6 +13,7 @@ final class MainScreenViewController: UIViewController{
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var collectionView2: UICollectionView!
     
+    @IBOutlet var readingBook: UIButton!
     private var hamburgerMenuManager: HamburgerMenuManager!
     var viewModel: MainScreenViewModel?
 
@@ -47,6 +48,15 @@ final class MainScreenViewController: UIViewController{
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+    }
+    
+    
+    @IBAction func handleReadingBookButton(_ sender: Any) {
+        ApplicationCoordinator.getInstance().pushFromTabBarCoordinator(ReadingBookCoordinator.self, hidesBottomBar: true)
+    }
+    
+    @IBAction func handleWordPuzzleButton(_ sender: Any) {
+        ApplicationCoordinator.getInstance().pushFromTabBarCoordinator(WordPuzzleCoordinator.self, hidesBottomBar: true)
     }
 }
 
@@ -104,6 +114,9 @@ private extension MainScreenViewController {
             }
         }
     }
+    
+    
+    
 }
 
 // MARK: - Collection View

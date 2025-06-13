@@ -20,6 +20,7 @@ final class LoginScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
+        applyGradientBackground()
         hamburgerMenuManager = HamburgerMenuManager(viewController: self)
         removeEdgePanGesture()
         setLoginButton()
@@ -45,14 +46,12 @@ final class LoginScreenViewController: UIViewController {
     }
     
     private func setLoginButton(){
-        loginButton.backgroundColor = .darkBlue
         loginButton.layer.cornerRadius = 8
         loginButton.layer.masksToBounds = true
     }
     private func setRegisterButton(){
         registerButton.layer.cornerRadius = 8
         registerButton.layer.borderWidth = 1
-        registerButton.layer.borderColor = UIColor.darkBlue.cgColor
         loginButton.layer.masksToBounds = true
     }
     private func setLottieAnimation(){

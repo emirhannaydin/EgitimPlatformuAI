@@ -13,6 +13,8 @@ class MainLoginScreenViewController: UIViewController {
     
     @IBOutlet var emailText: UITextField!
     @IBOutlet var passwordText: UITextField!
+    @IBOutlet var loginButton: UIButton!
+    @IBOutlet var registerNowButton: UIButton!
     @IBOutlet var backButton: CustomBackButtonView!
     var user: User?
     
@@ -39,8 +41,43 @@ class MainLoginScreenViewController: UIViewController {
     }
     
     private func setupUI(){
+        applyGradientBackground()
+        hideKeyboardWhenTappedAround()
         backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         setupPasswordToggle(for: passwordText)
+        loginButton.layer.cornerRadius = 8
+        loginButton.layer.masksToBounds = true
+        
+        emailText.layer.borderWidth = 1
+        emailText.layer.borderColor = UIColor.systemGray.cgColor
+        emailText.layer.cornerRadius = 8
+        emailText.layer.masksToBounds = true
+        emailText.attributedPlaceholder = NSAttributedString(
+                string: "Email",
+                attributes: [.foregroundColor: UIColor.backDarkBlue.withAlphaComponent(0.5)]
+            )
+        passwordText.layer.borderWidth = 1
+        passwordText.layer.borderColor = UIColor.systemGray.cgColor
+        passwordText.layer.cornerRadius = 8
+        passwordText.layer.masksToBounds = true
+        passwordText.attributedPlaceholder = NSAttributedString(
+                string: "Password",
+                attributes: [.foregroundColor: UIColor.backDarkBlue.withAlphaComponent(0.5)]
+            )
+        
+        let registerText = "Register Now"
+        let fullText = "Don't have an account? \(registerText)"
+        let attributedText = NSMutableAttributedString(string: fullText)
+
+        let fullRange = NSRange(location: 0, length: fullText.count)
+        attributedText.addAttribute(.font, value: UIFont(name: "HelveticaNeue", size: 15)!, range: fullRange)
+
+        let registerRange = (fullText as NSString).range(of: registerText)
+        attributedText.addAttribute(.foregroundColor, value: UIColor.summer, range: registerRange)
+        attributedText.addAttribute(.font, value: UIFont(name: "HelveticaNeue-Bold", size: 15)!, range: registerRange)
+
+        registerNowButton.setAttributedTitle(attributedText, for: .normal)
+
     }
     
     @objc func backButtonTapped() {

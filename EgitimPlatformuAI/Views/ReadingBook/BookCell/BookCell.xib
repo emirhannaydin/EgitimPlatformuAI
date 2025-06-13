@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BookCell" customModule="EgitimPlatformuAI" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="268" height="390"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UTq-as-1EF">
+                    <rect key="frame" x="0.0" y="0.0" width="268" height="390"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C3g-1L-EKP">
+                            <rect key="frame" x="0.0" y="5" width="268" height="330"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aRh-Im-DA0">
+                            <rect key="frame" x="10" y="335" width="248" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="QNG-yP-YeP"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                            <color key="textColor" name="softBlue"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="aRh-Im-DA0" secondAttribute="trailing" constant="10" id="69Q-uj-DmE"/>
+                        <constraint firstItem="C3g-1L-EKP" firstAttribute="leading" secondItem="UTq-as-1EF" secondAttribute="leading" id="9Ue-Wj-Rbu"/>
+                        <constraint firstAttribute="trailing" secondItem="C3g-1L-EKP" secondAttribute="trailing" id="DiP-QC-qHU"/>
+                        <constraint firstItem="C3g-1L-EKP" firstAttribute="top" secondItem="UTq-as-1EF" secondAttribute="top" constant="5" id="JBn-SO-SxG"/>
+                        <constraint firstItem="aRh-Im-DA0" firstAttribute="top" secondItem="C3g-1L-EKP" secondAttribute="bottom" id="NM8-aY-lNz"/>
+                        <constraint firstItem="aRh-Im-DA0" firstAttribute="leading" secondItem="UTq-as-1EF" secondAttribute="leading" constant="10" id="TtG-nt-QRH"/>
+                        <constraint firstAttribute="bottom" secondItem="aRh-Im-DA0" secondAttribute="bottom" constant="5" id="kyu-UO-k3C"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="UTq-as-1EF" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="9CQ-CY-XLZ"/>
+                <constraint firstItem="UTq-as-1EF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="aiw-b8-wnD"/>
+                <constraint firstAttribute="bottom" secondItem="UTq-as-1EF" secondAttribute="bottom" id="b7A-g7-4di"/>
+                <constraint firstAttribute="trailing" secondItem="UTq-as-1EF" secondAttribute="trailing" id="n2w-0t-Xqx"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imageView" destination="C3g-1L-EKP" id="lP1-4i-grx"/>
+                <outlet property="titleLabel" destination="aRh-Im-DA0" id="KsV-wf-xgB"/>
+            </connections>
+            <point key="canvasLocation" x="44.274809160305338" y="-109.1549295774648"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="softBlue">
+            <color red="0.8901960784313725" green="0.94901960784313721" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

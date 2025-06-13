@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,16 +17,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v960-ning-29" translatesAutoresizingMaskIntoConstraints="NO" id="qAI-pN-EsZ">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Learn Turkish App!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zX-ux-kq1">
                                 <rect key="frame" x="20" y="109" width="353" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="70" id="prn-yL-o3W"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
-                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" name="summer"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qlz-me-u25" customClass="LottieAnimationView" customModule="Lottie">
@@ -34,10 +32,11 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sYU-OU-xh9">
                                 <rect key="frame" x="20" y="713" width="353" height="55"/>
+                                <color key="backgroundColor" name="softBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="I9x-Pa-1Js"/>
                                 </constraints>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" name="backDarkBlue"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Register">
                                     <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
@@ -48,7 +47,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yeg-XB-Nx8">
                                 <rect key="frame" x="20" y="643" width="353" height="55"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" name="backDarkBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="Nmy-PP-S55"/>
                                 </constraints>
@@ -66,22 +65,18 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="5zX-ux-kq1" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="0gp-QE-2AM"/>
-                            <constraint firstItem="qAI-pN-EsZ" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="9bg-Im-fGk"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="sYU-OU-xh9" secondAttribute="trailing" constant="20" id="IN8-gn-uVf"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Qlz-me-u25" secondAttribute="trailing" constant="20" id="M9o-Tr-WVR"/>
                             <constraint firstItem="Qlz-me-u25" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="TWI-Zm-xfE"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="5zX-ux-kq1" secondAttribute="trailing" constant="20" id="TwO-z6-lCA"/>
                             <constraint firstItem="Qlz-me-u25" firstAttribute="top" secondItem="5zX-ux-kq1" secondAttribute="bottom" constant="50" id="UV9-N0-nDQ"/>
-                            <constraint firstItem="qAI-pN-EsZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="cH2-hA-Stn"/>
                             <constraint firstItem="Yeg-XB-Nx8" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="eeT-D9-euh"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Yeg-XB-Nx8" secondAttribute="trailing" constant="20" id="g93-Ts-iNi"/>
                             <constraint firstItem="sYU-OU-xh9" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="jas-ub-tlg"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="qAI-pN-EsZ" secondAttribute="trailing" id="jiq-Ou-WPy"/>
                             <constraint firstItem="sYU-OU-xh9" firstAttribute="top" secondItem="Yeg-XB-Nx8" secondAttribute="bottom" constant="15" id="kY9-Yb-kq7"/>
                             <constraint firstItem="Yeg-XB-Nx8" firstAttribute="top" secondItem="Qlz-me-u25" secondAttribute="bottom" constant="50" id="kpl-jX-ign"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="sYU-OU-xh9" secondAttribute="bottom" constant="50" id="ouu-Ld-Okb"/>
                             <constraint firstItem="5zX-ux-kq1" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="50" id="wyx-YG-m1J"/>
-                            <constraint firstAttribute="bottom" secondItem="qAI-pN-EsZ" secondAttribute="bottom" id="xoX-BJ-vMF"/>
                         </constraints>
                     </view>
                     <connections>
@@ -96,7 +91,15 @@
         </scene>
     </scenes>
     <resources>
-        <image name="v960-ning-29" width="5000" height="3333"/>
+        <namedColor name="backDarkBlue">
+            <color red="0.10588235294117647" green="0.12549019607843137" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="softBlue">
+            <color red="0.8901960784313725" green="0.94901960784313721" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="summer">
+            <color red="0.94117647058823528" green="0.73333333333333328" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
