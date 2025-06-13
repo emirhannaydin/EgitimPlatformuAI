@@ -139,15 +139,20 @@ extension UIViewController {
         }
     
     func hideKeyboardWhenTappedAround() {
-            let tapGesture = UITapGestureRecognizer(target: self,
-                                                    action: #selector(dismissKeyboard))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
             tapGesture.cancelsTouchesInView = false
             view.addGestureRecognizer(tapGesture)
         }
 
-        @objc private func dismissKeyboard() {
-            view.endEditing(true)
-        }
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
     
 }
 

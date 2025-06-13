@@ -22,6 +22,7 @@ class RegisterScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
+        nameLabel.becomeFirstResponder()
         setupUI()
         
     }
@@ -29,12 +30,20 @@ class RegisterScreenViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.isNavigationBarHidden = true
+        
+        nameLabel.text = ""
+        emailLabel.text = ""
+        passwordLabel.text = ""
+        confirmPasswordLabel.text = ""
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         self.navigationController?.isNavigationBarHidden = false
+        view.endEditing(true)
+
     }
     private func setupUI(){
         applyGradientBackground()
@@ -155,12 +164,4 @@ class RegisterScreenViewController: UIViewController {
 
 }
 
-extension RegisterScreenViewController{
-    private func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
-    }
-
-}
 

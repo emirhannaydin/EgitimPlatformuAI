@@ -29,9 +29,6 @@ class NetworkManager {
             let jsonData = try JSONEncoder().encode(request)
             urlRequest.httpBody = jsonData
 
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                print("Giden JSON: \(jsonString)")
-            }
         } catch {
             completion(.failure(error))
             return
@@ -126,6 +123,226 @@ class NetworkManager {
 
         }.resume()
     }
+    
+    func verifyEmail(userId: String, code: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        
+        let endPoint = "Account/VerifyEmail"
+        guard let url = URL(string: "\(baseUrl)\(endPoint)") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0)))
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("*/*", forHTTPHeaderField: "accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let body: [String: Any] = [
+            "userId": userId,
+            "code": code
+        ]
+
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+        } catch {
+            completion(.failure(error))
+            return
+        }
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(NSError(domain: "No response", code: 0)))
+                return
+            }
+
+            guard let data = data,
+                  let message = String(data: data, encoding: .utf8) else {
+                completion(.failure(NSError(domain: "Empty message", code: 0)))
+                return
+            }
+
+            if (200..<300).contains(httpResponse.statusCode) {
+                completion(.success(()))
+            } else {
+                let backendError = NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: message])
+                completion(.failure(backendError))
+            }
+
+        }.resume()
+    }
+
+    func forgotPasswordRequest(email: String, completion: @escaping (Result<String, Error>) -> Void) {
+        let endPoint = "Account/ForgotPasswordMail"
+        guard let url = URL(string: "\(baseUrl)\(endPoint)") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0)))
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("*/*", forHTTPHeaderField: "accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let body: [String: Any] = [
+            "email": email
+        ]
+
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+        } catch {
+            completion(.failure(error))
+            return
+        }
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(NSError(domain: "No response", code: 0)))
+                return
+            }
+
+            guard let data = data,
+                  let userIdString = String(data: data, encoding: .utf8) else {
+                completion(.failure(NSError(domain: "No data or invalid encoding", code: 0)))
+                return
+            }
+
+            if (200..<300).contains(httpResponse.statusCode) {
+                completion(.success(userIdString))
+            } else {
+                let backendError = NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: userIdString])
+                completion(.failure(backendError))
+            }
+        }.resume()
+    }
+    
+    func forgotPasswordOTP(userId: String, otpCode: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        
+        let endPoint = "Account/ForgotPasswordCodeCheck"
+        guard let url = URL(string: "\(baseUrl)\(endPoint)") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0)))
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("*/*", forHTTPHeaderField: "accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let body: [String: Any] = [
+            "userId": userId,
+            "code": otpCode
+        ]
+
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+        } catch {
+            completion(.failure(error))
+            return
+        }
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(NSError(domain: "No response", code: 0)))
+                return
+            }
+
+            guard let data = data else {
+                completion(.failure(NSError(domain: "No data", code: 0)))
+                return
+            }
+
+            if (200..<300).contains(httpResponse.statusCode) {
+                do {
+                    let result = try JSONDecoder().decode(Bool.self, from: data)
+                    completion(.success(result))
+                } catch {
+                    completion(.failure(error))
+                }
+            } else {
+                let message = String(data: data, encoding: .utf8) ?? "Unknown error"
+                let backendError = NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: message])
+                completion(.failure(backendError))
+            }
+
+        }.resume()
+    }
+
+    func resetPassword(userId: String, password: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        
+        let endPoint = "Account/ForgotPasswordChange"
+        guard let url = URL(string: "\(baseUrl)\(endPoint)") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0)))
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("*/*", forHTTPHeaderField: "accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let body: [String: Any] = [
+            "userId": userId,
+            "newPassword": password
+        ]
+
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+        } catch {
+            completion(.failure(error))
+            return
+        }
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(NSError(domain: "No response", code: 0)))
+                return
+            }
+
+            guard let data = data else {
+                completion(.failure(NSError(domain: "No data", code: 0)))
+                return
+            }
+
+            if (200..<300).contains(httpResponse.statusCode) {
+                do {
+                    let result = try JSONDecoder().decode(Bool.self, from: data)
+                    completion(.success(result))
+                } catch {
+                    completion(.failure(error))
+                }
+            } else {
+                let message = String(data: data, encoding: .utf8) ?? "Unknown error"
+                let backendError = NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: message])
+                completion(.failure(backendError))
+            }
+
+        }.resume()
+    }
+
+
     
     func getCourses(completion: @escaping (Result<[Course], Error>) -> Void) {
         let endPoint = "Course"

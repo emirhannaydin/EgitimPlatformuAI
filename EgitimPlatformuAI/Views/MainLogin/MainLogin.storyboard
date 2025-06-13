@@ -64,6 +64,9 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Forgot password?">
                                     <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="forgotPassword:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Dku-02-bEP"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dv3-jb-sG4">
                                 <rect key="frame" x="20" y="395.66666666666669" width="353" height="55"/>

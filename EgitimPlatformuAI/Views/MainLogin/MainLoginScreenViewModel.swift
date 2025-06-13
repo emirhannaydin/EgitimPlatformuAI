@@ -25,7 +25,6 @@ class MainLoginScreenViewModel {
                     KeychainHelper.shared.save(tokenData, service: "access-token", account: "user")
                 }
                 self.user = loginResponse.user
-                print(loginResponse.user.id)
                 self.mail = email
                 UserDefaults.standard.set(loginResponse.user.id, forKey: "userID")
                 UserDefaults.standard.set(loginResponse.user.name, forKey: "username")
