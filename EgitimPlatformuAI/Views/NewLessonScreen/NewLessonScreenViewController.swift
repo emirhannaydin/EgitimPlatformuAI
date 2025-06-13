@@ -19,7 +19,7 @@ final class NewLessonScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(viewModel.selectedLessonId!)
+        print(viewModel.courseId!)
         setupLevelTextField()
         setLottieAnimation()
     }

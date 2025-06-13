@@ -10,10 +10,10 @@ import SwiftOpenAI
 
 class NewLessonScreenViewModel {
     var coordinator: NewLessonScreenCoordinator?
-    var selectedLessonId: String!
+    var courseId: String!
 
-    init(coordinator: NewLessonScreenCoordinator?, selectedLessonId: String!) {
+    init(coordinator: NewLessonScreenCoordinator?, courseId: String!) {
         self.coordinator = coordinator
-        self.selectedLessonId = selectedLessonId
+        self.courseId = courseId
     }
 }
