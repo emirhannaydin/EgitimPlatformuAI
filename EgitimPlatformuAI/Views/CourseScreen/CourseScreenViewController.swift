@@ -31,6 +31,10 @@ final class CourseScreenViewController: UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.showLottieLoading()
         fetchCourseLessons()
     }
 }
@@ -120,8 +124,28 @@ extension CourseScreenViewController: UITableViewDataSource, UITableViewDelegate
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let lessonId = sections[indexPath.section].tests[indexPath.row].id
-        print(lessonId)
+        let selectedSection = sections[indexPath.section]
+        let selectedLesson = selectedSection.tests[indexPath.row]
+        let userLevel = Int(viewModel.courseLevelName) ?? 0
+
+        if selectedSection.level > userLevel {
+            showAlert(
+                title: "Access Denied",
+                message: "You cannot access level \(viewModel.levelTextForInt(for: selectedSection.level)) before completing your current level."
+            )
+            return
+        }
+
+        let previousLessons = selectedSection.tests[..<indexPath.row]
+        if let incompleteLesson = previousLessons.first(where: { $0.isCompleted != true }) {
+            showAlert(
+                title: "Access Denied",
+                message: "Please complete the previous lesson first: \(incompleteLesson.content)"
+            )
+            return
+        }
+
+        let lessonId = selectedLesson.id
         switch self.viewModel.courseClasses[0].courseName {
         case "Writing":
             let coordinator = WritingScreenCoordinator.getInstance()
@@ -144,9 +168,11 @@ extension CourseScreenViewController: UITableViewDataSource, UITableViewDelegate
             coordinator.start(with: viewModel)
             ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
         default:
-                break
+            break
         }
     }
+
+
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return tableView.estimatedSectionHeaderHeight
