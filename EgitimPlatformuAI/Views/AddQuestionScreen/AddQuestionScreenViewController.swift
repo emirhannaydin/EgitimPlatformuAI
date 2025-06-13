@@ -15,6 +15,7 @@ final class AddQuestionScreenViewController: UIViewController{
     @IBOutlet var courseName: UILabel!
     @IBOutlet var tableView: UITableView!
     var lessonId: String!
+    var courseId: String!
     
 
     var sections: [TestSection] {
@@ -27,6 +28,7 @@ final class AddQuestionScreenViewController: UIViewController{
         setupUI()
         setupTableView()
         setupTapGesture()
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -37,7 +39,7 @@ final class AddQuestionScreenViewController: UIViewController{
 
     @IBAction func addLessonButtonTapped(_ sender: Any) {
         let coordinator = NewLessonScreenCoordinator.getInstance()
-        let viewModel = NewLessonScreenViewModel(coordinator: coordinator, selectedLessonId: lessonId)
+        let viewModel = NewLessonScreenViewModel(coordinator: coordinator, courseId: courseId)
         coordinator.start(with: viewModel)
         ApplicationCoordinator.getInstance().pushFromTeacherScreenCoordinatorAndVariables(coordinator, hidesBottomBar: true)
     }
@@ -83,6 +85,11 @@ private extension AddQuestionScreenViewController {
                 case .success:
                     if let courseName = self?.viewModel.courseClasses[0].courseName {
                         self?.courseName.text = "\(courseName) Class"
+                    }
+                    if let courseId = self?.viewModel.courseClasses[0].courseId {
+                        print(courseId)
+                        self?.courseId = courseId
+                        self?.viewModel.courseId = courseId
                     }
                     self?.tableView.reloadData()
                 case .failure(let error):
