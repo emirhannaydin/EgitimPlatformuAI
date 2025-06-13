@@ -92,7 +92,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DSn-FK-9Yz">
-                                <rect key="frame" x="20" y="766" width="353" height="32"/>
+                                <rect key="frame" x="20" y="776" width="353" height="32"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Don't have an account? Register Now">
@@ -125,7 +125,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="HBA-nE-nMS" secondAttribute="trailing" constant="20" id="mpr-gE-Ocm"/>
                             <constraint firstItem="jp6-Ea-yY3" firstAttribute="top" secondItem="fd5-WI-KFq" secondAttribute="bottom" constant="20" id="qF9-wc-FpL"/>
                             <constraint firstItem="fd5-WI-KFq" firstAttribute="top" secondItem="jgk-uX-nqU" secondAttribute="bottom" constant="20" id="u5o-kQ-eRp"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="DSn-FK-9Yz" secondAttribute="bottom" constant="20" id="wkh-B0-bI6"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="DSn-FK-9Yz" secondAttribute="bottom" constant="10" id="wkh-B0-bI6"/>
                         </constraints>
                     </view>
                     <connections>
