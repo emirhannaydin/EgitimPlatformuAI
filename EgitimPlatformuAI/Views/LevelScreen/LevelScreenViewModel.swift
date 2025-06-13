@@ -23,7 +23,6 @@ class LevelScreenViewModel {
             switch result {
             case .success(let courses):
                 self.courses = courses
-                print("Gelen kurslar:", courses)
                 completion(.success(courses))
             case .failure(let error):
                 completion(.failure(error))

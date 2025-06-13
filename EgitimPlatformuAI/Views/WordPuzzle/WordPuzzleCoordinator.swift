@@ -37,7 +37,7 @@ public final class WordPuzzleCoordinator: Coordinator {
     }
     
     func start(with viewModel: WordPuzzleViewModel) {
-        let storyboard = UIStoryboard(name: "ListeningScreen", bundle: nil)
+        let storyboard = UIStoryboard(name: "WordPuzzle", bundle: nil)
         guard let viewController = storyboard.instantiateViewController(withIdentifier: "WordPuzzle")
                 as? WordPuzzleViewController else {
             fatalError("Failed to instantiate WordPuzzleViewController")

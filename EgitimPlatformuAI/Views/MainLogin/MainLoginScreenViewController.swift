@@ -20,6 +20,7 @@ class MainLoginScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        emailText.becomeFirstResponder()
         setupUI()
     }
     
@@ -88,6 +89,9 @@ class MainLoginScreenViewController: UIViewController {
         ApplicationCoordinator.getInstance().navigateToRegister()
     }
 
+    @IBAction func forgotPassword(_ sender: Any) {
+        ApplicationCoordinator.getInstance().pushToForgotPasswordScreen()
+    }
     
     @IBAction func loginButton(_ sender: Any) {
         login()
@@ -110,13 +114,17 @@ class MainLoginScreenViewController: UIViewController {
                         if self?.user?.userType == 0{
                             ApplicationCoordinator.getInstance().initTeacherScreen()
                         }else{
-                            let hasSubmittedKey = "hasSubmittedLevels_\(currentUserID)"
-                            let hasSubmitted = UserDefaults.standard.bool(forKey: hasSubmittedKey)
-                            
-                            if hasSubmitted {
-                                ApplicationCoordinator.getInstance().initTabBar()
-                            } else {
-                                ApplicationCoordinator.getInstance().pushToLevelScreen()
+                            if self?.user?.isEmailActivated == false{
+                                ApplicationCoordinator.getInstance().pushToVerifyEmailScreen()
+                            }else{
+                                let hasSubmittedKey = "hasSubmittedLevels_\(currentUserID)"
+                                let hasSubmitted = UserDefaults.standard.bool(forKey: hasSubmittedKey)
+                                
+                                if hasSubmitted {
+                                    ApplicationCoordinator.getInstance().initTabBar()
+                                } else {
+                                    ApplicationCoordinator.getInstance().pushToLevelScreen()
+                                }
                             }
                         }
                     } else {

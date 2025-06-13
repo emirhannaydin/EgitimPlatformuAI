@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Verify Email Screen View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="VerifyEmail" id="Y6W-OH-hqX" customClass="VerifyEmailScreenViewController" customModule="EgitimPlatformuAI" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3oB-Q3-E6q" customClass="CustomBackButtonView" customModule="EgitimPlatformuAI" customModuleProvider="target">
+                                <rect key="frame" x="20" y="59" width="40" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="1KN-ik-fJm"/>
+                                    <constraint firstAttribute="width" constant="40" id="b4k-lD-Nra"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OTP Verification" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QS6-ah-HlO">
+                                <rect key="frame" x="20" y="119" width="353" height="36"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
+                                <color key="textColor" name="summer"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter the verification code we just sent on your email address" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B9G-cy-IfB">
+                                <rect key="frame" x="20" y="175" width="353" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="s8N-yu-5jY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" name="softBlue"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="lU9-tc-QRg">
+                                <rect key="frame" x="20" y="265" width="353" height="75"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vla-b6-T6R">
+                                        <rect key="frame" x="0.0" y="0.0" width="54.666666666666664" height="75"/>
+                                        <color key="textColor" name="charcoal"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="36r-hC-Hpg">
+                                        <rect key="frame" x="59.666666666666671" y="0.0" width="54.666666666666671" height="75"/>
+                                        <color key="textColor" name="charcoal"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gL1-Rm-cGg">
+                                        <rect key="frame" x="119.33333333333336" y="0.0" width="54.666666666666671" height="75"/>
+                                        <color key="textColor" name="charcoal"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rhd-jU-8S4">
+                                        <rect key="frame" x="179" y="0.0" width="54.666666666666657" height="75"/>
+                                        <color key="textColor" name="charcoal"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BHb-jN-Yeu">
+                                        <rect key="frame" x="238.66666666666666" y="0.0" width="54.666666666666657" height="75"/>
+                                        <color key="textColor" name="charcoal"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="61j-7Q-f8i">
+                                        <rect key="frame" x="298.33333333333331" y="0.0" width="54.666666666666686" height="75"/>
+                                        <color key="textColor" name="charcoal"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="O9B-Ag-9mb"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bh-WJ-QYo">
+                                <rect key="frame" x="20" y="370" width="353" height="55"/>
+                                <color key="backgroundColor" name="softBlue"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="fpg-iJ-3NV"/>
+                                </constraints>
+                                <color key="tintColor" name="backDarkBlue"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Verify">
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="handleVerifyButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="fpw-uc-CT2"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" name="charcoal"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="lU9-tc-QRg" secondAttribute="trailing" constant="20" id="8t1-d6-3yI"/>
+                            <constraint firstItem="B9G-cy-IfB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="ETJ-Hy-gmH"/>
+                            <constraint firstItem="4bh-WJ-QYo" firstAttribute="top" secondItem="lU9-tc-QRg" secondAttribute="bottom" constant="30" id="GBX-MV-DAA"/>
+                            <constraint firstItem="QS6-ah-HlO" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="Hqn-vM-CnR"/>
+                            <constraint firstItem="B9G-cy-IfB" firstAttribute="top" secondItem="QS6-ah-HlO" secondAttribute="bottom" constant="20" id="O5x-GQ-CWu"/>
+                            <constraint firstItem="3oB-Q3-E6q" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="PaN-Is-J6p"/>
+                            <constraint firstItem="4bh-WJ-QYo" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="SZC-rt-LYP"/>
+                            <constraint firstItem="3oB-Q3-E6q" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="Sev-gy-cYS"/>
+                            <constraint firstItem="lU9-tc-QRg" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="VgK-uU-ogI"/>
+                            <constraint firstItem="lU9-tc-QRg" firstAttribute="top" secondItem="B9G-cy-IfB" secondAttribute="bottom" constant="40" id="eK7-rz-xdm"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="4bh-WJ-QYo" secondAttribute="trailing" constant="20" id="f3y-eH-ZJ7"/>
+                            <constraint firstItem="QS6-ah-HlO" firstAttribute="top" secondItem="3oB-Q3-E6q" secondAttribute="bottom" constant="20" id="g1L-tG-8m9"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="B9G-cy-IfB" secondAttribute="trailing" constant="20" id="jhC-jc-Wzd"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="QS6-ah-HlO" secondAttribute="trailing" constant="20" id="o5J-gZ-Kb5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="3oB-Q3-E6q" id="ape-Gy-BFs"/>
+                        <outlet property="otpField1" destination="vla-b6-T6R" id="muS-Rp-Llf"/>
+                        <outlet property="otpField2" destination="36r-hC-Hpg" id="tKG-9O-8lg"/>
+                        <outlet property="otpField3" destination="gL1-Rm-cGg" id="zCZ-X2-fMG"/>
+                        <outlet property="otpField4" destination="Rhd-jU-8S4" id="NYI-0c-Kvw"/>
+                        <outlet property="otpField5" destination="BHb-jN-Yeu" id="DUn-Yd-U2s"/>
+                        <outlet property="otpField6" destination="61j-7Q-f8i" id="M2Y-Nu-AWZ"/>
+                        <outlet property="verifyButton" destination="4bh-WJ-QYo" id="86a-6T-8P6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="101.5267175572519" y="-2.1126760563380285"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="backDarkBlue">
+            <color red="0.10588235294117647" green="0.12549019607843137" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="charcoal">
+            <color red="0.17254901960784313" green="0.20000000000000001" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="softBlue">
+            <color red="0.8901960784313725" green="0.94901960784313721" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="summer">
+            <color red="0.94117647058823528" green="0.73333333333333328" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

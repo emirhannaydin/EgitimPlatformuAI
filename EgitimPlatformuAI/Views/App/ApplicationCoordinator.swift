@@ -169,6 +169,67 @@ final class ApplicationCoordinator: Coordinator {
         }
     }
     
+    func pushToVerifyEmailScreen(){
+        let navController = LoginScreenCoordinator.getInstance().navigationController
+
+        if let existingLoginVC = navController.viewControllers.first(where: { $0 is VerifyEmailScreenViewController }) {
+            navController.popToViewController(existingLoginVC, animated: true)
+        } else {
+            let mainLoginCoordinator = VerifyEmailScreenCoordinator.getInstance()
+            mainLoginCoordinator.start()
+            
+            if let mainLoginVC = mainLoginCoordinator.navigationController.viewControllers.first {
+                navController.pushViewController(mainLoginVC, animated: true)
+            }
+        }
+    }
+    
+    func pushToVerifyEmailScreen(with viewModel: VerifyEmailScreenViewModel) {
+        let navController = LoginScreenCoordinator.getInstance().navigationController
+
+        if let existingRegisterVC = navController.viewControllers.first(where: { $0 is VerifyEmailScreenViewController }) {
+            navController.popToViewController(existingRegisterVC, animated: true)
+        } else {
+            let verifyCoordinator = VerifyEmailScreenCoordinator.getInstance()
+            verifyCoordinator.start(with: viewModel)
+
+            if let verifyVC = verifyCoordinator.navigationController.viewControllers.first {
+                navController.pushViewController(verifyVC, animated: true)
+            }
+        }
+    }
+
+    
+    func pushToForgotPasswordScreen(){
+        let navController = LoginScreenCoordinator.getInstance().navigationController
+
+        if let existingLoginVC = navController.viewControllers.first(where: { $0 is ForgotPasswordViewController }) {
+            navController.popToViewController(existingLoginVC, animated: true)
+        } else {
+            let mainLoginCoordinator = ForgotPasswordCoordinator.getInstance()
+            mainLoginCoordinator.start()
+            
+            if let mainLoginVC = mainLoginCoordinator.navigationController.viewControllers.first {
+                navController.pushViewController(mainLoginVC, animated: true)
+            }
+        }
+    }
+    
+    func pushToResetPasswordScreen(with viewModel: ResetPasswordScreenViewModel) {
+        let navController = LoginScreenCoordinator.getInstance().navigationController
+
+        if let existingRegisterVC = navController.viewControllers.first(where: { $0 is ResetPasswordScreenViewController }) {
+            navController.popToViewController(existingRegisterVC, animated: true)
+        } else {
+            let verifyCoordinator = ResetPasswordScreenCoordinator.getInstance()
+            verifyCoordinator.start(with: viewModel)
+
+            if let verifyVC = verifyCoordinator.navigationController.viewControllers.first {
+                navController.pushViewController(verifyVC, animated: true)
+            }
+        }
+    }
+    
     func pushToAddQuestionScreen() {
         let navController = LoginScreenCoordinator.getInstance().navigationController
 
