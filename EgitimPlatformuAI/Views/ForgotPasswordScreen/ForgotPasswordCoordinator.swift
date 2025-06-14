@@ -27,6 +27,7 @@ public final class ForgotPasswordCoordinator: Coordinator {
             fatalError("Failed to instantiate ForgotPasswordViewController")
         }
         
+        
         let viewModel = ForgotPasswordViewModel(coordinator: self)
         viewController.viewModel = viewModel
         if navigationController.viewControllers.isEmpty {
