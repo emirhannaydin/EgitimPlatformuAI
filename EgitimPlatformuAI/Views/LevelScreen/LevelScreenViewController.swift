@@ -95,7 +95,6 @@ final class LevelScreenViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.levelQuestionLabel.text = "What is your \((self.viewModel.courses[self.currentIndex].name)) level?"
                     self.tableView.reloadData()
-                    print("controller calisti")
                 }
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")

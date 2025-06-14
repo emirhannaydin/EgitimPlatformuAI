@@ -28,14 +28,15 @@ final class TeacherScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
+        self.showLottieLoading()
         setNameContainer()
         setCollectionView()
-        fetchCourses()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+        fetchCourses()
     }
 
     func fetchCourses() {
@@ -44,6 +45,7 @@ final class TeacherScreenViewController: UIViewController {
             case .success(_):
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
+                    self.hideLottieLoading()
                 }
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
@@ -53,12 +55,19 @@ final class TeacherScreenViewController: UIViewController {
 
     private func setNameContainer() {
         nameContainerView.configureView(
-            nameText: "Teacher \(username.capitalizingFirstLetter())",
+            nameText: username.capitalizingFirstLetter(),
             welcomeLabelText: "Welcome",
             imageName: "person.fill"
         )
         nameContainerView.onLogoutTapped = { [weak self] in
             self?.showAlertWithAction(title: "Logout", message: "Are you sure you want to log out?") {
+                KeychainHelper.shared.delete(service: "access-token", account: "user")
+                    
+                UserDefaults.standard.removeObject(forKey: "userID")
+                UserDefaults.standard.removeObject(forKey: "username")
+                UserDefaults.standard.removeObject(forKey: "userType")
+
+
                 ApplicationCoordinator.getInstance().start()
             }
         }

@@ -31,14 +31,16 @@ final class MainScreenViewController: UIViewController{
     
     let username = UserDefaults.standard.string(forKey: "username") ?? "Unknown"
     let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
+    let userType = UserDefaults.standard.integer(forKey: "userType")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Home"
+        print(userType)
+        self.showLottieLoading()
         setupHamburgerMenu()
         setupCollectionViews()
         configureNameContainer()
-        clearOldUserDefaults()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +75,13 @@ private extension MainScreenViewController {
         nameContainerView.configureView(nameText: username.capitalizingFirstLetter(), welcomeLabelText: "Welcome", imageName: "person.fill")
         nameContainerView.onLogoutTapped = { [weak self] in
             self?.showAlertWithAction(title: "Logout", message: "Are you sure you want to log out?") {
+                KeychainHelper.shared.delete(service: "access-token", account: "user")
+                    
+                UserDefaults.standard.removeObject(forKey: "userID")
+                UserDefaults.standard.removeObject(forKey: "username")
+                UserDefaults.standard.removeObject(forKey: "userType")
+
+
                 ApplicationCoordinator.getInstance().start()
             }
         }
@@ -89,11 +98,6 @@ private extension MainScreenViewController {
         collectionView2.register(HomeScreenCourseCollectionViewCell.nib(), forCellWithReuseIdentifier: HomeScreenCourseCollectionViewCell.identifier)
     }
 
-    func clearOldUserDefaults() {
-        UserDefaults.standard.removeObject(forKey: "enrolled_reading")
-        UserDefaults.standard.removeObject(forKey: "enrolled_listening")
-    }
-
     func loadCourseData() {
 
         viewModel?.loadCourseClasses(studentId: userID) { [weak self] result in
@@ -108,8 +112,10 @@ private extension MainScreenViewController {
                     self?.coursesName = classes.map { $0.courseName }
                     self?.collectionView.reloadData()
                     self?.collectionView2.reloadData()
+                    self?.hideLottieLoading()
                 case .failure(let error):
                     self?.showAlert(title: "Error", message: error.localizedDescription)
+                    self?.hideLottieLoading()
                 }
             }
         }
