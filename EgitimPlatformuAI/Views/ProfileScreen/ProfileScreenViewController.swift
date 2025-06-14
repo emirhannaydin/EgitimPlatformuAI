@@ -47,8 +47,14 @@ class ProfileScreenViewController: UIViewController {
     
     @IBAction func signOutButtonTapped(_ sender: Any) {
         self.showAlertWithAction(title: "Logout", message: "Are you sure you want to log out?") {
-            ApplicationCoordinator.getInstance().start()
-        }
+            KeychainHelper.shared.delete(service: "access-token", account: "user")
+                
+            UserDefaults.standard.removeObject(forKey: "userID")
+            UserDefaults.standard.removeObject(forKey: "username")
+            UserDefaults.standard.removeObject(forKey: "userType")
+
+
+            ApplicationCoordinator.getInstance().start()        }
     }
     func loadStudentData() {
         let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
