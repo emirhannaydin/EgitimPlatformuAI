@@ -98,8 +98,9 @@ final class ListeningScreenViewController: UIViewController {
                     switch result {
                     case .success(let isCompleted):
                         if isCompleted {
-                            self.showAlert(title: "Success", message: "The lesson completed..") {
-                                self.navigationController?.popViewController(animated: true)
+                            self.showLottieLoadingWithDuration() {
+                                ApplicationCoordinator.getInstance().initTabBar()
+                                self.hideLottieLoading()
                             }
                         } else {
                             self.showAlert(title: "Error", message: "Failed to complete the lesson.")

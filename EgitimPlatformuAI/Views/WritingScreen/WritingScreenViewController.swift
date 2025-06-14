@@ -62,7 +62,7 @@ final class WritingScreenViewController: UIViewController {
                     case(.success(_)):
                         self.loadQuestion()
                         self.hideLottieLoading()
-                        print("kamdksamd")
+                        
 
                     case ( .failure(let error)):
                         print(error)
@@ -125,7 +125,24 @@ final class WritingScreenViewController: UIViewController {
             if currentQuestionIndex < viewModel.questions.count {
                 loadQuestion()
             } else {
-                showAlert(title: "Completed", message: "You have finished all questions.")
+                let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
+                viewModel.completeLesson(studentId: userID, lessonId: viewModel.lessonId!) { result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(let isCompleted):
+                            if isCompleted {
+                                self.showLottieLoadingWithDuration() {
+                                    ApplicationCoordinator.getInstance().initTabBar()
+                                    self.hideLottieLoading()
+                                }
+                            } else {
+                                self.showAlert(title: "Error", message: "Failed to complete the lesson.")
+                            }
+                        case .failure(let error):
+                            self.showAlert(title: "Hata", message: error.localizedDescription)
+                        }
+                    }
+                }
             }
     }
     

@@ -103,7 +103,9 @@ private extension MainScreenViewController {
                     guard let classes = self?.viewModel?.courseClasses else { return }
                     self?.coursesClassName = classes.map { $0.name }
                     self?.lessonCount = classes.map { $0.lessons.count }
-                    self?.progressCount = classes.map { $0.completedLessonCount }
+                    self?.progressCount = classes.map { course in
+                        course.lessons.filter { $0.isCompleted == true }.count
+                    }
                     self?.level = classes.map { $0.level }
                     self?.coursesName = classes.map { $0.courseName }
                     self?.collectionView.reloadData()
@@ -180,21 +182,17 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
     func styleClassCell(_ cell: HomeScreenCollectionViewCell) {
         switch cell.courseName.text {
         case "Reading Class":
-            cell.progressView.progressColor = .darkBlue
             cell.backgroundColor = .silver
             cell.courseName.textColor = .black
             cell.levelLabel.textColor = .black
             cell.lessonLabel.textColor = .black
         case "Listening Class":
-            cell.progressView.progressColor = .porcelain
             cell.backgroundColor = .sapphireBlue
             cell.courseName.textColor = .porcelain
         case "Writing Class":
-            cell.progressView.progressColor = .winter
             cell.backgroundColor = .softRed
             cell.courseName.textColor = .winter
         case "Speaking Class":
-            cell.progressView.progressColor = .coldPurple
             cell.backgroundColor = .mintGreen
             cell.courseName.textColor = .coldPurple
         default:
@@ -226,7 +224,6 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let coordinator = CourseScreenCoordinator.getInstance()
         let selectedCourse = viewModel!.courseClasses[indexPath.row]
-        let rawCourseName = selectedCourse.courseName.lowercased()
         let courseId = selectedCourse.courseId
 
         let viewModel = CourseScreenViewModel(

@@ -88,7 +88,24 @@ final class SpeakingScreenViewController: UIViewController {
     
     private func loadCurrentQuestion() {
         guard currentIndex < viewModel.questions.count else {
-            showAlert(title: "Test Bitti", message: "")
+            let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
+            viewModel.completeLesson(studentId: userID, lessonId: viewModel.lessonId!) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let isCompleted):
+                        if isCompleted {
+                            self.showLottieLoadingWithDuration() {
+                                ApplicationCoordinator.getInstance().initTabBar()
+                                self.hideLottieLoading()
+                            }
+                        } else {
+                            self.showAlert(title: "Error", message: "Failed to complete the lesson.")
+                        }
+                    case .failure(let error):
+                        self.showAlert(title: "Hata", message: error.localizedDescription)
+                    }
+                }
+            }
             return
         }
         let current = viewModel.questions[currentIndex]

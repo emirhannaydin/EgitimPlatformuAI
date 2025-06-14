@@ -20,7 +20,6 @@ class MainLoginScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        emailText.becomeFirstResponder()
         setupUI()
     }
     

@@ -22,7 +22,6 @@ class RegisterScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
-        nameLabel.becomeFirstResponder()
         setupUI()
         
     }

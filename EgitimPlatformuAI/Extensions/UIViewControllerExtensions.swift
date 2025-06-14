@@ -102,6 +102,46 @@ extension UIViewController {
         
     }
     
+    func showLottieLoadingWithDuration(animationName: String = "done", onFinish: (() -> Void)? = nil) {
+        guard let window = UIApplication.shared.connectedScenes
+            .compactMap({ ($0 as? UIWindowScene)?.keyWindow }).first,
+              window.viewWithTag(lottieLoadingTag) == nil else {
+            return
+        }
+        
+        let overlay = UIView()
+        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.9)
+        overlay.tag = lottieLoadingTag
+        overlay.isUserInteractionEnabled = true
+        overlay.translatesAutoresizingMaskIntoConstraints = false
+        
+        let animationView = LottieAnimationView(name: animationName)
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        animationView.loopMode = .loop
+        animationView.contentMode = .scaleAspectFit
+        animationView.play()
+        
+        overlay.addSubview(animationView)
+        window.addSubview(overlay)
+        
+        NSLayoutConstraint.activate([
+            overlay.topAnchor.constraint(equalTo: window.topAnchor),
+            overlay.bottomAnchor.constraint(equalTo: window.bottomAnchor),
+            overlay.leadingAnchor.constraint(equalTo: window.leadingAnchor),
+            overlay.trailingAnchor.constraint(equalTo: window.trailingAnchor),
+            
+            animationView.centerXAnchor.constraint(equalTo: overlay.centerXAnchor),
+            animationView.centerYAnchor.constraint(equalTo: overlay.centerYAnchor),
+            animationView.widthAnchor.constraint(equalToConstant: 120),
+            animationView.heightAnchor.constraint(equalToConstant: 120)
+        ])
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            onFinish?()
+        }
+    }
+
+    
     func setupPasswordToggle(for textField: UITextField) {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(systemName: "eye.slash"), for: .normal)
