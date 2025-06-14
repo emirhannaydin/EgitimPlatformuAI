@@ -222,17 +222,60 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let coordinator = CourseScreenCoordinator.getInstance()
         let selectedCourse = viewModel!.courseClasses[indexPath.row]
         let courseId = selectedCourse.courseId
 
-        let viewModel = CourseScreenViewModel(
-            coordinator: coordinator,
-            courseLevelName: "\(selectedCourse.level)",
-            courseId: courseId
-        )
+        if collectionView.tag == 1 {
+            if let nextLesson = selectedCourse.lessons
+                .filter({ $0.isCompleted == false })
+                .sorted(by: { $0.order < $1.order })
+                .first
+            {
+                if selectedCourse.courseName == "Reading" {
+                    let coordinator = ReadingScreenCoordinator.getInstance()
+                    let viewModel = ReadingScreenViewModel(coordinator: coordinator, lessonId: nextLesson.id)
+                    coordinator.start(with: viewModel)
+                    ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+                }else if selectedCourse.courseName == "Writing" {
+                    let coordinator = WritingScreenCoordinator.getInstance()
+                    let viewModel = WritingScreenViewModel(coordinator: coordinator, lessonId: nextLesson.id)
+                    coordinator.start(with: viewModel)
+                    ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+                }else if selectedCourse.courseName == "Speaking" {
+                    let coordinator = SpeakingScreenCoordinator.getInstance()
+                    let viewModel = SpeakingScreenViewModel(coordinator: coordinator, lessonId: nextLesson.id)
+                    coordinator.start(with: viewModel)
+                    ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+                }else if selectedCourse.courseName == "Listening"{
+                    let coordinator = ListeningScreenCoordinator.getInstance()
+                    let viewModel = ListeningScreenViewModel(coordinator: coordinator, lessonId: nextLesson.id)
+                    coordinator.start(with: viewModel)
+                    ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+                }else{
+                    let coordinator = CourseScreenCoordinator.getInstance()
+                    let viewModel = CourseScreenViewModel(
+                        coordinator: coordinator,
+                        courseLevelName: "\(selectedCourse.level)",
+                        courseId: courseId
+                    )
+                    
+                    ApplicationCoordinator.getInstance().handleCourseEntry(with: viewModel)
+                }
+                
+            }
+        } else {
+            let coordinator = CourseScreenCoordinator.getInstance()
+            let viewModel = CourseScreenViewModel(
+                coordinator: coordinator,
+                courseLevelName: "\(selectedCourse.level)",
+                courseId: courseId
+            )
+            
+            ApplicationCoordinator.getInstance().handleCourseEntry(with: viewModel)
+        }
         
-        ApplicationCoordinator.getInstance().handleCourseEntry(with: viewModel)
+        
+        
     }
 }
 
