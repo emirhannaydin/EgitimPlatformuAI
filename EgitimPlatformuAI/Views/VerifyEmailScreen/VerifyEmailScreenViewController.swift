@@ -81,11 +81,11 @@ final class VerifyEmailScreenViewController: UIViewController{
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self.showAlert(title: "Success", message: "Email verified successfully."){
+                    self.showAlert(title: "Success", message: "Email verified successfully.", lottieName: "success"){
                         self.navigationController?.popViewController(animated: true)
                     }
                 case .failure(let error):
-                    self.showAlert(title: "Error", message: error.localizedDescription)
+                    self.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
                 }
             }
         }
@@ -99,14 +99,14 @@ final class VerifyEmailScreenViewController: UIViewController{
                     switch result {
                     case .success(_):
                         self?.hideLottieLoading()
-                        self?.showAlert(title: "Success", message: "Code verified successfully."){
+                        self?.showAlert(title: "Success", message: "Code verified successfully.", lottieName: "success"){
                             let viewModel = ResetPasswordScreenViewModel(coordinator: ResetPasswordScreenCoordinator.getInstance(), userID: userID)
                             ApplicationCoordinator.getInstance().pushToResetPasswordScreen(with: viewModel)
                             
                         }
                     case .failure(let error):
                         self?.hideLottieLoading()
-                        self?.showAlert(title: "Error", message: error.localizedDescription){
+                        self?.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error"){
                         }
                     }
                 }

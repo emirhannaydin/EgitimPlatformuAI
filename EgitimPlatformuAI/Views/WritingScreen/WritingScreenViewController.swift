@@ -89,7 +89,7 @@ final class WritingScreenViewController: UIViewController {
 
     @IBAction func checkButton(_ sender: Any) {
         if translatedText.text == "Enter your text here..."{
-            showAlert(title: "Error", message: "You did not write anything")
+            showAlert(title: "Error", message: "You did not write anything", lottieName: "error")
             return
         }
         showLottieLoading()
@@ -98,13 +98,13 @@ final class WritingScreenViewController: UIViewController {
               let originalSentence = exampleLabel.text,
               !userAnswer.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
             hideLottieLoading()
-            showAlert(title: "Error", message: "Please write your translation.")
+            showAlert(title: "Error", message: "Please write your translation.", lottieName: "error")
             return
         }
         
         guard let viewModel = viewModel else {
             hideLottieLoading()
-            showAlert(title: "Error", message: "AI servisine bağlanılamadı.")
+            showAlert(title: "Error", message: "AI services are currently unavailable.", lottieName: "error")
             return
         }
         
@@ -142,10 +142,10 @@ final class WritingScreenViewController: UIViewController {
                                     self.hideLottieLoading()
                                 }
                             } else {
-                                self.showAlert(title: "Error", message: "Failed to complete the lesson.")
+                                self.showAlert(title: "Error", message: "Failed to complete the lesson.", lottieName: "error")
                             }
                         case .failure(let error):
-                            self.showAlert(title: "Hata", message: error.localizedDescription)
+                            self.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
                         }
                     }
                 }

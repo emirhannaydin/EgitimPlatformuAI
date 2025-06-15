@@ -99,7 +99,7 @@ class MainLoginScreenViewController: UIViewController {
     func login() {
         guard let email = emailText.text, !email.isEmpty,
               let password = passwordText.text, !password.isEmpty else {
-            self.showAlert(title: "Error", message: "Email or password is empty.")
+            self.showAlert(title: "Error", message: "Email or password is empty.", lottieName: "error")
             return
         }
 
@@ -128,11 +128,11 @@ class MainLoginScreenViewController: UIViewController {
                             //}
                         }
                     } else {
-                        self?.showAlert(title: "Error", message: "UserID not found.")
+                        self?.showAlert(title: "Error", message: "UserID not found.", lottieName: "error")
                     }
 
                 case .failure(let error):
-                    self?.showAlert(title: "Login Error", message: error.localizedDescription)
+                    self?.showAlert(title: "Login Error", message: error.localizedDescription, lottieName: "error")
                 }
             }
         }

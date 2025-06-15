@@ -88,7 +88,7 @@ private extension CourseScreenViewController {
 
                     self?.tableView.reloadData()
                 case .failure(let error):
-                    self?.showAlert(title: "Error", message: error.localizedDescription)
+                    self?.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
                 }
             }
         }
@@ -145,7 +145,8 @@ extension CourseScreenViewController: UITableViewDataSource, UITableViewDelegate
         if selectedSection.level > userLevel {
             showAlert(
                 title: "Access Denied",
-                message: "You cannot access level \(viewModel.levelTextForInt(for: selectedSection.level)) before completing your current level."
+                message: "You cannot access level \(viewModel.levelTextForInt(for: selectedSection.level)) before completing your current level.",
+                lottieName: "error"
             )
             return
         }
@@ -154,7 +155,8 @@ extension CourseScreenViewController: UITableViewDataSource, UITableViewDelegate
         if let incompleteLesson = previousLessons.first(where: { $0.isCompleted != true }) {
             showAlert(
                 title: "Access Denied",
-                message: "Please complete the previous lesson first: \(incompleteLesson.content)"
+                message: "Please complete the previous lesson first: \(incompleteLesson.content)",
+                lottieName: "error"
             )
             return
         }

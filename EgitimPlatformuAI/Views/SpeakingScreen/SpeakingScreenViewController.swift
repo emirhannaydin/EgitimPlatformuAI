@@ -99,10 +99,10 @@ final class SpeakingScreenViewController: UIViewController {
                                 self.hideLottieLoading()
                             }
                         } else {
-                            self.showAlert(title: "Error", message: "Failed to complete the lesson.")
+                            self.showAlert(title: "Error", message: "Failed to complete the lesson.", lottieName: "error")
                         }
                     case .failure(let error):
-                        self.showAlert(title: "Hata", message: error.localizedDescription)
+                        self.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
                     }
                 }
             }

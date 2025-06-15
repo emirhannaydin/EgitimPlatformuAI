@@ -74,11 +74,11 @@ final class ResetPasswordScreenViewController: UIViewController {
     @IBAction func resetPassword(_ sender: Any) {
         guard let password = passwordTextField.text, !password.isEmpty,
               let confirmPassword = confirmPasswordTextField.text, !confirmPassword.isEmpty else {
-            showAlert(title: "Error", message: "Please fill in all fields.")
+            showAlert(title: "Error", message: "Please fill in all fields.", lottieName: "error")
             return
         }
         guard passwordTextField.text == confirmPasswordTextField.text else {
-            showAlert(title: "Error", message: "Passwords do not match.")
+            showAlert(title: "Error", message: "Passwords do not match.", lottieName: "error")
             return
         }
         if let userID = viewModel?.userID, let password = passwordTextField.text{
@@ -88,13 +88,13 @@ final class ResetPasswordScreenViewController: UIViewController {
                     switch result {
                     case .success(let success):
                         self?.hideLottieLoading()
-                        self?.showAlert(title: "Success", message: "Your password has been changed successfully."){
+                        self?.showAlert(title: "Success", message: "Your password has been changed successfully.", lottieName: "success"){
                             ApplicationCoordinator.getInstance().navigateToMainLogin()
                         }
                         
                     case .failure(let error):
                         self?.hideLottieLoading()
-                        self?.showAlert(title: "Error", message: error.localizedDescription){
+                        self?.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error"){
                             
                         }
                     }

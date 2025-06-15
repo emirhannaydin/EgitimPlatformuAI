@@ -59,7 +59,7 @@ final class ForgotPasswordViewController: UIViewController{
         if let text = emailTextField.text{
             guard isValidEmail(text) else {
                 self.hideLottieLoading()
-                self.showAlert(title: "Error", message: "Enter a valid email")
+                self.showAlert(title: "Error", message: "Enter a valid email", lottieName: "error")
                 return
             }
                 viewModel!.requestUserId(email: text) { [weak self] result in
@@ -67,7 +67,7 @@ final class ForgotPasswordViewController: UIViewController{
                         switch result {
                         case .success(let userId):
                             self?.hideLottieLoading()
-                            self?.showAlert(title: "Success", message: "Code sent"){
+                            self?.showAlert(title: "Success", message: "Code sent", lottieName: "success"){
                                 
                                 let viewModel = VerifyEmailScreenViewModel(coordinator:         VerifyEmailScreenCoordinator.getInstance(),
                                     userID: userId,
@@ -76,7 +76,7 @@ final class ForgotPasswordViewController: UIViewController{
                             }
                         case .failure(let error):
                             self?.hideLottieLoading()
-                            self?.showAlert(title: "Error", message: error.localizedDescription)
+                            self?.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
                         }
                     }
                 }

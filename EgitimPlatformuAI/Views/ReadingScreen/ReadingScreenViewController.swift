@@ -86,7 +86,7 @@ final class ReadingScreenViewController: UIViewController {
               let selectedText = cell.answerText.text
         else {
             self.hideLottieLoading()
-            self.showAlert(title: "Error", message: "Choose one")
+            self.showAlert(title: "Error", message: "Choose one", lottieName: "error")
             return
         }
 
@@ -139,10 +139,10 @@ final class ReadingScreenViewController: UIViewController {
                                     self.hideLottieLoading()
                                 }
                             } else {
-                                self.showAlert(title: "Error", message: "Failed to complete the lesson.")
+                                self.showAlert(title: "Error", message: "Failed to complete the lesson.", lottieName: "error")
                             }
                         case .failure(let error):
-                            self.showAlert(title: "Hata", message: error.localizedDescription)
+                            self.showAlert(title: "Hata", message: error.localizedDescription, lottieName: "error")
                         }
                     }
                 }

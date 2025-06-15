@@ -72,7 +72,7 @@ class ProfileScreenViewController: UIViewController {
                     self?.setupUserDetails()
                     self?.loadProfileImage()
                 case .failure(let error):
-                    self?.showAlert(title: "Error", message: error.localizedDescription)
+                    self?.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
                 }
             }
         }
@@ -97,7 +97,7 @@ class ProfileScreenViewController: UIViewController {
 
                 case .failure(let error):
                     self?.hideLottieLoading()
-                    self?.showAlert(title: "Error", message: error.localizedDescription)
+                    self?.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
                 }
             }
         }

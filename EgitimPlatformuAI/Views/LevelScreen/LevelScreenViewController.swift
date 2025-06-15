@@ -139,9 +139,7 @@ final class LevelScreenViewController: UIViewController {
     }
 
     func showSelectionAlert() {
-        let alert = UIAlertController(title: "Selection Required", message: "Please select a level before continuing.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        self.showAlert(title: "Selection Required", message: "Please select a level before continuing.", lottieName: "error")
     }
 
 }

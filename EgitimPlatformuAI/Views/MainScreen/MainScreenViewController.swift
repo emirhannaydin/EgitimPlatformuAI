@@ -129,7 +129,7 @@ private extension MainScreenViewController {
                     self?.collectionView2.reloadData()
                     self?.hideLottieLoading()
                 case .failure(let error):
-                    self?.showAlert(title: "Error", message: error.localizedDescription)
+                    self?.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
                     self?.hideLottieLoading()
                 }
             }

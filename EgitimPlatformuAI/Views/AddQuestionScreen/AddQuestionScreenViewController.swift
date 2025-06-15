@@ -93,7 +93,7 @@ private extension AddQuestionScreenViewController {
                     }
                     self?.tableView.reloadData()
                 case .failure(let error):
-                    self?.showAlert(title: "Error", message: error.localizedDescription)
+                    self?.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
                 }
             }
         }

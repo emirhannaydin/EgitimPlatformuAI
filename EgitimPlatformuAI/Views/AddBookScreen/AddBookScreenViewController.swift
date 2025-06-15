@@ -43,19 +43,19 @@ final class AddBookScreenViewController: UIViewController{
     @IBAction func uploadBookHandler(_ sender: Any) {
         guard let bookTitle = bookNameTextField.text,
                   !bookTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-                showAlert(title: "Error", message: "Please enter the book name.")
+            showAlert(title: "Error", message: "Please enter the book name.", lottieName: "error")
                 return
             }
             
             guard coverImage.image != nil else {
-                showAlert(title: "Error", message: "Please select a cover image.")
+                showAlert(title: "Error", message: "Please select a cover image.", lottieName: "error")
                 return
             }
             
             guard let bookFileName = bookNameLabel.text,
                   !bookFileName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
                   bookFileName != "Selected file:" else {
-                showAlert(title: "Error", message: "Please select a book PDF file.")
+                showAlert(title: "Error", message: "Please select a book PDF file.", lottieName: "error")
                 return
             }
         
@@ -63,9 +63,9 @@ final class AddBookScreenViewController: UIViewController{
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self.showAlert(title: "Success", message: "The book has been uploaded to the system.")
+                    self.showAlert(title: "Success", message: "The book has been uploaded to the system.", lottieName: "success")
                 case .failure(let error):
-                    self.showAlert(title: "Error", message: error.localizedDescription)
+                    self.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
                 }
             }
         }
@@ -99,9 +99,9 @@ extension AddBookScreenViewController: UIDocumentPickerDelegate {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):
-                    self.showAlert(title: "Success", message: "\(response.message)")
+                    self.showAlert(title: "Success", message: "\(response.message)", lottieName: "success")
                 case .failure(let error):
-                    self.showAlert(title: "Error", message: "\(error.localizedDescription)")
+                    self.showAlert(title: "Error", message: "\(error.localizedDescription)", lottieName: "error")
                 }
             }
         }

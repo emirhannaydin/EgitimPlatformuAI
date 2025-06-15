@@ -39,7 +39,7 @@ final class ReadingBookViewController: UIViewController{
                     self?.hideLottieLoading()
                 case .failure(let error):
                     self?.hideLottieLoading()
-                    self?.showAlert(title: "Error", message: error.localizedDescription)
+                    self?.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
                 }
             }
         }

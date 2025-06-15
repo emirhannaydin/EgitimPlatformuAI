@@ -10,30 +10,55 @@ import Lottie
 private var lottieLoadingTag = 888888
 
 extension UIViewController {
-    func showAlert(title: String, message: String, okAction: (() -> Void)? = nil) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        let okButton = UIAlertAction(title: "Okey", style: .default) { _ in
-            okAction?()
+    func showAlert(title: String, message: String, lottieName: String, okAction: (() -> Void)? = nil) {
+            let backgroundView = UIView(frame: view.bounds)
+            backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+            backgroundView.tag = 9999
+            view.addSubview(backgroundView)
+
+            let alertView = CustomAlertView(title: title, message: message, lottieName: lottieName, okAction: okAction)
+            backgroundView.addSubview(alertView)
+
+            NSLayoutConstraint.activate([
+                alertView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+                alertView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),
+                alertView.widthAnchor.constraint(equalToConstant: 300)
+            ])
+
+            alertView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+            alertView.alpha = 0
+            UIView.animate(withDuration: 0.3) {
+                alertView.transform = .identity
+                alertView.alpha = 1
+            }
         }
-        
-        alertController.addAction(okButton)
-        present(alertController, animated: true)
-    }
     
     func showAlertWithAction(title: String, message: String, okAction: @escaping () -> Void) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        if let existingBackground = view.viewWithTag(9999) {
+                    existingBackground.removeFromSuperview()
+                }
 
-        let okButton = UIAlertAction(title: "OK", style: .default) { _ in
-            okAction()
+        let backgroundView = UIView(frame: view.bounds)
+        backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        backgroundView.tag = 9999
+        view.addSubview(backgroundView)
+
+        let alertView = CustomAlertViewWithCancel(title: title, message: message, okAction: okAction)
+        alertView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.addSubview(alertView)
+
+        NSLayoutConstraint.activate([
+            alertView.centerXAnchor.constraint(equalTo: backgroundView.centerXAnchor),
+            alertView.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor),
+            alertView.widthAnchor.constraint(equalToConstant: 280)
+        ])
+
+        alertView.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        alertView.alpha = 0
+        UIView.animate(withDuration: 0.3) {
+            alertView.transform = .identity
+            alertView.alpha = 1
         }
-
-        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel)
-
-        alertController.addAction(okButton)
-        alertController.addAction(cancelButton)
-
-        present(alertController, animated: true)
     }
 
 
@@ -102,7 +127,7 @@ extension UIViewController {
         
     }
     
-    func showLottieLoadingWithDuration(animationName: String = "done", onFinish: (() -> Void)? = nil) {
+    func showLottieLoadingWithDuration(animationName: String = "success", onFinish: (() -> Void)? = nil) {
         guard let window = UIApplication.shared.connectedScenes
             .compactMap({ ($0 as? UIWindowScene)?.keyWindow }).first,
               window.viewWithTag(lottieLoadingTag) == nil else {

@@ -123,16 +123,14 @@ extension WordPuzzleViewController: UICollectionViewDelegate, UICollectionViewDa
             collectionView.reloadItems(at: [indexPath])
             
             if correctGuesses.joined() == selectedWord {
-                let alert = UIAlertController(title: "Congratulations!", message: "You guessed the word: \(selectedWord)", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Play Again", style: .default, handler: { _ in
+                self.showAlert(title: "Congratulations!", message: "You guessed the word: \(selectedWord)", lottieName: "success"){
                     self.setupGame()
                     self.guessLabel.text = "Your guess: "
                     self.collectionView.reloadData()
-                }))
-                present(alert, animated: true)
+                }
             }
         } else {
-            showAlert(title: "Wrong!", message: "That letter is not in the correct order.")
+            showAlert(title: "Wrong!", message: "That letter is not in the correct order.", lottieName: "error")
         }
     }
 }

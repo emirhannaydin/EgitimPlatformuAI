@@ -18,7 +18,7 @@ final class PDFScreenViewController: UIViewController {
         view.backgroundColor = .systemBackground
 
         guard let url = viewModel?.fullPDFURL else {
-            showAlert(title: "Error", message: "Invalid file URL")
+            showAlert(title: "Error", message: "Invalid file URL", lottieName: "error")
             return
         }
 
@@ -33,7 +33,7 @@ final class PDFScreenViewController: UIViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.showAlert(title: "Error", message: "PDF could not be loaded")
+                    self.showAlert(title: "Error", message: "PDF could not be loaded", lottieName: "error")
                 }
             }
         }

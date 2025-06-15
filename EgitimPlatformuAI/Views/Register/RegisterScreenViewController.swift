@@ -126,19 +126,19 @@ class RegisterScreenViewController: UIViewController {
               let password = passwordLabel.text, !password.isEmpty,
               let confirmPassword = confirmPasswordLabel.text, !confirmPassword.isEmpty else {
             self.hideLottieLoading()
-            showAlert(title: "Error", message: "Please fill in all fields.")
+            showAlert(title: "Error", message: "Please fill in all fields.", lottieName: "error")
             return
         }
 
         guard isValidEmail(email) else {
             self.hideLottieLoading()
-            showAlert(title: "Invalid Email", message: "Please enter a valid email address.")
+            showAlert(title: "Invalid Email", message: "Please enter a valid email address.", lottieName: "error")
             return
         }
 
         guard password == confirmPassword else {
             self.hideLottieLoading()
-            showAlert(title: "Error", message: "Passwords do not match.")
+            showAlert(title: "Error", message: "Passwords do not match.", lottieName: "error")
             return
         }
 
@@ -149,11 +149,11 @@ class RegisterScreenViewController: UIViewController {
                 switch result {
                 case .success:
                     self?.hideLottieLoading()
-                    self?.showAlert(title: "Success", message: "Registration completed successfully!") {
+                    self?.showAlert(title: "Success", message: "Registration completed successfully!", lottieName: "success") {
                         ApplicationCoordinator.getInstance().pushToMainLoginScreen()
                     }
                 case .failure(let error):
-                    self?.showAlert(title: "Registration Error", message: error.localizedDescription)
+                    self?.showAlert(title: "Registration Error", message: error.localizedDescription, lottieName: "error")
                 }
             }
         }
