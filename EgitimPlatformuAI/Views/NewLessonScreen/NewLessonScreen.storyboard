@@ -43,6 +43,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addLessonButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="5eD-Sr-YgZ"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select a Class" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E53-Nm-pS4">
                                 <rect key="frame" x="20" y="259" width="119" height="34"/>
@@ -67,6 +70,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="lessonNameTextField" destination="0xi-x3-rCf" id="Ry4-Yy-ZcL"/>
                         <outlet property="levelTextField" destination="E53-Nm-pS4" id="7kA-im-1Ok"/>
                         <outlet property="lottieView" destination="0Du-ec-DLc" id="fGZ-qF-wD1"/>
                     </connections>

@@ -10,10 +10,16 @@ import SwiftOpenAI
 
 class NewLessonScreenViewModel {
     var coordinator: NewLessonScreenCoordinator?
-    var courseId: String!
+    var classIds: [String]
 
-    init(coordinator: NewLessonScreenCoordinator?, courseId: String!) {
+    init(coordinator: NewLessonScreenCoordinator?, classIds: [String]) {
         self.coordinator = coordinator
-        self.courseId = courseId
+        self.classIds = classIds
     }
+    
+    func addLesson(classId: String, content: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let request = AddLessonRequest(classId: classId, content: content)
+        NetworkManager.shared.postAddLesson(body: request, completion: completion)
+    }
+
 }

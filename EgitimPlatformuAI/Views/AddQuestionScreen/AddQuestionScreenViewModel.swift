@@ -14,6 +14,9 @@ class AddQuestionScreenViewModel {
     var sections: [TestSection] = []
     var courseLevelName: String
     var selectedLessonId: String!
+    var allClassIds: [String] {
+        return courseClasses.map { $0.id }
+    }
     
     init(coordinator: AddQuestionScreenCoordinator?,
          courseLevelName: String,
