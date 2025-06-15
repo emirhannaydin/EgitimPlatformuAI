@@ -15,4 +15,6 @@ struct User: Codable {
     let name: String
     let userType: Int
     let eMail: String
+    let isEmailActivated: Bool
+    let classes: [CourseClass]
 }

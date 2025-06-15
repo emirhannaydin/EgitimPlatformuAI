@@ -30,10 +30,9 @@ final class WritingScreenViewController: UIViewController {
         configureView()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tapGesture.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapGesture)
+        
         setNotification()
+        hideKeyboardWhenTappedAround()
         translatedText.delegate = self
     }
     
@@ -63,7 +62,7 @@ final class WritingScreenViewController: UIViewController {
                     case(.success(_)):
                         self.loadQuestion()
                         self.hideLottieLoading()
-                        print("kamdksamd")
+                        
 
                     case ( .failure(let error)):
                         print(error)
@@ -87,7 +86,6 @@ final class WritingScreenViewController: UIViewController {
     }
 
     @IBAction func checkButton(_ sender: Any) {
-        dismissKeyboard()
         showLottieLoading()
         
         guard let userAnswer = translatedText.text,
@@ -127,7 +125,24 @@ final class WritingScreenViewController: UIViewController {
             if currentQuestionIndex < viewModel.questions.count {
                 loadQuestion()
             } else {
-                showAlert(title: "Completed", message: "You have finished all questions.")
+                let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
+                viewModel.completeLesson(studentId: userID, lessonId: viewModel.lessonId!) { result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(let isCompleted):
+                            if isCompleted {
+                                self.showLottieLoadingWithDuration() {
+                                    ApplicationCoordinator.getInstance().initTabBar()
+                                    self.hideLottieLoading()
+                                }
+                            } else {
+                                self.showAlert(title: "Error", message: "Failed to complete the lesson.")
+                            }
+                        case .failure(let error):
+                            self.showAlert(title: "Hata", message: error.localizedDescription)
+                        }
+                    }
+                }
             }
     }
     
@@ -195,9 +210,5 @@ final class WritingScreenViewController: UIViewController {
             }
         }
         return nil
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
 }

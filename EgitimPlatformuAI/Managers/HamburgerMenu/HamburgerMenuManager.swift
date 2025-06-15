@@ -188,7 +188,7 @@ class HamburgerMenuManager: NSObject, UITableViewDataSource, UITableViewDelegate
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 3
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -198,21 +198,17 @@ class HamburgerMenuManager: NSObject, UITableViewDataSource, UITableViewDelegate
         cell.backgroundColor = .charcoal
         switch indexPath.row {
         case 0:
-            cell.labelText.text = "Login"
-            cell.logoImageView.image = UIImage(systemName: "lock")
-            cell.logoImageView.tintColor = .mintGreen
-        case 1:
-            cell.labelText.text = "Profile"
-            cell.logoImageView.image = UIImage(systemName: "person.circle")
-            cell.logoImageView.tintColor = .royalBlue
-        case 2:
             cell.labelText.text = "Home"
             cell.logoImageView.image = UIImage(systemName: "house")
             cell.logoImageView.tintColor = .softRed
-        case 3:
+        case 1:
             cell.labelText.text = "AI"
             cell.logoImageView.image = UIImage(systemName: "checkmark.message")
             cell.logoImageView.tintColor = .summer
+        case 2:
+            cell.labelText.text = "Profile"
+            cell.logoImageView.image = UIImage(systemName: "person.circle")
+            cell.logoImageView.tintColor = .royalBlue
         default:
             cell.labelText.text = "--"
             cell.logoImageView.image = UIImage(systemName: "link")
@@ -232,15 +228,11 @@ class HamburgerMenuManager: NSObject, UITableViewDataSource, UITableViewDelegate
         
         switch indexPath.row {
         case 0:
-            ApplicationCoordinator.getInstance().start()
-        case 1:
-            ApplicationCoordinator.getInstance().navigateToProfile()
-        case 2:
             ApplicationCoordinator.getInstance().navigateToMain()
-        case 3:
+        case 1:
             ApplicationCoordinator.getInstance().navigateToAI()
-            
-            
+        case 2:
+            ApplicationCoordinator.getInstance().navigateToProfile()
         default:
             break
         }

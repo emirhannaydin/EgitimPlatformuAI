@@ -13,6 +13,7 @@ final class MainScreenViewController: UIViewController{
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var collectionView2: UICollectionView!
     
+    @IBOutlet var readingBook: UIButton!
     private var hamburgerMenuManager: HamburgerMenuManager!
     var viewModel: MainScreenViewModel?
 
@@ -30,14 +31,16 @@ final class MainScreenViewController: UIViewController{
     
     let username = UserDefaults.standard.string(forKey: "username") ?? "Unknown"
     let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
+    let userType = UserDefaults.standard.integer(forKey: "userType")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Home"
+        print(userType)
+        self.showLottieLoading()
         setupHamburgerMenu()
         setupCollectionViews()
         configureNameContainer()
-        clearOldUserDefaults()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +50,15 @@ final class MainScreenViewController: UIViewController{
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+    }
+    
+    
+    @IBAction func handleReadingBookButton(_ sender: Any) {
+        ApplicationCoordinator.getInstance().pushFromTabBarCoordinator(ReadingBookCoordinator.self, hidesBottomBar: true)
+    }
+    
+    @IBAction func handleWordPuzzleButton(_ sender: Any) {
+        ApplicationCoordinator.getInstance().pushFromTabBarCoordinator(WordPuzzleCoordinator.self, hidesBottomBar: true)
     }
 }
 
@@ -63,6 +75,13 @@ private extension MainScreenViewController {
         nameContainerView.configureView(nameText: username.capitalizingFirstLetter(), welcomeLabelText: "Welcome", imageName: "person.fill")
         nameContainerView.onLogoutTapped = { [weak self] in
             self?.showAlertWithAction(title: "Logout", message: "Are you sure you want to log out?") {
+                KeychainHelper.shared.delete(service: "access-token", account: "user")
+                    
+                UserDefaults.standard.removeObject(forKey: "userID")
+                UserDefaults.standard.removeObject(forKey: "username")
+                UserDefaults.standard.removeObject(forKey: "userType")
+
+
                 ApplicationCoordinator.getInstance().start()
             }
         }
@@ -79,11 +98,6 @@ private extension MainScreenViewController {
         collectionView2.register(HomeScreenCourseCollectionViewCell.nib(), forCellWithReuseIdentifier: HomeScreenCourseCollectionViewCell.identifier)
     }
 
-    func clearOldUserDefaults() {
-        UserDefaults.standard.removeObject(forKey: "enrolled_reading")
-        UserDefaults.standard.removeObject(forKey: "enrolled_listening")
-    }
-
     func loadCourseData() {
 
         viewModel?.loadCourseClasses(studentId: userID) { [weak self] result in
@@ -93,17 +107,24 @@ private extension MainScreenViewController {
                     guard let classes = self?.viewModel?.courseClasses else { return }
                     self?.coursesClassName = classes.map { $0.name }
                     self?.lessonCount = classes.map { $0.lessons.count }
-                    self?.progressCount = classes.map { $0.completedLessonCount }
+                    self?.progressCount = classes.map { course in
+                        course.lessons.filter { $0.isCompleted == true }.count
+                    }
                     self?.level = classes.map { $0.level }
                     self?.coursesName = classes.map { $0.courseName }
                     self?.collectionView.reloadData()
                     self?.collectionView2.reloadData()
+                    self?.hideLottieLoading()
                 case .failure(let error):
                     self?.showAlert(title: "Error", message: error.localizedDescription)
+                    self?.hideLottieLoading()
                 }
             }
         }
     }
+    
+    
+    
 }
 
 // MARK: - Collection View
@@ -167,21 +188,17 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
     func styleClassCell(_ cell: HomeScreenCollectionViewCell) {
         switch cell.courseName.text {
         case "Reading Class":
-            cell.progressView.progressColor = .darkBlue
             cell.backgroundColor = .silver
             cell.courseName.textColor = .black
             cell.levelLabel.textColor = .black
             cell.lessonLabel.textColor = .black
         case "Listening Class":
-            cell.progressView.progressColor = .porcelain
             cell.backgroundColor = .sapphireBlue
             cell.courseName.textColor = .porcelain
         case "Writing Class":
-            cell.progressView.progressColor = .winter
             cell.backgroundColor = .softRed
             cell.courseName.textColor = .winter
         case "Speaking Class":
-            cell.progressView.progressColor = .coldPurple
             cell.backgroundColor = .mintGreen
             cell.courseName.textColor = .coldPurple
         default:
@@ -211,18 +228,60 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let coordinator = CourseScreenCoordinator.getInstance()
         let selectedCourse = viewModel!.courseClasses[indexPath.row]
-        let rawCourseName = selectedCourse.courseName.lowercased()
         let courseId = selectedCourse.courseId
 
-        let viewModel = CourseScreenViewModel(
-            coordinator: coordinator,
-            courseLevelName: "\(selectedCourse.level)",
-            courseId: courseId
-        )
+        if collectionView.tag == 1 {
+            if let nextLesson = selectedCourse.lessons
+                .filter({ $0.isCompleted == false })
+                .sorted(by: { $0.order < $1.order })
+                .first
+            {
+                if selectedCourse.courseName == "Reading" {
+                    let coordinator = ReadingScreenCoordinator.getInstance()
+                    let viewModel = ReadingScreenViewModel(coordinator: coordinator, lessonId: nextLesson.id)
+                    coordinator.start(with: viewModel)
+                    ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+                }else if selectedCourse.courseName == "Writing" {
+                    let coordinator = WritingScreenCoordinator.getInstance()
+                    let viewModel = WritingScreenViewModel(coordinator: coordinator, lessonId: nextLesson.id)
+                    coordinator.start(with: viewModel)
+                    ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+                }else if selectedCourse.courseName == "Speaking" {
+                    let coordinator = SpeakingScreenCoordinator.getInstance()
+                    let viewModel = SpeakingScreenViewModel(coordinator: coordinator, lessonId: nextLesson.id)
+                    coordinator.start(with: viewModel)
+                    ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+                }else if selectedCourse.courseName == "Listening"{
+                    let coordinator = ListeningScreenCoordinator.getInstance()
+                    let viewModel = ListeningScreenViewModel(coordinator: coordinator, lessonId: nextLesson.id)
+                    coordinator.start(with: viewModel)
+                    ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+                }else{
+                    let coordinator = CourseScreenCoordinator.getInstance()
+                    let viewModel = CourseScreenViewModel(
+                        coordinator: coordinator,
+                        courseLevelName: "\(selectedCourse.level)",
+                        courseId: courseId
+                    )
+                    
+                    ApplicationCoordinator.getInstance().handleCourseEntry(with: viewModel)
+                }
+                
+            }
+        } else {
+            let coordinator = CourseScreenCoordinator.getInstance()
+            let viewModel = CourseScreenViewModel(
+                coordinator: coordinator,
+                courseLevelName: "\(selectedCourse.level)",
+                courseId: courseId
+            )
+            
+            ApplicationCoordinator.getInstance().handleCourseEntry(with: viewModel)
+        }
         
-        ApplicationCoordinator.getInstance().handleCourseEntry(with: viewModel)
+        
+        
     }
 }
 

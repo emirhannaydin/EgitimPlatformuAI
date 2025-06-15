@@ -11,6 +11,7 @@ struct TestSection {
     let level: Int
     let title: String
     let tests: [Lesson]
+    var isExpanded: Bool = true
 }
 
 class CourseScreenViewModel {
@@ -52,9 +53,18 @@ class CourseScreenViewModel {
         return sortedClasses.map { courseClass in
             let sortedLessons = courseClass.lessons.sorted { $0.content.localizedCaseInsensitiveCompare($1.content) == .orderedAscending }
             let title = levelTextForInt(for: courseClass.level)
-            return TestSection(level: courseClass.level, title: title, tests: sortedLessons)
+            
+            let allLessonsCompleted = sortedLessons.allSatisfy { $0.isCompleted == true }
+
+            return TestSection(
+                level: courseClass.level,
+                title: title,
+                tests: sortedLessons,
+                isExpanded: !allLessonsCompleted
+            )
         }
     }
+
 
 
     func levelTextForInt(for level: Int) -> String {

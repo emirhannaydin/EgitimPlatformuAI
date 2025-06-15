@@ -21,6 +21,26 @@ final class ApplicationCoordinator: Coordinator {
     let teacherCoordinator = TeacherScreenCoordinator.getInstance()
 
     func start() {
+        let userType = UserDefaults.standard.integer(forKey: "userType")
+        let hasUserType = UserDefaults.standard.object(forKey: "userType") != nil
+        if let tokenData = KeychainHelper.shared.read(service: "access-token", account: "user"),
+           let token = String(data: tokenData, encoding: .utf8),
+           !token.isEmpty {
+            if !hasUserType {
+                navigateToLogin()
+                return
+            }
+            if userType == 0 {
+                ApplicationCoordinator.getInstance().initTeacherScreen()
+            }else{
+                ApplicationCoordinator.getInstance().initTabBar()
+            }
+        } else {
+            navigateToLogin()
+        }
+
+    }
+    func navigateToLogin(){
         let loginCoordinator = LoginScreenCoordinator.getInstance()
         loginCoordinator.navigationController = UINavigationController()
         loginCoordinator.start()
@@ -30,9 +50,6 @@ final class ApplicationCoordinator: Coordinator {
             })
             window.makeKeyAndVisible()
         }
-        window?.makeKeyAndVisible()
-        
-        
     }
     func navigateToMain() {
         tabBarCoordinator.tabBarController.selectedIndex = 0
@@ -49,14 +66,12 @@ final class ApplicationCoordinator: Coordinator {
     func navigateToMainLogin(){
         pushToMainLoginScreen()
     }
-    func navigateToLevelScreen(){
-        
-    }
     func navigateToAddQuestionScreen(){
         pushToAddQuestionScreen()
     }
 
     func initTabBar(){
+        UserDefaults.standard.set(1, forKey: "userType")
         tabBarCoordinator.start()
         tabBarCoordinator.tabBarController.isTabBarHidden = false
         tabBarCoordinator.tabBarController.selectedIndex = 0
@@ -70,6 +85,7 @@ final class ApplicationCoordinator: Coordinator {
     }
     
     func initTeacherScreen(){
+        UserDefaults.standard.set(0, forKey: "userType")
         teacherCoordinator.start()
         if let window = self.window {
             UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: {
@@ -165,6 +181,67 @@ final class ApplicationCoordinator: Coordinator {
             
             if let mainLoginVC = mainLoginCoordinator.navigationController.viewControllers.first {
                 navController.pushViewController(mainLoginVC, animated: true)
+            }
+        }
+    }
+    
+    func pushToVerifyEmailScreen(){
+        let navController = LoginScreenCoordinator.getInstance().navigationController
+
+        if let existingLoginVC = navController.viewControllers.first(where: { $0 is VerifyEmailScreenViewController }) {
+            navController.popToViewController(existingLoginVC, animated: true)
+        } else {
+            let mainLoginCoordinator = VerifyEmailScreenCoordinator.getInstance()
+            mainLoginCoordinator.start()
+            
+            if let mainLoginVC = mainLoginCoordinator.navigationController.viewControllers.first {
+                navController.pushViewController(mainLoginVC, animated: true)
+            }
+        }
+    }
+    
+    func pushToVerifyEmailScreen(with viewModel: VerifyEmailScreenViewModel) {
+        let navController = LoginScreenCoordinator.getInstance().navigationController
+
+        if let existingRegisterVC = navController.viewControllers.first(where: { $0 is VerifyEmailScreenViewController }) {
+            navController.popToViewController(existingRegisterVC, animated: true)
+        } else {
+            let verifyCoordinator = VerifyEmailScreenCoordinator.getInstance()
+            verifyCoordinator.start(with: viewModel)
+
+            if let verifyVC = verifyCoordinator.navigationController.viewControllers.first {
+                navController.pushViewController(verifyVC, animated: true)
+            }
+        }
+    }
+
+    
+    func pushToForgotPasswordScreen(){
+        let navController = LoginScreenCoordinator.getInstance().navigationController
+
+        if let existingLoginVC = navController.viewControllers.first(where: { $0 is ForgotPasswordViewController }) {
+            navController.popToViewController(existingLoginVC, animated: true)
+        } else {
+            let mainLoginCoordinator = ForgotPasswordCoordinator.getInstance()
+            mainLoginCoordinator.start()
+            
+            if let mainLoginVC = mainLoginCoordinator.navigationController.viewControllers.first {
+                navController.pushViewController(mainLoginVC, animated: true)
+            }
+        }
+    }
+    
+    func pushToResetPasswordScreen(with viewModel: ResetPasswordScreenViewModel) {
+        let navController = LoginScreenCoordinator.getInstance().navigationController
+
+        if let existingRegisterVC = navController.viewControllers.first(where: { $0 is ResetPasswordScreenViewController }) {
+            navController.popToViewController(existingRegisterVC, animated: true)
+        } else {
+            let verifyCoordinator = ResetPasswordScreenCoordinator.getInstance()
+            verifyCoordinator.start(with: viewModel)
+
+            if let verifyVC = verifyCoordinator.navigationController.viewControllers.first {
+                navController.pushViewController(verifyVC, animated: true)
             }
         }
     }

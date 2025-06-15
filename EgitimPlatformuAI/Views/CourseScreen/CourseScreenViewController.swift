@@ -13,6 +13,7 @@ final class CourseScreenViewController: UIViewController{
     
     var viewModel: CourseScreenViewModel!
 
+    @IBOutlet var backButton: CustomBackButtonView!
     @IBOutlet var courseLevelName: UILabel!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var courseName: UILabel!
@@ -31,6 +32,10 @@ final class CourseScreenViewController: UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.showLottieLoading()
         fetchCourseLessons()
     }
 }
@@ -41,6 +46,7 @@ private extension CourseScreenViewController {
         courseName.layer.borderWidth = 1
         courseName.layer.borderColor = UIColor.black.cgColor
         courseName.layer.masksToBounds = true
+        backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
     }
 
     func setupTableView() {
@@ -87,6 +93,10 @@ private extension CourseScreenViewController {
             }
         }
     }
+    
+    @objc func backButtonTapped(){
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 // MARK: - TableView DataSource & Delegate
@@ -97,8 +107,9 @@ extension CourseScreenViewController: UITableViewDataSource, UITableViewDelegate
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sections[section].tests.count
+        return sections[section].isExpanded ? sections[section].tests.count : 0
     }
+
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CourseScreenTableViewCell.identifier, for: indexPath) as! CourseScreenTableViewCell
@@ -115,13 +126,40 @@ extension CourseScreenViewController: UITableViewDataSource, UITableViewDelegate
         }
         header.titleLabel.text = sections[section].title
         header.tag = section
-        header.imageView.isHidden = true // açılır kapanır gerek yok artık
+        header.imageView.image = UIImage(systemName: "chevron.down")
+        header.imageView.transform = sections[section].isExpanded ? .identity : CGAffineTransform(rotationAngle: -.pi / 2)
+
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(toggleSection(_:)))
+        header.addGestureRecognizer(tapGesture)
+        
         return header
     }
 
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let lessonId = sections[indexPath.section].tests[indexPath.row].id
-        print(lessonId)
+        let selectedSection = sections[indexPath.section]
+        let selectedLesson = selectedSection.tests[indexPath.row]
+        let userLevel = Int(viewModel.courseLevelName) ?? 0
+
+        if selectedSection.level > userLevel {
+            showAlert(
+                title: "Access Denied",
+                message: "You cannot access level \(viewModel.levelTextForInt(for: selectedSection.level)) before completing your current level."
+            )
+            return
+        }
+
+        let previousLessons = selectedSection.tests[..<indexPath.row]
+        if let incompleteLesson = previousLessons.first(where: { $0.isCompleted != true }) {
+            showAlert(
+                title: "Access Denied",
+                message: "Please complete the previous lesson first: \(incompleteLesson.content)"
+            )
+            return
+        }
+
+        let lessonId = selectedLesson.id
         switch self.viewModel.courseClasses[0].courseName {
         case "Writing":
             let coordinator = WritingScreenCoordinator.getInstance()
@@ -144,9 +182,11 @@ extension CourseScreenViewController: UITableViewDataSource, UITableViewDelegate
             coordinator.start(with: viewModel)
             ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
         default:
-                break
+            break
         }
     }
+
+
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return tableView.estimatedSectionHeaderHeight
@@ -167,4 +207,23 @@ extension CourseScreenViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
+    
+    @objc private func toggleSection(_ gesture: UITapGestureRecognizer) {
+        guard let headerView = gesture.view else { return }
+        let section = headerView.tag
+        viewModel.sections[section].isExpanded.toggle()
+
+        if let header = tableView.headerView(forSection: section) as? CourseScreenHeaderFooterView {
+            UIView.animate(withDuration: 0.3) {
+                let isExpanded = self.viewModel.sections[section].isExpanded
+                header.imageView.transform = isExpanded ? .identity : CGAffineTransform(rotationAngle: -.pi / 2)
+            }
+        }
+
+        tableView.beginUpdates()
+        tableView.reloadSections([section], with: .automatic)
+        tableView.endUpdates()
+    }
+
+
 }

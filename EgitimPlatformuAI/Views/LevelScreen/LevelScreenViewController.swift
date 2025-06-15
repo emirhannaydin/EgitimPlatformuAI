@@ -95,7 +95,6 @@ final class LevelScreenViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.levelQuestionLabel.text = "What is your \((self.viewModel.courses[self.currentIndex].name)) level?"
                     self.tableView.reloadData()
-                    print("controller calisti")
                 }
             case .failure(let error):
                 print("Error: \(error.localizedDescription)")
@@ -119,13 +118,10 @@ final class LevelScreenViewController: UIViewController {
             continueButton.isEnabled = false
         } else {
             if let userId = UserDefaults.standard.string(forKey: "userID") {
-                print(userId)
                 viewModel.submitSelections(studentId: userId) { result in
                     DispatchQueue.main.async {
                         switch result {
                         case .success:
-                            UserDefaults.standard.set(true, forKey: "hasSubmittedLevels_\(userId)")
-                            print("Başarıyla gönderildi.")
                             self.goToNextPage()
                         case .failure(let error):
                             print("Gönderim hatası: \(error.localizedDescription)")
@@ -133,7 +129,6 @@ final class LevelScreenViewController: UIViewController {
                     }
                 }
             } else {
-                print("UserID bulunamadı.")
             }
         }
     }
