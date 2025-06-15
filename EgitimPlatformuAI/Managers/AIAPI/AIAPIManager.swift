@@ -15,16 +15,7 @@ final class AIAPIManager: NSObject {
     var openAIAudioPlayer: AVAudioPlayer?
     var shouldPlayAudio = true
 
-    struct Config {
-        static var openAIKey: String {
-            guard let filePath = Bundle.main.path(forResource: "Config", ofType: "plist"),
-                  let plist = NSDictionary(contentsOfFile: filePath),
-                  let value = plist.object(forKey: "OpenAI_API_Key") as? String else {
-                fatalError("Couldn't find OpenAI_API_Key in Config.plist.")
-            }
-            return value
-        }
-    }
+    
     
     var openAI = SwiftOpenAI(apiKey: Config.openAIKey)
     
@@ -205,6 +196,50 @@ final class AIAPIManager: NSObject {
     }
     
     
+    private func calculateSimilarity(between str1: String, and str2: String) -> Double {
+        let norm1 = normalize(str1)
+        let norm2 = normalize(str2)
+
+        let distance = levenshtein(norm1, norm2)
+        let maxLen = max(norm1.count, norm2.count)
+        return maxLen == 0 ? 1.0 : 1.0 - Double(distance) / Double(maxLen)
+    }
+
+
+
+    private func levenshtein(_ a: String, _ b: String) -> Int {
+        let a = Array(a)
+        let b = Array(b)
+        var dist = [[Int]](repeating: [Int](repeating: 0, count: b.count + 1), count: a.count + 1)
+
+        for i in 0...a.count { dist[i][0] = i }
+        for j in 0...b.count { dist[0][j] = j }
+
+        for i in 1...a.count {
+            for j in 1...b.count {
+                if a[i - 1] == b[j - 1] {
+                    dist[i][j] = dist[i - 1][j - 1]
+                } else {
+                    dist[i][j] = min(
+                        dist[i - 1][j - 1] + 1,
+                        min(dist[i][j - 1] + 1, dist[i - 1][j] + 1)
+                    )
+                }
+            }
+        }
+        return dist[a.count][b.count]
+    }
+
+    private func normalize(_ str: String) -> String {
+        return str
+            .lowercased()
+            .folding(options: .diacriticInsensitive, locale: .current)
+            .components(separatedBy: .punctuationCharacters).joined()
+            .replacingOccurrences(of: "\n", with: " ")
+            .replacingOccurrences(of: "\t", with: " ")
+            .replacingOccurrences(of: "  ", with: " ")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+    }
 
 }
 
@@ -215,7 +250,6 @@ extension AIAPIManager: AVAudioPlayerDelegate{
         
     }
 
-    
 }
 
 extension Notification.Name {
@@ -234,49 +268,15 @@ extension Data {
     }
 }
 
-private func calculateSimilarity(between str1: String, and str2: String) -> Double {
-    let norm1 = normalize(str1)
-    let norm2 = normalize(str2)
-
-    let distance = levenshtein(norm1, norm2)
-    let maxLen = max(norm1.count, norm2.count)
-    return maxLen == 0 ? 1.0 : 1.0 - Double(distance) / Double(maxLen)
-}
-
-
-
-private func levenshtein(_ a: String, _ b: String) -> Int {
-    let a = Array(a)
-    let b = Array(b)
-    var dist = [[Int]](repeating: [Int](repeating: 0, count: b.count + 1), count: a.count + 1)
-
-    for i in 0...a.count { dist[i][0] = i }
-    for j in 0...b.count { dist[0][j] = j }
-
-    for i in 1...a.count {
-        for j in 1...b.count {
-            if a[i - 1] == b[j - 1] {
-                dist[i][j] = dist[i - 1][j - 1]
-            } else {
-                dist[i][j] = min(
-                    dist[i - 1][j - 1] + 1,
-                    min(dist[i][j - 1] + 1, dist[i - 1][j] + 1)
-                )
-            }
+struct Config {
+    static var openAIKey: String {
+        guard let filePath = Bundle.main.path(forResource: "Config", ofType: "plist"),
+              let plist = NSDictionary(contentsOfFile: filePath),
+              let value = plist.object(forKey: "OpenAI_API_Key") as? String else {
+            fatalError("Couldn't find OpenAI_API_Key in Config.plist.")
         }
+        return value
     }
-    return dist[a.count][b.count]
-}
-
-private func normalize(_ str: String) -> String {
-    return str
-        .lowercased()
-        .folding(options: .diacriticInsensitive, locale: .current)
-        .components(separatedBy: .punctuationCharacters).joined()
-        .replacingOccurrences(of: "\n", with: " ")
-        .replacingOccurrences(of: "\t", with: " ")
-        .replacingOccurrences(of: "  ", with: " ")
-        .trimmingCharacters(in: .whitespacesAndNewlines)
 }
 
 
