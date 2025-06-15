@@ -109,20 +109,22 @@ class MainLoginScreenViewController: UIViewController {
                 case .success:
                     guard let user = self?.viewModel?.user else { return }
                     self?.user = user
-                    guard let classes = self?.user?.classes else { return }
 
                     if let currentUserID = UserDefaults.standard.string(forKey: "userID") {
                         if self?.user?.userType == 0{
                             ApplicationCoordinator.getInstance().initTeacherScreen()
                         }else{
-                            //if self?.user?.isEmailActivated == true{
-                             //   ApplicationCoordinator.getInstance().pushToVerifyEmailScreen()
-                            //}else{
+                            if let classes = self?.user?.classes {
                                 if classes.isEmpty{
                                     ApplicationCoordinator.getInstance().pushToLevelScreen()
                                 }else {
                                     ApplicationCoordinator.getInstance().initTabBar()
                                 }
+                            }
+                            //if self?.user?.isEmailActivated == true{
+                             //   ApplicationCoordinator.getInstance().pushToVerifyEmailScreen()
+                            //}else{
+                                
                             //}
                         }
                     } else {
