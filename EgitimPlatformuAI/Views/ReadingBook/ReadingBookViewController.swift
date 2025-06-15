@@ -15,19 +15,34 @@ final class ReadingBookViewController: UIViewController{
 
     @IBOutlet var backButton: CustomBackButtonView!
     @IBOutlet var collectionView: UICollectionView!
-    
-    var viewModel: ReadingBookViewModel?
-    let books: [Books] = [
-        Books(title: "Borusandan Masallar", fileName: "borusandan-masallar", image: "borusanMasalları-kapak"),
-        Books(title: "Çalıkuşu", fileName: "calikusu", image: "calikusu-kapak"),
-        Books(title: "Karantina", fileName: "karantina", image: "karantina-kapak"),
-        Books(title: "Rezonans Kanunu", fileName: "rezonans-kanunu", image: "rezonansKanunu-kapak")
+    var books: [Books] = []
 
-    ]
+    var viewModel: ReadingBookViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = false
+        self.showLottieLoading()
         setupUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        loadBooks()
+    }
+    
+    private func loadBooks() {
+        viewModel?.fetchBooks { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let books):
+                    self?.books = books
+                    self?.collectionView.reloadData()
+                    self?.hideLottieLoading()
+                case .failure(let error):
+                    self?.hideLottieLoading()
+                    self?.showAlert(title: "Error", message: error.localizedDescription)
+                }
+            }
+        }
     }
 
     private func setupUI() {

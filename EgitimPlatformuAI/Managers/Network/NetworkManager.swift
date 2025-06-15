@@ -673,6 +673,162 @@ class NetworkManager {
 
         }.resume()
     }
+    
+    func uploadFile(fileURL: URL, completion: @escaping (Result<PDFUploadResponse, Error>) -> Void) {
+        
+        let endPoint = "ClassMedia/upload"
+        guard let url = URL(string: "\(baseUrl)\(endPoint)") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0)))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let boundary = "Boundary-\(UUID().uuidString)"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.setValue("*/*", forHTTPHeaderField: "accept")
+        
+        guard let pdfData = try? Data(contentsOf: fileURL) else {
+            completion(.failure(NSError(domain: "File read error", code: 0)))
+            return
+        }
+        
+        let filename = fileURL.lastPathComponent
+        let mimetype = "application/pdf"
+        
+        var body = Data()
+        
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"File\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
+        body.append("Content-Type: \(mimetype)\r\n\r\n".data(using: .utf8)!)
+        body.append(pdfData)
+        body.append("\r\n".data(using: .utf8)!)
+        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+        
+        request.httpBody = body
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(NSError(domain: "No response", code: 0)))
+                return
+            }
+            
+            guard (200..<300).contains(httpResponse.statusCode) else {
+                if let data = data, let errorMessage = String(data: data, encoding: .utf8) {
+                    let backendError = NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+                    completion(.failure(backendError))
+                } else {
+                    completion(.failure(NSError(domain: "Invalid response", code: httpResponse.statusCode)))
+                }
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(NSError(domain: "No data", code: 0)))
+                return
+            }
+            
+            do {
+                let responseModel = try JSONDecoder().decode(PDFUploadResponse.self, from: data)
+                completion(.success(responseModel))
+            } catch {
+                completion(.failure(error))
+            }
+            
+        }.resume()
+    }
+    
+    func uploadBookMetadata(title: String, coverName: String, fileName: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        
+        let endpoint = "Book/CreateBook"
+        guard let url = URL(string: "\(baseUrl)\(endpoint)") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0)))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("*/*", forHTTPHeaderField: "accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let body: [String: Any] = [
+            "title": title,
+            "coverName": coverName,
+            "fileName": fileName
+        ]
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+        } catch {
+            completion(.failure(error))
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(NSError(domain: "No response", code: 0)))
+                return
+            }
+            
+            guard (200..<300).contains(httpResponse.statusCode) else {
+                if let data = data, let errorMessage = String(data: data, encoding: .utf8) {
+                    let backendError = NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+                    completion(.failure(backendError))
+                } else {
+                    completion(.failure(NSError(domain: "Invalid response", code: httpResponse.statusCode)))
+                }
+                return
+            }
+            
+            completion(.success(true))
+            
+        }.resume()
+    }
+
+    func getBooks(completion: @escaping (Result<[Books], Error>) -> Void) {
+        let endpoint = "Book/GetBooks"
+        guard let url = URL(string: "\(baseUrl)\(endpoint)") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0)))
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("*/*", forHTTPHeaderField: "accept")
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let data = data else {
+                completion(.failure(NSError(domain: "No data", code: 0)))
+                return
+            }
+
+            do {
+                let books = try JSONDecoder().decode([Books].self, from: data)
+                completion(.success(books))
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
+
 
 
 }

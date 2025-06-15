@@ -24,6 +24,24 @@ final class BookCell: UICollectionViewCell {
 
     func configure(with book: Books) {
         titleLabel.text = book.title
-        imageView.image = UIImage(named: book.image ?? "")
+        
+        let baseUrl = "http://localhost:5001/media/"
+        if let url = URL(string: baseUrl + book.coverName) {
+            DispatchQueue.global().async {
+                if let data = try? Data(contentsOf: url),
+                   let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self.imageView.image = image
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.imageView.image = UIImage(systemName: "book")
+                    }
+                }
+            }
+        } else {
+            imageView.image = UIImage(systemName: "book")
+        }
     }
+
 }

@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Fotoğraf galerisine erişim izni gerekiyor.</string>
     <key>NSSpeechRecognitionUsageDescription</key>
     <string>Kullanıcının sesini metne dönüştürmek için izin gerekir.</string>
     <key>NSMicrophoneUsageDescription</key>

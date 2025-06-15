@@ -17,18 +17,28 @@ final class PDFScreenViewController: UIViewController {
         view.addSubview(pdfView)
         view.backgroundColor = .systemBackground
 
-        guard let fileName = viewModel?.fileName,
-              let url = Bundle.main.url(forResource: fileName, withExtension: "pdf"),
-              let document = PDFDocument(url: url) else {
-            showAlert(title: "Error", message: "PDF can not be loaded")
+        guard let url = viewModel?.fullPDFURL else {
+            showAlert(title: "Error", message: "Invalid file URL")
             return
         }
-        pdfView.document = document
-        pdfView.autoScales = true
-        pdfView.displayMode = .singlePageContinuous
-        pdfView.displayDirection = .horizontal
 
+        DispatchQueue.global().async {
+            if let data = try? Data(contentsOf: url),
+               let document = PDFDocument(data: data) {
+                DispatchQueue.main.async {
+                    self.pdfView.document = document
+                    self.pdfView.autoScales = true
+                    self.pdfView.displayMode = .singlePageContinuous
+                    self.pdfView.displayDirection = .horizontal
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Error", message: "PDF could not be loaded")
+                }
+            }
+        }
     }
+
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

@@ -40,7 +40,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bru-dV-F1l">
-                                <rect key="frame" x="0.0" y="157" width="393" height="661"/>
+                                <rect key="frame" x="0.0" y="215" width="393" height="603"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="O1l-KK-WLw">
                                     <size key="itemSize" width="300" height="150"/>
@@ -87,28 +87,44 @@
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="gHb-UK-Zxf"/>
                                 </connections>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pfZ-Mn-Qa4">
+                                <rect key="frame" x="20" y="172" width="353" height="38"/>
+                                <color key="backgroundColor" name="summer"/>
+                                <color key="tintColor" name="backDarkBlue"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Tap here to upload a book">
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="handleUploadBook:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="d2z-bT-g7g"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="darkBlue"/>
                         <constraints>
                             <constraint firstItem="cOp-eo-FCi" firstAttribute="top" secondItem="h4r-I6-zwi" secondAttribute="bottom" id="2CH-NV-bDH"/>
                             <constraint firstItem="h4r-I6-zwi" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="2Pw-WO-nxL"/>
+                            <constraint firstItem="pfZ-Mn-Qa4" firstAttribute="top" secondItem="Tpm-gL-5mA" secondAttribute="bottom" constant="20" id="51R-z2-9sq"/>
                             <constraint firstItem="Bru-dV-F1l" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="5WQ-b3-td3"/>
                             <constraint firstItem="cOp-eo-FCi" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="5Z2-TK-UbO"/>
                             <constraint firstItem="h4r-I6-zwi" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="7bM-Vf-aYu"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="pfZ-Mn-Qa4" secondAttribute="trailing" constant="20" id="9DX-ps-umM"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Bru-dV-F1l" secondAttribute="bottom" id="NyA-X9-sgp"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Tpm-gL-5mA" secondAttribute="trailing" id="UCj-KG-DjD"/>
                             <constraint firstItem="Tpm-gL-5mA" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="VfB-6X-mNj"/>
                             <constraint firstItem="Tpm-gL-5mA" firstAttribute="top" secondItem="cOp-eo-FCi" secondAttribute="bottom" id="X2O-vk-Hzq"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Bru-dV-F1l" secondAttribute="trailing" id="dJY-5I-rPB"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="h4r-I6-zwi" secondAttribute="trailing" id="dXI-BW-RPd"/>
-                            <constraint firstItem="Bru-dV-F1l" firstAttribute="top" secondItem="Tpm-gL-5mA" secondAttribute="bottom" constant="5" id="jnH-QY-663"/>
+                            <constraint firstItem="Bru-dV-F1l" firstAttribute="top" secondItem="pfZ-Mn-Qa4" secondAttribute="bottom" constant="5" id="jnH-QY-663"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="cOp-eo-FCi" secondAttribute="trailing" id="pK3-c4-Ez9"/>
+                            <constraint firstItem="pfZ-Mn-Qa4" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="pxh-h3-JMi"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="Bru-dV-F1l" id="Fnb-MH-0ot"/>
                         <outlet property="nameContainerView" destination="cOp-eo-FCi" id="rm6-gf-wTs"/>
+                        <outlet property="uploadBookButton" destination="pfZ-Mn-Qa4" id="W8a-Aw-WaX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -122,6 +138,9 @@
         </namedColor>
         <namedColor name="darkBlue">
             <color red="0.11764705882352941" green="0.13725490196078433" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="summer">
+            <color red="0.94117647058823528" green="0.73333333333333328" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

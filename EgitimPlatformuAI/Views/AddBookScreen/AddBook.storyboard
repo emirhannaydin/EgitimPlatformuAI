@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Add Book Screen View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="AddBook" id="Y6W-OH-hqX" customClass="AddBookScreenViewController" customModule="EgitimPlatformuAI" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2IU-oA-zzK" customClass="CustomBackButtonView" customModule="EgitimPlatformuAI" customModuleProvider="target">
+                                <rect key="frame" x="20" y="59" width="40" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="0Vb-7Y-qaw"/>
+                                    <constraint firstAttribute="height" constant="40" id="Ifc-Ue-BZ7"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Book" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vIu-fd-8uJ">
+                                <rect key="frame" x="60" y="54" width="273" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="COF-Ha-fuZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" name="summer"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7JT-DW-bfP">
+                                <rect key="frame" x="20" y="269" width="353" height="35"/>
+                                <color key="backgroundColor" name="summer"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="4xA-bV-3rK"/>
+                                </constraints>
+                                <color key="tintColor" name="charcoal"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Pick a Book Cover">
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="selectCoverHandler:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="gbx-I6-t9W"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gSn-UK-qEj">
+                                <rect key="frame" x="146.66666666666666" y="314" width="100" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="Qdu-LM-t7e"/>
+                                    <constraint firstAttribute="height" constant="150" id="ymV-df-Qzk"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Book Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b7F-1x-PNa">
+                                <rect key="frame" x="20" y="124" width="353" height="30"/>
+                                <color key="backgroundColor" name="paleGray"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="lul-hW-TO1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cCO-Ox-tzT">
+                                <rect key="frame" x="20" y="474" width="353" height="50"/>
+                                <color key="backgroundColor" name="softBlue"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="dj6-yg-JL6"/>
+                                </constraints>
+                                <color key="tintColor" name="darkBlue"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Upload Book">
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="uploadBookHandler:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="kxq-fl-lvF"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtT-8u-EUt">
+                                <rect key="frame" x="20" y="239" width="353" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Vjb-O0-Nmc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                <color key="textColor" name="paleGray"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bx2-8X-dZY">
+                                <rect key="frame" x="20" y="194" width="353" height="35"/>
+                                <color key="backgroundColor" name="summer"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="ELS-qs-1Ft"/>
+                                </constraints>
+                                <color key="tintColor" name="charcoal"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Pick a Book PDF">
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="selectBookHandler:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ZM6-Wi-bMQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" name="charcoal"/>
+                        <constraints>
+                            <constraint firstItem="7JT-DW-bfP" firstAttribute="top" secondItem="CtT-8u-EUt" secondAttribute="bottom" constant="10" id="7Xx-vJ-4Y7"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="vIu-fd-8uJ" secondAttribute="trailing" constant="60" id="8yU-p2-r2x"/>
+                            <constraint firstItem="2IU-oA-zzK" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" constant="20" id="CRU-1s-8yC"/>
+                            <constraint firstItem="2IU-oA-zzK" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="ClQ-Fz-CeT"/>
+                            <constraint firstItem="gSn-UK-qEj" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="J3t-nw-B4Q"/>
+                            <constraint firstItem="b7F-1x-PNa" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="Toa-Lu-Z36"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="bx2-8X-dZY" secondAttribute="trailing" constant="20" id="Tyv-J8-iME"/>
+                            <constraint firstItem="7JT-DW-bfP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="Wdp-QI-8BA"/>
+                            <constraint firstItem="vIu-fd-8uJ" firstAttribute="leading" secondItem="2IU-oA-zzK" secondAttribute="trailing" id="bt5-pj-eqG"/>
+                            <constraint firstItem="gSn-UK-qEj" firstAttribute="top" secondItem="7JT-DW-bfP" secondAttribute="bottom" constant="10" id="cJS-Op-83G"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CtT-8u-EUt" secondAttribute="trailing" constant="20" id="f9O-KB-9pC"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="cCO-Ox-tzT" secondAttribute="trailing" constant="20" id="fHg-TG-S7t"/>
+                            <constraint firstItem="cCO-Ox-tzT" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="gh2-dl-Woe"/>
+                            <constraint firstItem="cCO-Ox-tzT" firstAttribute="top" secondItem="gSn-UK-qEj" secondAttribute="bottom" constant="10" id="jci-x9-URb"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="b7F-1x-PNa" secondAttribute="trailing" constant="20" id="lHk-AL-QZc"/>
+                            <constraint firstItem="vIu-fd-8uJ" firstAttribute="centerY" secondItem="2IU-oA-zzK" secondAttribute="centerY" id="m2q-Rx-OEa"/>
+                            <constraint firstItem="b7F-1x-PNa" firstAttribute="top" secondItem="vIu-fd-8uJ" secondAttribute="bottom" constant="20" id="n3f-NF-79l"/>
+                            <constraint firstItem="CtT-8u-EUt" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="nQA-6q-dXJ"/>
+                            <constraint firstItem="bx2-8X-dZY" firstAttribute="top" secondItem="b7F-1x-PNa" secondAttribute="bottom" constant="40" id="pw0-m3-7ba"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="7JT-DW-bfP" secondAttribute="trailing" constant="20" id="q0j-u1-Ubx"/>
+                            <constraint firstItem="CtT-8u-EUt" firstAttribute="top" secondItem="bx2-8X-dZY" secondAttribute="bottom" constant="10" id="r4s-EL-Uqn"/>
+                            <constraint firstItem="bx2-8X-dZY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="rIT-xq-bAV"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="2IU-oA-zzK" id="7lO-ak-hTY"/>
+                        <outlet property="bookNameLabel" destination="CtT-8u-EUt" id="6pD-wV-IEb"/>
+                        <outlet property="bookNameTextField" destination="b7F-1x-PNa" id="eNe-4U-ZZW"/>
+                        <outlet property="coverImage" destination="gSn-UK-qEj" id="sRd-b3-deL"/>
+                        <outlet property="selectBookButton" destination="bx2-8X-dZY" id="N3T-nQ-pmn"/>
+                        <outlet property="selectCoverButton" destination="7JT-DW-bfP" id="f44-NG-phg"/>
+                        <outlet property="uploadBookButton" destination="cCO-Ox-tzT" id="bvy-y7-HZh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-48.091603053435115" y="3.5211267605633805"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="charcoal">
+            <color red="0.17254901960784313" green="0.20000000000000001" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="darkBlue">
+            <color red="0.11764705882352941" green="0.13725490196078433" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="paleGray">
+            <color red="0.88235294117647056" green="0.89411764705882357" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="softBlue">
+            <color red="0.8901960784313725" green="0.94901960784313721" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="summer">
+            <color red="0.94117647058823528" green="0.73333333333333328" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
