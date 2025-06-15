@@ -115,8 +115,9 @@ class ProfileScreenViewController: UIViewController {
     }
     
     func setupUserDetails() {
+        let tagName = UserDefaults.standard.string(forKey: "tagName") ?? "-"
         nameLabel.text = student?.name ?? "-"
-        surnameLabel.text = student?.surname ?? "-"
+        surnameLabel.text = tagName
         emailLabel.text = student?.email ?? "-"
     }
     

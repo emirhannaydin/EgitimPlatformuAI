@@ -36,7 +36,7 @@
                                     <constraint firstAttribute="height" constant="120" id="xlz-uh-OOV"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just click to enroll in the course." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ROE-e4-xhN">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just click to view the course lessons." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ROE-e4-xhN">
                                 <rect key="frame" x="10" y="140" width="250" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="EYN-Bm-SIq"/>

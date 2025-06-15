@@ -28,6 +28,8 @@ final class MainScreenViewController: UIViewController{
     var lessonCount: [Int] = []
     var progressCount: [Int] = []
     var level: [Int] = []
+    var levelName: String?
+    var levelColor: UIColor = .summer
     
     let username = UserDefaults.standard.string(forKey: "username") ?? "Unknown"
     let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
@@ -40,7 +42,6 @@ final class MainScreenViewController: UIViewController{
         self.showLottieLoading()
         setupHamburgerMenu()
         setupCollectionViews()
-        configureNameContainer()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -72,7 +73,17 @@ private extension MainScreenViewController {
     func configureNameContainer() {
         nameContainerView.hamburgerMenuManager = hamburgerMenuManager
         navigationController?.navigationBar.isHidden = true
-        nameContainerView.configureView(nameText: username.capitalizingFirstLetter(), welcomeLabelText: "Welcome", imageName: "person.fill")
+        if let _levelName = levelName{
+            UserDefaults.standard.set(_levelName, forKey: "tagName")
+            nameContainerView.configureView(
+                nameText: "\(username.capitalizingFirstLetter()) • \(_levelName)",
+                welcomeLabelText: "Welcome",
+                imageName: "person.fill",
+                levelName: _levelName,
+                levelColor: levelColor
+            )
+        }
+
         nameContainerView.onLogoutTapped = { [weak self] in
             self?.showAlertWithAction(title: "Logout", message: "Are you sure you want to log out?") {
                 KeychainHelper.shared.delete(service: "access-token", account: "user")
@@ -80,7 +91,6 @@ private extension MainScreenViewController {
                 UserDefaults.standard.removeObject(forKey: "userID")
                 UserDefaults.standard.removeObject(forKey: "username")
                 UserDefaults.standard.removeObject(forKey: "userType")
-
 
                 ApplicationCoordinator.getInstance().start()
             }
@@ -111,6 +121,9 @@ private extension MainScreenViewController {
                         course.lessons.filter { $0.isCompleted == true }.count
                     }
                     self?.level = classes.map { $0.level }
+                    self?.updateUserLevelTitleAndColor()
+                    self?.configureNameContainer()
+
                     self?.coursesName = classes.map { $0.courseName }
                     self?.collectionView.reloadData()
                     self?.collectionView2.reloadData()
@@ -123,8 +136,30 @@ private extension MainScreenViewController {
         }
     }
     
-    
-    
+    func updateUserLevelTitleAndColor() {
+        let levelTitles: [(range: ClosedRange<Int>, title: String, color: UIColor)] = [
+            (0...3, "Novice", UIColor.systemGray),
+            (4...6, "Apprentice", UIColor.systemBlue),
+            (7...9, "Adept", UIColor.systemTeal),
+            (10...12, "Champion", UIColor.systemGreen),
+            (13...15, "Elite", UIColor.systemOrange),
+            (16...17, "Master", UIColor.systemPurple),
+            (18...19, "Grandmaster", UIColor.systemPink),
+            (20...20, "Legendary Linguist", UIColor.systemYellow)
+        ]
+
+
+        let totalScore = level.reduce(0, +)
+
+        for (range, title, color) in levelTitles {
+            if range.contains(totalScore) {
+                levelName = title
+                levelColor = color
+                break
+            }
+        }
+    }
+
 }
 
 // MARK: - Collection View

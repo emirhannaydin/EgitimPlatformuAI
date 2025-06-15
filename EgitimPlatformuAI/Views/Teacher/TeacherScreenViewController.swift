@@ -57,7 +57,9 @@ final class TeacherScreenViewController: UIViewController {
         nameContainerView.configureView(
             nameText: username.capitalizingFirstLetter(),
             welcomeLabelText: "Welcome",
-            imageName: "person.fill"
+            imageName: "person.fill",
+            levelName: "",
+            levelColor: UIColor.white
         )
         nameContainerView.onLogoutTapped = { [weak self] in
             self?.showAlertWithAction(title: "Logout", message: "Are you sure you want to log out?") {
