@@ -83,6 +83,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addQuestionButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="e7s-Vm-ggJ"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Example Question" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="O9j-9L-fBf">
                                 <rect key="frame" x="20" y="184" width="353" height="235.66666666666663"/>

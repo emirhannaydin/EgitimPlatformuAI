@@ -35,10 +35,10 @@ final class NewQuestionScreenViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if let presentingVC = presentingViewController {
-                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleBackgroundTap))
-                tapGesture.cancelsTouchesInView = false
-                presentingVC.view.addGestureRecognizer(tapGesture)
-            }
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleBackgroundTap))
+            tapGesture.cancelsTouchesInView = false
+            presentingVC.view.addGestureRecognizer(tapGesture)
+        }
         
     }
     
@@ -47,7 +47,7 @@ final class NewQuestionScreenViewController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = false
     }
-
+    
     func configure(){
         switch viewModel.selectedCourseName{
         case "Reading":
@@ -92,11 +92,44 @@ final class NewQuestionScreenViewController: UIViewController {
         lottieView.loopMode = .loop
         lottieView.play()
     }
-
+    
     @objc func handleBackgroundTap() {
         self.dismiss(animated: true)
     }
+    
+    @IBAction func addQuestionButtonTapped(_ sender: Any) {
+        let questions: [LessonQuestionRequest] = [
+            LessonQuestionRequest(
+                id: UUID().uuidString,
+                questionString: passageTextView.text,
+                answerOne: answer1Label.text ?? "",
+                answerTwo: answer2Label.text ?? "",
+                answerThree: answer3Label.text ?? "",
+                answerFour: answer4Label.text ?? "",
+                correctAnswer: correctAnswerLabel.text ?? "",
+                listeningSentence: passageTextView.text
+            )
+        ]
+        
+        viewModel.submitQuestions(questions) { [weak self] success in
+            guard let self = self else { return }
+            
+            let title = success ? "Başarılı" : "Hata"
+            let message = success ? "Sorular başarıyla gönderildi." : "Sorular gönderilirken bir hata oluştu."
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Tamam", style: .default, handler: { _ in
+                if success {
+                    // Opsiyonel: Başarı sonrası ekranda geri dön
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
+            
+        }
+        
+    }
+    
+    
+    
 }
-
-
-
