@@ -25,7 +25,6 @@ class ProfileScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showLottieLoading()
         self.title = "Profile"
         hamburgerMenuManager = HamburgerMenuManager(viewController: self)
         hamburgerMenuManager.setNavigationBar()
@@ -38,9 +37,13 @@ class ProfileScreenViewController: UIViewController {
         super.viewDidDisappear(animated)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.showLottieLoading()
+        super.viewWillAppear(animated)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.showLottieLoading()
         loadStudentData()
         loadCourseData()
     }
@@ -48,13 +51,14 @@ class ProfileScreenViewController: UIViewController {
     @IBAction func signOutButtonTapped(_ sender: Any) {
         self.showAlertWithAction(title: "Logout", message: "Are you sure you want to log out?") {
             KeychainHelper.shared.delete(service: "access-token", account: "user")
-                
+            
             UserDefaults.standard.removeObject(forKey: "userID")
             UserDefaults.standard.removeObject(forKey: "username")
             UserDefaults.standard.removeObject(forKey: "userType")
-
-
-            ApplicationCoordinator.getInstance().start()        }
+            
+            
+            ApplicationCoordinator.getInstance().start()
+        }
     }
     func loadStudentData() {
         let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
@@ -89,7 +93,10 @@ class ProfileScreenViewController: UIViewController {
                     self?.level = classes.map { $0.level }
                     self?.setupTableView()
                     self?.tableView.reloadData()
+                    self?.hideLottieLoading()
+
                 case .failure(let error):
+                    self?.hideLottieLoading()
                     self?.showAlert(title: "Error", message: error.localizedDescription)
                 }
             }
@@ -141,7 +148,6 @@ extension ProfileScreenViewController: UITableViewDataSource {
 
         cell.lessonNameLabel.text = "\(courseName):"
         cell.lessonLevelLabel.text = "\(levelText)"
-        self.hideLottieLoading()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             cell.progressBar.setProgress(self.formattedProgress(self.level[indexPath.row]), animated: true)
             }

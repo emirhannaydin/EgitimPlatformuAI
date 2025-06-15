@@ -34,6 +34,8 @@ final class WritingScreenViewController: UIViewController {
         setNotification()
         hideKeyboardWhenTappedAround()
         translatedText.delegate = self
+        translatedText.text = "Enter your text here..."
+        translatedText.textColor = .lightGray
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -86,6 +88,10 @@ final class WritingScreenViewController: UIViewController {
     }
 
     @IBAction func checkButton(_ sender: Any) {
+        if translatedText.text == "Enter your text here..."{
+            showAlert(title: "Error", message: "You did not write anything")
+            return
+        }
         showLottieLoading()
         
         guard let userAnswer = translatedText.text,
@@ -212,3 +218,4 @@ final class WritingScreenViewController: UIViewController {
         return nil
     }
 }
+

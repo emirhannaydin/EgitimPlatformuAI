@@ -9,17 +9,15 @@ import UIKit
 
 extension WritingScreenViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        let placeholderText = "Enter your answer here..."
-        if textView.text == placeholderText {
+        if textView.text == "Enter your text here..." {
             textView.text = ""
-            textView.textColor = .label
+            textView.textColor = .porcelain
         }
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
-        let placeholderText = "Enter your answer here..."
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = placeholderText
+            textView.text = "Enter your text here..."
             textView.textColor = .lightGray
         }
     }
