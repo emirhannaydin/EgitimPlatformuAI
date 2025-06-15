@@ -109,22 +109,21 @@ class MainLoginScreenViewController: UIViewController {
                 case .success:
                     guard let user = self?.viewModel?.user else { return }
                     self?.user = user
+                    guard let classes = self?.user?.classes else { return }
+
                     if let currentUserID = UserDefaults.standard.string(forKey: "userID") {
                         if self?.user?.userType == 0{
                             ApplicationCoordinator.getInstance().initTeacherScreen()
                         }else{
-                            if self?.user?.isEmailActivated == false{
-                                ApplicationCoordinator.getInstance().pushToVerifyEmailScreen()
-                            }else{
-                                let hasSubmittedKey = "hasSubmittedLevels_\(currentUserID)"
-                                let hasSubmitted = UserDefaults.standard.bool(forKey: hasSubmittedKey)
-                                
-                                if hasSubmitted {
-                                    ApplicationCoordinator.getInstance().initTabBar()
-                                } else {
+                            //if self?.user?.isEmailActivated == true{
+                             //   ApplicationCoordinator.getInstance().pushToVerifyEmailScreen()
+                            //}else{
+                                if classes.isEmpty{
                                     ApplicationCoordinator.getInstance().pushToLevelScreen()
+                                }else {
+                                    ApplicationCoordinator.getInstance().initTabBar()
                                 }
-                            }
+                            //}
                         }
                     } else {
                         self?.showAlert(title: "Error", message: "UserID not found.")

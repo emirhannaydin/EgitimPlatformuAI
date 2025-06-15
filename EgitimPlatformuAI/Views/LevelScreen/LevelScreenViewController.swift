@@ -122,7 +122,6 @@ final class LevelScreenViewController: UIViewController {
                     DispatchQueue.main.async {
                         switch result {
                         case .success:
-                            UserDefaults.standard.set(true, forKey: "hasSubmittedLevels_\(userId)")
                             self.goToNextPage()
                         case .failure(let error):
                             print("Gönderim hatası: \(error.localizedDescription)")
