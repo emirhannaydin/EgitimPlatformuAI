@@ -19,7 +19,7 @@ final class AddQuestionScreenViewController: UIViewController{
     var classIds: [String]!
     var selectedCourseName: String!
     @IBOutlet var addQuestionButton: UIButton!
-    
+    var selectedIndexPath: IndexPath?
     
     var sections: [TestSection] {
         return viewModel.sections
@@ -118,6 +118,11 @@ extension AddQuestionScreenViewController: UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CourseScreenTableViewCell.identifier, for: indexPath) as! CourseScreenTableViewCell
+        if indexPath == selectedIndexPath {
+            cell.contentView.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.2)
+        } else {
+            cell.contentView.backgroundColor = .charcoal
+        }
         let lesson = sections[indexPath.section].tests[indexPath.row]
         cell.levelName.text = lesson.content
         cell.checkImage.isHidden = true
@@ -138,13 +143,7 @@ extension AddQuestionScreenViewController: UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        for cell in tableView.visibleCells {
-            cell.contentView.backgroundColor = .charcoal
-        }
-        
-        if let selectedCell = tableView.cellForRow(at: indexPath) {
-            selectedCell.contentView.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.2)
-        }
+        selectedIndexPath = indexPath
         addQuestionButton.titleLabel?.text = "Add Question"
         addQuestionButton.isEnabled = true
         self.lessonId = sections[indexPath.section].tests[indexPath.row].id
@@ -174,6 +173,7 @@ extension AddQuestionScreenViewController: UITableViewDataSource, UITableViewDel
         default:
             break
         }
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

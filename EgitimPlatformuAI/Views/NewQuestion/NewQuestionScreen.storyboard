@@ -24,8 +24,8 @@
                                     <constraint firstAttribute="width" constant="75" id="9Ss-Pd-rHL"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="5rY-xO-ofB">
-                                <rect key="frame" x="20" y="553.66666666666663" width="353" height="170"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="5rY-xO-ofB">
+                                <rect key="frame" x="20" y="513.66666666666663" width="353" height="210"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DwT-Ut-5i4">
                                         <rect key="frame" x="0.0" y="0.0" width="353" height="34"/>
@@ -35,29 +35,29 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 2" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xIA-NY-Xu5">
-                                        <rect key="frame" x="0.0" y="34" width="353" height="34"/>
+                                        <rect key="frame" x="0.0" y="44" width="353" height="34"/>
                                         <color key="backgroundColor" name="aliceblUE"/>
                                         <color key="textColor" name="darkBlue"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 3" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ht5-tf-YdQ">
-                                        <rect key="frame" x="0.0" y="68" width="353" height="34"/>
+                                        <rect key="frame" x="0.0" y="88" width="353" height="34"/>
                                         <color key="backgroundColor" name="aliceblUE"/>
                                         <color key="textColor" name="darkBlue"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 4" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YE9-mo-dhg">
-                                        <rect key="frame" x="0.0" y="102" width="353" height="34"/>
+                                        <rect key="frame" x="0.0" y="132" width="353" height="34"/>
                                         <color key="backgroundColor" name="aliceblUE"/>
                                         <color key="textColor" name="darkBlue"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the Correct Answer" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lc7-c2-3sT">
-                                        <rect key="frame" x="0.0" y="136" width="353" height="34"/>
-                                        <color key="backgroundColor" name="aliceblUE"/>
+                                        <rect key="frame" x="0.0" y="176" width="353" height="34"/>
+                                        <color key="backgroundColor" name="mintGreen"/>
                                         <color key="textColor" name="darkBlue"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -65,7 +65,7 @@
                                 </subviews>
                             </stackView>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the Question" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CNB-Ia-y9T">
-                                <rect key="frame" x="20" y="489.66666666666669" width="353" height="34.000000000000057"/>
+                                <rect key="frame" x="20" y="449.66666666666669" width="353" height="34"/>
                                 <color key="backgroundColor" name="aliceblUE"/>
                                 <color key="textColor" name="darkBlue"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -85,7 +85,7 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Example Question" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="O9j-9L-fBf">
-                                <rect key="frame" x="20" y="184.00000000000003" width="353" height="275.66666666666674"/>
+                                <rect key="frame" x="20" y="184" width="353" height="235.66666666666663"/>
                                 <color key="backgroundColor" name="darkBlue"/>
                                 <color key="textColor" name="porcelain"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -124,7 +124,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="answer1Label" destination="DwT-Ut-5i4" id="2Ck-fO-fd6"/>
+                        <outlet property="answer2Label" destination="xIA-NY-Xu5" id="Ikw-89-MKC"/>
+                        <outlet property="answer3Label" destination="Ht5-tf-YdQ" id="um1-fC-ip6"/>
+                        <outlet property="answer4Label" destination="YE9-mo-dhg" id="XJf-PY-z9e"/>
+                        <outlet property="correctAnswerLabel" destination="lc7-c2-3sT" id="Gke-wC-7KF"/>
                         <outlet property="lottieView" destination="dx0-VB-ZfD" id="IGP-ah-Fdk"/>
+                        <outlet property="passageTextView" destination="O9j-9L-fBf" id="7g1-ZA-TMQ"/>
                         <outlet property="questionLabel" destination="CNB-Ia-y9T" id="I2q-Sb-My8"/>
                     </connections>
                 </viewController>
@@ -142,6 +148,9 @@
         </namedColor>
         <namedColor name="darkBlue">
             <color red="0.11764705882352941" green="0.13725490196078433" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mintGreen">
+            <color red="0.23529411764705882" green="0.81176470588235294" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="porcelain">
             <color red="0.96862745098039216" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

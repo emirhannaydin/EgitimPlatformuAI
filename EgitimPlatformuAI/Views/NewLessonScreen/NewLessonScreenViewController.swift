@@ -32,7 +32,11 @@ final class NewLessonScreenViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        if let presentingVC = presentingViewController {
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleBackgroundTap))
+                tapGesture.cancelsTouchesInView = false
+                presentingVC.view.addGestureRecognizer(tapGesture)
+            }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -94,6 +98,10 @@ final class NewLessonScreenViewController: UIViewController {
                 }
             }
         }
+    }
+
+    @objc func handleBackgroundTap() {
+        self.dismiss(animated: true)
     }
 
     

@@ -13,6 +13,12 @@ final class NewQuestionScreenViewController: UIViewController {
     var viewModel: NewQuestionScreenViewModel!
     @IBOutlet var lottieView: LottieAnimationView!
     @IBOutlet var questionLabel: UITextField!
+    @IBOutlet var answer1Label: UITextField!
+    @IBOutlet var answer2Label: UITextField!
+    @IBOutlet var answer3Label: UITextField!
+    @IBOutlet var answer4Label: UITextField!
+    @IBOutlet var correctAnswerLabel: UITextField!
+    @IBOutlet var passageTextView: UITextView!
     
     
     override func viewDidLoad() {
@@ -28,6 +34,11 @@ final class NewQuestionScreenViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if let presentingVC = presentingViewController {
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleBackgroundTap))
+                tapGesture.cancelsTouchesInView = false
+                presentingVC.view.addGestureRecognizer(tapGesture)
+            }
         
     }
     
@@ -42,10 +53,31 @@ final class NewQuestionScreenViewController: UIViewController {
         case "Reading":
             break
         case "Listening":
-            questionLabel.text = "Enter Listening text"
+            questionLabel.isHidden = false
+            passageTextView.isHidden = false
+            answer1Label.isHidden = false
+            answer2Label.isHidden = false
+            answer3Label.isHidden = false
+            answer4Label.isHidden = false
+            correctAnswerLabel.isHidden = false
+            break
         case "Writing":
+            questionLabel.isHidden = true
+            passageTextView.isHidden = false
+            answer1Label.isHidden = true
+            answer2Label.isHidden = true
+            answer3Label.isHidden = true
+            answer4Label.isHidden = true
+            correctAnswerLabel.isHidden = true
             break
         case "Speaking":
+            questionLabel.isHidden = true
+            passageTextView.isHidden = false
+            answer1Label.isHidden = true
+            answer2Label.isHidden = true
+            answer3Label.isHidden = true
+            answer4Label.isHidden = true
+            correctAnswerLabel.isHidden = true
             break
         default:
             print("error configuring UI")
@@ -60,7 +92,10 @@ final class NewQuestionScreenViewController: UIViewController {
         lottieView.loopMode = .loop
         lottieView.play()
     }
-    
+
+    @objc func handleBackgroundTap() {
+        self.dismiss(animated: true)
+    }
 }
 
 
