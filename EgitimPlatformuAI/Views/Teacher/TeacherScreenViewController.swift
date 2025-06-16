@@ -14,6 +14,7 @@ final class TeacherScreenViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var nameContainerView: CustomNameContainer!
     @IBOutlet var uploadBookButton: UIButton!
+    @IBOutlet var studentsButton: UIButton!
     var viewModel: TeacherScreenViewModel!
     let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
     let username = UserDefaults.standard.string(forKey: "username") ?? "Unknown"
@@ -31,7 +32,7 @@ final class TeacherScreenViewController: UIViewController {
         self.showLottieLoading()
         setNameContainer()
         setCollectionView()
-        setUploadBookButton()
+        setButton()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -85,12 +86,21 @@ final class TeacherScreenViewController: UIViewController {
         )
     }
     
-    private func setUploadBookButton(){
+    private func setButton(){
         uploadBookButton.layer.cornerRadius = 8
         uploadBookButton.layer.masksToBounds = true
+        
+        studentsButton.layer.cornerRadius = 8
+        studentsButton.layer.masksToBounds = true
+
     }
     @IBAction func handleUploadBook(_ sender: Any) {
         let coordinator = AddBookScreenCoordinator.getInstance()
+        coordinator.start()
+        ApplicationCoordinator.getInstance().pushFromTeacherScreenCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+    }
+    @IBAction func handleStudentsButton(_ sender: Any) {
+        let coordinator = StudentsScreenCoordinator.getInstance()
         coordinator.start()
         ApplicationCoordinator.getInstance().pushFromTeacherScreenCoordinatorAndVariables(coordinator, hidesBottomBar: true)
     }

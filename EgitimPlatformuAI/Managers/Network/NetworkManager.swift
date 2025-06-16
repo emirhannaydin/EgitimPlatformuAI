@@ -475,7 +475,54 @@ class NetworkManager {
             }
         }.resume()
     }
+    
+    func fetchStudents(completion: @escaping (Result<[Student], Error>) -> Void) {
+        let endPoint = "Student"
+        guard let url = URL(string: "\(baseUrl)\(endPoint)") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0)))
+            return
+        }
 
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(NSError(domain: "No response", code: 0)))
+                return
+            }
+
+            guard (200..<300).contains(httpResponse.statusCode) else {
+                if let data = data, let errorMessage = String(data: data, encoding: .utf8) {
+                    let backendError = NSError(domain: "", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+                    completion(.failure(backendError))
+                } else {
+                    completion(.failure(NSError(domain: "Invalid response", code: httpResponse.statusCode)))
+                }
+                return
+            }
+
+            guard let data = data else {
+                completion(.failure(NSError(domain: "No data", code: 0)))
+                return
+            }
+
+            do {
+                let courses = try JSONDecoder().decode([Student].self, from: data)
+                completion(.success(courses))
+            } catch {
+                completion(.failure(error))
+            }
+
+        }.resume()
+    }
     func fetchTeacherClasses(for studentId: String, completion: @escaping (Result<[CourseClass], Error>) -> Void) {
         let endpoint = "Teacher/GetTeacherClasses/\(studentId)"
         guard let url = URL(string: "\(baseUrl)\(endpoint)") else {
