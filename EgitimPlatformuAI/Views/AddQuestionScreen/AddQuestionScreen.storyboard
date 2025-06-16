@@ -60,7 +60,7 @@
                                     <action selector="addLessonButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Hz5-4V-CdG"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lty-6h-ZZb">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lty-6h-ZZb">
                                 <rect key="frame" x="245.33333333333334" y="149" width="127.66666666666666" height="35"/>
                                 <color key="backgroundColor" name="summer"/>
                                 <color key="tintColor" name="darkBlue"/>
@@ -76,10 +76,17 @@
                                     <action selector="addQuestionButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="cgG-Kn-Tgg"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a Lesson To add Question" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWD-gj-RKh">
+                                <rect key="frame" x="245.33333333333334" y="184" width="127.66666666666666" height="35"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" name="paleGray"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9Uu-0j-6NO"/>
                         <color key="backgroundColor" name="darkBlue"/>
                         <constraints>
+                            <constraint firstItem="FWD-gj-RKh" firstAttribute="top" secondItem="lty-6h-ZZb" secondAttribute="bottom" id="59z-aW-X70"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="bottom" secondItem="f6j-nd-oP6" secondAttribute="bottom" constant="20" id="6uo-1I-RBj"/>
                             <constraint firstItem="1qB-HJ-O7o" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="20" id="82W-8g-oRH"/>
                             <constraint firstItem="nXL-ze-Wqi" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="20" id="8dw-00-J0g"/>
@@ -88,13 +95,16 @@
                             <constraint firstItem="lty-6h-ZZb" firstAttribute="top" secondItem="1qB-HJ-O7o" secondAttribute="bottom" constant="20" id="MbK-tf-E3Y"/>
                             <constraint firstItem="1qB-HJ-O7o" firstAttribute="top" secondItem="9Uu-0j-6NO" secondAttribute="top" constant="20" id="TIW-fo-80P"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="1qB-HJ-O7o" secondAttribute="trailing" constant="20" id="VIh-7Y-b5f"/>
+                            <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="FWD-gj-RKh" secondAttribute="trailing" constant="20" id="em5-oY-UuQ"/>
                             <constraint firstItem="nXL-ze-Wqi" firstAttribute="top" secondItem="1qB-HJ-O7o" secondAttribute="bottom" constant="20" id="gQB-hb-Ijb"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="f6j-nd-oP6" secondAttribute="trailing" constant="5" id="mQb-BS-kWu"/>
                             <constraint firstItem="f6j-nd-oP6" firstAttribute="top" secondItem="lty-6h-ZZb" secondAttribute="bottom" constant="35" id="otU-5i-2jX"/>
+                            <constraint firstItem="FWD-gj-RKh" firstAttribute="width" secondItem="lty-6h-ZZb" secondAttribute="width" id="pbR-a2-iJt"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="lty-6h-ZZb" secondAttribute="trailing" constant="20" id="y3G-V6-Zxb"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addQuestionButton" destination="lty-6h-ZZb" id="5XP-Yp-som"/>
                         <outlet property="courseName" destination="1qB-HJ-O7o" id="o0E-Jd-q66"/>
                         <outlet property="tableView" destination="f6j-nd-oP6" id="XBe-mR-Mub"/>
                     </connections>
@@ -113,6 +123,9 @@
         </namedColor>
         <namedColor name="darkBlue">
             <color red="0.11764705882352941" green="0.13725490196078433" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="paleGray">
+            <color red="0.88235294117647056" green="0.89411764705882357" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="summer">
             <color red="0.94117647058823528" green="0.73333333333333328" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

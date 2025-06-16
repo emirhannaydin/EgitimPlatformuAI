@@ -15,11 +15,13 @@ final class NewLessonScreenViewController: UIViewController {
     let pickerView = UIPickerView()
     let options = ["A1", "A2", "B1", "B2", "C1", "C2"]
     @IBOutlet var lottieView: LottieAnimationView!
+    @IBOutlet var lessonNameTextField: UITextField!
+    var selectedClassIndex: Int?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(viewModel.courseId!)
+        print(viewModel.classIds)
         setupLevelTextField()
         setLottieAnimation()
     }
@@ -30,7 +32,11 @@ final class NewLessonScreenViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        if let presentingVC = presentingViewController {
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleBackgroundTap))
+                tapGesture.cancelsTouchesInView = false
+                presentingVC.view.addGestureRecognizer(tapGesture)
+            }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -68,6 +74,38 @@ final class NewLessonScreenViewController: UIViewController {
         lottieView.play()
     }
     
+    @IBAction func addLessonButtonTapped(_ sender: Any) {
+        guard
+            let index = selectedClassIndex,
+            index < viewModel.classIds.count,
+            let content = lessonNameTextField.text,
+            !content.isEmpty
+        else {
+            showAlert(title: "Eksik Bilgi", message: "Lütfen tüm alanları doldurun.")
+            return
+        }
+
+        let selectedClassId = viewModel.classIds[index]
+        print(selectedClassId)
+
+        viewModel.addLesson(classId: selectedClassId, content: content) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self?.showAlert(title: "Başarılı", message: "Ders eklendi.")
+                case .failure(let error):
+                    self?.showAlert(title: "Hata", message: error.localizedDescription)
+                }
+            }
+        }
+    }
+
+    @objc func handleBackgroundTap() {
+        self.dismiss(animated: true)
+    }
+
+    
+    
 }
 
 extension NewLessonScreenViewController: UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
@@ -86,6 +124,7 @@ extension NewLessonScreenViewController: UIPickerViewDataSource, UIPickerViewDel
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         levelTextField.text = options[row]
+        selectedClassIndex = row
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

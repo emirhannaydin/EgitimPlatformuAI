@@ -13,6 +13,7 @@ class CourseScreenTableViewCell: UITableViewCell {
     @IBOutlet var checkImage: UIImageView!
     static let identifier = "CourseScreenTableViewCell"
     
+    
     static func nib() -> UINib{
         return UINib(nibName: "CourseScreenTableViewCell", bundle: nil)
     }

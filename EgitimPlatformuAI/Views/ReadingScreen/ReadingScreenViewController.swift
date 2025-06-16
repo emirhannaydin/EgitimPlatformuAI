@@ -200,6 +200,7 @@ extension ReadingScreenViewController: UITableViewDataSource{
             }
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReadingCell", for: indexPath) as! ReadingTableViewCell
         let currentAnswers = viewModel.questions[currentQuestionIndex].options
+        print(currentAnswers)
         cell.answerText.text = currentAnswers[indexPath.row]
         return cell
     }

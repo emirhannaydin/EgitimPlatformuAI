@@ -877,6 +877,70 @@ class NetworkManager {
     }
 
 
+    func postAddLesson<T: Codable>(body: T, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let endPoint = "Lesson/AddLesson"
+        guard let url = URL(string: "\(baseUrl)\(endPoint)") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0)))
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        do {
+            let jsonData = try JSONEncoder().encode(body)
+            request.httpBody = jsonData
+        } catch {
+            completion(.failure(error))
+            return
+        }
+
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(true))
+            }
+        }.resume()
+    }
+
+    func addLessonQuestions(lessonId: String, questions: [LessonQuestionRequest], completion: @escaping (Result<Bool, Error>) -> Void) {
+            let endpoint = "Lesson/AddLessonQuestion/\(lessonId)"
+            guard let url = URL(string: "\(baseUrl)\(endpoint)") else {
+                completion(.failure(NSError(domain: "Invalid URL", code: 0)))
+                return
+            }
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+            do {
+                let data = try JSONEncoder().encode(questions)
+                request.httpBody = data
+            } catch {
+                completion(.failure(error))
+                return
+            }
+
+            let task = URLSession.shared.dataTask(with: request) { _, response, error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+
+                guard let httpResponse = response as? HTTPURLResponse,
+                      (200...299).contains(httpResponse.statusCode) else {
+                    completion(.failure(NSError(domain: "Invalid response", code: 0)))
+                    return
+                }
+
+                completion(.success(true))
+            }
+
+            task.resume()
+        }
 
 }
 
