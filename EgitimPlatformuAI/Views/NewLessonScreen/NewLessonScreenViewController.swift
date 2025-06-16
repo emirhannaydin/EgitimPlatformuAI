@@ -21,7 +21,7 @@ final class NewLessonScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(viewModel.classIds)
+        print(viewModel.courseClasses)
         setupLevelTextField()
         setLottieAnimation()
     }
@@ -77,7 +77,7 @@ final class NewLessonScreenViewController: UIViewController {
     @IBAction func addLessonButtonTapped(_ sender: Any) {
         guard
             let index = selectedClassIndex,
-            index < viewModel.classIds.count,
+            index < viewModel.courseClasses.count,
             let content = lessonNameTextField.text,
             !content.isEmpty
         else {
@@ -85,8 +85,11 @@ final class NewLessonScreenViewController: UIViewController {
             return
         }
 
-        let selectedClassId = viewModel.classIds[index]
-        print(selectedClassId)
+        guard let selectedClassId = viewModel.courseClasses.first(where: { $0.level == index })?.id else {
+            print("Uygun classId bulunamadı")
+            return
+        }
+        print("Seçilen classId: \(selectedClassId)")
 
         viewModel.addLesson(classId: selectedClassId, content: content) { [weak self] result in
             DispatchQueue.main.async {

@@ -36,7 +36,6 @@ class AddQuestionScreenViewModel {
                 if let section = self?.convertToSections(classes: classes){
                     self?.sections = section
                 }
-                print(self?.courseClasses)
                 completion(.success(()))
             case .failure(let error):
                 completion(.failure(error))

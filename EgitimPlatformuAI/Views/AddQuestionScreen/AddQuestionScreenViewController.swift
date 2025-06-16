@@ -17,6 +17,7 @@ final class AddQuestionScreenViewController: UIViewController{
     var lessonId: String!
     var courseId: String!
     var classIds: [String]!
+    var courseClasses: [CourseClass]!
     var selectedCourseName: String!
     @IBOutlet var addQuestionButton: UIButton!
     var selectedIndexPath: IndexPath?
@@ -51,7 +52,7 @@ final class AddQuestionScreenViewController: UIViewController{
     
     @IBAction func addLessonButtonTapped(_ sender: Any) {
         let coordinator = NewLessonScreenCoordinator.getInstance()
-        let viewModel = NewLessonScreenViewModel(coordinator: coordinator, classIds: classIds)
+        let viewModel = NewLessonScreenViewModel(coordinator: coordinator, courseClasses: courseClasses)
         coordinator.start(with: viewModel)
         ApplicationCoordinator.getInstance().pushFromTeacherScreenCoordinatorAndVariables(coordinator, hidesBottomBar: true)
     }
@@ -115,7 +116,9 @@ private extension AddQuestionScreenViewController {
                         self?.courseId = courseId
                         self?.viewModel.courseId = courseId
                         self?.classIds = self?.viewModel.allClassIds ?? []
+                        
                     }
+                    self?.courseClasses = self?.viewModel.courseClasses
                     self?.tableView.reloadData()
                 case .failure(let error):
                     self?.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")

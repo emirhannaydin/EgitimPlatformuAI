@@ -10,11 +10,11 @@ import SwiftOpenAI
 
 class NewLessonScreenViewModel {
     var coordinator: NewLessonScreenCoordinator?
-    var classIds: [String]
+    var courseClasses: [CourseClass]
 
-    init(coordinator: NewLessonScreenCoordinator?, classIds: [String]) {
+    init(coordinator: NewLessonScreenCoordinator?, courseClasses: [CourseClass]) {
         self.coordinator = coordinator
-        self.classIds = classIds
+        self.courseClasses = courseClasses
     }
     
     func addLesson(classId: String, content: String, completion: @escaping (Result<Bool, Error>) -> Void) {

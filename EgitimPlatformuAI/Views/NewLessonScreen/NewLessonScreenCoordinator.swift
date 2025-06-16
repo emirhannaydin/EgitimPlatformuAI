@@ -27,7 +27,7 @@ public final class NewLessonScreenCoordinator: Coordinator {
             fatalError("Failed to instantiate NewLessonScreenViewController")
         }
         
-        let viewModel = NewLessonScreenViewModel(coordinator: self, classIds: [])
+        let viewModel = NewLessonScreenViewModel(coordinator: self, courseClasses: [])
         viewController.viewModel = viewModel
         if navigationController.viewControllers.isEmpty {
             navigationController.viewControllers = [viewController]
