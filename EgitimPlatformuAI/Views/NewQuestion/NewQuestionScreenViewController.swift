@@ -83,6 +83,9 @@ final class NewQuestionScreenViewController: UIViewController {
         default:
             print("error configuring UI")
         }
+        passageTextView.delegate = self
+        passageTextView.text = "Enter your text here..."
+        passageTextView.textColor = .lightGray
     }
     
     
@@ -122,8 +125,8 @@ final class NewQuestionScreenViewController: UIViewController {
         let questions: [LessonQuestionRequest] = [
             LessonQuestionRequest(
                 id: UUID().uuidString,
-                questionString: passageTextView.text,
-                answerOne: answer1Label.text,
+                questionString: questionLabel.text ?? "",
+                answerOne: answer1Label.text ?? "",
                 answerTwo: answer2Label.text ?? "",
                 answerThree: answer3Label.text ?? "",
                 answerFour: answer4Label.text ?? "",
@@ -146,4 +149,20 @@ final class NewQuestionScreenViewController: UIViewController {
         NotificationCenter.default.post(name: .questionScreenDismissed, object: nil)
     }
 
+}
+
+extension NewQuestionScreenViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "Enter your text here..." {
+            textView.text = ""
+            textView.textColor = .porcelain
+        }
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            textView.text = "Enter your text here..."
+            textView.textColor = .lightGray
+        }
+    }
 }

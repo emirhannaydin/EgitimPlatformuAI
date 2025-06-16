@@ -49,7 +49,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSq-mE-jQg">
                                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="297"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I went to school" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDl-UN-5LX">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xDl-UN-5LX">
                                                                         <rect key="frame" x="10" y="10" width="373" height="277"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <color key="textColor" name="porcelain"/>
@@ -228,7 +228,7 @@
                         <outlet property="checkButton" destination="A65-Ey-Ief" id="r4n-3A-MKO"/>
                         <outlet property="continueButton" destination="ihm-Em-Oin" id="S14-JH-B8A"/>
                         <outlet property="exampleLabel" destination="xDl-UN-5LX" id="rNr-Mu-Yoi"/>
-                        <outlet property="exampleLabelView" destination="hSq-mE-jQg" id="dzi-LZ-mYN"/>
+                        <outlet property="exampleLabelView" destination="hSq-mE-jQg" id="qJF-WO-FG5"/>
                         <outlet property="questionCount" destination="euP-we-Ccb" id="NaX-n5-ymv"/>
                         <outlet property="scrollView" destination="f1R-cf-qpm" id="v6x-ee-wSP"/>
                         <outlet property="translatedLabelView" destination="9W9-bo-gFU" id="Kag-to-PRi"/>

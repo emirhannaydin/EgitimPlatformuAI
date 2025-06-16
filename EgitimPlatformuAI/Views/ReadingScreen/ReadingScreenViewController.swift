@@ -92,8 +92,8 @@ final class ReadingScreenViewController: UIViewController {
 
         let correctText = readingAnswer
         let currentQuestion = viewModel.questions[currentQuestionIndex]
-        let passageText = currentQuestion.questionString
-        let questionText = "Answer the question"
+        let passageText = currentQuestion.listeningSentence
+        let questionText = currentQuestion.questionString
         let aiMessage = """
         The user read a short passage in Turkish and tried to understand its meaning by answering a question.
         passage: "\(passageText)"
@@ -174,9 +174,9 @@ final class ReadingScreenViewController: UIViewController {
     
     private func loadQuestion() {
         let currentQuestion = viewModel.questions[currentQuestionIndex]
-        passageLabel.text = currentQuestion.questionString
+        passageLabel.text = currentQuestion.listeningSentence
         questionCount.text = "\(currentQuestionIndex + 1)/\(viewModel.questions.count)"
-        questionLabel.text = "Answer the question"
+        questionLabel.text = viewModel.questions[currentQuestionIndex].questionString
         if let _correctAnswer = currentQuestion.correctAnswer{
             readingAnswer = _correctAnswer
         }

@@ -11,6 +11,7 @@ import MBCircularProgressBar
 class HomeScreenCollectionViewCell: UICollectionViewCell {
 
     
+    @IBOutlet var completedLessonLabel: UILabel!
     @IBOutlet var courseName: UILabel!
     @IBOutlet var progressView: MBCircularProgressBarView!
     @IBOutlet var levelLabel: UILabel!

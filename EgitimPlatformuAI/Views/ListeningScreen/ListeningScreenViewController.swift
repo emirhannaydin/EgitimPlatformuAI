@@ -171,9 +171,9 @@ final class ListeningScreenViewController: UIViewController {
         if listensLeft > 0 {
             listensLeft -= 1
             listensLeftLabel.text = "Listens Left: \(listensLeft)"
-            if let listeningText = viewModel.questions[currentIndex].listeningSentence{
-                viewModel.startAIListening(text: listeningText)
-            }
+            let listeningText = viewModel.questions[currentIndex].listeningSentence
+            viewModel.startAIListening(text: listeningText)
+            
             lottieView.stop()
             lottieView.play()
         }else{
@@ -245,9 +245,9 @@ final class ListeningScreenViewController: UIViewController {
     }
 
     @IBAction func cantHearButton(_ sender: Any) {
-        if let listeningText = viewModel.questions[currentIndex].listeningSentence{
-            cantListenLabel.text = "\(listeningText)"
-        }
+        let listeningText = viewModel.questions[currentIndex].listeningSentence
+        cantListenLabel.text = "\(listeningText)"
+        
         lottieView.isHidden = true
         tapToSoundImageLabel.isHidden = true
         cantListenLabel.isHidden = false

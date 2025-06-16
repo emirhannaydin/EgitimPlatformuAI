@@ -27,7 +27,6 @@ final class WritingScreenViewController: UIViewController {
         showLottieLoading()
         backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         navigationController?.isNavigationBarHidden = false
-        configureView()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
@@ -63,6 +62,7 @@ final class WritingScreenViewController: UIViewController {
                         
                     case(.success(_)):
                         self.loadQuestion()
+
                         self.hideLottieLoading()
                         
 
@@ -77,10 +77,12 @@ final class WritingScreenViewController: UIViewController {
     
     private func loadQuestion() {
         let currentQuestion = viewModel.questions[currentQuestionIndex]
-        exampleLabel.text = currentQuestion.questionString
+        exampleLabel.text = currentQuestion.listeningSentence
         questionCount.text = "\(currentQuestionIndex + 1)/\(viewModel.questions.count)"
         checkButton.isHidden = false
         continueButton.isHidden = true
+        self.configureView()
+
     }
 
     @objc func backButtonTapped() {
@@ -216,6 +218,22 @@ final class WritingScreenViewController: UIViewController {
             }
         }
         return nil
+    }
+}
+
+extension WritingScreenViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "Enter your text here..." {
+            textView.text = ""
+            textView.textColor = .porcelain
+        }
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            textView.text = "Enter your text here..."
+            textView.textColor = .lightGray
+        }
     }
 }
 

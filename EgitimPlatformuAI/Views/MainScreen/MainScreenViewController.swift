@@ -185,6 +185,14 @@ extension MainScreenViewController: UICollectionViewDataSource, UICollectionView
         cell.levelLabel.text = formattedLevel(level[indexPath.row])
         let formatted = String(format: "%g", cell.progressView.maxValue)
         cell.progressView.unitString = " / \(formatted)"
+        
+        if cell.progressView.value == cell.progressView.maxValue {
+            cell.progressView.isHidden = true
+            cell.completedLessonLabel.isHidden = false
+        }else{
+            cell.progressView.isHidden = false
+            cell.completedLessonLabel.isHidden = true
+        }
         styleClassCell(cell)
         return cell
     }

@@ -20,6 +20,16 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s86-V4-oz5">
                         <rect key="frame" x="0.0" y="0.0" width="150" height="220"/>
                         <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All lessons completed!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adQ-ad-qnM">
+                                <rect key="frame" x="25" y="20" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="0zf-EN-bkY"/>
+                                    <constraint firstAttribute="width" constant="100" id="8no-Ar-CmU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ByD-RD-yJv" customClass="MBCircularProgressBarView">
                                 <rect key="frame" x="25" y="20" width="100" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -115,7 +125,10 @@
                             <constraint firstAttribute="bottom" secondItem="gCr-AU-vQK" secondAttribute="bottom" constant="10" id="GyY-da-TDO"/>
                             <constraint firstItem="ByD-RD-yJv" firstAttribute="top" secondItem="s86-V4-oz5" secondAttribute="top" constant="20" id="HEv-SC-M8j"/>
                             <constraint firstItem="gCr-AU-vQK" firstAttribute="leading" secondItem="s86-V4-oz5" secondAttribute="leading" constant="10" id="JYQ-dd-5fL"/>
+                            <constraint firstItem="DyA-Z3-J5E" firstAttribute="top" secondItem="adQ-ad-qnM" secondAttribute="bottom" constant="10" id="bPh-bn-ifg"/>
+                            <constraint firstItem="adQ-ad-qnM" firstAttribute="top" secondItem="s86-V4-oz5" secondAttribute="top" constant="20" id="dnO-9F-HZS"/>
                             <constraint firstItem="ByD-RD-yJv" firstAttribute="centerX" secondItem="s86-V4-oz5" secondAttribute="centerX" id="jSp-Tb-fbq"/>
+                            <constraint firstItem="adQ-ad-qnM" firstAttribute="centerX" secondItem="s86-V4-oz5" secondAttribute="centerX" id="llx-tv-ucA"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -135,6 +148,7 @@
                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
             </userDefinedRuntimeAttributes>
             <connections>
+                <outlet property="completedLessonLabel" destination="adQ-ad-qnM" id="yar-i6-YdK"/>
                 <outlet property="courseName" destination="DyA-Z3-J5E" id="aXu-Pc-ETt"/>
                 <outlet property="lessonLabel" destination="pxA-Ha-oRe" id="S0j-dL-MsQ"/>
                 <outlet property="levelLabel" destination="SH5-t6-bZc" id="ngx-Dr-lXE"/>

@@ -110,8 +110,8 @@ final class SpeakingScreenViewController: UIViewController {
         }
         let current = viewModel.questions[currentIndex]
         questionCount.text = "\(currentIndex + 1)/\(viewModel.questions.count)"
-        questionLabel.text = "Please speak the text below"
-        speakingLabel.text = current.questionString
+        questionLabel.text = current.questionString
+        speakingLabel.text = current.listeningSentence
     }
     
     @objc private func onSpeechEnd() {
@@ -157,7 +157,7 @@ final class SpeakingScreenViewController: UIViewController {
             speaksLeftLabel.text = "Speaks Left:\(speaksLeftCount)"
             configureLottie(named: "speakingScreen", play: true)
             
-            viewModel.expectedText = viewModel.questions[currentIndex].questionString
+            viewModel.expectedText = viewModel.questions[currentIndex].listeningSentence ?? ""
             viewModel.startRecording()
             successRateLabel.text = "Evaluating your speech..."
         } else {
@@ -223,7 +223,7 @@ final class SpeakingScreenViewController: UIViewController {
             listeningButton.setImage(UIImage(systemName: "speaker.fill"), for: .normal)
             listeningActivityIndicator.startAnimating()
             listeningActivityIndicator.alpha = 1
-            viewModel.startAISpeaking(text: viewModel.questions[currentIndex].questionString)
+            viewModel.startAISpeaking(text: viewModel.questions[currentIndex].listeningSentence ?? "")
         } else {
             setListeningButton()
             listeningActivityIndicator.stopAnimating()
