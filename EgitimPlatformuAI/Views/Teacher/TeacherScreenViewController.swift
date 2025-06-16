@@ -164,13 +164,13 @@ extension TeacherScreenViewController: UICollectionViewDataSource, UICollectionV
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedCourse = viewModel.courses[indexPath.row]
-
+        let coordinator = AddQuestionScreenCoordinator.getInstance()
         let viewModel = AddQuestionScreenViewModel(
-            coordinator: AddQuestionScreenCoordinator.getInstance(),
+            coordinator: coordinator,
             courseLevelName: "\(selectedCourse.level)",
             courseId: selectedCourse.id
         )
-
-        ApplicationCoordinator.getInstance().handleAddQuestionEntry(with: viewModel)
+        coordinator.start(with: viewModel)
+        ApplicationCoordinator.getInstance().pushFromTeacherScreenCoordinatorAndVariables(coordinator, hidesBottomBar: true)
     }
 }

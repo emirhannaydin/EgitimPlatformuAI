@@ -98,6 +98,7 @@ final class NewLessonScreenViewController: UIViewController {
                 }
             }
         }
+        NotificationCenter.default.post(name: .questionScreenDismissed, object: nil)
     }
 
     @objc func handleBackgroundTap() {

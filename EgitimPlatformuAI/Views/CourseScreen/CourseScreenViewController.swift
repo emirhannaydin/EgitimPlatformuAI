@@ -117,6 +117,8 @@ extension CourseScreenViewController: UITableViewDataSource, UITableViewDelegate
         cell.levelName.text = lesson.content
         let checkImage = lesson.isCompleted! ? "checkmark.circle.fill" : "checkmark.circle"
         cell.checkImage.image = UIImage(systemName: checkImage)
+        let questionCount = lesson.questionCount
+        cell.questionNumber.text = "\(questionCount ?? 0) Question"
         return cell
     }
 

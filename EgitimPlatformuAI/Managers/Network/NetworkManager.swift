@@ -12,8 +12,10 @@ class NetworkManager {
 
     private var baseUrl = "http://localhost:5001/api/"
     
+    var token = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
     func registerUser(request: Register, completion: @escaping (Result<Bool, Error>) -> Void) {
         
+
         let endPoint = "Account/signup"
         
         guard let url = URL(string: "\(baseUrl)\(endPoint)") else {
@@ -296,6 +298,7 @@ class NetworkManager {
         request.httpMethod = "POST"
         request.setValue("*/*", forHTTPHeaderField: "accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
 
         let body: [String: Any] = [
             "userId": userId,
@@ -354,6 +357,7 @@ class NetworkManager {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
 
@@ -403,6 +407,7 @@ class NetworkManager {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
 
         do {
             let jsonData = try JSONEncoder().encode(request)
@@ -453,6 +458,7 @@ class NetworkManager {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -486,6 +492,7 @@ class NetworkManager {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
 
@@ -533,6 +540,7 @@ class NetworkManager {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -566,6 +574,41 @@ class NetworkManager {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let data = data,
+                  let httpResponse = response as? HTTPURLResponse,
+                  (200..<300).contains(httpResponse.statusCode) else {
+                completion(.failure(NSError(domain: "Invalid response", code: 0)))
+                return
+            }
+
+            do {
+                let classes = try JSONDecoder().decode([CourseClass].self, from: data)
+                completion(.success(classes))
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
+    
+    func fetchCourseLessonsForTeacher(for teacherId: String, for courseId: String, completion: @escaping (Result<[CourseClass], Error>) -> Void) {
+        let endpoint = "Teacher/GetTeacherClasses/\(teacherId)/\(courseId)"
+        guard let url = URL(string: "\(baseUrl)\(endpoint)") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0)))
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -599,6 +642,8 @@ class NetworkManager {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
+
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 completion(.failure(error))
@@ -632,6 +677,7 @@ class NetworkManager {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -685,6 +731,7 @@ class NetworkManager {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("*/*", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
 
@@ -735,7 +782,8 @@ class NetworkManager {
         let boundary = "Boundary-\(UUID().uuidString)"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         request.setValue("*/*", forHTTPHeaderField: "accept")
-        
+        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
+
         guard let pdfData = try? Data(contentsOf: fileURL) else {
             completion(.failure(NSError(domain: "File read error", code: 0)))
             return
@@ -804,7 +852,8 @@ class NetworkManager {
         request.httpMethod = "POST"
         request.setValue("*/*", forHTTPHeaderField: "accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
+        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
+
         let body: [String: Any] = [
             "title": title,
             "coverName": coverName,
@@ -855,6 +904,7 @@ class NetworkManager {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("*/*", forHTTPHeaderField: "accept")
+        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -887,6 +937,7 @@ class NetworkManager {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
 
         do {
             let jsonData = try JSONEncoder().encode(body)
@@ -915,6 +966,7 @@ class NetworkManager {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
 
             do {
                 let data = try JSONEncoder().encode(questions)

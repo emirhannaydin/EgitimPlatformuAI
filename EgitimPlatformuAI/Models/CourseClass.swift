@@ -26,6 +26,7 @@ struct Lesson: Codable {
     let isCompleted: Bool?
     let students: [String]?
     let questions: [String]?
+    let questionCount: Int?
 }
 
 

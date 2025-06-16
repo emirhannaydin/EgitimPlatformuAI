@@ -11,6 +11,7 @@ class CourseScreenTableViewCell: UITableViewCell {
 
     @IBOutlet var levelName: UILabel!
     @IBOutlet var checkImage: UIImageView!
+    @IBOutlet var questionNumber: UILabel!
     static let identifier = "CourseScreenTableViewCell"
     
     

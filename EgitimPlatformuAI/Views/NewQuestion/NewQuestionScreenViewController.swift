@@ -19,6 +19,7 @@ final class NewQuestionScreenViewController: UIViewController {
     @IBOutlet var answer4Label: UITextField!
     @IBOutlet var correctAnswerLabel: UITextField!
     @IBOutlet var passageTextView: UITextView!
+    var addQuestionViewController: AddQuestionScreenViewController?
     
     
     override func viewDidLoad() {
@@ -71,7 +72,7 @@ final class NewQuestionScreenViewController: UIViewController {
             correctAnswerLabel.isHidden = true
             break
         case "Speaking":
-            questionLabel.isHidden = true
+            questionLabel.isHidden = false
             passageTextView.isHidden = false
             answer1Label.isHidden = true
             answer2Label.isHidden = true
@@ -98,11 +99,31 @@ final class NewQuestionScreenViewController: UIViewController {
     }
     
     @IBAction func addQuestionButtonTapped(_ sender: Any) {
+        
+        if !correctAnswerLabel.isHidden {
+            guard let correctAnswer = correctAnswerLabel.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                  let answer1 = answer1Label.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                  let answer2 = answer2Label.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                  let answer3 = answer3Label.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                  let answer4 = answer4Label.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
+                return
+            }
+            
+            let allAnswers = [answer1, answer2, answer3, answer4]
+            
+            if !allAnswers.contains(correctAnswer) {
+                showAlert(title: "Error", message: "Correct answer must be one of the following answers", lottieName: "error"){
+                    self.correctAnswerLabel.becomeFirstResponder()
+                }
+                return
+            }
+        }
+        
         let questions: [LessonQuestionRequest] = [
             LessonQuestionRequest(
                 id: UUID().uuidString,
                 questionString: passageTextView.text,
-                answerOne: answer1Label.text ?? "",
+                answerOne: answer1Label.text,
                 answerTwo: answer2Label.text ?? "",
                 answerThree: answer3Label.text ?? "",
                 answerFour: answer4Label.text ?? "",
@@ -111,25 +132,18 @@ final class NewQuestionScreenViewController: UIViewController {
             )
         ]
         
-        viewModel.submitQuestions(questions) { [weak self] success in
-            guard let self = self else { return }
-            
-            let title = success ? "Başarılı" : "Hata"
-            let message = success ? "Sorular başarıyla gönderildi." : "Sorular gönderilirken bir hata oluştu."
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Tamam", style: .default, handler: { _ in
-                if success {
-                    // Opsiyonel: Başarı sonrası ekranda geri dön
-                    self.navigationController?.popViewController(animated: true)
-                }
-            }))
-            
-            self.present(alert, animated: true, completion: nil)
-            
-        }
         
+        viewModel.submitQuestions(questions) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self.showAlert(title: "Success", message: "The book has been uploaded to the system.", lottieName: "success")
+                case .failure(let error):
+                    self.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
+                }
+            }
+        }
+        NotificationCenter.default.post(name: .questionScreenDismissed, object: nil)
     }
-    
-    
-    
+
 }

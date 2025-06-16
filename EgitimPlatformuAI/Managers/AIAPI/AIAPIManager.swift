@@ -252,13 +252,6 @@ extension AIAPIManager: AVAudioPlayerDelegate{
 
 }
 
-extension Notification.Name {
-    static let aiMessageUpdated = Notification.Name("AIMessageUpdated")
-    static let aiMessageFinished = Notification.Name("AIMessageFinished")
-    static let aiSpeechFinished = Notification.Name("AISpeechFinished")
-    static let aiSpeechDidStart = Notification.Name("AISpeechDidStart")
-
-}
 
 extension Data {
     mutating func append(_ string: String) {

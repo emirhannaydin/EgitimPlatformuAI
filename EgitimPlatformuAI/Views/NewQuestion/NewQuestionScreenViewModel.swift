@@ -19,17 +19,17 @@ class NewQuestionScreenViewModel {
         self.selectedCourseName = selecteCourseName
     }
 
-    func submitQuestions(_ questions: [LessonQuestionRequest], completion: @escaping (Bool) -> Void) {
+    func submitQuestions(_ questions: [LessonQuestionRequest], completion: @escaping (Result<Void, Error>) -> Void) {
         NetworkManager.shared.addLessonQuestions(lessonId: selectedLessonId, questions: questions) { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success:
-                        completion(true)
-                    case .failure(let error):
-                        print("Error submitting questions: \(error.localizedDescription)")
-                        completion(false)
-                    }
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    completion(.success(()))
+                case .failure(let error):
+                    completion(.failure(error))
                 }
             }
         }
+    }
+
 }

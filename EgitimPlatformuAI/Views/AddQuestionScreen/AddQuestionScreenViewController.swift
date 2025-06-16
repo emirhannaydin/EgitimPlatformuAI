@@ -27,15 +27,25 @@ final class AddQuestionScreenViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.showLottieLoading()
         setupUI()
         setupTableView()
         setupTapGesture()
         self.navigationController?.isNavigationBarHidden = false
+        NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(handleQuestionScreenDismissed),
+                name: .questionScreenDismissed,
+                object: nil
+            )
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        fetchCourseLessons()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         fetchCourseLessons()
     }
     
@@ -53,6 +63,15 @@ final class AddQuestionScreenViewController: UIViewController{
         coordinator.start(with: viewModel)
         ApplicationCoordinator.getInstance().pushFromTeacherScreenCoordinatorAndVariables(coordinator, hidesBottomBar: true)
     }
+
+    @objc func handleQuestionScreenDismissed() {
+        self.showLottieLoading()
+        fetchCourseLessons()
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .questionScreenDismissed, object: nil)
+    }
+
 }
 
 private extension AddQuestionScreenViewController {
@@ -81,7 +100,7 @@ private extension AddQuestionScreenViewController {
     
     func fetchCourseLessons() {
         let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
-        viewModel.loadCourseLessons(studentId: userID) { [weak self] result in
+        viewModel.loadCourseLessons(teacherId: userID) { [weak self] result in
             DispatchQueue.main.async {
                 self?.hideLottieLoading()
                 switch result {
@@ -127,9 +146,8 @@ extension AddQuestionScreenViewController: UITableViewDataSource, UITableViewDel
         let lesson = sections[indexPath.section].tests[indexPath.row]
         cell.levelName.text = lesson.content
         cell.checkImage.isHidden = true
-        let checkImage = lesson.isCompleted! ? "checkmark.circle.fill" : "checkmark.circle"
-        cell.checkImage.image = UIImage(systemName: checkImage)
-        
+        let questionCount = lesson.questionCount
+        cell.questionNumber.text = "\(questionCount ?? 0) Question"
         return cell
     }
     

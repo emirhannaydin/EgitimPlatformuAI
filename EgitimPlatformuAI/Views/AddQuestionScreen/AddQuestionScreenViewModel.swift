@@ -27,16 +27,16 @@ class AddQuestionScreenViewModel {
         self.sections = self.convertToSections(classes: courseClasses)
     }
     
-    func loadCourseLessons(studentId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+    func loadCourseLessons(teacherId: String, completion: @escaping (Result<Void, Error>) -> Void) {
 
-        NetworkManager.shared.fetchCourseLessons(for: studentId, for: courseId) { [weak self] result in
+        NetworkManager.shared.fetchCourseLessonsForTeacher(for: teacherId, for: courseId) { [weak self] result in
             switch result {
             case .success(let classes):
                 self?.courseClasses = classes
                 if let section = self?.convertToSections(classes: classes){
                     self?.sections = section
-
                 }
+                print(self?.courseClasses)
                 completion(.success(()))
             case .failure(let error):
                 completion(.failure(error))
