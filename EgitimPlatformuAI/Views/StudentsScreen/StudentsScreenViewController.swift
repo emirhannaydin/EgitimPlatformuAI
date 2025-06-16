@@ -92,4 +92,16 @@ extension StudentsScreenViewController: UITableViewDataSource, UITableViewDelega
             }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(viewModel.students[indexPath.row].name)
+        
+        let coordinator = StudentsScreenInfoCoordinator.getInstance()
+        let studentId = viewModel.students[indexPath.row].id
+        
+        let viewModel = StudentsScreenInfoViewModel(coordinator: coordinator, studentId: studentId)
+        
+        coordinator.start(with: viewModel)
+        ApplicationCoordinator.getInstance().pushFromTeacherScreenCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+    }
 }

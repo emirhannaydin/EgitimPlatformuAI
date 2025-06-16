@@ -15,6 +15,6 @@ struct Student: Codable {
     let address: String?
     let profilePicture: String?
     let birthDate: String?
-    let classes: [CourseClass]
+    let classes: [CourseClass]?
 }
 

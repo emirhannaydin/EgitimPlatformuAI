@@ -12,8 +12,6 @@ class ProfileScreenViewController: UIViewController {
     private var hamburgerMenuManager: HamburgerMenuManager!
     var student: Student?
     var coursesClassName: [String] = []
-    var lessonCount: [Int] = []
-    var coursesName: [String] = []
     var level: [Int] = []
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var surnameLabel: UILabel!
@@ -88,8 +86,6 @@ class ProfileScreenViewController: UIViewController {
                 case .success:
                     guard let classes = self?.viewModel?.courseClasses else { return }
                     self?.coursesClassName = classes.map { $0.name }
-                    self?.lessonCount = classes.map { $0.lessons.count }
-                    self?.coursesName = classes.map { $0.courseName }
                     self?.level = classes.map { $0.level }
                     self?.setupTableView()
                     self?.tableView.reloadData()
