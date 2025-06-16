@@ -95,7 +95,8 @@ private extension AddQuestionScreenViewController {
                         print(courseId)
                         self?.courseId = courseId
                         self?.viewModel.courseId = courseId
-                        self?.classIds = self?.viewModel.allClassIds ?? []                    }
+                        self?.classIds = self?.viewModel.allClassIds ?? []
+                    }
                     self?.tableView.reloadData()
                 case .failure(let error):
                     self?.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")

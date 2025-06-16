@@ -28,6 +28,12 @@ final class StudentsScreenInfoViewController: UIViewController {
         super.viewDidAppear(animated)
         loadStudentData()
         loadCourseData()
+        
+        if let presentingVC = presentingViewController {
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleBackgroundTap))
+                tapGesture.cancelsTouchesInView = false
+                presentingVC.view.addGestureRecognizer(tapGesture)
+            }
     }
     
     private func loadStudentData() {
@@ -80,6 +86,10 @@ final class StudentsScreenInfoViewController: UIViewController {
     func setupUserDetails() {
         nameLabel.text = student?.name ?? "-"
         emailLabel.text = student?.email ?? "-"
+    }
+    
+    @objc func handleBackgroundTap() {
+        self.dismiss(animated: true)
     }
     
 }

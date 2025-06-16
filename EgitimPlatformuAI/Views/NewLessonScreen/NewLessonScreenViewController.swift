@@ -81,7 +81,7 @@ final class NewLessonScreenViewController: UIViewController {
             let content = lessonNameTextField.text,
             !content.isEmpty
         else {
-            showAlert(title: "Eksik Bilgi", message: "Lütfen tüm alanları doldurun.")
+            showAlert(title: "Error", message: "Please fill all fields", lottieName: "error")
             return
         }
 
@@ -92,9 +92,9 @@ final class NewLessonScreenViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self?.showAlert(title: "Başarılı", message: "Ders eklendi.")
+                    self?.showAlert(title: "Success", message: "Lesson added successfully", lottieName: "success")
                 case .failure(let error):
-                    self?.showAlert(title: "Hata", message: error.localizedDescription)
+                    self?.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
                 }
             }
         }

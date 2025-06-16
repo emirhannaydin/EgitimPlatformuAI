@@ -189,31 +189,31 @@ final class ReadingScreenViewController: UIViewController {
     
 }
 
-extension ReadingScreenViewController: UITableViewDataSource{
+extension ReadingScreenViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        guard viewModel.questions.indices.contains(currentQuestionIndex) else { return 0 }
+        return viewModel.questions[currentQuestionIndex].options.count
     }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard indexPath.row < viewModel.questions.count else {
-                return UITableViewCell()
-            }
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReadingCell", for: indexPath) as! ReadingTableViewCell
+        
+        guard viewModel.questions.indices.contains(currentQuestionIndex),
+              viewModel.questions[currentQuestionIndex].options.indices.contains(indexPath.row) else {
+            return cell
+        }
+
         let currentAnswers = viewModel.questions[currentQuestionIndex].options
-        print(currentAnswers)
         cell.answerText.text = currentAnswers[indexPath.row]
         return cell
     }
+
     
     
 }
 
-extension ReadingScreenViewController: UITableViewDelegate{
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? ReadingTableViewCell {
-            }
-    }
-}
+
 
 
 
