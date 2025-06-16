@@ -51,7 +51,9 @@ class CourseScreenViewModel {
         let sortedClasses = classes.sorted(by: { $0.level < $1.level })
         
         return sortedClasses.map { courseClass in
-            let sortedLessons = courseClass.lessons.sorted { $0.content.localizedCaseInsensitiveCompare($1.content) == .orderedAscending }
+            let sortedLessons = courseClass.lessons.sorted {
+                $0.order < $1.order
+            }
             let title = levelTextForInt(for: courseClass.level)
             
             let allLessonsCompleted = sortedLessons.allSatisfy { $0.isCompleted == true }
