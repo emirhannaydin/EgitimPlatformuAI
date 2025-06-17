@@ -27,7 +27,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="f6j-nd-oP6">
-                                <rect key="frame" x="5" y="234" width="383" height="564"/>
+                                <rect key="frame" x="5" y="263.66666666666669" width="383" height="534.33333333333326"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="uD9-zl-Vq0">
@@ -46,8 +46,8 @@
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nXL-ze-Wqi">
                                 <rect key="frame" x="20" y="124" width="113" height="75"/>
-                                <color key="backgroundColor" name="summer"/>
-                                <color key="tintColor" name="darkBlue"/>
+                                <color key="backgroundColor" name="royalBlue"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Add Lesson"/>
                                 <userDefinedRuntimeAttributes>
@@ -111,13 +111,12 @@
                         <color key="backgroundColor" name="darkBlue"/>
                         <constraints>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="bottom" secondItem="f6j-nd-oP6" secondAttribute="bottom" constant="20" id="6uo-1I-RBj"/>
-                            <constraint firstItem="f6j-nd-oP6" firstAttribute="top" secondItem="36W-qY-ZKP" secondAttribute="bottom" constant="35" id="7tt-5u-xib"/>
+                            <constraint firstItem="f6j-nd-oP6" firstAttribute="top" secondItem="qsp-JH-aom" secondAttribute="bottom" constant="10" id="7tt-5u-xib"/>
                             <constraint firstItem="nXL-ze-Wqi" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="20" id="8dw-00-J0g"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="36W-qY-ZKP" secondAttribute="trailing" constant="20" id="ASG-zp-H87"/>
                             <constraint firstItem="f6j-nd-oP6" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="5" id="BMq-Ms-lBP"/>
                             <constraint firstItem="qsp-JH-aom" firstAttribute="width" secondItem="36W-qY-ZKP" secondAttribute="width" id="BdO-4a-MBC"/>
                             <constraint firstItem="36W-qY-ZKP" firstAttribute="top" secondItem="lty-6h-ZZb" secondAttribute="bottom" constant="5" id="Ld7-UJ-8zy"/>
-                            <constraint firstItem="f6j-nd-oP6" firstAttribute="top" secondItem="nXL-ze-Wqi" secondAttribute="bottom" constant="35" id="Lvf-9r-ap5"/>
                             <constraint firstItem="lty-6h-ZZb" firstAttribute="top" secondItem="1qB-HJ-O7o" secondAttribute="bottom" constant="20" id="MbK-tf-E3Y"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="1qB-HJ-O7o" secondAttribute="trailing" constant="20" id="VIh-7Y-b5f"/>
                             <constraint firstItem="izy-e7-NbU" firstAttribute="top" secondItem="9Uu-0j-6NO" secondAttribute="top" id="Zzn-S9-YOw"/>
@@ -128,6 +127,7 @@
                             <constraint firstItem="qsp-JH-aom" firstAttribute="top" secondItem="36W-qY-ZKP" secondAttribute="bottom" constant="2" id="gbF-np-DSU"/>
                             <constraint firstItem="1qB-HJ-O7o" firstAttribute="centerY" secondItem="izy-e7-NbU" secondAttribute="centerY" id="hmA-ls-wOe"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="f6j-nd-oP6" secondAttribute="trailing" constant="5" id="mQb-BS-kWu"/>
+                            <constraint firstItem="nXL-ze-Wqi" firstAttribute="bottom" secondItem="36W-qY-ZKP" secondAttribute="bottom" id="nlD-q7-nIx"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="lty-6h-ZZb" secondAttribute="trailing" constant="20" id="y3G-V6-Zxb"/>
                         </constraints>
                     </view>
@@ -156,6 +156,9 @@
         </namedColor>
         <namedColor name="paleGray">
             <color red="0.88235294117647056" green="0.89411764705882357" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="royalBlue">
+            <color red="0.29019607843137257" green="0.3843137254901961" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="summer">
             <color red="0.94117647058823528" green="0.73333333333333328" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
