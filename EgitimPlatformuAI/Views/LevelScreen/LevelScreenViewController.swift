@@ -24,6 +24,7 @@ final class LevelScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        applyGradientBackground()
         fetchCourses()
         setupData()
         continueButton.isEnabled = false

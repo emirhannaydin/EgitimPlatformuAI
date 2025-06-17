@@ -103,14 +103,31 @@ final class NewQuestionScreenViewController: UIViewController {
     
     @IBAction func addQuestionButtonTapped(_ sender: Any) {
         
+        guard let passage = passageTextView.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !passage.isEmpty,
+              passage != "Enter your text here..." else {
+            showAlert(title: "Error", message: "Passage cannot be empty.", lottieName: "error") {
+                self.passageTextView.becomeFirstResponder()
+            }
+            return
+        }
+        
+        
+        
         if !correctAnswerLabel.isHidden {
+            
             guard let correctAnswer = correctAnswerLabel.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                  let question = questionLabel.text?.trimmingCharacters(in: .whitespacesAndNewlines),
                   let answer1 = answer1Label.text?.trimmingCharacters(in: .whitespacesAndNewlines),
                   let answer2 = answer2Label.text?.trimmingCharacters(in: .whitespacesAndNewlines),
                   let answer3 = answer3Label.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-                  let answer4 = answer4Label.text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
+                  let answer4 = answer4Label.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                  !question.isEmpty ,!answer1.isEmpty, !answer2.isEmpty, !answer3.isEmpty, !answer4.isEmpty else {
+                showAlert(title: "Error", message: "All fields must be filled.", lottieName: "error")
                 return
             }
+            
+            
             
             let allAnswers = [answer1, answer2, answer3, answer4]
             
@@ -120,7 +137,10 @@ final class NewQuestionScreenViewController: UIViewController {
                 }
                 return
             }
+            
+            
         }
+        
         
         let questions: [LessonQuestionRequest] = [
             LessonQuestionRequest(
@@ -140,7 +160,7 @@ final class NewQuestionScreenViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self.showAlert(title: "Success", message: "The book has been uploaded to the system.", lottieName: "success")
+                    self.showAlert(title: "Success", message: "The question has been uploaded to the system.", lottieName: "success")
                 case .failure(let error):
                     self.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
                 }
@@ -148,7 +168,7 @@ final class NewQuestionScreenViewController: UIViewController {
         }
         NotificationCenter.default.post(name: .questionScreenDismissed, object: nil)
     }
-
+    
 }
 
 extension NewQuestionScreenViewController: UITextViewDelegate {
@@ -158,7 +178,7 @@ extension NewQuestionScreenViewController: UITextViewDelegate {
             textView.textColor = .porcelain
         }
     }
-
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = "Enter your text here..."

@@ -11,8 +11,7 @@ class NetworkManager {
     private init() {}
 
     private var baseUrl = "http://localhost:5001/api/"
-    
-    var token = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+    var token: String!
     func registerUser(request: Register, completion: @escaping (Result<Bool, Error>) -> Void) {
         
 
@@ -119,6 +118,8 @@ class NetworkManager {
             do {
                 let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
                 completion(.success(loginResponse))
+                let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+                self.token = tokenData
             } catch {
                 completion(.failure(error))
             }

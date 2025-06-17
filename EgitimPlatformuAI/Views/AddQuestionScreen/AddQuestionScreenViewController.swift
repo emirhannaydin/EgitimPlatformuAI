@@ -142,7 +142,7 @@ extension AddQuestionScreenViewController: UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CourseScreenTableViewCell.identifier, for: indexPath) as! CourseScreenTableViewCell
         if indexPath == selectedIndexPath {
-            cell.contentView.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.2)
+            cell.contentView.backgroundColor = UIColor.darkBlue
         } else {
             cell.contentView.backgroundColor = .charcoal
         }
