@@ -12,6 +12,7 @@ import Lottie
 final class AddQuestionScreenViewController: UIViewController{
     
     var viewModel: AddQuestionScreenViewModel!
+    @IBOutlet var backButton: CustomBackButtonView!
     @IBOutlet var courseName: UILabel!
     @IBOutlet var tableView: UITableView!
     var lessonId: String!
@@ -22,6 +23,7 @@ final class AddQuestionScreenViewController: UIViewController{
     @IBOutlet var addQuestionButton: UIButton!
     @IBOutlet var editQuestionButton: UIButton!
     var selectedIndexPath: IndexPath?
+    private let refreshControl = UIRefreshControl()
     
     var sections: [TestSection] {
         return viewModel.sections
@@ -32,13 +34,10 @@ final class AddQuestionScreenViewController: UIViewController{
         setupUI()
         setupTableView()
         setupTapGesture()
-        self.navigationController?.isNavigationBarHidden = false
-        NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(handleQuestionScreenDismissed),
-                name: .questionScreenDismissed,
-                object: nil
-            )
+        setupRefreshControl()
+        setNotification()
+        self.navigationController?.isNavigationBarHidden = true
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,6 +47,14 @@ final class AddQuestionScreenViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         fetchCourseLessons()
+    }
+    private func setNotification(){
+        NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(handleQuestionScreenDismissed),
+                name: .questionScreenDismissed,
+                object: nil
+            )
     }
     
     @IBAction func addLessonButtonTapped(_ sender: Any) {
@@ -84,6 +91,7 @@ final class AddQuestionScreenViewController: UIViewController{
 
 private extension AddQuestionScreenViewController {
     func setupUI() {
+        backButton.backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         courseName.layer.borderWidth = 1
         courseName.layer.borderColor = UIColor.black.cgColor
         courseName.layer.masksToBounds = true
@@ -115,6 +123,7 @@ private extension AddQuestionScreenViewController {
                 self?.hideLottieLoading()
                 switch result {
                 case .success:
+                    self?.refreshControl.endRefreshing()
                     if let courseName = self?.viewModel.courseClasses[0].courseName {
                         self?.courseName.text = "\(courseName) Class"
                         print(courseName)
@@ -135,6 +144,20 @@ private extension AddQuestionScreenViewController {
             }
         }
     }
+    
+    private func setupRefreshControl() {
+        refreshControl.tintColor = .summer
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    @objc private func refreshData() {
+        fetchCourseLessons()
+    }
+    
+    @objc private func backButtonTapped(){
+        self.navigationController?.popViewController(animated: true)
+    }
+
 }
 
 // MARK: - TableView DataSource & Delegate
@@ -178,7 +201,12 @@ extension AddQuestionScreenViewController: UITableViewDataSource, UITableViewDel
         addQuestionButton.titleLabel?.text = "Add Question"
         addQuestionButton.isEnabled = true
         editQuestionButton.titleLabel?.text = "Edit Question"
-        editQuestionButton.isEnabled = true
+        let questionCount = sections[indexPath.section].tests[indexPath.row].questionCount
+        if questionCount == 0 {
+            editQuestionButton.isEnabled = false
+        }else {
+            editQuestionButton.isEnabled = true
+        }
         self.lessonId = sections[indexPath.section].tests[indexPath.row].id
         tableView.reloadData()
     }

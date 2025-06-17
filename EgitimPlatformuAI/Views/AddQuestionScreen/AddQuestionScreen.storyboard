@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1qB-HJ-O7o">
-                                <rect key="frame" x="20" y="79" width="353" height="50"/>
+                                <rect key="frame" x="80" y="54" width="293" height="50"/>
                                 <color key="backgroundColor" name="charcoal"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ts3-s0-57R"/>
@@ -27,7 +27,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="f6j-nd-oP6">
-                                <rect key="frame" x="5" y="259" width="383" height="539"/>
+                                <rect key="frame" x="5" y="234" width="383" height="564"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="uD9-zl-Vq0">
@@ -45,7 +45,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nXL-ze-Wqi">
-                                <rect key="frame" x="20" y="149" width="113" height="75"/>
+                                <rect key="frame" x="20" y="124" width="113" height="75"/>
                                 <color key="backgroundColor" name="summer"/>
                                 <color key="tintColor" name="darkBlue"/>
                                 <state key="normal" title="Button"/>
@@ -61,7 +61,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lty-6h-ZZb">
-                                <rect key="frame" x="245.33333333333334" y="149" width="127.66666666666666" height="35"/>
+                                <rect key="frame" x="245.33333333333334" y="124" width="127.66666666666666" height="35"/>
                                 <color key="backgroundColor" name="summer"/>
                                 <color key="tintColor" name="darkBlue"/>
                                 <state key="normal" title="Button"/>
@@ -77,7 +77,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36W-qY-ZKP">
-                                <rect key="frame" x="246" y="189" width="127" height="35"/>
+                                <rect key="frame" x="246" y="164" width="127" height="35"/>
                                 <color key="backgroundColor" name="summer"/>
                                 <color key="tintColor" name="darkBlue"/>
                                 <state key="normal" title="Button"/>
@@ -93,18 +93,25 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a lesson to add or edit question" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsp-JH-aom">
-                                <rect key="frame" x="246" y="226" width="127" height="52.666666666666686"/>
+                                <rect key="frame" x="246" y="201" width="127" height="52.666666666666657"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" name="paleGray"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="izy-e7-NbU" customClass="CustomBackButtonView" customModule="EgitimPlatformuAI" customModuleProvider="target">
+                                <rect key="frame" x="20" y="59" width="40" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="2oA-cr-MsM"/>
+                                    <constraint firstAttribute="width" constant="40" id="CvM-k5-XyN"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9Uu-0j-6NO"/>
                         <color key="backgroundColor" name="darkBlue"/>
                         <constraints>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="bottom" secondItem="f6j-nd-oP6" secondAttribute="bottom" constant="20" id="6uo-1I-RBj"/>
                             <constraint firstItem="f6j-nd-oP6" firstAttribute="top" secondItem="36W-qY-ZKP" secondAttribute="bottom" constant="35" id="7tt-5u-xib"/>
-                            <constraint firstItem="1qB-HJ-O7o" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="20" id="82W-8g-oRH"/>
                             <constraint firstItem="nXL-ze-Wqi" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="20" id="8dw-00-J0g"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="36W-qY-ZKP" secondAttribute="trailing" constant="20" id="ASG-zp-H87"/>
                             <constraint firstItem="f6j-nd-oP6" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="5" id="BMq-Ms-lBP"/>
@@ -112,17 +119,21 @@
                             <constraint firstItem="36W-qY-ZKP" firstAttribute="top" secondItem="lty-6h-ZZb" secondAttribute="bottom" constant="5" id="Ld7-UJ-8zy"/>
                             <constraint firstItem="f6j-nd-oP6" firstAttribute="top" secondItem="nXL-ze-Wqi" secondAttribute="bottom" constant="35" id="Lvf-9r-ap5"/>
                             <constraint firstItem="lty-6h-ZZb" firstAttribute="top" secondItem="1qB-HJ-O7o" secondAttribute="bottom" constant="20" id="MbK-tf-E3Y"/>
-                            <constraint firstItem="1qB-HJ-O7o" firstAttribute="top" secondItem="9Uu-0j-6NO" secondAttribute="top" constant="20" id="TIW-fo-80P"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="1qB-HJ-O7o" secondAttribute="trailing" constant="20" id="VIh-7Y-b5f"/>
+                            <constraint firstItem="izy-e7-NbU" firstAttribute="top" secondItem="9Uu-0j-6NO" secondAttribute="top" id="Zzn-S9-YOw"/>
+                            <constraint firstItem="1qB-HJ-O7o" firstAttribute="leading" secondItem="izy-e7-NbU" secondAttribute="trailing" constant="20" id="cfj-Jh-Cta"/>
+                            <constraint firstItem="izy-e7-NbU" firstAttribute="leading" secondItem="imu-Tx-qdE" secondAttribute="leading" constant="20" id="dP6-AQ-b99"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="qsp-JH-aom" secondAttribute="trailing" constant="20" id="eaP-FK-hTC"/>
                             <constraint firstItem="nXL-ze-Wqi" firstAttribute="top" secondItem="1qB-HJ-O7o" secondAttribute="bottom" constant="20" id="gQB-hb-Ijb"/>
                             <constraint firstItem="qsp-JH-aom" firstAttribute="top" secondItem="36W-qY-ZKP" secondAttribute="bottom" constant="2" id="gbF-np-DSU"/>
+                            <constraint firstItem="1qB-HJ-O7o" firstAttribute="centerY" secondItem="izy-e7-NbU" secondAttribute="centerY" id="hmA-ls-wOe"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="f6j-nd-oP6" secondAttribute="trailing" constant="5" id="mQb-BS-kWu"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="lty-6h-ZZb" secondAttribute="trailing" constant="20" id="y3G-V6-Zxb"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="addQuestionButton" destination="lty-6h-ZZb" id="5XP-Yp-som"/>
+                        <outlet property="backButton" destination="izy-e7-NbU" id="fy6-ST-Y33"/>
                         <outlet property="courseName" destination="1qB-HJ-O7o" id="o0E-Jd-q66"/>
                         <outlet property="editQuestionButton" destination="36W-qY-ZKP" id="Y0j-OT-YG3"/>
                         <outlet property="tableView" destination="f6j-nd-oP6" id="XBe-mR-Mub"/>

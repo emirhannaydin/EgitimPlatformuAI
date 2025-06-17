@@ -17,7 +17,7 @@ final class CourseScreenViewController: UIViewController{
     @IBOutlet var courseLevelName: UILabel!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var courseName: UILabel!
-    
+    private let refreshControl = UIRefreshControl()
     var sections: [TestSection] {
         return viewModel.sections
     }
@@ -28,6 +28,8 @@ final class CourseScreenViewController: UIViewController{
         setupUI()
         setupTableView()
         setupTapGesture()
+        setupRefreshControl()
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,6 +73,7 @@ private extension CourseScreenViewController {
                 self?.hideLottieLoading()
                 switch result {
                 case .success:
+                    self?.refreshControl.endRefreshing()
                     if let courseName = self?.viewModel.courseClasses[0].courseName {
                         self?.courseName.text = "\(courseName) Class"
                     }
@@ -96,6 +99,15 @@ private extension CourseScreenViewController {
     
     @objc func backButtonTapped(){
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    private func setupRefreshControl() {
+        refreshControl.tintColor = .summer
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    @objc private func refreshData() {
+        fetchCourseLessons()
     }
 }
 

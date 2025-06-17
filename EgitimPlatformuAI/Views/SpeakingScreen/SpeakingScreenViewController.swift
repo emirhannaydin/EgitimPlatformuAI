@@ -15,7 +15,6 @@ final class SpeakingScreenViewController: UIViewController {
     @IBOutlet var backButton: CustomBackButtonView!
     @IBOutlet var speakingLottie: LottieAnimationView!
     @IBOutlet var questionCount: UILabel!
-    @IBOutlet var questionLabel: UILabel!
     @IBOutlet var speakingLabel: UILabel!
     @IBOutlet var speakButton: UIButton!
     @IBOutlet var hearingYouLabel: UILabel!
@@ -108,11 +107,13 @@ final class SpeakingScreenViewController: UIViewController {
             }
             return
         }
+        viewModel.expectedText = ""
+
         let current = viewModel.questions[currentIndex]
         questionCount.text = "\(currentIndex + 1)/\(viewModel.questions.count)"
-        questionLabel.text = current.questionString
         speakingLabel.text = current.listeningSentence
     }
+
     
     @objc private func onSpeechEnd() {
         listeningButton.setImage(UIImage(systemName: "speaker"), for: .normal)
@@ -156,7 +157,7 @@ final class SpeakingScreenViewController: UIViewController {
             speaksLeftCount -= 1
             speaksLeftLabel.text = "Speaks Left:\(speaksLeftCount)"
             configureLottie(named: "speakingScreen", play: true)
-            
+            listeningButton.setImage(UIImage(systemName: "speaker"), for: .normal)
             viewModel.expectedText = viewModel.questions[currentIndex].listeningSentence ?? ""
             viewModel.startRecording()
             successRateLabel.text = "Evaluating your speech..."

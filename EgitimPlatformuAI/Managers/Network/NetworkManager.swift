@@ -1033,6 +1033,41 @@ class NetworkManager {
 
         task.resume()
     }
+    
+    func deleteLessonQuestion(with id: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let endpoint = "Lesson/DeleteLessonQuestion/\(id)"
+        guard let url = URL(string: "\(baseUrl)\(endpoint)") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0)))
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let data = data,
+                  let httpResponse = response as? HTTPURLResponse,
+                  (200..<300).contains(httpResponse.statusCode) else {
+                completion(.failure(NSError(domain: "Invalid response", code: 0)))
+                return
+            }
+
+            do {
+                let result = try JSONDecoder().decode(Bool.self, from: data)
+                completion(.success(result))
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
+
 
 
 }

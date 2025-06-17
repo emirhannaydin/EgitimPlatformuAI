@@ -238,7 +238,7 @@ final class NewQuestionScreenViewController: UIViewController {
                     self.questionNumberLabel.text = "\(self.currentIndex + 1) / \(self.viewModel.questions.count)"
                     self.leftButton.isHidden = (self.currentIndex <= 0)
                     self.rightButton.isHidden = (self.currentIndex >= (self.viewModel.questions.count - 1))
-
+                    
                     
                 case .failure(let error):
                     self.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
@@ -250,10 +250,43 @@ final class NewQuestionScreenViewController: UIViewController {
     
     
     @IBAction func trashButtonClicked(_ sender: Any) {
-        showAlertWithAction(title: "Delete Question", message: "Are you sure you want to delete this question? This action cannot be undone.") {
-            self.showAlert(title: "Success", message: "The question has been successfully deleted.", lottieName: "success")
+        showAlertWithAction(
+            title: "Delete Question",
+            message: "Are you sure you want to delete this question? This action cannot be undone."
+        ) { [weak self] in
+            guard let self = self else { return }
+            let id = self.viewModel.questions[self.currentIndex].id
+            
+            self.viewModel.deleteQuestion(id: id) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success:
+                        self.viewModel.questions.remove(at: self.currentIndex)
+                        
+                        if self.viewModel.questions.isEmpty {
+                            self.showAlert(title: "No Questions Left",
+                                           message: "All questions have been deleted. You will be redirected to the previous screen.",
+                                           lottieName: "error") {
+                                self.dismiss(animated: true)
+                            }
+                            return
+                        }
+                        
+                        if self.currentIndex >= self.viewModel.questions.count {
+                            self.currentIndex = max(0, self.viewModel.questions.count - 1)
+                        }
+                        
+                        self.setLessonData()
+                        self.showAlert(title: "Success", message: "The question has been successfully deleted.", lottieName: "success")
+                        
+                    case .failure(let error):
+                        self.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
+                    }
+                }
+            }
         }
     }
+    
     
     
     @IBAction func rightButtonClicked(_ sender: Any) {

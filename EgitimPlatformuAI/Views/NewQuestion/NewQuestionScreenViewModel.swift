@@ -61,5 +61,25 @@ class NewQuestionScreenViewModel {
             
         }
     }
+    
+    func deleteQuestion(id: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        NetworkManager.shared.deleteLessonQuestion(with: id) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let isSuccess):
+                    if isSuccess {
+                        completion(.success(()))
+                    } else {
+                        completion(.failure(NSError(domain: "Deletion failed", code: 0)))
+                    }
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+
+    
+    
 
 }
