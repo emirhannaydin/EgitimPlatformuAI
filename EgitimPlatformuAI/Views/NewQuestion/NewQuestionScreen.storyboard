@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dx0-VB-ZfD" customClass="LottieAnimationView" customModule="Lottie">
-                                <rect key="frame" x="159" y="89" width="75" height="75"/>
+                                <rect key="frame" x="159" y="69" width="75" height="75"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="0A5-9v-7EV"/>
@@ -88,7 +88,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Example Question" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="O9j-9L-fBf">
-                                <rect key="frame" x="20" y="184" width="353" height="256"/>
+                                <rect key="frame" x="20" y="164" width="353" height="276"/>
                                 <color key="backgroundColor" name="darkBlue"/>
                                 <color key="textColor" name="porcelain"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -119,26 +119,64 @@
                                     <action selector="trashButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="y4O-pm-r8X"/>
                                 </connections>
                             </button>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="FVW-rH-V47">
+                                <rect key="frame" x="228.66666666666663" y="756" width="144.33333333333337" height="50"/>
+                                <subviews>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="koZ-m0-QhR">
+                                        <rect key="frame" x="0.0" y="18" width="0.0" height="14"/>
+                                        <color key="tintColor" name="mintGreen"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain"/>
+                                        <connections>
+                                            <action selector="leftButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="mmf-an-ypH"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="soh-3A-ylB">
+                                        <rect key="frame" x="0.0" y="18" width="144.33333333333334" height="14"/>
+                                        <color key="tintColor" name="mintGreen"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain"/>
+                                        <connections>
+                                            <action selector="rightButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="q6f-Rx-hpo"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="AWj-KC-uRQ"/>
+                                </constraints>
+                            </stackView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggF-Fc-Dp0">
+                                <rect key="frame" x="20" y="154" width="353" height="0.0"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" name="summer"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="charcoal"/>
                         <constraints>
+                            <constraint firstItem="FVW-rH-V47" firstAttribute="leading" secondItem="rXR-Q5-Bv4" secondAttribute="trailing" constant="20" id="0M1-Vd-0qx"/>
                             <constraint firstItem="5rY-xO-ofB" firstAttribute="top" secondItem="CNB-Ia-y9T" secondAttribute="bottom" constant="30" id="0SO-m8-yRv"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="rXR-Q5-Bv4" secondAttribute="bottom" constant="30" id="0vS-fe-PYd"/>
                             <constraint firstItem="CNB-Ia-y9T" firstAttribute="top" secondItem="O9j-9L-fBf" secondAttribute="bottom" constant="30" id="3Dc-h4-YQw"/>
                             <constraint firstItem="KZv-98-YzC" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="3Ve-6a-hZY"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CNB-Ia-y9T" secondAttribute="trailing" constant="20" id="Gg9-3r-N5L"/>
-                            <constraint firstItem="dx0-VB-ZfD" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="30" id="IVV-bS-aoJ"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="ggF-Fc-Dp0" secondAttribute="trailing" constant="20" id="GvZ-Ow-Prd"/>
+                            <constraint firstItem="O9j-9L-fBf" firstAttribute="top" secondItem="ggF-Fc-Dp0" secondAttribute="bottom" constant="10" id="I8D-fA-hee"/>
+                            <constraint firstItem="dx0-VB-ZfD" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="IVV-bS-aoJ"/>
+                            <constraint firstItem="ggF-Fc-Dp0" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="Ko2-SL-JOg"/>
                             <constraint firstItem="dx0-VB-ZfD" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="OfU-Uv-IBz"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="5rY-xO-ofB" secondAttribute="trailing" constant="20" id="eLO-c7-Pao"/>
-                            <constraint firstItem="O9j-9L-fBf" firstAttribute="top" secondItem="dx0-VB-ZfD" secondAttribute="bottom" constant="20" id="fBd-F0-yZi"/>
+                            <constraint firstItem="ggF-Fc-Dp0" firstAttribute="top" secondItem="dx0-VB-ZfD" secondAttribute="bottom" constant="10" id="g5q-e2-n9c"/>
                             <constraint firstItem="rXR-Q5-Bv4" firstAttribute="top" secondItem="5rY-xO-ofB" secondAttribute="bottom" constant="30" id="gUS-oG-wxq"/>
                             <constraint firstItem="rXR-Q5-Bv4" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="hzP-NB-6MP"/>
                             <constraint firstItem="CNB-Ia-y9T" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="iQk-CT-V4W"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="FVW-rH-V47" secondAttribute="trailing" constant="20" id="kR7-oD-9zU"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="KZv-98-YzC" secondAttribute="trailing" constant="20" id="lsP-6Y-yCx"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="O9j-9L-fBf" secondAttribute="trailing" constant="20" id="pz9-hf-sgZ"/>
                             <constraint firstItem="5rY-xO-ofB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="qCJ-Yu-RNz"/>
                             <constraint firstItem="O9j-9L-fBf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="yhW-AV-itW"/>
+                            <constraint firstItem="FVW-rH-V47" firstAttribute="centerY" secondItem="rXR-Q5-Bv4" secondAttribute="centerY" id="zTm-aj-6or"/>
                         </constraints>
                     </view>
                     <connections>
@@ -147,10 +185,14 @@
                         <outlet property="answer2Label" destination="xIA-NY-Xu5" id="Ikw-89-MKC"/>
                         <outlet property="answer3Label" destination="Ht5-tf-YdQ" id="um1-fC-ip6"/>
                         <outlet property="answer4Label" destination="YE9-mo-dhg" id="XJf-PY-z9e"/>
+                        <outlet property="buttonStackView" destination="FVW-rH-V47" id="akn-1P-75c"/>
                         <outlet property="correctAnswerLabel" destination="lc7-c2-3sT" id="Gke-wC-7KF"/>
+                        <outlet property="leftButton" destination="koZ-m0-QhR" id="d1d-s6-VZ2"/>
                         <outlet property="lottieView" destination="dx0-VB-ZfD" id="IGP-ah-Fdk"/>
                         <outlet property="passageTextView" destination="O9j-9L-fBf" id="7g1-ZA-TMQ"/>
                         <outlet property="questionLabel" destination="CNB-Ia-y9T" id="I2q-Sb-My8"/>
+                        <outlet property="questionNumberLabel" destination="ggF-Fc-Dp0" id="1Lx-db-4Iq"/>
+                        <outlet property="rightButton" destination="soh-3A-ylB" id="D8z-rG-P3B"/>
                         <outlet property="trashButton" destination="KZv-98-YzC" id="ggh-iq-or4"/>
                     </connections>
                 </viewController>
@@ -181,6 +223,9 @@
         </namedColor>
         <namedColor name="sapphireBlue">
             <color red="0.23921568627450981" green="0.41960784313725491" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="summer">
+            <color red="0.94117647058823528" green="0.73333333333333328" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

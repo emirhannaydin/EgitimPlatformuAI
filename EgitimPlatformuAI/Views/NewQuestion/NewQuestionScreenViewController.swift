@@ -20,11 +20,14 @@ final class NewQuestionScreenViewController: UIViewController {
     @IBOutlet var correctAnswerLabel: UITextField!
     @IBOutlet var passageTextView: UITextView!
     
+    @IBOutlet var questionNumberLabel: UILabel!
+    @IBOutlet var buttonStackView: UIStackView!
+    @IBOutlet var rightButton: UIButton!
+    @IBOutlet var leftButton: UIButton!
     @IBOutlet var trashButton: UIButton!
     @IBOutlet var addQuestionButton: UIButton!
     var addQuestionViewController: AddQuestionScreenViewController?
-    
-    
+    var currentIndex: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         print(viewModel.selectedLessonId!)
@@ -93,14 +96,21 @@ final class NewQuestionScreenViewController: UIViewController {
         passageTextView.text = "Enter your text here..."
         passageTextView.textColor = .lightGray
         
+        rightButton.setImage(UIImage(systemName: "arrow.right.circle"), for: .normal)
+        leftButton.setImage(UIImage(systemName: "arrow.left.circle"), for: .normal)
+        
         DispatchQueue.main.async { [self] in
             if viewModel.isUpdate{
                 addQuestionButton.setTitle("Edit Question", for: .normal)
                 trashButton.isHidden = false
+                buttonStackView.isHidden = false
+                questionNumberLabel.isHidden = false
                 
             }else{
                 addQuestionButton.setTitle("Add Question", for: .normal)
                 trashButton.isHidden = true
+                buttonStackView.isHidden = true
+                questionNumberLabel.isHidden = true
             }
         }
     }
@@ -178,15 +188,15 @@ final class NewQuestionScreenViewController: UIViewController {
             }
         }else{
             let questions = LessonQuestionRequest(
-                    id: viewModel.questions[0].id,
-                    questionString: questionLabel.text ?? "",
-                    answerOne: answer1Label.text ?? "",
-                    answerTwo: answer2Label.text ?? "",
-                    answerThree: answer3Label.text ?? "",
-                    answerFour: answer4Label.text ?? "",
-                    correctAnswer: correctAnswerLabel.text ?? "",
-                    listeningSentence: passageTextView.text
-                )
+                id: viewModel.questions[0].id,
+                questionString: questionLabel.text ?? "",
+                answerOne: answer1Label.text ?? "",
+                answerTwo: answer2Label.text ?? "",
+                answerThree: answer3Label.text ?? "",
+                answerFour: answer4Label.text ?? "",
+                correctAnswer: correctAnswerLabel.text ?? "",
+                listeningSentence: passageTextView.text
+            )
             
             
             viewModel.editQuestions(questions) { result in
@@ -204,32 +214,39 @@ final class NewQuestionScreenViewController: UIViewController {
         NotificationCenter.default.post(name: .questionScreenDismissed, object: nil)
     }
     
-    private func setLessonData(){
-        viewModel.loadLessonData() { [weak self] result in
+    private func setLessonData() {
+        viewModel.loadLessonData { [weak self] result in
             DispatchQueue.main.async {
-                guard let firstQuestion = self?.viewModel.questions.first else {
-                    self?.hideLottieLoading()
-                    return }
-                switch result{
-                    case(.success(let lessons)):
-                    print(lessons)
-                    self?.questionLabel.text = firstQuestion.questionString
-                    self?.answer1Label.text = firstQuestion.answerOne
-                    self?.answer2Label.text = firstQuestion.answerTwo
-                    self?.answer3Label.text = firstQuestion.answerThree
-                    self?.answer4Label.text = firstQuestion.answerFour
-                    self?.correctAnswerLabel.text = firstQuestion.correctAnswer
-                    self?.passageTextView.text = firstQuestion.listeningSentence
-                    self?.passageTextView.textColor = .porcelain
-                    self?.hideLottieLoading()
-                    case ( .failure(let error)):
-                    self?.hideLottieLoading()
-                    self?.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
+                guard let self = self else { return }
+                self.hideLottieLoading()
+                
+                switch result {
+                case .success:
+                    guard self.currentIndex < self.viewModel.questions.count else {
+                        print("Index out of bounds: \(self.currentIndex)")
+                        return
+                    }
+                    let question = self.viewModel.questions[self.currentIndex]
+                    self.questionLabel.text = question.questionString
+                    self.answer1Label.text = question.answerOne
+                    self.answer2Label.text = question.answerTwo
+                    self.answer3Label.text = question.answerThree
+                    self.answer4Label.text = question.answerFour
+                    self.correctAnswerLabel.text = question.correctAnswer
+                    self.passageTextView.text = question.listeningSentence
+                    self.passageTextView.textColor = .porcelain
+                    self.questionNumberLabel.text = "\(self.currentIndex + 1) / \(self.viewModel.questions.count)"
+                    self.leftButton.isHidden = (self.currentIndex <= 0)
+                    self.rightButton.isHidden = (self.currentIndex >= (self.viewModel.questions.count - 1))
 
+                    
+                case .failure(let error):
+                    self.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
                 }
             }
         }
     }
+    
     
     
     @IBAction func trashButtonClicked(_ sender: Any) {
@@ -238,6 +255,16 @@ final class NewQuestionScreenViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func rightButtonClicked(_ sender: Any) {
+        currentIndex += 1
+        setLessonData()
+    }
+    
+    @IBAction func leftButtonClicked(_ sender: Any) {
+        currentIndex -= 1
+        setLessonData()
+    }
 }
 
 extension NewQuestionScreenViewController: UITextViewDelegate {
