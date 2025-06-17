@@ -62,14 +62,8 @@ class ListeningScreenViewModel {
         NetworkManager.shared.completeLesson(studentId: studentId, lessonId: lessonId) { result in
             switch result {
             case .success(let isCompleted):
-                if isCompleted {
-                    print("Ders başarıyla tamamlandı.")
-                } else {
-                    print("Ders tamamlanamadı.")
-                }
                 completion(.success(isCompleted))
             case .failure(let error):
-                print("❌ Hata oluştu: \(error.localizedDescription)")
                 completion(.failure(error))
             }
         }

@@ -27,7 +27,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="f6j-nd-oP6">
-                                <rect key="frame" x="5" y="263.66666666666669" width="383" height="534.33333333333326"/>
+                                <rect key="frame" x="5" y="266.33333333333331" width="383" height="531.66666666666674"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="uD9-zl-Vq0">
@@ -44,12 +44,17 @@
                                     <outlet property="delegate" destination="Y6W-OH-hqX" id="dNj-Ee-80T"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nXL-ze-Wqi">
-                                <rect key="frame" x="20" y="124" width="113" height="75"/>
-                                <color key="backgroundColor" name="royalBlue"/>
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nXL-ze-Wqi">
+                                <rect key="frame" x="20" y="123.99999999999999" width="127" height="34.333333333333329"/>
+                                <color key="backgroundColor" name="mintGreen"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="127" id="sen-sd-Sle"/>
+                                </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Add Lesson"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Add Lesson">
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                </buttonConfiguration>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="12"/>
@@ -60,12 +65,38 @@
                                     <action selector="addLessonButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Hz5-4V-CdG"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5Q-5D-KSF">
+                                <rect key="frame" x="20" y="168.33333333333334" width="127" height="33.333333333333343"/>
+                                <color key="backgroundColor" name="softRed"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="127" id="MvR-GI-hNL"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Delete Lesson">
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="deleteLessonButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="e0K-mK-Cm6"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lty-6h-ZZb">
-                                <rect key="frame" x="245.33333333333334" y="124" width="127.66666666666666" height="35"/>
+                                <rect key="frame" x="245" y="123.99999999999999" width="128" height="34.333333333333329"/>
                                 <color key="backgroundColor" name="summer"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="q3N-lJ-o6j"/>
+                                </constraints>
                                 <color key="tintColor" name="darkBlue"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Add Question"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Add Question">
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                </buttonConfiguration>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="12"/>
@@ -77,11 +108,16 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36W-qY-ZKP">
-                                <rect key="frame" x="246" y="164" width="127" height="35"/>
-                                <color key="backgroundColor" name="summer"/>
-                                <color key="tintColor" name="darkBlue"/>
+                                <rect key="frame" x="245" y="168.33333333333334" width="128" height="33.333333333333343"/>
+                                <color key="backgroundColor" name="coldPurple"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="tGK-ig-fkY"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Edit Question"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Edit Question">
+                                    <fontDescription key="titleFontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                </buttonConfiguration>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="12"/>
@@ -92,8 +128,11 @@
                                     <action selector="editQuestionButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="aPI-S1-dLe"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a lesson to add or edit question" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsp-JH-aom">
-                                <rect key="frame" x="246" y="201" width="127" height="52.666666666666657"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a lesson to add or edit question" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsp-JH-aom">
+                                <rect key="frame" x="245" y="203.66666666666666" width="128" height="52.666666666666657"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="0lY-tB-QIo"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="15"/>
                                 <color key="textColor" name="paleGray"/>
                                 <nil key="highlightedColor"/>
@@ -106,28 +145,44 @@
                                     <constraint firstAttribute="width" constant="40" id="CvM-k5-XyN"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a lesson to delete " textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmp-W2-zR2">
+                                <rect key="frame" x="20" y="203.66666666666666" width="127" height="52.666666666666657"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="127" id="qBH-sc-IrN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-LightItalic" family="Helvetica Neue" pointSize="15"/>
+                                <color key="textColor" name="paleGray"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9Uu-0j-6NO"/>
                         <color key="backgroundColor" name="darkBlue"/>
                         <constraints>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="bottom" secondItem="f6j-nd-oP6" secondAttribute="bottom" constant="20" id="6uo-1I-RBj"/>
+                            <constraint firstItem="r5Q-5D-KSF" firstAttribute="centerY" secondItem="36W-qY-ZKP" secondAttribute="centerY" id="73L-DX-uY1"/>
                             <constraint firstItem="f6j-nd-oP6" firstAttribute="top" secondItem="qsp-JH-aom" secondAttribute="bottom" constant="10" id="7tt-5u-xib"/>
                             <constraint firstItem="nXL-ze-Wqi" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="20" id="8dw-00-J0g"/>
+                            <constraint firstItem="gmp-W2-zR2" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="20" id="ARE-69-Jze"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="36W-qY-ZKP" secondAttribute="trailing" constant="20" id="ASG-zp-H87"/>
                             <constraint firstItem="f6j-nd-oP6" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="5" id="BMq-Ms-lBP"/>
-                            <constraint firstItem="qsp-JH-aom" firstAttribute="width" secondItem="36W-qY-ZKP" secondAttribute="width" id="BdO-4a-MBC"/>
-                            <constraint firstItem="36W-qY-ZKP" firstAttribute="top" secondItem="lty-6h-ZZb" secondAttribute="bottom" constant="5" id="Ld7-UJ-8zy"/>
+                            <constraint firstItem="nXL-ze-Wqi" firstAttribute="centerY" secondItem="lty-6h-ZZb" secondAttribute="centerY" id="BoQ-nf-nTf"/>
+                            <constraint firstItem="r5Q-5D-KSF" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="20" id="EKy-gw-IyI"/>
+                            <constraint firstItem="36W-qY-ZKP" firstAttribute="top" secondItem="lty-6h-ZZb" secondAttribute="bottom" constant="10" id="Ld7-UJ-8zy"/>
                             <constraint firstItem="lty-6h-ZZb" firstAttribute="top" secondItem="1qB-HJ-O7o" secondAttribute="bottom" constant="20" id="MbK-tf-E3Y"/>
+                            <constraint firstItem="r5Q-5D-KSF" firstAttribute="leading" secondItem="9Uu-0j-6NO" secondAttribute="leading" constant="20" id="PjC-0J-YAw"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="1qB-HJ-O7o" secondAttribute="trailing" constant="20" id="VIh-7Y-b5f"/>
                             <constraint firstItem="izy-e7-NbU" firstAttribute="top" secondItem="9Uu-0j-6NO" secondAttribute="top" id="Zzn-S9-YOw"/>
+                            <constraint firstItem="gmp-W2-zR2" firstAttribute="top" secondItem="r5Q-5D-KSF" secondAttribute="bottom" constant="2" id="cWj-vV-dKr"/>
                             <constraint firstItem="1qB-HJ-O7o" firstAttribute="leading" secondItem="izy-e7-NbU" secondAttribute="trailing" constant="20" id="cfj-Jh-Cta"/>
                             <constraint firstItem="izy-e7-NbU" firstAttribute="leading" secondItem="imu-Tx-qdE" secondAttribute="leading" constant="20" id="dP6-AQ-b99"/>
+                            <constraint firstItem="gmp-W2-zR2" firstAttribute="centerY" secondItem="qsp-JH-aom" secondAttribute="centerY" id="eDX-R6-DFi"/>
+                            <constraint firstItem="f6j-nd-oP6" firstAttribute="top" secondItem="gmp-W2-zR2" secondAttribute="bottom" constant="10" id="eHn-AZ-sr2"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="qsp-JH-aom" secondAttribute="trailing" constant="20" id="eaP-FK-hTC"/>
                             <constraint firstItem="nXL-ze-Wqi" firstAttribute="top" secondItem="1qB-HJ-O7o" secondAttribute="bottom" constant="20" id="gQB-hb-Ijb"/>
                             <constraint firstItem="qsp-JH-aom" firstAttribute="top" secondItem="36W-qY-ZKP" secondAttribute="bottom" constant="2" id="gbF-np-DSU"/>
                             <constraint firstItem="1qB-HJ-O7o" firstAttribute="centerY" secondItem="izy-e7-NbU" secondAttribute="centerY" id="hmA-ls-wOe"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="f6j-nd-oP6" secondAttribute="trailing" constant="5" id="mQb-BS-kWu"/>
-                            <constraint firstItem="nXL-ze-Wqi" firstAttribute="bottom" secondItem="36W-qY-ZKP" secondAttribute="bottom" id="nlD-q7-nIx"/>
+                            <constraint firstItem="r5Q-5D-KSF" firstAttribute="top" secondItem="nXL-ze-Wqi" secondAttribute="bottom" constant="10" id="utW-L9-q96"/>
                             <constraint firstItem="9Uu-0j-6NO" firstAttribute="trailing" secondItem="lty-6h-ZZb" secondAttribute="trailing" constant="20" id="y3G-V6-Zxb"/>
                         </constraints>
                     </view>
@@ -135,6 +190,7 @@
                         <outlet property="addQuestionButton" destination="lty-6h-ZZb" id="5XP-Yp-som"/>
                         <outlet property="backButton" destination="izy-e7-NbU" id="fy6-ST-Y33"/>
                         <outlet property="courseName" destination="1qB-HJ-O7o" id="o0E-Jd-q66"/>
+                        <outlet property="deleteLessonButton" destination="r5Q-5D-KSF" id="8jj-WX-rT5"/>
                         <outlet property="editQuestionButton" destination="36W-qY-ZKP" id="Y0j-OT-YG3"/>
                         <outlet property="tableView" destination="f6j-nd-oP6" id="XBe-mR-Mub"/>
                     </connections>
@@ -151,14 +207,20 @@
         <namedColor name="charcoal">
             <color red="0.17254901960784313" green="0.20000000000000001" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="coldPurple">
+            <color red="0.39215686274509803" green="0.22352941176470589" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="darkBlue">
             <color red="0.11764705882352941" green="0.13725490196078433" blue="0.17254901960784313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="mintGreen">
+            <color red="0.23529411764705882" green="0.81176470588235294" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="paleGray">
             <color red="0.88235294117647056" green="0.89411764705882357" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="royalBlue">
-            <color red="0.29019607843137257" green="0.3843137254901961" blue="0.77254901960784317" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="softRed">
+            <color red="0.94901960784313721" green="0.42745098039215684" blue="0.42745098039215684" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="summer">
             <color red="0.94117647058823528" green="0.73333333333333328" blue="0.47058823529411764" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

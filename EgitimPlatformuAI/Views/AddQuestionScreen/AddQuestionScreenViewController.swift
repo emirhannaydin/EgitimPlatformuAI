@@ -22,6 +22,7 @@ final class AddQuestionScreenViewController: UIViewController{
     var selectedCourseName: String!
     @IBOutlet var addQuestionButton: UIButton!
     @IBOutlet var editQuestionButton: UIButton!
+    @IBOutlet var deleteLessonButton: UIButton!
     var selectedIndexPath: IndexPath?
     private let refreshControl = UIRefreshControl()
     
@@ -50,11 +51,11 @@ final class AddQuestionScreenViewController: UIViewController{
     }
     private func setNotification(){
         NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(handleQuestionScreenDismissed),
-                name: .questionScreenDismissed,
-                object: nil
-            )
+            self,
+            selector: #selector(handleQuestionScreenDismissed),
+            name: .questionScreenDismissed,
+            object: nil
+        )
     }
     
     @IBAction func addLessonButtonTapped(_ sender: Any) {
@@ -72,6 +73,29 @@ final class AddQuestionScreenViewController: UIViewController{
     }
     
     
+    @IBAction func deleteLessonButtonTapped(_ sender: Any) {
+        self.showAlertWithAction(
+            title: "Delete Lesson",
+            message: "Are you sure you want to delete this lesson? This action cannot be undone."
+        ){ [weak self] in
+            guard let lessonId = self?.lessonId else { return }
+            self?.viewModel.deleteLesson(lessonId: lessonId) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(_):
+                        self?.fetchCourseLessons()
+                        self?.tableView.reloadData()
+                        
+                    case .failure(_):
+                        self?.showAlert(title: "Error", message: "There was an error deleting the lesson", lottieName: "error")
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    
     @IBAction func editQuestionButtonTapped(_ sender: Any) {
         let coordinator = NewQuestionScreenCoordinator.getInstance()
         let viewModel = NewQuestionScreenViewModel(coordinator: coordinator, selectedLessonId: lessonId, selecteCourseName: selectedCourseName, isUpdate: true)
@@ -80,14 +104,13 @@ final class AddQuestionScreenViewController: UIViewController{
     }
     
     @objc func handleQuestionScreenDismissed() {
-        self.showLottieLoading()
         fetchCourseLessons()
     }
     deinit {
         NotificationCenter.default.removeObserver(self, name: .questionScreenDismissed, object: nil)
-
+        
     }
-
+    
 }
 
 private extension AddQuestionScreenViewController {
@@ -98,7 +121,8 @@ private extension AddQuestionScreenViewController {
         courseName.layer.masksToBounds = true
         addQuestionButton.isEnabled = false
         editQuestionButton.isEnabled = false
-
+        deleteLessonButton.isEnabled = false
+        
     }
     
     func setupTableView() {
@@ -121,7 +145,6 @@ private extension AddQuestionScreenViewController {
         let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
         viewModel.loadCourseLessons(teacherId: userID) { [weak self] result in
             DispatchQueue.main.async {
-                self?.hideLottieLoading()
                 switch result {
                 case .success:
                     self?.refreshControl.endRefreshing()
@@ -158,7 +181,7 @@ private extension AddQuestionScreenViewController {
     @objc private func backButtonTapped(){
         self.navigationController?.popViewController(animated: true)
     }
-
+    
 }
 
 // MARK: - TableView DataSource & Delegate
@@ -206,6 +229,7 @@ extension AddQuestionScreenViewController: UITableViewDataSource, UITableViewDel
         }else {
             editQuestionButton.isEnabled = true
         }
+        deleteLessonButton.isEnabled = true
         self.lessonId = sections[indexPath.section].tests[indexPath.row].id
         tableView.reloadData()
     }

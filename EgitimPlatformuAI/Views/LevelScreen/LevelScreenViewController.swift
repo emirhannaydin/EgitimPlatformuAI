@@ -12,15 +12,9 @@ final class LevelScreenViewController: UIViewController {
     var viewModel: LevelScreenViewModel!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var continueButton: UIButton!
-    var questionGroups: [[Question]] = []
+    var questionGroups: [[LevelQuestion]] = []
     var currentIndex = 0
     @IBOutlet var levelQuestionLabel: UILabel!
-    
-    
-    struct Question {
-        let title: String
-        let description: String
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +23,7 @@ final class LevelScreenViewController: UIViewController {
         setupData()
         continueButton.isEnabled = false
         setTableView()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,7 +38,7 @@ final class LevelScreenViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false
     }
     
-    func setTableView(){
+    private func setTableView(){
         let cellNib = UINib(nibName: "LevelTableViewCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "LevelCell")
         tableView.delegate = self
@@ -54,47 +49,53 @@ final class LevelScreenViewController: UIViewController {
     func setupData() {
         questionGroups = [
             [ // Reading
-                Question(title: "A1 - Beginner", description: "Read short texts"),
-                Question(title: "A2 - Elementary", description: "Read emails and letters"),
-                Question(title: "B1 - Intermediate", description: "Read articles and reports"),
-                Question(title: "B2 - Upper-Intermediate", description: "Read complex passages"),
-                Question(title: "C1 - Advanced", description: "Read academic and professional texts"),
-                Question(title: "C2 - Proficient", description: "Understand nuanced literary or academic materials")
+                LevelQuestion(title: "A1 - Beginner", description: "Read short texts"),
+                LevelQuestion(title: "A2 - Elementary", description: "Read emails and letters"),
+                LevelQuestion(title: "B1 - Intermediate", description: "Read articles and reports"),
+                LevelQuestion(title: "B2 - Upper-Intermediate", description: "Read complex passages"),
+                LevelQuestion(title: "C1 - Advanced", description: "Read academic and professional texts"),
+                LevelQuestion(title: "C2 - Proficient", description: "Understand nuanced literary or academic materials")
             ],
             [ // Listening
-                Question(title: "A1 - Beginner", description: "Understand simple phrases"),
-                Question(title: "A2 - Elementary", description: "Understand short, clear speech"),
-                Question(title: "B1 - Intermediate", description: "Follow conversations on familiar topics"),
-                Question(title: "B2 - Upper-Intermediate", description: "Understand native-speed discussions"),
-                Question(title: "C1 - Advanced", description: "Follow lectures and detailed speech"),
-                Question(title: "C2 - Proficient", description: "Comprehend complex or idiomatic audio")
+                LevelQuestion(title: "A1 - Beginner", description: "Understand simple phrases"),
+                LevelQuestion(title: "A2 - Elementary", description: "Understand short, clear speech"),
+                LevelQuestion(title: "B1 - Intermediate", description: "Follow conversations on familiar topics"),
+                LevelQuestion(title: "B2 - Upper-Intermediate", description: "Understand native-speed discussions"),
+                LevelQuestion(title: "C1 - Advanced", description: "Follow lectures and detailed speech"),
+                LevelQuestion(title: "C2 - Proficient", description: "Comprehend complex or idiomatic audio")
             ],
             [ // Writing
-                Question(title: "A1 - Beginner", description: "Write simple sentences"),
-                Question(title: "A2 - Elementary", description: "Write short personal messages"),
-                Question(title: "B1 - Intermediate", description: "Compose structured paragraphs"),
-                Question(title: "B2 - Upper-Intermediate", description: "Write emails, stories, and essays"),
-                Question(title: "C1 - Advanced", description: "Develop formal writing with arguments"),
-                Question(title: "C2 - Proficient", description: "Produce polished academic or professional documents")
+                LevelQuestion(title: "A1 - Beginner", description: "Write simple sentences"),
+                LevelQuestion(title: "A2 - Elementary", description: "Write short personal messages"),
+                LevelQuestion(title: "B1 - Intermediate", description: "Compose structured paragraphs"),
+                LevelQuestion(title: "B2 - Upper-Intermediate", description: "Write emails, stories, and essays"),
+                LevelQuestion(title: "C1 - Advanced", description: "Develop formal writing with arguments"),
+                LevelQuestion(title: "C2 - Proficient", description: "Produce polished academic or professional documents")
             ],
             [ // Speaking
-                Question(title: "A1 - Beginner", description: "Introduce yourself and use simple phrases"),
-                Question(title: "A2 - Elementary", description: "Handle basic interactions in daily situations"),
-                Question(title: "B1 - Intermediate", description: "Hold conversations on familiar topics"),
-                Question(title: "B2 - Upper-Intermediate", description: "Discuss abstract topics confidently"),
-                Question(title: "C1 - Advanced", description: "Express ideas fluently in debates"),
-                Question(title: "C2 - Proficient", description: "Speak clearly with subtle nuance and accuracy")
+                LevelQuestion(title: "A1 - Beginner", description: "Introduce yourself and use simple phrases"),
+                LevelQuestion(title: "A2 - Elementary", description: "Handle basic interactions in daily situations"),
+                LevelQuestion(title: "B1 - Intermediate", description: "Hold conversations on familiar topics"),
+                LevelQuestion(title: "B2 - Upper-Intermediate", description: "Discuss abstract topics confidently"),
+                LevelQuestion(title: "C1 - Advanced", description: "Express ideas fluently in debates"),
+                LevelQuestion(title: "C2 - Proficient", description: "Speak clearly with subtle nuance and accuracy")
             ]
         ]
         
     }
     
-    func fetchCourses(){
+    private func fetchCourses(){
         viewModel?.getCourses { result in
             switch result {
             case .success(let courses):
                 DispatchQueue.main.async {
-                    self.levelQuestionLabel.text = "What is your \((self.viewModel.courses[self.currentIndex].name)) level?"
+                    let levelText = "\((self.viewModel.courses[self.currentIndex].name))"
+                    let fullText = "What is your \(levelText) level?"
+                    let attributedText = NSMutableAttributedString(string: fullText)
+                    
+                    let range = (fullText as NSString).range(of: levelText)
+                    attributedText.addAttribute(.foregroundColor, value: UIColor.summer, range: range)
+                    self.levelQuestionLabel.attributedText = attributedText
                     self.tableView.reloadData()
                 }
             case .failure(let error):
@@ -115,7 +116,13 @@ final class LevelScreenViewController: UIViewController {
         if currentIndex < viewModel.courses.count - 1 {
             currentIndex += 1
             tableView.reloadData()
-            levelQuestionLabel.text = "What is your \((viewModel.courses[currentIndex].name)) level?"
+            let levelText = "\((self.viewModel.courses[self.currentIndex].name))"
+            let fullText = "What is your \(levelText) level?"
+            let attributedText = NSMutableAttributedString(string: fullText)
+            
+            let range = (fullText as NSString).range(of: levelText)
+            attributedText.addAttribute(.foregroundColor, value: UIColor.summer, range: range)
+            self.levelQuestionLabel.attributedText = attributedText
             continueButton.isEnabled = false
         } else {
             if let userId = UserDefaults.standard.string(forKey: "userID") {
@@ -135,11 +142,11 @@ final class LevelScreenViewController: UIViewController {
     }
     
     
-    func goToNextPage() {
+    private func goToNextPage() {
         ApplicationCoordinator.getInstance().initTabBar()
     }
 
-    func showSelectionAlert() {
+    private func showSelectionAlert() {
         self.showAlert(title: "Selection Required", message: "Please select a level before continuing.", lottieName: "error")
     }
 

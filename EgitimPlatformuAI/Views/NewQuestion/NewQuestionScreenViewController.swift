@@ -37,7 +37,6 @@ final class NewQuestionScreenViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if viewModel.isUpdate{
-            self.showLottieLoading()
             setLessonData()
         }
         self.navigationController?.isNavigationBarHidden = false
@@ -209,7 +208,6 @@ final class NewQuestionScreenViewController: UIViewController {
         viewModel.loadLessonData { [weak self] result in
             DispatchQueue.main.async {
                 guard let self = self else { return }
-                self.hideLottieLoading()
                 
                 switch result {
                 case .success:
@@ -262,7 +260,6 @@ final class NewQuestionScreenViewController: UIViewController {
                             }
                             return
                         }
-                        
                         if self.currentIndex >= self.viewModel.questions.count {
                             self.currentIndex = max(0, self.viewModel.questions.count - 1)
                         }

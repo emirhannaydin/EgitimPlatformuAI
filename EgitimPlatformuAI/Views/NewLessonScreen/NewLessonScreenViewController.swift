@@ -86,16 +86,16 @@ final class NewLessonScreenViewController: UIViewController {
         }
 
         guard let selectedClassId = viewModel.courseClasses.first(where: { $0.level == index })?.id else {
-            print("Uygun classId bulunamadı")
             return
         }
-        print("Seçilen classId: \(selectedClassId)")
 
         viewModel.addLesson(classId: selectedClassId, content: content) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    self?.showAlert(title: "Success", message: "Lesson added successfully", lottieName: "success")
+                    self?.showAlert(title: "Success", message: "Lesson added successfully", lottieName: "success"){
+                        self?.dismiss(animated: true)
+                    }
                 case .failure(let error):
                     self?.showAlert(title: "Error", message: error.localizedDescription, lottieName: "error")
                 }
@@ -106,9 +106,7 @@ final class NewLessonScreenViewController: UIViewController {
     }
 
     @objc func handleBackgroundTap() {
-       
         self.dismiss(animated: true)
-        
     }
 
     

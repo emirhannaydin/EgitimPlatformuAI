@@ -52,6 +52,17 @@ class AddQuestionScreenViewModel {
             return TestSection(level: courseClass.level, title: title, tests: sortedLessons)
         }
     }
+    
+    func deleteLesson(lessonId: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        NetworkManager.shared.deleteLesson(lessonId: lessonId) { result in
+            switch result {
+            case .success(let isCompleted):
+                completion(.success(isCompleted))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 
 
     func levelTextForInt(for level: Int) -> String {
