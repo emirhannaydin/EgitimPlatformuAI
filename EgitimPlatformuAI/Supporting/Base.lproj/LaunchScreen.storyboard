@@ -22,7 +22,7 @@
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" name="logoBackground"/>
+                        <color key="backgroundColor" name="dainTree"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="UsO-mt-6X4" secondAttribute="bottom" id="OTT-2D-CWc"/>
                             <constraint firstAttribute="trailing" secondItem="UsO-mt-6X4" secondAttribute="trailing" id="X1V-sb-oPD"/>
@@ -38,8 +38,8 @@
     </scenes>
     <resources>
         <image name="learnTurkishAppLogo" width="1024" height="1024"/>
-        <namedColor name="logoBackground">
-            <color red="1" green="0.98039215686274506" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="dainTree">
+            <color red="0.0039215686274509803" green="0.16470588235294117" blue="0.22352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

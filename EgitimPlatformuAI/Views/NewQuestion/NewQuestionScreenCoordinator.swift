@@ -27,7 +27,7 @@ public final class NewQuestionScreenCoordinator: Coordinator {
             fatalError("Failed to instantiate NewQuestionScreenViewController")
         }
         
-        let viewModel = NewQuestionScreenViewModel(coordinator: self, selectedLessonId: nil, selecteCourseName: "")
+        let viewModel = NewQuestionScreenViewModel(coordinator: self, selectedLessonId: nil, selecteCourseName: "", isUpdate: false)
         viewController.viewModel = viewModel
         if navigationController.viewControllers.isEmpty {
             navigationController.viewControllers = [viewController]

@@ -958,42 +958,82 @@ class NetworkManager {
     }
 
     func addLessonQuestions(lessonId: String, questions: [LessonQuestionRequest], completion: @escaping (Result<Bool, Error>) -> Void) {
-            let endpoint = "Lesson/AddLessonQuestion/\(lessonId)"
-            guard let url = URL(string: "\(baseUrl)\(endpoint)") else {
-                completion(.failure(NSError(domain: "Invalid URL", code: 0)))
+        let endpoint = "Lesson/AddLessonQuestion/\(lessonId)"
+        guard let url = URL(string: "\(baseUrl)\(endpoint)") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0)))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
+        
+        do {
+            let data = try JSONEncoder().encode(questions)
+            request.httpBody = data
+        } catch {
+            completion(.failure(error))
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                completion(.failure(error))
                 return
             }
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure(NSError(domain: "Invalid response", code: 0)))
+                return
+            }
+            
+            completion(.success(true))
+        }
+        
+        task.resume()
+        
+    }
+    
+    func editLessonQuestion(question: LessonQuestionRequest, completion: @escaping (Result<Bool, Error>) -> Void) {
+        let endpoint = "Lesson/UpdateLessonQuestion"
+        guard let url = URL(string: "\(baseUrl)\(endpoint)") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0)))
+            return
+        }
 
-            var request = URLRequest(url: url)
-            request.httpMethod = "POST"
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
 
-            do {
-                let data = try JSONEncoder().encode(questions)
-                request.httpBody = data
-            } catch {
+        do {
+            let data = try JSONEncoder().encode(question) // Tek obje encode ediliyor
+            request.httpBody = data
+        } catch {
+            completion(.failure(error))
+            return
+        }
+
+        let task = URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
                 completion(.failure(error))
                 return
             }
 
-            let task = URLSession.shared.dataTask(with: request) { _, response, error in
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-
-                guard let httpResponse = response as? HTTPURLResponse,
-                      (200...299).contains(httpResponse.statusCode) else {
-                    completion(.failure(NSError(domain: "Invalid response", code: 0)))
-                    return
-                }
-
-                completion(.success(true))
+            guard let httpResponse = response as? HTTPURLResponse,
+                  (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure(NSError(domain: "Invalid response", code: 0)))
+                return
             }
 
-            task.resume()
+            completion(.success(true))
         }
+
+        task.resume()
+    }
+
 
 }
 

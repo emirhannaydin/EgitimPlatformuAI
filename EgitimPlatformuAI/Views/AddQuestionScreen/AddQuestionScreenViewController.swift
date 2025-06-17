@@ -20,6 +20,7 @@ final class AddQuestionScreenViewController: UIViewController{
     var courseClasses: [CourseClass]!
     var selectedCourseName: String!
     @IBOutlet var addQuestionButton: UIButton!
+    @IBOutlet var editQuestionButton: UIButton!
     var selectedIndexPath: IndexPath?
     
     var sections: [TestSection] {
@@ -42,7 +43,6 @@ final class AddQuestionScreenViewController: UIViewController{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        fetchCourseLessons()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,13 +58,20 @@ final class AddQuestionScreenViewController: UIViewController{
     }
     
     @IBAction func addQuestionButtonTapped(_ sender: Any) {
-        print(selectedCourseName!)
         let coordinator = NewQuestionScreenCoordinator.getInstance()
-        let viewModel = NewQuestionScreenViewModel(coordinator: coordinator, selectedLessonId: lessonId, selecteCourseName: selectedCourseName)
+        let viewModel = NewQuestionScreenViewModel(coordinator: coordinator, selectedLessonId: lessonId, selecteCourseName: selectedCourseName, isUpdate: false)
         coordinator.start(with: viewModel)
         ApplicationCoordinator.getInstance().pushFromTeacherScreenCoordinatorAndVariables(coordinator, hidesBottomBar: true)
     }
-
+    
+    
+    @IBAction func editQuestionButtonTapped(_ sender: Any) {
+        let coordinator = NewQuestionScreenCoordinator.getInstance()
+        let viewModel = NewQuestionScreenViewModel(coordinator: coordinator, selectedLessonId: lessonId, selecteCourseName: selectedCourseName, isUpdate: true)
+        coordinator.start(with: viewModel)
+        ApplicationCoordinator.getInstance().pushFromTeacherScreenCoordinatorAndVariables(coordinator, hidesBottomBar: true)
+    }
+    
     @objc func handleQuestionScreenDismissed() {
         self.showLottieLoading()
         fetchCourseLessons()
@@ -81,6 +88,8 @@ private extension AddQuestionScreenViewController {
         courseName.layer.borderColor = UIColor.black.cgColor
         courseName.layer.masksToBounds = true
         addQuestionButton.isEnabled = false
+        editQuestionButton.isEnabled = false
+
     }
     
     func setupTableView() {
@@ -160,7 +169,7 @@ extension AddQuestionScreenViewController: UITableViewDataSource, UITableViewDel
         }
         header.titleLabel.text = sections[section].title
         header.tag = section
-        header.imageView.isHidden = true // açılır kapanır gerek yok artık
+        header.imageView.isHidden = true
         return header
     }
     
@@ -168,33 +177,9 @@ extension AddQuestionScreenViewController: UITableViewDataSource, UITableViewDel
         selectedIndexPath = indexPath
         addQuestionButton.titleLabel?.text = "Add Question"
         addQuestionButton.isEnabled = true
+        editQuestionButton.titleLabel?.text = "Edit Question"
+        editQuestionButton.isEnabled = true
         self.lessonId = sections[indexPath.section].tests[indexPath.row].id
-        let selectedLessonId = sections[indexPath.section].tests[indexPath.row].id
-        viewModel.selectedLessonId = selectedLessonId
-        switch self.viewModel.courseClasses[0].courseName {
-        case "Writing":
-            let coordinator = WritingScreenCoordinator.getInstance()
-            let viewModel = WritingScreenViewModel(coordinator: coordinator, lessonId: lessonId)
-            coordinator.start(with: viewModel)
-            ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
-        case "Listening":
-            let coordinator = ListeningScreenCoordinator.getInstance()
-            let viewModel = ListeningScreenViewModel(coordinator: coordinator, lessonId: lessonId)
-            coordinator.start(with: viewModel)
-            ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
-        case "Reading":
-            let coordinator = ReadingScreenCoordinator.getInstance()
-            let viewModel = ReadingScreenViewModel(coordinator: coordinator, lessonId: lessonId)
-            coordinator.start(with: viewModel)
-            ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
-        case "Speaking":
-            let coordinator = SpeakingScreenCoordinator.getInstance()
-            let viewModel = SpeakingScreenViewModel(coordinator: coordinator, lessonId: lessonId)
-            coordinator.start(with: viewModel)
-            ApplicationCoordinator.getInstance().pushFromTabBarCoordinatorAndVariables(coordinator, hidesBottomBar: true)
-        default:
-            break
-        }
         tableView.reloadData()
     }
     

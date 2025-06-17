@@ -12,8 +12,8 @@ class AddQuestionScreenViewModel {
     var courseClasses: [CourseClass] = []
     var courseId: String
     var sections: [TestSection] = []
+    var questions: [Lessons] = []
     var courseLevelName: String
-    var selectedLessonId: String!
     var allClassIds: [String] {
         return courseClasses.map { $0.id }
     }
@@ -66,5 +66,6 @@ class AddQuestionScreenViewModel {
         default: return " - "
         }
     }
+    
 }
 

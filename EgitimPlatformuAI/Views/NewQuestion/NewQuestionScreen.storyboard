@@ -25,7 +25,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="5rY-xO-ofB">
-                                <rect key="frame" x="20" y="513.66666666666663" width="353" height="210"/>
+                                <rect key="frame" x="20" y="534" width="353" height="210"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Answer 1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DwT-Ut-5i4">
                                         <rect key="frame" x="0.0" y="0.0" width="353" height="34"/>
@@ -65,18 +65,18 @@
                                 </subviews>
                             </stackView>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the Question" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CNB-Ia-y9T">
-                                <rect key="frame" x="20" y="449.66666666666669" width="353" height="34"/>
+                                <rect key="frame" x="20" y="470" width="353" height="34"/>
                                 <color key="backgroundColor" name="aliceblUE"/>
                                 <color key="textColor" name="darkBlue"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rXR-Q5-Bv4">
-                                <rect key="frame" x="132.66666666666666" y="753.66666666666663" width="127.66666666666666" height="34.333333333333371"/>
+                                <rect key="frame" x="184.66666666666666" y="774" width="24" height="14"/>
                                 <color key="backgroundColor" name="sapphireBlue"/>
                                 <color key="tintColor" name="porcelain"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Add Question"/>
+                                <buttonConfiguration key="configuration" style="plain" title=""/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="12"/>
@@ -88,7 +88,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Example Question" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="O9j-9L-fBf">
-                                <rect key="frame" x="20" y="184" width="353" height="235.66666666666663"/>
+                                <rect key="frame" x="20" y="184" width="353" height="256"/>
                                 <color key="backgroundColor" name="darkBlue"/>
                                 <color key="textColor" name="porcelain"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -106,6 +106,19 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </textView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZv-98-YzC">
+                                <rect key="frame" x="333" y="79" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="en3-0d-0Y1"/>
+                                    <constraint firstAttribute="width" constant="40" id="uTA-cY-RDL"/>
+                                </constraints>
+                                <color key="tintColor" name="paleGray"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="trash.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="trashButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="y4O-pm-r8X"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" name="charcoal"/>
@@ -113,6 +126,7 @@
                             <constraint firstItem="5rY-xO-ofB" firstAttribute="top" secondItem="CNB-Ia-y9T" secondAttribute="bottom" constant="30" id="0SO-m8-yRv"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="rXR-Q5-Bv4" secondAttribute="bottom" constant="30" id="0vS-fe-PYd"/>
                             <constraint firstItem="CNB-Ia-y9T" firstAttribute="top" secondItem="O9j-9L-fBf" secondAttribute="bottom" constant="30" id="3Dc-h4-YQw"/>
+                            <constraint firstItem="KZv-98-YzC" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="3Ve-6a-hZY"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="CNB-Ia-y9T" secondAttribute="trailing" constant="20" id="Gg9-3r-N5L"/>
                             <constraint firstItem="dx0-VB-ZfD" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="30" id="IVV-bS-aoJ"/>
                             <constraint firstItem="dx0-VB-ZfD" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="OfU-Uv-IBz"/>
@@ -121,12 +135,14 @@
                             <constraint firstItem="rXR-Q5-Bv4" firstAttribute="top" secondItem="5rY-xO-ofB" secondAttribute="bottom" constant="30" id="gUS-oG-wxq"/>
                             <constraint firstItem="rXR-Q5-Bv4" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="hzP-NB-6MP"/>
                             <constraint firstItem="CNB-Ia-y9T" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="iQk-CT-V4W"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="KZv-98-YzC" secondAttribute="trailing" constant="20" id="lsP-6Y-yCx"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="O9j-9L-fBf" secondAttribute="trailing" constant="20" id="pz9-hf-sgZ"/>
                             <constraint firstItem="5rY-xO-ofB" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="qCJ-Yu-RNz"/>
                             <constraint firstItem="O9j-9L-fBf" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="yhW-AV-itW"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addQuestionButton" destination="rXR-Q5-Bv4" id="IQA-tH-K8L"/>
                         <outlet property="answer1Label" destination="DwT-Ut-5i4" id="2Ck-fO-fd6"/>
                         <outlet property="answer2Label" destination="xIA-NY-Xu5" id="Ikw-89-MKC"/>
                         <outlet property="answer3Label" destination="Ht5-tf-YdQ" id="um1-fC-ip6"/>
@@ -135,6 +151,7 @@
                         <outlet property="lottieView" destination="dx0-VB-ZfD" id="IGP-ah-Fdk"/>
                         <outlet property="passageTextView" destination="O9j-9L-fBf" id="7g1-ZA-TMQ"/>
                         <outlet property="questionLabel" destination="CNB-Ia-y9T" id="I2q-Sb-My8"/>
+                        <outlet property="trashButton" destination="KZv-98-YzC" id="ggh-iq-or4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -143,6 +160,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="trash.fill" catalog="system" width="117" height="128"/>
         <namedColor name="aliceblUE">
             <color red="0.96078431372549022" green="0.97647058823529409" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -154,6 +172,9 @@
         </namedColor>
         <namedColor name="mintGreen">
             <color red="0.23529411764705882" green="0.81176470588235294" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="paleGray">
+            <color red="0.88235294117647056" green="0.89411764705882357" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="porcelain">
             <color red="0.96862745098039216" green="0.97254901960784312" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
