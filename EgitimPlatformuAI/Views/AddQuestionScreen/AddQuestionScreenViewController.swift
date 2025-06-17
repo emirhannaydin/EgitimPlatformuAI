@@ -85,6 +85,7 @@ final class AddQuestionScreenViewController: UIViewController{
     }
     deinit {
         NotificationCenter.default.removeObserver(self, name: .questionScreenDismissed, object: nil)
+
     }
 
 }
@@ -198,9 +199,7 @@ extension AddQuestionScreenViewController: UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
-        addQuestionButton.titleLabel?.text = "Add Question"
         addQuestionButton.isEnabled = true
-        editQuestionButton.titleLabel?.text = "Edit Question"
         let questionCount = sections[indexPath.section].tests[indexPath.row].questionCount
         if questionCount == 0 {
             editQuestionButton.isEnabled = false

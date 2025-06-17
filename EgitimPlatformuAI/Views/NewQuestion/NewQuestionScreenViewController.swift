@@ -44,17 +44,13 @@ final class NewQuestionScreenViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let presentingVC = presentingViewController {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleBackgroundTap))
-            tapGesture.cancelsTouchesInView = false
-            presentingVC.view.addGestureRecognizer(tapGesture)
-        }
+        
         
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        NotificationCenter.default.post(name: .questionScreenDismissed, object: nil)
         self.navigationController?.isNavigationBarHidden = false
     }
     
@@ -122,10 +118,6 @@ final class NewQuestionScreenViewController: UIViewController {
         lottieView.contentMode = .scaleAspectFit
         lottieView.loopMode = .loop
         lottieView.play()
-    }
-    
-    @objc func handleBackgroundTap() {
-        self.dismiss(animated: true)
     }
     
     @IBAction func addQuestionButtonTapped(_ sender: Any) {
@@ -210,8 +202,7 @@ final class NewQuestionScreenViewController: UIViewController {
                 }
             }
         }
-        
-        NotificationCenter.default.post(name: .questionScreenDismissed, object: nil)
+
     }
     
     private func setLessonData() {

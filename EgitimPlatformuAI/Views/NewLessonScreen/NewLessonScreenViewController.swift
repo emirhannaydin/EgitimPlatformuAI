@@ -41,7 +41,7 @@ final class NewLessonScreenViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        NotificationCenter.default.post(name: .questionScreenDismissed, object: nil)
         self.navigationController?.isNavigationBarHidden = false
     }
     
@@ -101,11 +101,14 @@ final class NewLessonScreenViewController: UIViewController {
                 }
             }
         }
-        NotificationCenter.default.post(name: .questionScreenDismissed, object: nil)
+        
+
     }
 
     @objc func handleBackgroundTap() {
+       
         self.dismiss(animated: true)
+        
     }
 
     
