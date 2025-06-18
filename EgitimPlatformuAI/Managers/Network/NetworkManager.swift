@@ -294,15 +294,11 @@ class NetworkManager {
             completion(.failure(NSError(domain: "Invalid URL", code: 0)))
             return
         }
-        
-        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
-        self.token = tokenData
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("*/*", forHTTPHeaderField: "accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
 
         let body: [String: Any] = [
             "userId": userId,
