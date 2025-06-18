@@ -15,12 +15,12 @@ final class WritingScreenViewController: UIViewController {
     @IBOutlet var translatedLabelView: UIView!
     @IBOutlet var backButton: CustomBackButtonView!
     @IBOutlet var checkButton: UIButton!
-    @IBOutlet var continueButton: CustomContinueView!
     @IBOutlet var translatedText: UITextView!
     @IBOutlet var exampleLabel: UILabel!
     private var currentQuestionIndex = 0
     @IBOutlet var questionCount: UILabel!
     
+    @IBOutlet var continueButton: CustomContinueView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -131,6 +131,7 @@ final class WritingScreenViewController: UIViewController {
     @objc func continueButtonTapped() {
         currentQuestionIndex += 1
             if currentQuestionIndex < viewModel.questions.count {
+                translatedText.text = ""
                 loadQuestion()
             } else {
                 let userID = UserDefaults.standard.string(forKey: "userID") ?? "Unknown"
@@ -176,10 +177,8 @@ final class WritingScreenViewController: UIViewController {
         let lowercasedResponse = AIAPIManager.shared.currentMessage.text.trimmingCharacters(in: .whitespacesAndNewlines)
         if lowercasedResponse.contains("your translation is correct") || lowercasedResponse.contains("yes") {
             self.continueButton.setCorrectAnswer()
-            self.translatedLabelView.backgroundColor = .systemGreen
         } else {
             self.continueButton.setWrongAnswer()
-            self.translatedLabelView.backgroundColor = .systemRed
         }
         
         let popup = AIRobotPopupViewController(message: lowercasedResponse)
