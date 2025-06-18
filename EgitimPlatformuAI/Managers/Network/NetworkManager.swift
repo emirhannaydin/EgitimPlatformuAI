@@ -294,6 +294,9 @@ class NetworkManager {
             completion(.failure(NSError(domain: "Invalid URL", code: 0)))
             return
         }
+        
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -355,6 +358,9 @@ class NetworkManager {
             return
         }
 
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -404,6 +410,9 @@ class NetworkManager {
             completion(.failure(NSError(domain: "Invalid URL", code: 0)))
             return
         }
+        
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
 
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
@@ -456,6 +465,9 @@ class NetworkManager {
             return
         }
 
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -490,6 +502,9 @@ class NetworkManager {
             return
         }
 
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -537,6 +552,9 @@ class NetworkManager {
             completion(.failure(NSError(domain: "Invalid URL", code: 0)))
             return
         }
+        
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
 
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -571,6 +589,9 @@ class NetworkManager {
             completion(.failure(NSError(domain: "Invalid URL", code: 0)))
             return
         }
+        
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
 
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -606,6 +627,9 @@ class NetworkManager {
             return
         }
 
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -639,6 +663,9 @@ class NetworkManager {
             completion(.failure(NSError(domain: "Invalid URL", code: 0)))
             return
         }
+        
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -675,6 +702,9 @@ class NetworkManager {
             return
         }
 
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -729,6 +759,9 @@ class NetworkManager {
             return
         }
 
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("*/*", forHTTPHeaderField: "Accept")
@@ -775,6 +808,9 @@ class NetworkManager {
             completion(.failure(NSError(domain: "Invalid URL", code: 0)))
             return
         }
+        
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
 
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -826,6 +862,9 @@ class NetworkManager {
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
+        
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
         
         let boundary = "Boundary-\(UUID().uuidString)"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
@@ -896,6 +935,9 @@ class NetworkManager {
             return
         }
         
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("*/*", forHTTPHeaderField: "accept")
@@ -949,6 +991,9 @@ class NetworkManager {
             return
         }
 
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("*/*", forHTTPHeaderField: "accept")
@@ -982,6 +1027,9 @@ class NetworkManager {
             return
         }
 
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -1010,6 +1058,9 @@ class NetworkManager {
             completion(.failure(NSError(domain: "Invalid URL", code: 0)))
             return
         }
+        
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -1050,13 +1101,16 @@ class NetworkManager {
             return
         }
 
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(token ?? "")", forHTTPHeaderField: "Authorization")
 
         do {
-            let data = try JSONEncoder().encode(question) // Tek obje encode ediliyor
+            let data = try JSONEncoder().encode(question)
             request.httpBody = data
         } catch {
             completion(.failure(error))
@@ -1088,6 +1142,9 @@ class NetworkManager {
             return
         }
 
+        let tokenData = String(data: KeychainHelper.shared.read(service: "access-token", account: "user")!, encoding: .utf8)
+        self.token = tokenData
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
