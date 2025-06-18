@@ -113,18 +113,18 @@ class MainLoginScreenViewController: UIViewController {
                     if self?.user?.userType == 0{
                         ApplicationCoordinator.getInstance().initTeacherScreen()
                     }else{
-                        if let classes = self?.user?.classes {
-                            if classes.isEmpty{
-                                ApplicationCoordinator.getInstance().pushToLevelScreen()
-                            }else {
-                                ApplicationCoordinator.getInstance().initTabBar()
+                        if self?.user?.isEmailActivated == false{
+                            ApplicationCoordinator.getInstance().pushToVerifyEmailScreen()
+                        }else{
+                            if let classes = self?.user?.classes {
+                                if classes.isEmpty{
+                                    ApplicationCoordinator.getInstance().pushToLevelScreen()
+                                }else {
+                                    ApplicationCoordinator.getInstance().initTabBar()
+                                }
                             }
                         }
-                        //if self?.user?.isEmailActivated == true{
-                        //   ApplicationCoordinator.getInstance().pushToVerifyEmailScreen()
-                        //}else{
                         
-                        //}
                     }
                     
                     

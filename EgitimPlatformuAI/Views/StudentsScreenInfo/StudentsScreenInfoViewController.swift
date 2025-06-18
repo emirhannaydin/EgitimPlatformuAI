@@ -20,8 +20,10 @@ final class StudentsScreenInfoViewController: UIViewController {
     var viewModel: StudentsScreenInfoViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        nameLabel.layer.cornerRadius = 8
+        nameLabel.layer.masksToBounds = true
+        emailLabel.layer.cornerRadius = 8
+        emailLabel.layer.masksToBounds = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,8 +86,8 @@ final class StudentsScreenInfoViewController: UIViewController {
     }
     
     func setupUserDetails() {
-        nameLabel.text = student?.name ?? "-"
-        emailLabel.text = student?.email ?? "-"
+        nameLabel.text = "Name: \(student?.name ?? "-")"
+        emailLabel.text = "Email: \(student?.email ?? "-")"
     }
     
     @objc func handleBackgroundTap() {

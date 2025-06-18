@@ -12,7 +12,7 @@ extension String {
         guard let first = self.first else { return self }
         return first.uppercased() + self.dropFirst()
     }
-
+    
     mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
     }
@@ -25,6 +25,29 @@ extension String {
             .lowercased()
         return cleaned
     }
+    
+    var isValidPassword: Bool {
+        let regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$&*_.?\\-])[A-Za-z!@#$&*_.?\\-\\d]{8,}$"
+        return NSPredicate(format: "SELF MATCHES %@", regex).evaluate(with: self)
+    }
+    
+    var hasUppercase: Bool {
+            return range(of: "[A-Z]", options: .regularExpression) != nil
+        }
+
+        var hasLowercase: Bool {
+            return range(of: "[a-z]", options: .regularExpression) != nil
+        }
+
+        var hasSpecialCharacter: Bool {
+            return range(of: "[!@#$&*_.?\\-]", options: .regularExpression) != nil
+        }
+
+        var hasMinimumLength: Bool {
+            return count >= 8
+        }
+
+    
 }
 
 

@@ -77,10 +77,10 @@
                                                 </constraints>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U8K-2B-85t">
-                                                <rect key="frame" x="20" y="421.66666666666669" width="353" height="56"/>
+                                                <rect key="frame" x="20" y="421.66666666666669" width="353" height="55"/>
                                                 <color key="backgroundColor" name="softBlue"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="56" id="l8v-IH-bAu"/>
+                                                    <constraint firstAttribute="height" constant="55" id="l8v-IH-bAu"/>
                                                 </constraints>
                                                 <color key="tintColor" name="backDarkBlue"/>
                                                 <state key="normal" title="Button"/>
@@ -91,30 +91,29 @@
                                                     <action selector="registerButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Z5X-YR-OkY"/>
                                                 </connections>
                                             </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="imf-4n-LuH" customClass="SocialLoginView" customModule="EgitimPlatformuAI" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="497.66666666666657" width="353" height="191.33333333333331"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7pU-Xr-0Rt" customClass="PasswordRulesView" customModule="EgitimPlatformuAI" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="496.66666666666663" width="353" height="150"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="titleText" value="Or Register with"/>
-                                                </userDefinedRuntimeAttributes>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="150" id="yNe-KG-Fdk"/>
+                                                </constraints>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="qau-rg-uMU" secondAttribute="trailing" constant="20" id="0gx-Yb-fVb"/>
                                             <constraint firstAttribute="trailing" secondItem="U8K-2B-85t" secondAttribute="trailing" constant="20" id="Ahq-fn-F0T"/>
-                                            <constraint firstAttribute="bottom" secondItem="imf-4n-LuH" secondAttribute="bottom" constant="20" id="Car-97-YVs"/>
                                             <constraint firstAttribute="trailing" secondItem="SlC-38-UhK" secondAttribute="trailing" constant="20" id="IOD-ig-Gvn"/>
-                                            <constraint firstAttribute="trailing" secondItem="imf-4n-LuH" secondAttribute="trailing" constant="20" id="R0M-9N-HHP"/>
+                                            <constraint firstItem="7pU-Xr-0Rt" firstAttribute="leading" secondItem="Gpb-6Y-YSE" secondAttribute="leading" constant="20" id="QiK-Th-AyH"/>
                                             <constraint firstItem="U8K-2B-85t" firstAttribute="top" secondItem="qau-rg-uMU" secondAttribute="bottom" constant="20" id="SLb-Hy-2mc"/>
+                                            <constraint firstAttribute="trailing" secondItem="7pU-Xr-0Rt" secondAttribute="trailing" constant="20" id="Wdl-vM-nE3"/>
                                             <constraint firstItem="SlC-38-UhK" firstAttribute="top" secondItem="1Kl-gH-Xbl" secondAttribute="bottom" constant="20" id="Ync-IB-MqA"/>
                                             <constraint firstItem="qau-rg-uMU" firstAttribute="leading" secondItem="Gpb-6Y-YSE" secondAttribute="leading" constant="20" id="ZWU-TV-N81"/>
-                                            <constraint firstItem="imf-4n-LuH" firstAttribute="top" secondItem="U8K-2B-85t" secondAttribute="bottom" constant="20" id="ajb-yI-kTS"/>
                                             <constraint firstItem="U8K-2B-85t" firstAttribute="leading" secondItem="Gpb-6Y-YSE" secondAttribute="leading" constant="20" id="d10-SB-PUv"/>
                                             <constraint firstItem="SlC-38-UhK" firstAttribute="leading" secondItem="Gpb-6Y-YSE" secondAttribute="leading" constant="20" id="dJZ-cQ-PiL"/>
+                                            <constraint firstItem="qau-rg-uMU" firstAttribute="top" secondItem="SlC-38-UhK" secondAttribute="bottom" constant="20" id="h2w-F4-swD"/>
                                             <constraint firstItem="1Kl-gH-Xbl" firstAttribute="top" secondItem="Gpb-6Y-YSE" secondAttribute="top" id="hzJ-u8-NUB"/>
-                                            <constraint firstItem="imf-4n-LuH" firstAttribute="leading" secondItem="Gpb-6Y-YSE" secondAttribute="leading" constant="20" id="o4y-JS-jLE"/>
-                                            <constraint firstItem="qau-rg-uMU" firstAttribute="top" secondItem="SlC-38-UhK" secondAttribute="bottom" constant="20" id="t1c-pX-bhm"/>
+                                            <constraint firstItem="7pU-Xr-0Rt" firstAttribute="top" secondItem="U8K-2B-85t" secondAttribute="bottom" constant="20" id="xcW-Yh-ajF"/>
                                             <constraint firstItem="1Kl-gH-Xbl" firstAttribute="leading" secondItem="Gpb-6Y-YSE" secondAttribute="leading" constant="20" id="zDS-S7-uG9"/>
                                         </constraints>
                                     </view>
@@ -162,8 +161,8 @@
                         <outlet property="loginNowButton" destination="BwU-5E-49d" id="BeL-6P-4kv"/>
                         <outlet property="nameLabel" destination="Ywh-bY-THh" id="0ov-JD-xQD"/>
                         <outlet property="passwordLabel" destination="ymJ-na-lvO" id="hfx-pw-2HB"/>
+                        <outlet property="passwordRulesView" destination="7pU-Xr-0Rt" id="g0L-Eh-D5I"/>
                         <outlet property="registerButton" destination="U8K-2B-85t" id="VIz-mz-3h0"/>
-                        <outlet property="socialLoginView" destination="imf-4n-LuH" id="qEY-os-Hkn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
