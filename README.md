@@ -39,4 +39,7 @@
 2. Kütüphaneleri indirin:
    ```bash
    pod install
+3. Backend linki:
+   
+   https://github.com/dogukankiziltepe/Bitirme
 
